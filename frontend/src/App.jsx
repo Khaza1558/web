@@ -6,7 +6,8 @@ import React, { useState, useEffect, createContext, useContext, useCallback, use
 // --- Context for Authentication ---
 const AuthContext = createContext(null);
 
-const AuthContextProvider = ({ children }) => {
+// <--- CHANGE IS HERE: Export AuthContextProvider as a named export ---!>
+export const AuthContextProvider = ({ children }) => { 
     const [token, setTokenInternal] = useState(localStorage.getItem('jwtToken'));
     const [userDetails, setUserDetails] = useState(null); // Now stores full user details including roll_number
     const [isAuthLoading, setIsAuthLoading] = useState(true); // New state to track if auth is still loading
@@ -1485,7 +1486,7 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
 };
 
 // Main App component
-export default function App() { // App is now the default export
+function App() { // App is no longer the default export, just a regular function
     const getInitialPage = () => {
         const params = new URLSearchParams(window.location.search);
         if (params.get('state') === 'resetPassword' && params.get('token')) {
@@ -1496,7 +1497,7 @@ export default function App() { // App is now the default export
 
     const [currentPage, setCurrentPage] = useState(getInitialPage);
     const [resetTokenFromUrl, setResetTokenFromUrl] = useState('');
-    const { token, fetchUserDetails, userDetails, isAuthLoading } = useContext(AuthContext);
+    const { token, fetchUserDetails, userDetails, isAuthLoading } = useContext(AuthContext); // This useContext will now work!
 
     // This useEffect handles initial navigation and re-fetching user details if needed
     useEffect(() => {
@@ -1567,17 +1568,18 @@ export default function App() { // App is now the default export
     };
 
     return (
-        <AuthContextProvider>
-            <div className="min-h-screen flex flex-col items-center justify-center bg-[#222831] text-[#EEEEEE] font-inter p-4">
-                <header className="mb-8 text-center animate-fade-in-down">
-                    <img src="/title-removebg-preview (2).png" alt="Plote. - Project Management App" className="h-24 sm:h-32 mx-auto mb-4 drop-shadow-lg" />
-                    <h1 className="text-5xl sm:text-6xl font-extrabold text-[#00ADB5] drop-shadow-lg">Plote.</h1>
-                </header>
+        <div className="min-h-screen flex flex-col items-center justify-center bg-[#222831] text-[#EEEEEE] font-inter p-4">
+            <header className="mb-8 text-center animate-fade-in-down">
+                <img src="/title-removebg-preview (2).png" alt="Plote. - Project Management App" className="h-24 sm:h-32 mx-auto mb-4 drop-shadow-lg" />
+                <h1 className="text-5xl sm:text-6xl font-extrabold text-[#00ADB5] drop-shadow-lg">Plote.</h1>
+            </header>
 
-                <main className="flex-grow flex items-center justify-center w-full">
-                    {renderPage()}
-                </main>
-            </div>
-        </AuthContextProvider>
+            <main className="flex-grow flex items-center justify-center w-full">
+                {renderPage()}
+            </main>
+        </div>
     );
 }
+
+// <--- CHANGE IS HERE: App is now the default export ---!>
+export default App;
