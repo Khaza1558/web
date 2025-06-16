@@ -110,7 +110,7 @@ const CustomConfirmModal = ({ message, onConfirm, onCancel }) => {
 
     return (
         <div ref={modalRef} className="fixed inset-0 bg-gray-900 bg-opacity-70 flex justify-center items-center z-50 p-5 backdrop-blur-sm animate-fade-in">
-            <div className="bg-white p-8 rounded-3xl shadow-2xl text-center max-w-sm w-full transform transition-all duration-300 scale-105 opacity-0 animate-scale-in"> 
+            <div className="bg-white p-8 rounded-3xl shadow-2xl text-center max-w-sm w-full transform transition-all duration-300 scale-105 opacity-0 animate-scale-in">
                 <p className="mb-6 text-gray-800 text-lg font-medium">{message}</p>
                 <div className="flex justify-center gap-4">
                     <button
@@ -181,7 +181,7 @@ const EditTitleModal = ({ projectId, currentTitle, onClose, onSave }) => {
 
     return (
         <div ref={modalRef} className="fixed inset-0 bg-gray-900 bg-opacity-70 flex justify-center items-center z-50 p-5 backdrop-blur-sm animate-fade-in">
-            <div className="bg-white p-8 rounded-3xl shadow-2xl max-w-md w-full transform transition-all duration-300 scale-105 opacity-0 animate-scale-in"> 
+            <div className="bg-white p-8 rounded-3xl shadow-2xl max-w-md w-full transform transition-all duration-300 scale-105 opacity-0 animate-scale-in">
                 <h3 className="text-xl font-bold mb-6 text-center text-gray-800">Edit Project Title</h3>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                     <label htmlFor="newProjectTitle" className="font-semibold text-gray-700">New Project Title:</label>
@@ -274,7 +274,7 @@ const ReplaceFileModal = ({ fileId, currentFileName, onClose, onReplace }) => {
 
     return (
         <div ref={modalRef} className="fixed inset-0 bg-gray-900 bg-opacity-70 flex justify-center items-center z-50 p-5 backdrop-blur-sm animate-fade-in">
-            <div className="bg-white p-8 rounded-3xl shadow-2xl max-w-md w-full transform transition-all duration-300 scale-105 opacity-0 animate-scale-in"> 
+            <div className="bg-white p-8 rounded-3xl shadow-2xl max-w-md w-full transform transition-all duration-300 scale-105 opacity-0 animate-scale-in">
                 <h3 className="text-xl font-bold mb-6 text-center text-gray-800">Replace File</h3>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                     <label htmlFor="newFileName" className="font-semibold text-gray-700">New File Name:</label>
@@ -374,7 +374,7 @@ const CodeViewerModal = ({ content, language, onClose }) => {
 
     return (
         <div ref={modalRef} className="fixed inset-0 bg-gray-900 bg-opacity-70 flex justify-center items-center z-50 p-5 backdrop-blur-sm animate-fade-in">
-            <div className="bg-white p-8 rounded-3xl shadow-2xl max-w-4xl w-full h-4/5 flex flex-col transform transition-all duration-300 scale-105 opacity-0 animate-scale-in"> 
+            <div className="bg-white p-8 rounded-3xl shadow-2xl max-w-4xl w-full h-4/5 flex flex-col transform transition-all duration-300 scale-105 opacity-0 animate-scale-in">
                 <h3 className="text-xl font-bold mb-4 text-center text-gray-800">Code Viewer</h3>
                 <div className="flex-grow overflow-auto rounded-lg bg-gray-800 p-4 text-sm scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-900">
                     <pre>
@@ -837,7 +837,7 @@ const ResetPasswordPage = ({ onNavigateToLogin, initialToken }) => {
 
                     <button
                         type="submit"
-                        className="bg-blue-500 text-white py-3 px-6 rounded-lg font-bold transition duration-300 hover:bg-blue-600 shadow-xl hover:shadow-2xl mt-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75"
+                        className="bg-blue-500 text-white py-3 px-6 rounded-lg font-bold transition duration-300 hover:bg-blue-600 shadow-xl hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 mt-4"
                     >
                         Reset Password
                     </button>
@@ -1629,6 +1629,57 @@ const CreateProjectPage = ({ onNavigateToWelcome }) => {
 };
 
 
+// NEW: Splash Video Component
+const SplashVideo = ({ onVideoEnd }) => {
+    const videoRef = useRef(null);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            // Fallback: If video 'ended' event doesn't fire for any reason,
+            // or if video autoplay is blocked, transition after 4 seconds anyway.
+            onVideoEnd();
+        }, 4000); // 4 seconds
+
+        const handleVideoEnded = () => {
+            clearTimeout(timer); // Clear the timeout if video ends naturally
+            onVideoEnd();
+        };
+
+        const videoElement = videoRef.current;
+        if (videoElement) {
+            videoElement.addEventListener('ended', handleVideoEnded);
+            // Attempt to play the video; catch potential autoplay errors
+            videoElement.play().catch(error => {
+                console.warn("Autoplay was prevented:", error);
+                // If autoplay is prevented, the setTimeout will still ensure transition
+            });
+        }
+
+        return () => {
+            if (videoElement) {
+                videoElement.removeEventListener('ended', handleVideoEnded);
+            }
+            clearTimeout(timer);
+        };
+    }, [onVideoEnd]);
+
+    return (
+        <div className="fixed inset-0 z-50 bg-black flex items-center justify-center overflow-hidden">
+            <video
+                ref={videoRef}
+                src="/path/to/your/4-sec-intro-video.mp4" // IMPORTANT: Replace this with your actual video URL!
+                autoPlay
+                muted
+                playsInline // Crucial for mobile autoplay
+                className="w-full h-full object-cover" // Ensure video covers full screen
+            >
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    );
+};
+
+
 // Main App component
 function App() { 
     const getInitialPage = () => {
@@ -1643,6 +1694,14 @@ function App() {
     const [resetTokenFromUrl, setResetTokenFromUrl] = useState('');
     const { token, fetchUserDetails, userDetails, isAuthLoading } = useContext(AuthContext); 
 
+    // New state for splash screen
+    const [showSplash, setShowSplash] = useState(true);
+
+    // Effect to hide splash after 4 seconds, or when video ends
+    const handleVideoEnd = useCallback(() => {
+        setShowSplash(false);
+    }, []);
+
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
         const tokenInUrl = params.get('token');
@@ -1650,18 +1709,19 @@ function App() {
             setResetTokenFromUrl(tokenInUrl);
         }
 
-        if (token && !isAuthLoading && userDetails) {
+        // Only navigate to welcome if logged in AND splash screen is done
+        if (token && !isAuthLoading && userDetails && !showSplash) {
             if (currentPage === 'login' || currentPage === 'register' || currentPage === 'forgotPassword' || currentPage === 'resetPassword') {
                 setCurrentPage('welcome');
             }
         } else if (token && !userDetails && !isAuthLoading) {
             fetchUserDetails(); 
-        } else if (!token) {
+        } else if (!token && !showSplash) { // Only redirect to login if no token AND splash is done
             if (currentPage !== 'resetPassword' && currentPage !== 'register' && currentPage !== 'forgotPassword') {
                 setCurrentPage('login');
             }
         }
-    }, [token, fetchUserDetails, userDetails, isAuthLoading, currentPage]); 
+    }, [token, fetchUserDetails, userDetails, isAuthLoading, currentPage, showSplash]); 
 
 
     const navigate = useCallback((page, token = null) => {
@@ -1702,29 +1762,41 @@ function App() {
     };
 
     return (
-        // Main container with light green background from the screenshot and horizontal layout
-        <div className="min-h-screen flex flex-col md:flex-row bg-green-100 font-sans">
-            {/* Left section for Logo and Slogan */}
-            <div className="w-full md:w-1/2 p-8 flex flex-col justify-between items-start">
-                <header className="mb-8 md:mb-0">
-                    {/* Replaced h1 with img tag for the logo */}
-                    <img src="/title-removebg-preview (2).png" alt="Plote." className="h-20 sm:h-24 md:h-32 mb-2 drop-shadow-lg" /> 
-                    <p className="text-xl sm:text-2xl text-gray-700 italic pl-2" style={{ fontFamily: 'Inter, sans-serif' }}>portfolio of talent & exhibits</p> 
-                </header>
-                <div className="hidden md:block mt-auto pb-10 pl-2"> 
-                    <p className="text-lg text-gray-700 max-w-sm leading-relaxed"> 
-                        Manage your projects effortlessly: access, <br/> 
-                        edit and update them from any desktop, <br/>
-                        anytime.
-                    </p>
-                </div>
-            </div>
+        // Conditional rendering: Show SplashVideo first, then the main app
+        <>
+            {showSplash ? (
+                <SplashVideo onVideoEnd={handleVideoEnd} />
+            ) : (
+                // Main container with black background and horizontal layout from the new screenshot
+                <div className="min-h-screen flex flex-col md:flex-row bg-black font-sans">
+                    {/* Left section for Logo and Slogan */}
+                    <div className="w-full md:w-1/2 p-8 flex flex-col justify-between items-start">
+                        <header className="mb-8 md:mb-0">
+                            {/* Replaced h1 with img tag for the logo, now white for dark background */}
+                            <img src="/title-removebg-preview (2).png" alt="Plote." className="h-20 sm:h-24 md:h-32 mb-2 drop-shadow-lg filter invert" /> {/* filter invert makes it white */}
+                            <p className="text-xl sm:text-2xl text-white italic pl-2" style={{ fontFamily: 'Inter, sans-serif' }}>portfolio of talent & exhibits</p> 
+                        </header>
+                        <div className="hidden md:block mt-auto pb-10 pl-2"> 
+                            <p className="text-lg text-white max-w-sm leading-relaxed"> 
+                                Manage your projects effortlessly: access, <br/> 
+                                edit and update them from any desktop, <br/>
+                                anytime.
+                            </p>
+                        </div>
+                    </div>
 
-            {/* Right section for dynamic page content */}
-            <main className="flex-grow flex items-center justify-center w-full md:w-1/2 p-4">
-                {renderPage()}
-            </main>
-        </div>
+                    {/* Right section for dynamic page content */}
+                    <main className="flex-grow flex items-center justify-center w-full md:w-1/2 p-4">
+                        {renderPage()}
+                    </main>
+
+                    {/* Footer for the main app */}
+                    <footer className="w-full text-center py-4 text-gray-500 text-sm absolute bottom-0">
+                        © 2025 plote from KHAZA
+                    </footer>
+                </div>
+            )}
+        </>
     );
 }
 
