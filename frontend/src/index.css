@@ -1,0 +1,105 @@
+/* Importing Inter font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Base styles for the whole application */
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #EEEEEE; /* Light gray background */
+    color: #222831; /* Dark text color */
+}
+
+/* Ensure full viewport height for main app container */
+#root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Utility classes for animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInFromBottom {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-scale-in {
+    animation: scaleIn 0.4s ease-out forwards;
+}
+
+.animate-fade-in-up {
+    animation: fadeInFromBottom 0.6s ease-out forwards;
+}
+
+/* Scrollbar styles for better aesthetics */
+.scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: #00ADB5 #EEEEEE;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+    background: #EEEEEE;
+    border-radius: 10px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: #00ADB5;
+    border-radius: 10px;
+    border: 2px solid #EEEEEE;
+}
+
+/* Basic styling for common elements (buttons, inputs) - Tailwind already handles much of this, but for explicit control */
+button {
+    cursor: pointer;
+    border: none;
+}
+
+input, textarea {
+    border: 1px solid #393E46;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: #00ADB5;
+    box-shadow: 0 0 0 2px rgba(0, 173, 181, 0.5);
+}

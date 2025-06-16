@@ -1,0 +1,55 @@
+/* src/style.css */
+
+/* Import Inter font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* Apply Tailwind CSS base styles, components, and utilities */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom CSS Keyframe Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes scaleIn {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+@keyframes slideInRight {
+    from { transform: translateX(20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Apply animations as Tailwind utility classes */
+.animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+.animate-scale-in {
+    animation: scaleIn 0.5s ease-out forwards;
+}
+.animate-slide-in-right {
+    animation: slideInRight 0.4s ease-out forwards;
+}
+.animate-fade-in-up {
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+
+/* Ensure full viewport height for all pages and prevent horizontal scroll */
+html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+/* Basic font application to body */
+body {
+    font-family: 'Inter', sans-serif;
+    /* Background color is now applied directly in public/index.html body class for simplicity and consistency with Tailwind */
+}
