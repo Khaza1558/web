@@ -1667,7 +1667,7 @@ const SplashVideo = ({ onVideoEnd }) => {
         <div className="fixed inset-0 z-50 bg-black flex items-center justify-center overflow-hidden">
             <video
                 ref={videoRef}
-                src="/path/to/your/4-sec-intro-video.mp4" // IMPORTANT: Replace this with your actual video URL!
+                src="intro.mp4" // IMPORTANT: Replace this with your actual video URL!
                 autoPlay
                 muted
                 playsInline // Crucial for mobile autoplay
@@ -1777,10 +1777,8 @@ function App() {
                             <p className="text-xl sm:text-2xl text-white italic pl-2" style={{ fontFamily: 'Inter, sans-serif' }}>portfolio of talent & exhibits</p>
                             <div className="hidden md:block mt-auto pb-10 pl-2"> 
                             <p className="text-lg text-white max-w-sm leading-relaxed"> 
-                                Manage your projects effortlessly: access,edit and update them from any desktop,anytime.</p>
+                                Manage your projects effortlessly: access,edit and update them from any desktop,anytime.</p></div>
                         </header>
-                        
-                        </div>
                     </div>
 
                     {/* Right section for dynamic page content */}
@@ -1790,7 +1788,7 @@ function App() {
 
                     {/* Footer for the main app */}
                     <footer className="w-full text-center py-4 text-gray-500 text-sm absolute bottom-0">
-                        © 2025 plote from KHAZA
+                        © 2025 plote. from KHAZA
                     </footer>
                 </div>
             )}
