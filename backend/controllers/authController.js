@@ -93,11 +93,22 @@ exports.loginUser = async (req, res) => {
         const isMatch = await user.matchPassword(password);
 
         if (user && isMatch) {
+            // --- START DEBUG LOG FOR LOGIN ---
+            console.log('DEBUG Login: User object details being sent:', {
+                id: user.id,
+                username: user.username,
+                email: user.email,
+                roll_number: user.roll_number, // Check this!
+                college: user.college,         // Check this!
+                branch: user.branch            // Check this!
+            });
+            // --- END DEBUG LOG FOR LOGIN ---
+
             res.status(200).json({
                 success: true,
                 message: 'Logged in successfully!',
                 token: generateToken(user.id),
-                user: {
+                user: { // Ensure these fields are explicitly included here
                     id: user.id,
                     username: user.username,
                     email: user.email,
@@ -127,6 +138,10 @@ exports.getUserDetails = async (req, res) => {
         // Ensure that password is not included (already excluded by middleware)
         const userDetails = { ...req.user.toJSON() }; // Convert Sequelize instance to plain object
         delete userDetails.password; // Double-check and remove if somehow present
+
+        // --- START DEBUG LOG FOR GET_USER_DETAILS ---
+        console.log('DEBUG GetUserDetails: User details being sent:', userDetails); // Check this!
+        // --- END DEBUG LOG FOR GET_USER_DETAILS ---
 
         res.status(200).json({ success: true, user: userDetails });
     } catch (error) {
@@ -212,4 +227,3 @@ exports.resetPassword = async (req, res) => {
         res.status(500).json({ success: false, message: 'Server error during password reset.' });
     }
 };
-
