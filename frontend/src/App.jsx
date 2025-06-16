@@ -89,7 +89,7 @@ const AuthContextProvider = ({ children }) => {
 // --- Global API Base URL (will be replaced by render/deployment) ---
 // IMPORTANT: Replace this placeholder with your actual backend API URL.
 // Example: 'https://your-backend-url.onrender.com'
-const API_BASE_URL = '__BACKEND_API_URL__'; // REMEMBER TO UPDATE THIS FOR YOUR DEPLOYED BACKEND!
+const API_BASE_URL = 'https://plote.onrender.com'; // REMEMBER TO UPDATE THIS FOR YOUR DEPLOYED BACKEND!
 
 // --- Reusable Modal Components ---
 
