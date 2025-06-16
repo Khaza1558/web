@@ -78,7 +78,7 @@ const AuthContextProvider = ({ children }) => {
 // --- Global API Base URL (will be replaced by render/deployment) ---
 // IMPORTANT: Replace this placeholder with your actual backend API URL.
 // Example: 'https://your-backend-url.onrender.com'
-const API_BASE_URL = import.meta.env.VITE_APP_API_URL || 'http://localhost:5000';
+const API_BASE_URL ='https://plote.onrender.com';
 
 // --- Reusable Modal Components ---
 
