@@ -1773,15 +1773,13 @@ function App() {
                     <div className="w-full md:w-1/2 p-8 flex flex-col justify-between items-start">
                         <header className="mb-8 md:mb-0">
                             {/* Replaced h1 with img tag for the logo, now white for dark background */}
-                            <img src="/title-removebg-preview (2).png" alt="Plote." className="h-20 sm:h-24 md:h-32 mb-2 drop-shadow-lg filter invert" /> {/* filter invert makes it white */}
-                            <p className="text-xl sm:text-2xl text-white italic pl-2" style={{ fontFamily: 'Inter, sans-serif' }}>portfolio of talent & exhibits</p> 
-                        </header>
-                        <div className="hidden md:block mt-auto pb-10 pl-2"> 
+                            <img src="/title-removebg-preview.png" alt="Plote." className="h-20 sm:h-32 md:h-32 mb-2 drop-shadow-lg filter invert" /> {/* filter invert makes it white */}
+                            <p className="text-xl sm:text-2xl text-white italic pl-2" style={{ fontFamily: 'Inter, sans-serif' }}>portfolio of talent & exhibits</p>
+                            <div className="hidden md:block mt-auto pb-10 pl-2"> 
                             <p className="text-lg text-white max-w-sm leading-relaxed"> 
-                                Manage your projects effortlessly: access, <br/> 
-                                edit and update them from any desktop, <br/>
-                                anytime.
-                            </p>
+                                Manage your projects effortlessly: access,edit and update them from any desktop,anytime.</p>
+                        </header>
+                        
                         </div>
                     </div>
 
