@@ -110,7 +110,7 @@ const CustomConfirmModal = ({ message, onConfirm, onCancel }) => {
 
     return (
         <div ref={modalRef} className="fixed inset-0 bg-gray-900 bg-opacity-70 flex justify-center items-center z-50 p-5 backdrop-blur-sm animate-fade-in">
-            <div className="bg-white p-8 rounded-3xl shadow-2xl text-center max-w-sm w-full transform transition-all duration-300 scale-105 opacity-0 animate-scale-in"> {/* Increased rounded and shadow */}
+            <div className="bg-white p-8 rounded-3xl shadow-2xl text-center max-w-sm w-full transform transition-all duration-300 scale-105 opacity-0 animate-scale-in"> 
                 <p className="mb-6 text-gray-800 text-lg font-medium">{message}</p>
                 <div className="flex justify-center gap-4">
                     <button
@@ -181,7 +181,7 @@ const EditTitleModal = ({ projectId, currentTitle, onClose, onSave }) => {
 
     return (
         <div ref={modalRef} className="fixed inset-0 bg-gray-900 bg-opacity-70 flex justify-center items-center z-50 p-5 backdrop-blur-sm animate-fade-in">
-            <div className="bg-white p-8 rounded-3xl shadow-2xl max-w-md w-full transform transition-all duration-300 scale-105 opacity-0 animate-scale-in"> {/* Increased rounded and shadow */}
+            <div className="bg-white p-8 rounded-3xl shadow-2xl max-w-md w-full transform transition-all duration-300 scale-105 opacity-0 animate-scale-in"> 
                 <h3 className="text-xl font-bold mb-6 text-center text-gray-800">Edit Project Title</h3>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                     <label htmlFor="newProjectTitle" className="font-semibold text-gray-700">New Project Title:</label>
@@ -274,7 +274,7 @@ const ReplaceFileModal = ({ fileId, currentFileName, onClose, onReplace }) => {
 
     return (
         <div ref={modalRef} className="fixed inset-0 bg-gray-900 bg-opacity-70 flex justify-center items-center z-50 p-5 backdrop-blur-sm animate-fade-in">
-            <div className="bg-white p-8 rounded-3xl shadow-2xl max-w-md w-full transform transition-all duration-300 scale-105 opacity-0 animate-scale-in"> {/* Increased rounded and shadow */}
+            <div className="bg-white p-8 rounded-3xl shadow-2xl max-w-md w-full transform transition-all duration-300 scale-105 opacity-0 animate-scale-in"> 
                 <h3 className="text-xl font-bold mb-6 text-center text-gray-800">Replace File</h3>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                     <label htmlFor="newFileName" className="font-semibold text-gray-700">New File Name:</label>
@@ -374,7 +374,7 @@ const CodeViewerModal = ({ content, language, onClose }) => {
 
     return (
         <div ref={modalRef} className="fixed inset-0 bg-gray-900 bg-opacity-70 flex justify-center items-center z-50 p-5 backdrop-blur-sm animate-fade-in">
-            <div className="bg-white p-8 rounded-3xl shadow-2xl max-w-4xl w-full h-4/5 flex flex-col transform transition-all duration-300 scale-105 opacity-0 animate-scale-in"> {/* Increased rounded and shadow */}
+            <div className="bg-white p-8 rounded-3xl shadow-2xl max-w-4xl w-full h-4/5 flex flex-col transform transition-all duration-300 scale-105 opacity-0 animate-scale-in"> 
                 <h3 className="text-xl font-bold mb-4 text-center text-gray-800">Code Viewer</h3>
                 <div className="flex-grow overflow-auto rounded-lg bg-gray-800 p-4 text-sm scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-900">
                     <pre>
@@ -400,7 +400,7 @@ const CodeViewerModal = ({ content, language, onClose }) => {
 const ProjectCard = ({ project, onSelectProject }) => {
     return (
         <div
-            className="bg-gray-100 p-4 rounded-xl shadow-lg hover:bg-gray-200 transition duration-200 cursor-pointer" // Corrected: Removed extra curly brace comment
+            className="bg-gray-100 p-4 rounded-xl shadow-lg hover:bg-gray-200 transition duration-200 cursor-pointer" 
             onClick={() => onSelectProject(project.id, project.name)}
         >
             <h4 className="text-xl font-bold text-gray-800 mb-2">{project.name}</h4>
@@ -449,10 +449,10 @@ const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPas
 
     return (
         <div className="flex items-center justify-center p-5 w-full">
-            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col items-center animate-fade-in-up"> {/* Increased rounded and shadow */}
+            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col items-center animate-fade-in-up"> 
                 <h2 className="text-3xl font-bold text-gray-800 mb-6">Login</h2>
-                <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full max-w-xs"> {/* Increased gap for spacing */}
-                    <label htmlFor="loginUsername" className="font-semibold text-gray-700 mb-1">Username:</label> {/* Added mb-1 for label spacing */}
+                <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full max-w-xs"> 
+                    <label htmlFor="loginUsername" className="font-semibold text-gray-700 mb-1">Username:</label> 
                     <input
                         type="text"
                         id="loginUsername"
@@ -462,7 +462,7 @@ const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPas
                         required
                     />
 
-                    <label htmlFor="loginPassword" className="font-semibold text-gray-700 mb-1">Password:</label> {/* Added mb-1 for label spacing */}
+                    <label htmlFor="loginPassword" className="font-semibold text-gray-700 mb-1">Password:</label> 
                     <input
                         type="password"
                         id="loginPassword"
@@ -476,7 +476,7 @@ const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPas
 
                     <button
                         type="submit"
-                        className="bg-blue-500 text-white py-3 px-6 rounded-lg font-bold transition duration-300 hover:bg-blue-600 shadow-xl hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 mt-4" {/* Increased shadow and added mt-4 */}
+                        className="bg-blue-500 text-white py-3 px-6 rounded-lg font-bold transition duration-300 hover:bg-blue-600 shadow-xl hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 mt-4" 
                     >
                         Login
                     </button>
@@ -488,7 +488,7 @@ const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPas
                         </a>
                     </p>
                 )}
-                <p className="mt-6 text-gray-700 text-base"> {/* Adjusted text size for readability */}
+                <p className="mt-6 text-gray-700 text-base"> 
                     Don't have an account?{' '}
                     <a href="#" onClick={onNavigateToRegister} className="text-blue-500 font-semibold hover:underline">
                         Register here
@@ -558,10 +558,10 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
 
     return (
         <div className="flex items-center justify-center p-5 w-full">
-            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-xl flex flex-col items-center animate-fade-in-up"> {/* Increased rounded and shadow */}
+            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-xl flex flex-col items-center animate-fade-in-up"> 
                 <h2 className="text-3xl font-bold text-gray-800 mb-6">Register</h2>
-                <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-lg mx-auto"> {/* Adjusted gap */}
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2"> {/* Added mb-2 for consistent row spacing */}
+                <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-lg mx-auto"> 
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2"> 
                         <label htmlFor="email" className="font-semibold text-gray-700 text-sm sm:w-1/4 flex-shrink-0">Email:</label>
                         <input type="email" id="email" value={formData.email} onChange={handleChange}
                             className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow" required />
@@ -670,9 +670,9 @@ const ForgotPasswordPage = ({ onNavigateToLogin, onNavigateToResetPasswordWithTo
 
     return (
         <div className="flex items-center justify-center p-5 w-full">
-            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col items-center animate-fade-in-up"> {/* Increased rounded and shadow */}
+            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col items-center animate-fade-in-up"> 
                 <h2 className="text-3xl font-bold text-gray-800 mb-6">Forgot Password</h2>
-                <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full max-w-xs"> {/* Increased gap */}
+                <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full max-w-xs"> 
                     <p className="text-center text-gray-700 mb-4">Enter your username to receive a password reset token.</p>
                     <label htmlFor="username" className="font-semibold text-gray-700 mb-1">Username:</label>
                     <input
@@ -789,9 +789,9 @@ const ResetPasswordPage = ({ onNavigateToLogin, initialToken }) => {
 
     return (
         <div className="flex items-center justify-center p-5 w-full">
-            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col items-center animate-fade-in-up"> {/* Increased rounded and shadow */}
+            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col items-center animate-fade-in-up"> 
                 <h2 className="text-3xl font-bold text-gray-800 mb-6">Reset Password</h2>
-                <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full max-w-xs"> {/* Increased gap */}
+                <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full max-w-xs"> 
                     <label htmlFor="resetUsername" className="font-semibold text-gray-700 mb-1">Username:</label>
                     <input
                         type="text"
@@ -870,15 +870,15 @@ const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects }) =>
 
     return (
         <div className="flex flex-col items-center justify-center p-5 w-full">
-            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col items-center animate-fade-in-up"> {/* Increased rounded and shadow */}
+            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col items-center animate-fade-in-up"> 
                 <h1 className="text-3xl font-bold text-gray-800 mb-6">Welcome, {userDetails?.username || 'User'}!</h1>
 
                 {isAuthLoading ? (
                     <p className="text-gray-600 mb-6">Loading user details...</p>
                 ) : userDetails ? (
-                    <div className="user-details-box text-left w-full max-w-xs mx-auto mb-6 p-4 border border-blue-300 rounded-xl bg-blue-50 shadow-md"> {/* Increased rounded and shadow */}
-                        <p className="text-gray-700 text-sm mb-2">College: <span className="font-medium">{userDetails.college || 'N/A'}</span></p> {/* Added mb-2 */}
-                        <p className="text-gray-700 text-sm mb-2">Branch: <span className="font-medium">{userDetails.branch || 'N/A'}</span></p> {/* Added mb-2 */}
+                    <div className="user-details-box text-left w-full max-w-xs mx-auto mb-6 p-4 border border-blue-300 rounded-xl bg-blue-50 shadow-md"> 
+                        <p className="text-gray-700 text-sm mb-2">College: <span className="font-medium">{userDetails.college || 'N/A'}</span></p> 
+                        <p className="text-gray-700 text-sm mb-2">Branch: <span className="font-medium">{userDetails.branch || 'N/A'}</span></p> 
                         <p className="text-gray-700 text-sm">Roll Number: <span className="font-medium">{userDetails.roll_number || 'N/A'}</span></p>
                     </div>
                 ) : (
@@ -917,7 +917,7 @@ const FileItem = ({ file, projectOwnerRollNumber, loggedInUserRollNumber, onRepl
     console.log(`FileItem - File ID: ${file.id}, LoggedInUserRollNumber: '${loggedInUserRollNumber}', ProjectOwnerRollNumber: '${projectOwnerRollNumber}', IsOwner: ${isOwner}`); 
 
     return (
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-4 p-4 bg-gray-50 rounded-xl border border-gray-200 shadow-lg animate-fade-in-up flex-wrap"> {/* Increased rounded and shadow */}
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-4 p-4 bg-gray-50 rounded-xl border border-gray-200 shadow-lg animate-fade-in-up flex-wrap"> 
             <div className="flex flex-col sm:flex-row sm:items-center gap-2 w-full sm:w-2/3">
                 <span className="font-semibold text-gray-700 text-sm mb-1 sm:w-fit sm:min-w-[40px] flex-shrink-0">Title:</span>
                 <span className="font-bold text-gray-800 flex-grow">{file.file_name} ({file.original_name})</span>
@@ -1250,12 +1250,12 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
 
     return (
         <div className="flex flex-col items-center justify-center p-5 w-full">
-            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-xl flex flex-col items-start animate-fade-in-up"> {/* Increased rounded and shadow */}
+            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-xl flex flex-col items-start animate-fade-in-up"> 
                 <h1 className="text-3xl font-bold mb-6 text-gray-800 self-center">View Projects</h1>
 
                 {showSearchAndList ? (
                     <>
-                        <form onSubmit={(e) => { e.preventDefault(); fetchProjects(); }} className="flex flex-col gap-5 w-full max-w-xs mx-auto mb-6"> {/* Increased gap */}
+                        <form onSubmit={(e) => { e.preventDefault(); fetchProjects(); }} className="flex flex-col gap-5 w-full max-w-xs mx-auto mb-6"> 
                             <label htmlFor="viewRollNumber" className="font-semibold text-gray-700 mb-1">Enter Student Roll Number:</label>
                             <input
                                 type="text"
@@ -1291,7 +1291,7 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
                 ) : (
                     <>
                         <div className="project-details-section w-full animate-fade-in-up">
-                            <h3 className="text-3xl font-bold mb-4 text-gray-800">{selectedProject?.name}</h3> {/* Adjusted mb */}
+                            <h3 className="text-3xl font-bold mb-4 text-gray-800">{selectedProject?.name}</h3> 
                             <p className="text-gray-700 text-lg mb-6">{selectedProject?.description || ''}</p>
 
                             {loggedInUserRollNumber && selectedProject?.roll_number === loggedInUserRollNumber && (
@@ -1336,7 +1336,7 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
                                     <h4 className="text-2xl font-bold mb-2 text-gray-800">Add New Files to this Project:</h4>
                                     <div className="flex flex-col gap-4 w-full">
                                         {addFiles.map(fileEntry => (
-                                            <div key={fileEntry.id} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 p-4 bg-gray-50 rounded-xl border border-gray-200 shadow-sm flex-wrap"> {/* Increased rounded and shadow */}
+                                            <div key={fileEntry.id} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 p-4 bg-gray-50 rounded-xl border border-gray-200 shadow-sm flex-wrap"> 
                                                 <div className="flex flex-col sm:flex-row sm:items-center gap-2 w-full sm:w-1/2">
                                                     <label htmlFor={`addFile${fileEntry.id}`} className="font-semibold text-gray-700 sm:w-fit sm:min-w-[50px] flex-shrink-0">File {fileEntry.id}:</label>
                                                     <input
@@ -1538,9 +1538,9 @@ const CreateProjectPage = ({ onNavigateToWelcome }) => {
 
     return (
         <div className="flex items-center justify-center p-5 w-full">
-            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-xl flex flex-col items-center animate-fade-in-up"> {/* Increased rounded and shadow */}
+            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-xl flex flex-col items-center animate-fade-in-up"> 
                 <h2 className="text-3xl font-bold text-gray-800 mb-6">Create New Project</h2>
-                <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full max-w-lg mx-auto"> {/* Increased gap */}
+                <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full max-w-lg mx-auto"> 
                     <label htmlFor="projectName" className="font-semibold text-gray-700 mb-1">Project Name:</label>
                     <input
                         type="text"
@@ -1560,10 +1560,10 @@ const CreateProjectPage = ({ onNavigateToWelcome }) => {
                         className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition resize-y"
                     ></textarea>
 
-                    <h3 className="text-2xl font-bold mb-4 text-gray-800">Files:</h3> {/* Adjusted mb */}
+                    <h3 className="text-2xl font-bold mb-4 text-gray-800">Files:</h3> 
                     <div className="flex flex-col gap-4 w-full">
                         {files.map(fileEntry => (
-                            <div key={fileEntry.id} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 p-4 bg-gray-50 rounded-xl border border-gray-200 shadow-sm flex-wrap"> {/* Increased rounded and shadow */}
+                            <div key={fileEntry.id} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 p-4 bg-gray-50 rounded-xl border border-gray-200 shadow-sm flex-wrap"> 
                                 <div className="flex flex-col sm:flex-row sm:items-center gap-2 w-full sm:w-1/2">
                                     <label htmlFor={`file${fileEntry.id}`} className="font-semibold text-gray-700 sm:w-fit sm:min-w-[50px] flex-shrink-0">File {fileEntry.id}:</label>
                                     <input
@@ -1708,12 +1708,12 @@ function App() {
             <div className="w-full md:w-1/2 p-8 flex flex-col justify-between items-start">
                 <header className="mb-8 md:mb-0">
                     {/* Replaced h1 with img tag for the logo */}
-                    <img src="/title-removebg-preview (2).png" alt="Plote." className="h-20 sm:h-24 md:h-32 mb-2 drop-shadow-lg" /> {/* Adjusted size and added shadow */}
-                    <p className="text-xl sm:text-2xl text-gray-700 italic pl-2" style={{ fontFamily: 'Inter, sans-serif' }}>portfolio of talent & exhibits</p> {/* Added padding-left for spacing */}
+                    <img src="/title-removebg-preview (2).png" alt="Plote." className="h-20 sm:h-24 md:h-32 mb-2 drop-shadow-lg" /> 
+                    <p className="text-xl sm:text-2xl text-gray-700 italic pl-2" style={{ fontFamily: 'Inter, sans-serif' }}>portfolio of talent & exhibits</p> 
                 </header>
-                <div className="hidden md:block mt-auto pb-10 pl-2"> {/* Hidden on small, visible on md+, adjusted padding */}
-                    <p className="text-lg text-gray-700 max-w-sm leading-relaxed"> {/* Added leading-relaxed for better line spacing */}
-                        Manage your projects effortlessly: access, <br/> {/* Added line break for visual arrangement */}
+                <div className="hidden md:block mt-auto pb-10 pl-2"> 
+                    <p className="text-lg text-gray-700 max-w-sm leading-relaxed"> 
+                        Manage your projects effortlessly: access, <br/> 
                         edit and update them from any desktop, <br/>
                         anytime.
                     </p>
