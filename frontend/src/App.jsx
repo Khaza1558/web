@@ -9,6 +9,7 @@ const AuthContext = createContext(null);
 const AuthContextProvider = ({ children }) => {
     const [token, setTokenInternal] = useState(localStorage.getItem('jwtToken'));
     const [userDetails, setUserDetails] = useState(null); // Now stores full user details including roll_number
+    const [isAuthLoading, setIsAuthLoading] = useState(true); // New state to track if auth is still loading
 
     const setToken = (newToken) => {
         if (newToken) {
@@ -22,6 +23,7 @@ const AuthContextProvider = ({ children }) => {
     const removeToken = () => {
         setToken(null);
         setUserDetails(null);
+        setIsAuthLoading(false); // Auth is no longer loading after logout
     };
 
     const createAuthHeaders = (contentType = 'application/json') => {
@@ -41,7 +43,8 @@ const AuthContextProvider = ({ children }) => {
         return headers;
     };
 
-    const fetchUserDetails = useCallback(async (setCurrentPage) => {
+    const fetchUserDetails = useCallback(async (setCurrentPageCallback) => {
+        setIsAuthLoading(true); // Start loading
         if (token) {
             try {
                 const response = await fetch(`${API_BASE_URL}/api/auth/user/details`, {
@@ -51,25 +54,33 @@ const AuthContextProvider = ({ children }) => {
                 if (response.ok) {
                     const data = await response.json();
                     console.log('AuthContext - Fetched User Details:', data);
-                    console.log('AuthContext - User Roll Number from details:', data.roll_number); // Added log
-                    setUserDetails(data); // Store full user details
+                    console.log('AuthContext - User Roll Number from details:', data.user?.roll_number); // Safely access roll_number
+                    setUserDetails(data.user); // Store only the 'user' object, not {success:true, user:{...}}
                 } else {
                     console.error('AuthContext - Failed to fetch user details:', response.status, response.statusText);
                     if (response.status === 401 || response.status === 403) {
                         removeToken();
                         alert('Your session has expired or is invalid. Please log in again.');
-                        if (setCurrentPage) setCurrentPage('login'); // Navigate to login page
+                        if (setCurrentPageCallback) setCurrentPageCallback('login'); // Navigate to login page
                     }
                 }
             } catch (error) {
                 console.error('AuthContext - Error fetching user details:', error);
                 alert('An error occurred while fetching user details.');
+            } finally {
+                setIsAuthLoading(false); // Finished loading
             }
+        } else {
+            setIsAuthLoading(false); // No token, no loading needed
         }
     }, [token]); // Re-run when token changes
 
+    useEffect(() => {
+        fetchUserDetails(); // Fetch details on component mount or token change
+    }, [fetchUserDetails]);
+
     return (
-        <AuthContext.Provider value={{ token, setToken, removeToken, createAuthHeaders, createFileUploadAuthHeaders, userDetails, setUserDetails, fetchUserDetails }}>
+        <AuthContext.Provider value={{ token, setToken, removeToken, createAuthHeaders, createFileUploadAuthHeaders, userDetails, setUserDetails, fetchUserDetails, isAuthLoading }}>
             {children}
         </AuthContext.Provider>
     );
@@ -78,7 +89,7 @@ const AuthContextProvider = ({ children }) => {
 // --- Global API Base URL (will be replaced by render/deployment) ---
 // IMPORTANT: Replace this placeholder with your actual backend API URL.
 // Example: 'https://your-backend-url.onrender.com'
-const API_BASE_URL ='https://plote.onrender.com';
+const API_BASE_URL = '__BACKEND_API_URL__'; // REMEMBER TO UPDATE THIS FOR YOUR DEPLOYED BACKEND!
 
 // --- Reusable Modal Components ---
 
@@ -86,7 +97,6 @@ const CustomConfirmModal = ({ message, onConfirm, onCancel }) => {
     const modalRef = useRef(null);
     useEffect(() => {
         if (modalRef.current) {
-            // Log for debugging animation/display issues
             const computedStyle = window.getComputedStyle(modalRef.current);
             console.log('CustomConfirmModal - Initial Opacity:', computedStyle.opacity);
             console.log('CustomConfirmModal - Initial Display:', computedStyle.display);
@@ -96,7 +106,7 @@ const CustomConfirmModal = ({ message, onConfirm, onCancel }) => {
                 console.log('CustomConfirmModal - After 100ms Display:', updatedStyle.display);
             }, 100);
         }
-    }, []); // Only run once on mount
+    }, []);
 
     return (
         <div ref={modalRef} className="fixed inset-0 bg-gray-900 bg-opacity-70 flex justify-center items-center z-50 p-5 backdrop-blur-sm animate-fade-in">
@@ -857,14 +867,14 @@ const ResetPasswordPage = ({ onNavigateToLogin, initialToken }) => {
 
 
 const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects }) => {
-    const { userDetails, removeToken, fetchUserDetails } = useContext(AuthContext); // Added fetchUserDetails
+    const { userDetails, removeToken, fetchUserDetails, isAuthLoading } = useContext(AuthContext); // Added isAuthLoading
 
     // Fetch user details when the component mounts or token changes
     useEffect(() => {
-        if (!userDetails) { // Only fetch if userDetails is not already available
+        if (!userDetails && !isAuthLoading) { // Only fetch if userDetails is not already available AND not currently loading
             fetchUserDetails();
         }
-    }, [userDetails, fetchUserDetails]); // Depend on userDetails and fetchUserDetails
+    }, [userDetails, fetchUserDetails, isAuthLoading]); // Depend on userDetails and fetchUserDetails
 
 
     const handleLogout = () => {
@@ -878,14 +888,16 @@ const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects }) =>
             <div className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md flex flex-col items-center animate-scale-in">
                 <h1 className="text-4xl font-extrabold mb-8 text-[#222831]">Welcome, {userDetails?.username || 'User'}!</h1>
 
-                {userDetails ? (
+                {isAuthLoading ? (
+                    <p className="text-gray-600 mb-6">Loading user details...</p>
+                ) : userDetails ? (
                     <div className="user-details-box text-left w-full max-w-xs mx-auto mb-6 p-4 border border-[#00ADB5] rounded-xl bg-gradient-to-r from-teal-50 to-teal-100 shadow-inner">
                         <p className="text-[#393E46] text-sm">College: <span className="font-medium">{userDetails.college || 'N/A'}</span></p>
                         <p className="text-[#393E46] text-sm">Branch: <span className="font-medium">{userDetails.branch || 'N/A'}</span></p>
                         <p className="text-[#393E46] text-sm">Roll Number: <span className="font-medium">{userDetails.roll_number || 'N/A'}</span></p>
                     </div>
                 ) : (
-                    <p className="text-gray-600 mb-6">Loading user details...</p>
+                    <p className="text-red-600 mb-6">Could not load user details. Please try logging in again.</p>
                 )}
 
                 <div className="flex flex-col sm:flex-row gap-4 mt-6 w-full max-w-xs justify-center">
@@ -909,171 +921,6 @@ const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects }) =>
                 >
                     Logout
                 </button>
-            </div>
-        </div>
-    );
-};
-
-const CreateProjectPage = ({ onNavigateToWelcome }) => {
-    const { createFileUploadAuthHeaders } = useContext(AuthContext);
-    const [projectName, setProjectName] = useState('');
-    const [projectDescription, setProjectDescription] = useState('');
-    const [files, setFiles] = useState([{ file: null, title: '', id: 1 }]);
-    const [nextFileId, setNextFileId] = useState(2);
-    const [error, setError] = useState('');
-
-    const handleFileChange = (id, field, value) => {
-        setFiles(prevFiles =>
-            prevFiles.map(f => (f.id === id ? { ...f, [field]: value } : f))
-        );
-    };
-
-    const addFileField = () => {
-        setFiles(prevFiles => [...prevFiles, { file: null, title: '', id: nextFileId }]);
-        setNextFileId(prevId => prevId + 1);
-    };
-
-    const removeFileField = (idToRemove) => {
-        setFiles(prevFiles => prevFiles.filter(f => f.id !== idToRemove));
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setError('');
-
-        if (!projectName.trim()) {
-            setError('Project Name is required.');
-            return;
-        }
-        if (files.some(f => f.file === null || !f.title.trim())) { // Check for null file and empty title
-            setError('All file fields must have a file selected and a title.');
-            return;
-        }
-
-        const formData = new FormData();
-        formData.append('name', projectName);
-        formData.append('description', projectDescription);
-
-        files.forEach((fileEntry, index) => {
-            formData.append(`projectFiles`, fileEntry.file);
-            formData.append(`fileTitle_projectFiles`, fileEntry.title); // Backend expects this naming
-        });
-
-        try {
-            const response = await fetch(`${API_BASE_URL}/api/projects/create`, {
-                method: 'POST',
-                headers: createFileUploadAuthHeaders(),
-                body: formData
-            });
-
-            const data = await response.json();
-
-            if (response.ok && data.success) {
-                alert('Project created successfully!');
-                onNavigateToWelcome(); // Or navigate to view projects
-            } else {
-                setError(data.message || 'Error creating project.');
-                alert(data.message || 'Error creating project.');
-            }
-        } catch (err) {
-            console.error('Error creating project:', err);
-            setError('An error occurred while creating the project.');
-            alert('An error occurred while creating the project.');
-        }
-    };
-
-    return (
-        <div className="flex flex-col items-center p-5 w-full">
-            <div className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-xl flex flex-col items-start animate-scale-in">
-                <h1 className="text-4xl font-extrabold mb-8 text-[#222831] self-center">Create New Project</h1>
-                <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full max-w-none mx-auto">
-                    <label htmlFor="projectName" className="font-semibold text-[#393E46]">Project Name:</label>
-                    <input
-                        type="text"
-                        id="projectName"
-                        value={projectName}
-                        onChange={(e) => setProjectName(e.target.value)}
-                        className="p-3 border border-[#393E46] rounded-lg text-[#222831] bg-[#F8FBFB] focus:ring-2 focus:ring-[#00ADB5] focus:border-transparent transition focus:shadow-md"
-                        required
-                    />
-
-                    <label htmlFor="projectDescription" className="font-semibold text-[#393E46]">Project Description:</label>
-                    <textarea
-                        id="projectDescription"
-                        value={projectDescription}
-                        onChange={(e) => setProjectDescription(e.target.value)}
-                        placeholder="Enter project description"
-                        className="p-3 border border-[#393E46] rounded-lg text-[#222831] bg-[#F8FBFB] focus:ring-2 focus:ring-[#00ADB5] focus:border-transparent transition w-full resize-y min-h-[60px] hover:min-h-[140px] focus:min-h-[140px] overflow-hidden hover:overflow-auto focus:overflow-auto focus:shadow-md"
-                    ></textarea>
-
-                    <h3 className="text-2xl font-bold mt-4 mb-2 text-[#222831] self-start">Upload Files:</h3>
-                    <div id="filesContainer" className="flex flex-col gap-4 w-full">
-                        {files.map(fileEntry => (
-                            // Each file entry row is a flex container
-                            <div key={fileEntry.id} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 p-4 bg-[#F8FBFB] rounded-xl border border-[#393E46] shadow-sm flex-wrap"> {/* Added flex-wrap */}
-                                {/* Group for File Input */}
-                                <div className="flex flex-col sm:flex-row sm:items-center gap-2 w-full sm:w-1/2">
-                                    <label htmlFor={`file${fileEntry.id}`} className="font-semibold text-[#393E46] sm:w-fit sm:min-w-[50px] flex-shrink-0">File {fileEntry.id}:</label>
-                                    <input
-                                        type="file"
-                                        id={`file${fileEntry.id}`}
-                                        onChange={(e) => handleFileChange(fileEntry.id, 'file', e.target.files[0])}
-                                        className="p-2 border border-[#393E46] rounded-lg text-[#222831] bg-[#F8FBFB] focus:ring-2 focus:ring-[#00ADB5] focus:border-transparent transition flex-grow w-full"
-                                        required
-                                    />
-                                </div>
-                                {/* Group for Title Input */}
-                                <div className="flex flex-col sm:flex-row sm:items-center gap-2 w-full sm:w-1/2">
-                                    <label htmlFor={`fileTitle${fileEntry.id}`} className="font-semibold text-[#393E46] sm:w-fit sm:min-w-[40px] flex-shrink-0">Title:</label>
-                                    <input
-                                        type="text"
-                                        id={`fileTitle${fileEntry.id}`}
-                                        value={fileEntry.title}
-                                        onChange={(e) => handleFileChange(fileEntry.id, 'title', e.target.value)}
-                                        placeholder="Enter title for this file"
-                                        className="p-2 border border-[#393E46] rounded-lg text-[#222831] bg-[#F8FBFB] focus:ring-2 focus:ring-[#00ADB5] focus:border-transparent transition flex-grow w-full"
-                                        required
-                                    />
-                                </div>
-                                {files.length > 1 && (
-                                    <button
-                                        type="button"
-                                        onClick={() => removeFileField(fileEntry.id)}
-                                        className="bg-[#F47C7C] text-white py-2 px-4 rounded-lg font-bold transition duration-300 hover:bg-[#E06666] hover:scale-105 shadow-md hover:shadow-lg sm:ml-auto mt-2 sm:mt-0 focus:outline-none focus:ring-2 focus:ring-[#F47C7C] focus:ring-opacity-75 w-full sm:w-auto"
-                                    >
-                                        Remove
-                                    </button>
-                                )}
-                            </div>
-                        ))}
-                    </div>
-
-                    <button
-                        type="button"
-                        onClick={addFileField}
-                        className="bg-[#393E46] text-white py-3 px-6 rounded-lg font-bold transition duration-300 hover:bg-[#2B3036] hover:scale-105 shadow-md hover:shadow-lg self-start mt-4 mb-2 focus:outline-none focus:ring-2 focus:ring-[#393E46] focus:ring-opacity-75"
-                    >
-                        Add Another File
-                    </button>
-
-                    {error && <p className="text-red-600 text-sm text-center mt-2">{error}</p>}
-
-                    <button
-                        type="submit"
-                        className="bg-[#00ADB5] text-white py-3 px-6 rounded-lg font-bold transition duration-300 hover:bg-[#008C94] hover:scale-105 shadow-md hover:shadow-lg mt-5 focus:outline-none focus:ring-2 focus:ring-[#00ADB5] focus:ring-opacity-75"
-                    >
-                        Create Project
-                    </button>
-                </form>
-
-                <div className="w-full flex justify-end mt-6">
-                    <button
-                        onClick={onNavigateToWelcome}
-                        className="bg-[#EEEEEE] text-[#222831] py-2 px-5 rounded-lg font-bold transition duration-300 hover:bg-[#DBDBDB] hover:scale-105 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#EEEEEE] focus:ring-opacity-75"
-                    >
-                        Back to Welcome
-                    </button>
-                </div>
             </div>
         </div>
     );
@@ -1144,7 +991,7 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
 
     const [showCodeViewer, setShowCodeViewer] = useState(false);
     const [codeViewerContent, setCodeViewerContent] = useState('');
-    const [codeViewerLanguage, setCodeViewerLanguage] = useState('');
+    const [codeViewerLanguage, setCodeViewerLanguage] = '';
 
 
     const fetchProjects = useCallback(async () => {
@@ -1158,7 +1005,7 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
         }
         setHasSearched(true); // Mark that a search has been initiated
         try {
-            const response = await fetch(`${API_BASE_URL}/api/projects/view-by-roll?rollNumber=${encodeURIComponent(rollNumber)}`, {
+            const response = await fetch(`${API_BASE_URL}/api/public-projects/view-by-roll?rollNumber=${encodeURIComponent(rollNumber)}`, {
                 method: 'GET',
                 headers: createAuthHeaders(),
             });
@@ -1636,106 +1483,6 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
         </div>
     );
 };
-
-// --- Main App Component ---
-// Moved App component definition outside of RenderApp
-// This ensures 'App' is defined in the module scope and accessible globally
-// or by other functions that need to reference it.
-function App() { // Changed to function declaration
-    // Determine initial page based on URL parameters for password reset flow
-    const getInitialPage = () => {
-        const params = new URLSearchParams(window.location.search);
-        if (params.get('state') === 'resetPassword' && params.get('token')) {
-            return 'resetPassword';
-        }
-        return 'login'; // Default to login if no specific state
-    };
-
-    const [currentPage, setCurrentPage] = useState(getInitialPage); // Initial page
-    const [resetTokenFromUrl, setResetTokenFromUrl] = useState(''); // Store token if from URL
-    const { token, fetchUserDetails } = useContext(AuthContext); // Access token and fetchUserDetails from context
-
-    useEffect(() => {
-        const params = new URLSearchParams(window.location.search);
-        const tokenInUrl = params.get('token');
-        if (tokenInUrl) {
-            setResetTokenFromUrl(tokenInUrl);
-        }
-
-        // If a token exists and the current page is 'login', redirect to 'welcome'
-        if (token && currentPage === 'login') {
-            fetchUserDetails(setCurrentPage);
-            setCurrentPage('welcome');
-        }
-        // If no token exists AND we are not in the 'resetPassword' flow (meaning not coming from a reset link),
-        // AND the current page is not 'register' or 'forgotPassword', then default to 'login'.
-        // This prevents immediate redirect from register/forgot when user clicks them.
-        else if (!token && currentPage !== 'resetPassword' && currentPage !== 'register' && currentPage !== 'forgotPassword') {
-            setCurrentPage('login');
-        }
-        // If we are on a page that normally requires authentication (like createProject or viewProjects)
-        // but there's no token, redirect to login.
-        else if (!token && (currentPage === 'createProject' || currentPage === 'viewProjects')) {
-            setCurrentPage('login');
-        }
-
-    }, [token, fetchUserDetails, currentPage]); // Depend on token, fetchUserDetails, and currentPage
-
-    // Wrap navigate in useCallback to ensure stable reference
-    const navigate = useCallback((page, token = null) => {
-        if (page === 'resetPassword' && token) {
-            // Update URL to include the token for consistent behavior (e.g., if user refreshes)
-            const newUrl = new URL(window.location.origin);
-            newUrl.searchParams.set('state', 'resetPassword');
-            newUrl.searchParams.set('token', token);
-            window.history.pushState({}, '', newUrl); // Update URL without full reload
-            setResetTokenFromUrl(token);
-        } else {
-            // Clean up URL params if navigating away from resetPassword
-            const currentUrl = new URL(window.location.href);
-            currentUrl.searchParams.delete('state');
-            currentUrl.searchParams.delete('token');
-            window.history.pushState({}, '', currentUrl); // Update URL without full reload
-            setResetTokenFromUrl('');
-        }
-        setCurrentPage(page);
-    }, []); // Empty dependency array means this function reference is stable
-
-    return (
-        // The overall container for the entire application,
-        // implementing the split layout and background color from the screenshot.
-        // Uses flexbox to create columns on large screens and stacks on smaller screens.
-        <div className="min-h-screen flex flex-col lg:flex-row bg-[#C1D5C0] overflow-hidden">
-            {/* Left Section: Branding and Introductory Text */}
-            <div className="lg:w-1/2 flex flex-col justify-center items-center p-8 text-[#222831] animate-fade-in">
-                {/* Plote. Title Image */}
-                <img
-                    src="/title-removebg-preview (2).png" // Ensure this path is correct relative to your public folder
-                    alt="Plote. Logo"
-                    className="w-48 sm:w-56 md:w-64 lg:w-72 xl:w-80 mb-4 drop-shadow-lg" // Responsive sizing
-                />
-                <p className="text-3xl sm:text-4xl lg:text-5xl italic font-light mb-4 text-center leading-tight">
-                    portfolio of talent & exhibits
-                </p>
-                <p className="text-base sm:text-lg lg:text-xl text-center max-w-sm sm:max-w-md mt-4 leading-relaxed">
-                    Manage your projects effortlessly: access, edit and update them from any desktop, anytime.
-                </p>
-            </div>
-
-            {/* Right Section: Main Application Content (Login, Register, Projects) */}
-            {/* This div acts as the container for all your dynamic pages */}
-            <div className="lg:w-1/2 flex justify-center items-center p-4 sm:p-8 w-full">
-                {currentPage === 'login' && <LoginPage onLoginSuccess={() => navigate('welcome')} onNavigateToRegister={() => navigate('register')} onNavigateToForgotPassword={() => navigate('forgotPassword')} />}
-                {currentPage === 'register' && <RegisterPage onRegisterSuccess={() => navigate('login')} onNavigateToLogin={() => navigate('login')} />}
-                {currentPage === 'welcome' && <WelcomePage onNavigateToCreateProject={() => navigate('createProject')} onNavigateToViewProjects={() => navigate('viewProjects')} />}
-                {currentPage === 'createProject' && <CreateProjectPage onNavigateToWelcome={() => navigate('welcome')} />}
-                {currentPage === 'viewProjects' && <ViewProjectsPage onNavigateToWelcome={() => navigate('welcome')} />}
-                {currentPage === 'forgotPassword' && <ForgotPasswordPage onNavigateToLogin={() => navigate('login')} onNavigateToResetPasswordWithToken={(token) => navigate('resetPassword', token)} />}
-                {currentPage === 'resetPassword' && <ResetPasswordPage onNavigateToLogin={() => navigate('login')} initialToken={resetTokenFromUrl} />}
-            </div>
-        </div>
-    );
-}
 
 export default function RenderApp() {
     return (
