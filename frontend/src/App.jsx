@@ -4,13 +4,12 @@ import React, { useState, useEffect, createContext, useContext, useCallback, use
 // import './style.css'; 
 
 // --- Context for Authentication ---
-const AuthContext = createContext(null);
+const AuthContext = createContext(null); 
 
-// <--- CHANGE IS HERE: Export AuthContextProvider as a named export ---!>
 export const AuthContextProvider = ({ children }) => { 
     const [token, setTokenInternal] = useState(localStorage.getItem('jwtToken'));
-    const [userDetails, setUserDetails] = useState(null); // Now stores full user details including roll_number
-    const [isAuthLoading, setIsAuthLoading] = useState(true); // New state to track if auth is still loading
+    const [userDetails, setUserDetails] = useState(null); 
+    const [isAuthLoading, setIsAuthLoading] = useState(true); 
 
     const setToken = (newToken) => {
         if (newToken) {
@@ -24,7 +23,7 @@ export const AuthContextProvider = ({ children }) => {
     const removeToken = () => {
         setToken(null);
         setUserDetails(null);
-        setIsAuthLoading(false); // Auth is no longer loading after logout
+        setIsAuthLoading(false); 
     };
 
     const createAuthHeaders = (contentType = 'application/json') => {
@@ -45,7 +44,7 @@ export const AuthContextProvider = ({ children }) => {
     };
 
     const fetchUserDetails = useCallback(async (setCurrentPageCallback) => {
-        setIsAuthLoading(true); // Start loading
+        setIsAuthLoading(true); 
         if (token) {
             try {
                 const response = await fetch(`${API_BASE_URL}/api/auth/user/details`, {
@@ -55,29 +54,29 @@ export const AuthContextProvider = ({ children }) => {
                 if (response.ok) {
                     const data = await response.json();
                     console.log('AuthContext - Fetched User Details:', data);
-                    console.log('AuthContext - User Roll Number from details:', data.user?.roll_number); // Safely access roll_number
-                    setUserDetails(data.user); // Store only the 'user' object, not {success:true, user:{...}}
+                    console.log('AuthContext - User Roll Number from details:', data.user?.roll_number); 
+                    setUserDetails(data.user); 
                 } else {
                     console.error('AuthContext - Failed to fetch user details:', response.status, response.statusText);
                     if (response.status === 401 || response.status === 403) {
                         removeToken();
                         alert('Your session has expired or is invalid. Please log in again.');
-                        if (setCurrentPageCallback) setCurrentPageCallback('login'); // Navigate to login page
+                        if (setCurrentPageCallback) setCurrentPageCallback('login'); 
                     }
                 }
             } catch (error) {
                 console.error('AuthContext - Error fetching user details:', error);
                 alert('An error occurred while fetching user details.');
             } finally {
-                setIsAuthLoading(false); // Finished loading
+                setIsAuthLoading(false); 
             }
         } else {
-            setIsAuthLoading(false); // No token, no loading needed
+            setIsAuthLoading(false); 
         }
-    }, [token]); // Re-run when token changes
+    }, [token]); 
 
     useEffect(() => {
-        fetchUserDetails(); // Fetch details on component mount or token change
+        fetchUserDetails(); 
     }, [fetchUserDetails]);
 
     return (
@@ -422,16 +421,16 @@ const ProjectCard = ({ project, onSelectProject }) => {
 // --- Page Components ---
 
 const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPassword }) => {
-    const { setToken } = useContext(AuthContext);
+    const { setToken } = useContext(AuthContext); 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const [showForgotPassword, setShowForgotPassword] = useState(false); // New state to control visibility
+    const [showForgotPassword, setShowForgotPassword] = useState(false); 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
-        setShowForgotPassword(false); // Hide it initially
+        setShowForgotPassword(false); 
         try {
             const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
                 method: 'POST',
@@ -447,7 +446,6 @@ const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPas
             } else {
                 setError(data.message || 'Login failed. Please check your credentials.');
                 alert(data.message || 'Login failed. Please check your credentials.');
-                // Show forgot password button only on login failure
                 setShowForgotPassword(true);
             }
         } catch (err) {
@@ -491,7 +489,7 @@ const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPas
                         Login
                     </button>
                 </form>
-                {showForgotPassword && ( // Conditionally render "Forgot Password?"
+                {showForgotPassword && ( 
                     <p className="mt-4 text-[#222831]">
                         <a href="#" onClick={onNavigateToForgotPassword} className="text-[#00ADB5] font-semibold hover:underline transition duration-200">
                             Forgot Password?
@@ -568,10 +566,8 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
 
     return (
         <div className="flex items-center justify-center p-5 w-full">
-            {/* Increased max-w-xl for a wider container */}
             <div className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-xl flex flex-col items-center animate-scale-in">
                 <h2 className="text-4xl font-extrabold mb-8 text-[#222831]">Register</h2>
-                {/* Max-w-lg for the form to give it more horizontal space for labels & inputs side-by-side */}
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-lg mx-auto">
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2">
                         <label htmlFor="email" className="font-semibold text-[#393E46] text-sm sm:w-1/4 flex-shrink-0">Email:</label>
@@ -640,7 +636,7 @@ const ForgotPasswordPage = ({ onNavigateToLogin, onNavigateToResetPasswordWithTo
     const [username, setUsername] = useState('');
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
-    const [resetTokenInfo, setResetTokenInfo] = useState(null); // To display token and link
+    const [resetTokenInfo, setResetTokenInfo] = useState(null); 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -670,7 +666,6 @@ const ForgotPasswordPage = ({ onNavigateToLogin, onNavigateToResetPasswordWithTo
 
     const handleCopyToken = () => {
         if (resetTokenInfo?.token) {
-            // Use document.execCommand for broader compatibility in some iframe environments
             const tempInput = document.createElement('textarea');
             tempInput.value = resetTokenInfo.token;
             document.body.appendChild(tempInput);
@@ -760,7 +755,6 @@ const ResetPasswordPage = ({ onNavigateToLogin, initialToken }) => {
     }, []);
 
     useEffect(() => {
-        // If initialToken is provided via URL (e.g., from a simulated email link), use it
         if (initialToken) {
             setToken(initialToken);
         }
@@ -868,20 +862,18 @@ const ResetPasswordPage = ({ onNavigateToLogin, initialToken }) => {
 
 
 const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects }) => {
-    const { userDetails, removeToken, fetchUserDetails, isAuthLoading } = useContext(AuthContext); // Added isAuthLoading
+    const { userDetails, removeToken, fetchUserDetails, isAuthLoading } = useContext(AuthContext); 
 
-    // Fetch user details when the component mounts or token changes
     useEffect(() => {
-        if (!userDetails && !isAuthLoading) { // Only fetch if userDetails is not already available AND not currently loading
+        if (!userDetails && !isAuthLoading) { 
             fetchUserDetails();
         }
-    }, [userDetails, fetchUserDetails, isAuthLoading]); // Depend on userDetails and fetchUserDetails
+    }, [userDetails, fetchUserDetails, isAuthLoading]); 
 
 
     const handleLogout = () => {
         removeToken();
         alert('Logged out successfully!');
-        // Context will handle navigation to login page after token removal
     };
 
     return (
@@ -929,22 +921,18 @@ const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects }) =>
 
 // Updated FileItem component to include ownership logic and onViewFile prop
 const FileItem = ({ file, projectOwnerRollNumber, loggedInUserRollNumber, onReplace, onDelete, onViewFile }) => {
-    // Determine if the logged-in user is the owner of this project/file
     const isOwner = loggedInUserRollNumber && projectOwnerRollNumber === loggedInUserRollNumber;
-    console.log(`FileItem - File ID: ${file.id}, LoggedInUserRollNumber: '${loggedInUserRollNumber}', ProjectOwnerRollNumber: '${projectOwnerRollNumber}', IsOwner: ${isOwner}`); // Added log for direct comparison
+    console.log(`FileItem - File ID: ${file.id}, LoggedInUserRollNumber: '${loggedInUserRollNumber}', ProjectOwnerRollNumber: '${projectOwnerRollNumber}', IsOwner: ${isOwner}`); 
 
     return (
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-4 p-4 bg-[#F8FBFB] rounded-xl border border-[#393E46] shadow-sm animate-fade-in-up flex-wrap">
-            {/* Group for File Name & Title */}
             <div className="flex flex-col sm:flex-row sm:items-center gap-2 w-full sm:w-2/3">
-                {/* Changed from <label> to <span> as it's not associated with an input */}
                 <span className="font-semibold text-[#393E46] text-sm mb-1 sm:w-fit sm:min-w-[40px] flex-shrink-0">Title:</span>
                 <span className="font-bold text-[#222831] flex-grow">{file.file_name} ({file.original_name})</span>
             </div>
-            {/* Group for Buttons */}
             <div className="flex flex-wrap gap-2 sm:ml-auto justify-end w-full sm:w-1/3">
                 <button
-                    onClick={() => onViewFile(file.file_path, file.original_name)} // Pass file_path and original_name
+                    onClick={() => onViewFile(file.file_path, file.original_name)} 
                     className="bg-[#EEEEEE] text-[#222831] py-2 px-4 rounded-lg font-bold transition duration-300 hover:bg-[#DBDBDB] hover:scale-105 shadow-sm hover:shadow-md text-center flex-grow sm:flex-grow-0"
                 >
                     View
@@ -973,8 +961,8 @@ const FileItem = ({ file, projectOwnerRollNumber, loggedInUserRollNumber, onRepl
 
 const ViewProjectsPage = ({ onNavigateToWelcome }) => {
     const { createAuthHeaders, createFileUploadAuthHeaders, removeToken, userDetails } = useContext(AuthContext);
-    const loggedInUserRollNumber = userDetails?.roll_number; // Get logged-in user's roll number
-    console.log('ViewProjectsPage - loggedInUserRollNumber (from AuthContext):', loggedInUserRollNumber); // Added log
+    const loggedInUserRollNumber = userDetails?.roll_number; 
+    console.log('ViewProjectsPage - loggedInUserRollNumber (from AuthContext):', loggedInUserRollNumber); 
 
     const [rollNumber, setRollNumber] = useState('');
     const [projects, setProjects] = useState([]);
@@ -984,15 +972,15 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
     const [nextAddFileId, setNextAddFileId] = useState(2);
     const [error, setError] = useState('');
     const [showConfirmModal, setShowConfirmModal] = useState(false);
-    const [confirmAction, setConfirmAction] = useState(null); // stores the action to perform on confirm
+    const [confirmAction, setConfirmAction] = useState(null); 
     const [showEditTitleModal, setShowEditTitleModal] = useState(false);
     const [showReplaceFileModal, setShowReplaceFileModal] = useState(false);
     const [fileToReplace, setFileToReplace] = useState(null);
-    const [hasSearched, setHasSearched] = useState(false); // New state to track if a search has been performed
+    const [hasSearched, setHasSearched] = useState(false); 
 
     const [showCodeViewer, setShowCodeViewer] = useState(false);
     const [codeViewerContent, setCodeViewerContent] = useState('');
-    const [codeViewerLanguage, setCodeViewerLanguage] = useState(''); // Initialize with useState
+    const [codeViewerLanguage, setCodeViewerLanguage] = useState(''); 
 
 
     const fetchProjects = useCallback(async () => {
@@ -1000,11 +988,11 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
         setError('');
         if (!rollNumber) {
             setProjects([]);
-            setHasSearched(false); // Reset search status if roll number is cleared
+            setHasSearched(false); 
             console.log('Roll number is empty, not fetching projects.');
             return;
         }
-        setHasSearched(true); // Mark that a search has been initiated
+        setHasSearched(true); 
         try {
             const response = await fetch(`${API_BASE_URL}/api/public-projects/view-by-roll?rollNumber=${encodeURIComponent(rollNumber)}`, {
                 method: 'GET',
@@ -1024,16 +1012,16 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
             const data = await response.json();
             console.log('fetchProjects - Projects fetched successfully:', data);
             setProjects(data);
-            setSelectedProject(null); // Clear selected project on new search
+            setSelectedProject(null); 
             setProjectFiles([]);
-            setAddFiles([{ file: null, title: '', id: 1 }]); // Reset add file fields
+            setAddFiles([{ file: null, title: '', id: 1 }]); 
             setNextAddFileId(2);
 
         } catch (err) {
             console.error('fetchProjects - Error in fetchProjects:', err);
             setError(`An error occurred while fetching projects: ${err.message}`);
             setProjects([]);
-            setSelectedProject(null); // Ensure no project is selected on error
+            setSelectedProject(null); 
         }
     }, [rollNumber, createAuthHeaders, removeToken]);
 
@@ -1053,21 +1041,20 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
             }
             const { project, files } = await response.json();
             console.log('fetchProjectDetails - Project details fetched:', project, 'Files:', files);
-            console.log('fetchProjectDetails - Fetched project.roll_number (actual owner):', project.roll_number); // Added log
-            // IMPORTANT: Update selectedProject with the full project object including its actual roll_number
-            setSelectedProject(project); // This is crucial for the ownership check to be accurate
+            console.log('fetchProjectDetails - Fetched project.roll_number (actual owner):', project.roll_number); 
+            setSelectedProject(project); 
             setProjectFiles(files);
-            setAddFiles([{ file: null, title: '', id: 1 }]); // Reset add file fields
+            setAddFiles([{ file: null, title: '', id: 1 }]); 
             setNextAddFileId(2);
         } catch (err) {
             console.error('fetchProjectDetails - Error in fetchProjectDetails:', err);
             setError(`An error occurred while fetching project details: ${err.message}`);
-            setSelectedProject(null); // Go back to search list view on error
+            setSelectedProject(null); 
             setProjectFiles([]);
             if (err.message === 'Project not found.') {
                 alert('Project not found. It might have been deleted or never existed.');
-                setProjects([]); // Clear project list to prompt new search
-                setHasSearched(false); // Reset search status
+                setProjects([]); 
+                setHasSearched(false); 
             }
             if (err.message.includes('401') || err.message.includes('403')) {
                 removeToken();
@@ -1078,23 +1065,19 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
 
     const handleSelectProject = (projectId, projectName) => {
         console.log('handleSelectProject called:', projectId, projectName);
-        // Only set a temporary state to indicate loading, the actual project object (with roll_number)
-        // will be set by fetchProjectDetails. We don't initialize roll_number here from the input field
-        // because the input field's rollNumber might not be the actual owner.
-        // Set a placeholder for `selectedProject` initially to trigger UI change and indicate loading
         setSelectedProject({ id: projectId, name: projectName, description: 'Loading...', roll_number: null });
         fetchProjectDetails(projectId);
     };
 
     const handleBackToProjectsList = () => {
         console.log('handleBackToProjectsList called.');
-        setSelectedProject(null); // Clear selected project details
+        setSelectedProject(null); 
         setProjectFiles([]);
         setAddFiles([{ file: null, title: '', id: 1 }]);
         setNextAddFileId(2);
-        setProjects([]); // Explicitly clear projects list to show search form
-        setHasSearched(false); // Reset search status
-        setRollNumber(''); // Clear the roll number input as well
+        setProjects([]); 
+        setHasSearched(false); 
+        setRollNumber(''); 
     };
 
     // --- File Management Handlers ---
@@ -1117,7 +1100,7 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
         e.preventDefault();
         setError('');
 
-        if (addFiles.some(f => f.file === null || !f.title.trim())) { // Check for null file and empty title
+        if (addFiles.some(f => f.file === null || !f.title.trim())) { 
             setError('All new file fields must have a file selected and a title.');
             return;
         }
@@ -1141,7 +1124,7 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
             const data = await response.json();
             if (response.ok && data.success) {
                 alert('Files added successfully!');
-                fetchProjectDetails(selectedProject.id); // Refresh details
+                fetchProjectDetails(selectedProject.id); 
             } else {
                 setError(data.message || 'Error adding new files.');
                 alert(data.message || 'Error adding new files.');
@@ -1193,7 +1176,7 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
                 const data = await response.json();
                 if (response.ok && data.success) {
                     alert(data.message || 'File deleted successfully!');
-                    fetchProjectDetails(selectedProject.id); // Refresh project details
+                    fetchProjectDetails(selectedProject.id); 
                 } else {
                     setError(data.message || 'Error deleting file.');
                     alert(data.message || 'Error deleting file.');
@@ -1212,7 +1195,7 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
                 const data = await response.json();
                 if (response.ok && data.success) {
                     alert(data.message || 'Project deleted successfully!');
-                    handleBackToProjectsList(); // Go back to the list and refresh
+                    handleBackToProjectsList(); 
                 } else {
                     setError(data.message || 'Error deleting project.');
                     alert(data.message || 'Error deleting project.');
@@ -1234,20 +1217,17 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
     const onEditTitleSave = (newTitle) => {
         setSelectedProject(prev => ({ ...prev, name: newTitle }));
         setShowEditTitleModal(false);
-        // After title save, we don't need to re-fetch *all* projects.
-        // If the user is on the project details page, just update the title displayed.
-        // If they go back to the list, fetchProjects will be triggered.
     };
 
     const onReplaceFileComplete = () => {
         setShowReplaceFileModal(false);
         setFileToReplace(null);
-        fetchProjectDetails(selectedProject.id); // Refresh project details
+        fetchProjectDetails(selectedProject.id); 
     };
 
     const handleViewFile = async (filePath, originalFileName) => {
         const fileExtension = originalFileName.split('.').pop().toLowerCase();
-        const codeExtensions = ['js', 'json', 'css', 'html', 'txt', 'py', 'java', 'c', 'cpp', 'sh', 'md', 'xml']; // Add more as needed
+        const codeExtensions = ['js', 'json', 'css', 'html', 'txt', 'py', 'java', 'c', 'cpp', 'sh', 'md', 'xml']; 
 
         if (codeExtensions.includes(fileExtension)) {
             try {
@@ -1262,28 +1242,22 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
                 }
                 const textContent = await response.text();
                 setCodeViewerContent(textContent);
-                setCodeViewerLanguage(fileExtension); // Pass extension for highlighting
+                setCodeViewerLanguage(fileExtension); 
                 setShowCodeViewer(true);
             } catch (error) {
                 console.error('Error fetching file content for viewer:', error);
                 alert(`An error occurred while fetching file content: ${error.message}`);
             }
         } else {
-            // For non-code files, open in new tab
             window.open(`${API_BASE_URL}${filePath}`, '_blank');
         }
     };
 
-
-    // Determine current view based on selectedProject state
     const showSearchAndList = selectedProject === null;
     console.log('ViewProjectsPage - Rendering. showSearchAndList:', showSearchAndList);
 
-
     return (
         <div className="flex flex-col items-center justify-center p-5 w-full">
-            {/* Removed the Hero Image Section */}
-
             <div className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-xl flex flex-col items-start animate-scale-in">
                 <h1 className="text-4xl font-extrabold mb-8 text-[#222831] self-center">View Projects</h1>
 
@@ -1324,12 +1298,10 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
                     </>
                 ) : (
                     <>
-                        {/* Project Details Section */}
                         <div className="project-details-section w-full animate-fade-in-up">
                             <h3 className="text-3xl font-extrabold mb-2 text-[#222831]">{selectedProject?.name}</h3>
                             <p className="text-[#393E46] text-lg mb-6">{selectedProject?.description || ''}</p>
 
-                            {/* Edit/Delete Project Buttons (only visible to project owner) */}
                             {loggedInUserRollNumber && selectedProject?.roll_number === loggedInUserRollNumber && (
                                 <div className="flex flex-wrap gap-4 mb-6 justify-start">
                                     <button
@@ -1355,8 +1327,8 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
                                         <FileItem
                                             key={file.id}
                                             file={file}
-                                            projectOwnerRollNumber={selectedProject.roll_number} // Pass project owner's roll number
-                                            loggedInUserRollNumber={loggedInUserRollNumber} // Pass logged-in user's roll number
+                                            projectOwnerRollNumber={selectedProject.roll_number} 
+                                            loggedInUserRollNumber={loggedInUserRollNumber} 
                                             onReplace={handleReplaceFile}
                                             onDelete={handleDeleteFile}
                                             onViewFile={handleViewFile}
@@ -1367,15 +1339,12 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
                                 <p className="text-gray-600">No files associated with this project.</p>
                             )}
 
-                            {/* Add New Files Form (only visible to project owner) */}
                             {loggedInUserRollNumber && selectedProject?.roll_number === loggedInUserRollNumber && (
                                 <form onSubmit={handleAddFilesSubmit} className="flex flex-col gap-5 mt-8 w-full">
                                     <h4 className="text-2xl font-bold mb-2 text-[#222831]">Add New Files to this Project:</h4>
                                     <div className="flex flex-col gap-4 w-full">
                                         {addFiles.map(fileEntry => (
-                                            // Each new file entry row is a flex container
                                             <div key={fileEntry.id} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 p-4 bg-[#F8FBFB] rounded-xl border border-[#393E46] shadow-sm flex-wrap">
-                                                {/* Group for File Input */}
                                                 <div className="flex flex-col sm:flex-row sm:items-center gap-2 w-full sm:w-1/2">
                                                     <label htmlFor={`addFile${fileEntry.id}`} className="font-semibold text-[#393E46] sm:w-fit sm:min-w-[50px] flex-shrink-0">File {fileEntry.id}:</label>
                                                     <input
@@ -1386,7 +1355,6 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
                                                         required
                                                     />
                                                 </div>
-                                                {/* Group for Title Input */}
                                                 <div className="flex flex-col sm:flex-row sm:items-center gap-2 w-full sm:w-1/2">
                                                     <label htmlFor={`addFileTitle${fileEntry.id}`} className="font-semibold text-[#393E46] sm:w-fit sm:min-w-[40px] flex-shrink-0">Title:</label>
                                                     <input
@@ -1431,7 +1399,6 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
                     </>
                 )}
 
-                {/* Dynamic Bottom Buttons for navigation */}
                 <div className="flex flex-wrap gap-4 mt-8 w-full justify-end">
                     {!showSearchAndList && (
                         <button
@@ -1450,7 +1417,6 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
                 </div>
             </div>
 
-            {/* Modals rendered conditionally */}
             {showConfirmModal && (
                 <CustomConfirmModal
                     message={confirmAction?.message}
@@ -1485,8 +1451,198 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
     );
 };
 
+
+// NEW: CreateProjectPage Component (This was previously missing!)
+const CreateProjectPage = ({ onNavigateToWelcome }) => {
+    const { createAuthHeaders, createFileUploadAuthHeaders, userDetails, isAuthLoading } = useContext(AuthContext);
+
+    const [projectName, setProjectName] = useState('');
+    const [projectDescription, setProjectDescription] = useState('');
+    const [files, setFiles] = useState([{ file: null, title: '', id: 1 }]);
+    const [nextFileId, setNextFileId] = useState(2);
+    const [error, setError] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+
+    // Ensure userDetails are loaded before allowing project creation.
+    useEffect(() => {
+        if (!isAuthLoading && !userDetails) {
+            alert('User details not loaded. Please log in again.');
+            onNavigateToWelcome(); // Redirect if user details are missing
+        }
+    }, [userDetails, isAuthLoading, onNavigateToWelcome]);
+
+
+    const handleFileChange = (id, field, value) => {
+        setFiles(prevFiles =>
+            prevFiles.map(f => (f.id === id ? { ...f, [field]: value } : f))
+        );
+    };
+
+    const addFileField = () => {
+        setFiles(prevFiles => [...prevFiles, { file: null, title: '', id: nextFileId }]);
+        setNextFileId(prevId => prevId + 1);
+    };
+
+    const removeFileField = (idToRemove) => {
+        setFiles(prevFiles => prevFiles.filter(f => f.id !== idToRemove));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setError('');
+        setIsLoading(true);
+
+        if (!projectName.trim()) {
+            setError('Project name is required.');
+            setIsLoading(false);
+            return;
+        }
+
+        // Validate that at least one file is selected and has a title
+        const hasValidFile = files.some(f => f.file !== null && f.title.trim() !== '');
+        if (!hasValidFile) {
+            setError('At least one file with a title must be uploaded.');
+            setIsLoading(false);
+            return;
+        }
+        // Validate all file fields have both a file and a title if present
+        if (files.some(f => (f.file === null && f.title.trim() !== '') || (f.file !== null && f.title.trim() === ''))) {
+            setError('All file inputs must have both a file and a title.');
+            setIsLoading(false);
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('name', projectName);
+        formData.append('description', projectDescription);
+
+        files.forEach((fileEntry) => {
+            if (fileEntry.file && fileEntry.title.trim()) { // Only append if both file and title are present
+                formData.append(`projectFiles`, fileEntry.file); // Matches Multer's array field name
+                formData.append(`fileTitle_projectFiles`, fileEntry.title); // Matches backend req.body field name
+            }
+        });
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/projects/create`, {
+                method: 'POST',
+                headers: createFileUploadAuthHeaders(), // Use headers for file upload
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (response.ok && data.success) {
+                alert('Project created successfully!');
+                onNavigateToWelcome();
+            } else {
+                setError(data.message || 'Project creation failed.');
+                alert(data.message || 'Project creation failed.');
+            }
+        } catch (err) {
+            console.error('Error creating project:', err);
+            setError('An error occurred during project creation.');
+            alert('An error occurred during project creation.');
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    return (
+        <div className="flex items-center justify-center p-5 w-full">
+            <div className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-xl flex flex-col items-center animate-scale-in">
+                <h2 className="text-4xl font-extrabold mb-8 text-[#222831]">Create New Project</h2>
+                <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full max-w-lg mx-auto">
+                    <label htmlFor="projectName" className="font-semibold text-[#393E46]">Project Name:</label>
+                    <input
+                        type="text"
+                        id="projectName"
+                        value={projectName}
+                        onChange={(e) => setProjectName(e.target.value)}
+                        className="p-3 border border-[#393E46] rounded-lg text-[#222831] bg-[#F8FBFB] focus:ring-2 focus:ring-[#00ADB5] focus:border-transparent transition focus:shadow-md"
+                        required
+                    />
+
+                    <label htmlFor="projectDescription" className="font-semibold text-[#393E46]">Project Description (Optional):</label>
+                    <textarea
+                        id="projectDescription"
+                        value={projectDescription}
+                        onChange={(e) => setProjectDescription(e.target.value)}
+                        rows="4"
+                        className="p-3 border border-[#393E46] rounded-lg text-[#222831] bg-[#F8FBFB] focus:ring-2 focus:ring-[#00ADB5] focus:border-transparent transition focus:shadow-md resize-y"
+                    ></textarea>
+
+                    <h3 className="text-2xl font-bold mb-2 text-[#222831]">Files:</h3>
+                    <div className="flex flex-col gap-4 w-full">
+                        {files.map(fileEntry => (
+                            <div key={fileEntry.id} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 p-4 bg-[#F8FBFB] rounded-xl border border-[#393E46] shadow-sm flex-wrap">
+                                <div className="flex flex-col sm:flex-row sm:items-center gap-2 w-full sm:w-1/2">
+                                    <label htmlFor={`file${fileEntry.id}`} className="font-semibold text-[#393E46] sm:w-fit sm:min-w-[50px] flex-shrink-0">File {fileEntry.id}:</label>
+                                    <input
+                                        type="file"
+                                        id={`file${fileEntry.id}`}
+                                        onChange={(e) => handleFileChange(fileEntry.id, 'file', e.target.files[0])}
+                                        className="p-2 border border-[#393E46] rounded-lg text-[#222831] bg-[#F8FBFB] focus:ring-2 focus:ring-[#00ADB5] focus:border-transparent transition flex-grow w-full"
+                                        required
+                                    />
+                                </div>
+                                <div className="flex flex-col sm:flex-row sm:items-center gap-2 w-full sm:w-1/2">
+                                    <label htmlFor={`fileTitle${fileEntry.id}`} className="font-semibold text-[#393E46] sm:w-fit sm:min-w-[40px] flex-shrink-0">Title:</label>
+                                    <input
+                                        type="text"
+                                        id={`fileTitle${fileEntry.id}`}
+                                        value={fileEntry.title}
+                                        onChange={(e) => handleFileChange(fileEntry.id, 'title', e.target.value)}
+                                        placeholder="Enter title for this file"
+                                        className="p-2 border border-[#393E46] rounded-lg text-[#222831] bg-[#F8FBFB] focus:ring-2 focus:ring-[#00ADB5] focus:border-transparent transition flex-grow w-full"
+                                        required
+                                    />
+                                </div>
+                                {files.length > 1 && (
+                                    <button
+                                        type="button"
+                                        onClick={() => removeFileField(fileEntry.id)}
+                                        className="bg-[#F47C7C] text-white py-2 px-4 rounded-lg font-bold transition duration-300 hover:bg-[#E06666] hover:scale-105 shadow-md hover:shadow-lg sm:ml-auto mt-2 sm:mt-0 focus:outline-none focus:ring-2 focus:ring-[#F47C7C] focus:ring-opacity-75 w-full sm:w-auto"
+                                    >
+                                        Remove
+                                    </button>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+
+                    <button
+                        type="button"
+                        onClick={addFileField}
+                        className="bg-[#393E46] text-white py-3 px-6 rounded-lg font-bold transition duration-300 hover:bg-[#2B3036] hover:scale-105 shadow-md hover:shadow-lg self-start mt-4 mb-2 focus:outline-none focus:ring-2 focus:ring-[#393E46] focus:ring-opacity-75"
+                    >
+                        Add Another File Input
+                    </button>
+
+                    {error && <p className="text-red-600 text-sm text-center mt-2">{error}</p>}
+
+                    <button
+                        type="submit"
+                        className="bg-[#00ADB5] text-white py-3 px-6 rounded-lg font-bold transition duration-300 hover:bg-[#008C94] hover:scale-105 shadow-md hover:shadow-lg mt-5 focus:outline-none focus:ring-2 focus:ring-[#00ADB5] focus:ring-opacity-75"
+                        disabled={isLoading}
+                    >
+                        {isLoading ? 'Creating Project...' : 'Create Project'}
+                    </button>
+                </form>
+                <button
+                    onClick={onNavigateToWelcome}
+                    className="bg-[#EEEEEE] text-[#222831] py-2 px-5 rounded-lg font-bold transition duration-300 hover:bg-[#DBDBDB] hover:scale-105 shadow-md hover:shadow-lg mt-6 w-full max-w-[150px] mx-auto focus:outline-none focus:ring-2 focus:ring-[#EEEEEE] focus:ring-opacity-75"
+                >
+                    Back to Welcome
+                </button>
+            </div>
+        </div>
+    );
+};
+
+
 // Main App component
-function App() { // App is no longer the default export, just a regular function
+function App() { 
     const getInitialPage = () => {
         const params = new URLSearchParams(window.location.search);
         if (params.get('state') === 'resetPassword' && params.get('token')) {
@@ -1497,9 +1653,8 @@ function App() { // App is no longer the default export, just a regular function
 
     const [currentPage, setCurrentPage] = useState(getInitialPage);
     const [resetTokenFromUrl, setResetTokenFromUrl] = useState('');
-    const { token, fetchUserDetails, userDetails, isAuthLoading } = useContext(AuthContext); // This useContext will now work!
+    const { token, fetchUserDetails, userDetails, isAuthLoading } = useContext(AuthContext); 
 
-    // This useEffect handles initial navigation and re-fetching user details if needed
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
         const tokenInUrl = params.get('token');
@@ -1507,26 +1662,18 @@ function App() { // App is no longer the default export, just a regular function
             setResetTokenFromUrl(tokenInUrl);
         }
 
-        // Logic to decide which page to show based on auth state and URL params
         if (token && !isAuthLoading && userDetails) {
-            // User is logged in, details loaded, go to welcome or stay if already on a valid page
             if (currentPage === 'login' || currentPage === 'register' || currentPage === 'forgotPassword' || currentPage === 'resetPassword') {
                 setCurrentPage('welcome');
             }
         } else if (token && !userDetails && !isAuthLoading) {
-            // Token exists, but userDetails are not loaded (and not currently loading), try fetching
-            fetchUserDetails(); // Removed setCurrentPage from here to avoid circular logic
+            fetchUserDetails(); 
         } else if (!token) {
-            // No token, ensure we are on an public page
             if (currentPage !== 'resetPassword' && currentPage !== 'register' && currentPage !== 'forgotPassword') {
                 setCurrentPage('login');
             }
         }
-        // If token exists and userDetails are loading, stay on current page (e.g., login, waiting for details)
-        // If token exists and userDetails are null but not loading (and no token in URL), could be a previous fetch failed.
-        // We rely on fetchUserDetails() in AuthContext's useEffect to handle the re-fetching.
-
-    }, [token, fetchUserDetails, userDetails, isAuthLoading, currentPage]); // Added userDetails and isAuthLoading to dependencies
+    }, [token, fetchUserDetails, userDetails, isAuthLoading, currentPage]); 
 
 
     const navigate = useCallback((page, token = null) => {
@@ -1545,7 +1692,6 @@ function App() { // App is no longer the default export, just a regular function
         setCurrentPage(page);
     }, []);
 
-    // Render logic based on currentPage
     const renderPage = () => {
         switch (currentPage) {
             case 'login':
@@ -1559,7 +1705,7 @@ function App() { // App is no longer the default export, just a regular function
             case 'welcome':
                 return <WelcomePage onNavigateToCreateProject={() => navigate('createProject')} onNavigateToViewProjects={() => navigate('viewProjects')} />;
             case 'createProject':
-                return <CreateProjectPage onNavigateToWelcome={() => navigate('welcome')} />;
+                return <CreateProjectPage onNavigateToWelcome={() => navigate('welcome')} />; {/* <--- CreateProjectPage is now defined */}
             case 'viewProjects':
                 return <ViewProjectsPage onNavigateToWelcome={() => navigate('welcome')} />;
             default:
@@ -1581,5 +1727,4 @@ function App() { // App is no longer the default export, just a regular function
     );
 }
 
-// <--- CHANGE IS HERE: App is now the default export ---!>
 export default App;
