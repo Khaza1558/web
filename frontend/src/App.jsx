@@ -1667,7 +1667,7 @@ const SplashVideo = ({ onVideoEnd }) => {
         <div className="fixed inset-0 z-50 bg-black flex items-center justify-center overflow-hidden">
             <video
                 ref={videoRef}
-                src="/intro.mp4" // IMPORTANT: Replace this with your actual video URL!
+                src="/main-v.mp4" // IMPORTANT: Replace this with your actual video URL!
                 autoPlay
                 muted
                 playsInline // Crucial for mobile autoplay
@@ -1773,14 +1773,13 @@ function App() {
                     <div className="w-full md:w-1/2 p-8 flex flex-col justify-start items-start"> {/* Adjusted justify-start */}
                         <header className="mb-8 md:mb-0">
                             {/* Logo image with precise height and alignment */}
-                            <img src="/title-removebg-preview.png" alt="Plote." className="h-20 sm:h-24 md:h-[100px] mb-[-10px] drop-shadow-lg filter invert" /> {/* md:h-[100px] for more exact height, negative margin for tighter spacing */}
+                            <img src="/main-t.png" alt="Plote." className="h-20 sm:h-24 md:h-[100px] mb-[-10px] drop-shadow-lg filter invert" /> {/* md:h-[100px] for more exact height, negative margin for tighter spacing */}
                             {/* Slogan with refined font size and color */}
                             <p className="text-xl sm:text-2xl text-white italic pl-2" style={{ fontFamily: 'Inter, sans-serif' }}>portfolio of talent & exhibits</p> 
-                        </header>
-                        <div className="md:mt-auto pb-10 pl-2"> {/* Removed hidden for md:block to ensure consistency on all sizes */}
+                            <div className="md:mt-auto pb-10 pl-2"> {/* Removed hidden for md:block to ensure consistency on all sizes */}
                             <p className="text-lg text-white max-w-sm leading-relaxed"> 
-                                Manage your projects effortlessly: access,edit and update them from any desktop,anytime.</p>
-                        </div>
+                                Manage your projects effortlessly: access,edit and update them from any desktop,anytime.</p></div>
+                        </header>
                          {/* Footer for the main app - moved here to align with the left section content */}
                         <footer className="w-full text-left py-4 text-gray-500 text-sm md:absolute md:bottom-0 md:left-8">
                             © 2025 plote from KHAZA
