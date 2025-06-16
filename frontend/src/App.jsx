@@ -89,7 +89,7 @@ const AuthContextProvider = ({ children }) => {
 // --- Global API Base URL (will be replaced by render/deployment) ---
 // IMPORTANT: Replace this placeholder with your actual backend API URL.
 // Example: 'https://your-backend-url.onrender.com'
-const API_BASE_URL = 'https://plote.onrender.com'; // REMEMBER TO UPDATE THIS FOR YOUR DEPLOYED BACKEND!
+const API_BASE_URL = https://plote.onrender.com'; // REMEMBER TO UPDATE THIS FOR YOUR DEPLOYED BACKEND!
 
 // --- Reusable Modal Components ---
 
@@ -991,7 +991,7 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
 
     const [showCodeViewer, setShowCodeViewer] = useState(false);
     const [codeViewerContent, setCodeViewerContent] = useState('');
-    const [codeViewerLanguage, setCodeViewerLanguage] = '';
+    const [codeViewerLanguage, setCodeViewerLanguage] = useState(''); // Initialize with useState
 
 
     const fetchProjects = useCallback(async () => {
@@ -1484,12 +1484,100 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
     );
 };
 
-export default function RenderApp() {
+// Main App component
+export default function App() { // App is now the default export
+    const getInitialPage = () => {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('state') === 'resetPassword' && params.get('token')) {
+            return 'resetPassword';
+        }
+        return 'login';
+    };
+
+    const [currentPage, setCurrentPage] = useState(getInitialPage);
+    const [resetTokenFromUrl, setResetTokenFromUrl] = useState('');
+    const { token, fetchUserDetails, userDetails, isAuthLoading } = useContext(AuthContext);
+
+    // This useEffect handles initial navigation and re-fetching user details if needed
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        const tokenInUrl = params.get('token');
+        if (tokenInUrl) {
+            setResetTokenFromUrl(tokenInUrl);
+        }
+
+        // Logic to decide which page to show based on auth state and URL params
+        if (token && !isAuthLoading && userDetails) {
+            // User is logged in, details loaded, go to welcome or stay if already on a valid page
+            if (currentPage === 'login' || currentPage === 'register' || currentPage === 'forgotPassword' || currentPage === 'resetPassword') {
+                setCurrentPage('welcome');
+            }
+        } else if (token && !userDetails && !isAuthLoading) {
+            // Token exists, but userDetails are not loaded (and not currently loading), try fetching
+            fetchUserDetails(); // Removed setCurrentPage from here to avoid circular logic
+        } else if (!token) {
+            // No token, ensure we are on an public page
+            if (currentPage !== 'resetPassword' && currentPage !== 'register' && currentPage !== 'forgotPassword') {
+                setCurrentPage('login');
+            }
+        }
+        // If token exists and userDetails are loading, stay on current page (e.g., login, waiting for details)
+        // If token exists and userDetails are null but not loading (and no token in URL), could be a previous fetch failed.
+        // We rely on fetchUserDetails() in AuthContext's useEffect to handle the re-fetching.
+
+    }, [token, fetchUserDetails, userDetails, isAuthLoading, currentPage]); // Added userDetails and isAuthLoading to dependencies
+
+
+    const navigate = useCallback((page, token = null) => {
+        const currentUrl = new URL(window.location.href);
+        currentUrl.searchParams.delete('state');
+        currentUrl.searchParams.delete('token');
+
+        if (page === 'resetPassword' && token) {
+            currentUrl.searchParams.set('state', 'resetPassword');
+            currentUrl.searchParams.set('token', token);
+            setResetTokenFromUrl(token);
+        } else {
+            setResetTokenFromUrl('');
+        }
+        window.history.pushState({}, '', currentUrl);
+        setCurrentPage(page);
+    }, []);
+
+    // Render logic based on currentPage
+    const renderPage = () => {
+        switch (currentPage) {
+            case 'login':
+                return <LoginPage onLoginSuccess={() => setCurrentPage('welcome')} onNavigateToRegister={() => navigate('register')} onNavigateToForgotPassword={() => navigate('forgotPassword')} />;
+            case 'register':
+                return <RegisterPage onRegisterSuccess={() => navigate('login')} onNavigateToLogin={() => navigate('login')} />;
+            case 'forgotPassword':
+                return <ForgotPasswordPage onNavigateToLogin={() => navigate('login')} onNavigateToResetPasswordWithToken={(token) => navigate('resetPassword', token)} />;
+            case 'resetPassword':
+                return <ResetPasswordPage onNavigateToLogin={() => navigate('login')} initialToken={resetTokenFromUrl} />;
+            case 'welcome':
+                return <WelcomePage onNavigateToCreateProject={() => navigate('createProject')} onNavigateToViewProjects={() => navigate('viewProjects')} />;
+            case 'createProject':
+                return <CreateProjectPage onNavigateToWelcome={() => navigate('welcome')} />;
+            case 'viewProjects':
+                return <ViewProjectsPage onNavigateToWelcome={() => navigate('welcome')} />;
+            default:
+                return <LoginPage onLoginSuccess={() => setCurrentPage('welcome')} onNavigateToRegister={() => navigate('register')} onNavigateToForgotPassword={() => navigate('forgotPassword')} />;
+        }
+    };
+
     return (
-        // Render the main App component, which now includes AuthContextProvider internally
-        // AuthContextProvider must wrap App for useContext to work correctly within App and its children
         <AuthContextProvider>
-            <App />
+            <div className="min-h-screen flex flex-col items-center justify-center bg-[#222831] text-[#EEEEEE] font-inter p-4">
+                <header className="mb-8 text-center animate-fade-in-down">
+                    <img src="/title-removebg-preview (2).png" alt="Plote. - Project Management App" className="h-24 sm:h-32 mx-auto mb-4 drop-shadow-lg" />
+                    <h1 className="text-5xl sm:text-6xl font-extrabold text-[#00ADB5] drop-shadow-lg">Plote.</h1>
+                </header>
+
+                <main className="flex-grow flex items-center justify-center w-full">
+                    {renderPage()}
+                </main>
+            </div>
         </AuthContextProvider>
     );
 }
