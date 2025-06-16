@@ -357,6 +357,7 @@ exports.deleteFile = async (req, res) => {
         } catch (unlinkError) {
             if (unlinkError.code === 'ENOENT') {
                 console.warn(`File not found on disk, skipping: ${filePath}`);
+                // Decide if you want to stop or continue if file deletion fails
             } else {
                 console.error(`Error deleting local file ${filePath}:`, unlinkError);
             }
