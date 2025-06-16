@@ -448,7 +448,7 @@ const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPas
     };
 
     return (
-        <div className="flex items-center justify-center p-5 w-full">
+        <div className="flex items-center justify-center p-5 w-full h-full"> {/* Added h-full to help centering */}
             <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col items-center animate-fade-in-up"> 
                 <h2 className="text-3xl font-bold text-gray-800 mb-6">Login</h2>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full max-w-xs"> 
@@ -557,7 +557,7 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
     };
 
     return (
-        <div className="flex items-center justify-center p-5 w-full">
+        <div className="flex items-center justify-center p-5 w-full h-full"> {/* Added h-full to help centering */}
             <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-xl flex flex-col items-center animate-fade-in-up"> 
                 <h2 className="text-3xl font-bold text-gray-800 mb-6">Register</h2>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-lg mx-auto"> 
@@ -669,7 +669,7 @@ const ForgotPasswordPage = ({ onNavigateToLogin, onNavigateToResetPasswordWithTo
     };
 
     return (
-        <div className="flex items-center justify-center p-5 w-full">
+        <div className="flex items-center justify-center p-5 w-full h-full"> {/* Added h-full to help centering */}
             <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col items-center animate-fade-in-up"> 
                 <h2 className="text-3xl font-bold text-gray-800 mb-6">Forgot Password</h2>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full max-w-xs"> 
@@ -788,7 +788,7 @@ const ResetPasswordPage = ({ onNavigateToLogin, initialToken }) => {
     };
 
     return (
-        <div className="flex items-center justify-center p-5 w-full">
+        <div className="flex items-center justify-center p-5 w-full h-full"> {/* Added h-full to help centering */}
             <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col items-center animate-fade-in-up"> 
                 <h2 className="text-3xl font-bold text-gray-800 mb-6">Reset Password</h2>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full max-w-xs"> 
@@ -869,7 +869,7 @@ const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects }) =>
     };
 
     return (
-        <div className="flex flex-col items-center justify-center p-5 w-full">
+        <div className="flex flex-col items-center justify-center p-5 w-full h-full"> {/* Added h-full to help centering */}
             <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col items-center animate-fade-in-up"> 
                 <h1 className="text-3xl font-bold text-gray-800 mb-6">Welcome, {userDetails?.username || 'User'}!</h1>
 
@@ -1249,7 +1249,7 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
     console.log('ViewProjectsPage - Rendering. showSearchAndList:', showSearchAndList);
 
     return (
-        <div className="flex flex-col items-center justify-center p-5 w-full">
+        <div className="flex flex-col items-center justify-center p-5 w-full h-full"> {/* Added h-full to help centering */}
             <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-xl flex flex-col items-start animate-fade-in-up"> 
                 <h1 className="text-3xl font-bold mb-6 text-gray-800 self-center">View Projects</h1>
 
@@ -1537,7 +1537,7 @@ const CreateProjectPage = ({ onNavigateToWelcome }) => {
     };
 
     return (
-        <div className="flex items-center justify-center p-5 w-full">
+        <div className="flex items-center justify-center p-5 w-full h-full"> {/* Added h-full to help centering */}
             <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-xl flex flex-col items-center animate-fade-in-up"> 
                 <h2 className="text-3xl font-bold text-gray-800 mb-6">Create New Project</h2>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full max-w-lg mx-auto"> 
@@ -1667,7 +1667,7 @@ const SplashVideo = ({ onVideoEnd }) => {
         <div className="fixed inset-0 z-50 bg-black flex items-center justify-center overflow-hidden">
             <video
                 ref={videoRef}
-                src="intro.mp4" // IMPORTANT: Replace this with your actual video URL!
+                src="/intro.mp4" // IMPORTANT: Replace this with your actual video URL!
                 autoPlay
                 muted
                 playsInline // Crucial for mobile autoplay
@@ -1770,26 +1770,27 @@ function App() {
                 // Main container with black background and horizontal layout from the new screenshot
                 <div className="min-h-screen flex flex-col md:flex-row bg-black font-sans">
                     {/* Left section for Logo and Slogan */}
-                    <div className="w-full md:w-1/2 p-8 flex flex-col justify-between items-start">
+                    <div className="w-full md:w-1/2 p-8 flex flex-col justify-start items-start"> {/* Adjusted justify-start */}
                         <header className="mb-8 md:mb-0">
-                            {/* Replaced h1 with img tag for the logo, now white for dark background */}
-                            <img src="/title-removebg-preview.png" alt="Plote." className="h-20 sm:h-32 md:h-32 mb-2 drop-shadow-lg filter invert" /> {/* filter invert makes it white */}
-                            <p className="text-xl sm:text-2xl text-white italic pl-2" style={{ fontFamily: 'Inter, sans-serif' }}>portfolio of talent & exhibits</p>
-                            <div className="hidden md:block mt-auto pb-10 pl-2"> 
-                            <p className="text-lg text-white max-w-sm leading-relaxed"> 
-                                Manage your projects effortlessly: access,edit and update them from any desktop,anytime.</p></div>
+                            {/* Logo image with precise height and alignment */}
+                            <img src="/title-removebg-preview.png" alt="Plote." className="h-20 sm:h-24 md:h-[100px] mb-[-10px] drop-shadow-lg filter invert" /> {/* md:h-[100px] for more exact height, negative margin for tighter spacing */}
+                            {/* Slogan with refined font size and color */}
+                            <p className="text-xl sm:text-2xl text-white italic pl-2" style={{ fontFamily: 'Inter, sans-serif' }}>portfolio of talent & exhibits</p> 
                         </header>
+                        <div className="md:mt-auto pb-10 pl-2"> {/* Removed hidden for md:block to ensure consistency on all sizes */}
+                            <p className="text-lg text-white max-w-sm leading-relaxed"> 
+                                Manage your projects effortlessly: access,edit and update them from any desktop,anytime.</p>
+                        </div>
+                         {/* Footer for the main app - moved here to align with the left section content */}
+                        <footer className="w-full text-left py-4 text-gray-500 text-sm md:absolute md:bottom-0 md:left-8">
+                            © 2025 plote from KHAZA
+                        </footer>
                     </div>
 
                     {/* Right section for dynamic page content */}
                     <main className="flex-grow flex items-center justify-center w-full md:w-1/2 p-4">
                         {renderPage()}
                     </main>
-
-                    {/* Footer for the main app */}
-                    <footer className="w-full text-center py-4 text-gray-500 text-sm absolute bottom-0">
-                        © 2025 plote. from KHAZA
-                    </footer>
                 </div>
             )}
         </>
