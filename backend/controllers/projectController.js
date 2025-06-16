@@ -72,16 +72,32 @@ exports.createProject = async (req, res) => {
             return res.status(400).json({ success: false, message: err.message });
         }
 
+        // --- START DEBUG LOGS ---
+        console.log('--- Debugging Create Project ---');
+        console.log('req.body:', req.body); // This should show text fields like name, description, fileTitle_projectFiles
+        console.log('req.files:', req.files); // This should be an array of uploaded file objects
+        // Ensure fileTitles is always an array, even if a single string is sent (Multer behavior)
+        const fileTitlesReceived = Array.isArray(req.body.fileTitle_projectFiles)
+                                   ? req.body.fileTitle_projectFiles
+                                   : (req.body.fileTitle_projectFiles ? [req.body.fileTitle_projectFiles] : []);
+        console.log('fileTitles (adjusted for array) received from req.body:', fileTitlesReceived);
+        console.log('Is fileTitles (adjusted) an array?', Array.isArray(fileTitlesReceived));
+        console.log('Number of files received by Multer:', req.files ? req.files.length : 0);
+        console.log('--- End Debugging ---');
+        // --- END DEBUG LOGS ---
+
         try {
             const { name, description } = req.body;
-            // fileTitle_projectFiles will be an array of titles corresponding to each uploaded file
-            const fileTitles = req.body.fileTitle_projectFiles; 
+            // Use the adjusted fileTitles variable here for validation
+            const fileTitles = fileTitlesReceived; 
 
             if (!name || !req.files || req.files.length === 0) {
+                // If files are missing, it's a client-side issue (no files selected)
                 return res.status(400).json({ success: false, message: 'Project name and at least one file are required.' });
             }
-            // Ensure that fileTitles is an array and matches the number of files
-            if (!Array.isArray(fileTitles) || fileTitles.length !== req.files.length) {
+            
+            // Validate that the number of titles matches the number of files
+            if (fileTitles.length !== req.files.length) { 
                 return res.status(400).json({ success: false, message: 'Each uploaded file must have a corresponding title.' });
             }
 
@@ -270,12 +286,16 @@ exports.addFilesToProject = async (req, res) => {
 
         try {
             const { projectId } = req.params;
-            const fileTitles = req.body.fileTitle_newProjectFiles;
+            // Ensure fileTitles is always an array, even if a single string is sent
+            const fileTitlesReceived = Array.isArray(req.body.fileTitle_newProjectFiles)
+                                       ? req.body.fileTitle_newProjectFiles
+                                       : (req.body.fileTitle_newProjectFiles ? [req.body.fileTitle_newProjectFiles] : []);
+            const fileTitles = fileTitlesReceived;
 
             if (!req.files || req.files.length === 0) {
                 return res.status(400).json({ success: false, message: 'No files provided to add.' });
             }
-            if (!Array.isArray(fileTitles) || fileTitles.length !== req.files.length) {
+            if (fileTitles.length !== req.files.length) {
                 return res.status(400).json({ success: false, message: 'Each uploaded file must have a corresponding title.' });
             }
 
