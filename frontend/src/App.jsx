@@ -1775,7 +1775,7 @@ function App() {
                             {/* Logo image with precise height and alignment */}
                             <img src="/tit.png" alt="kroxnest" className="h-20 sm:h-24 md:h-[100px] mb-[-10px] drop-shadow-lg filter invert" /> {/* md:h-[100px] for more exact height, negative margin for tighter spacing */}
                             {/* Slogan with refined font size and color */}
-                            <p className="text-xl sm:text-2xl text-white italic pl-2" style={{ fontFamily: 'Inter, sans-serif' }}>portfolio of talent & exhibits</p> 
+                            <p className="text-xl sm:text-2xl text-white italic pl-2" style={{ fontFamily: 'Inter, sans-serif' }}>Knowledge Repository Of eXhibits & Networked Educational Student Tracks</p> 
                             <div className="md:mt-auto pb-10 pl-2"> {/* Removed hidden for md:block to ensure consistency on all sizes */}
                             <p className="text-lg text-white max-w-sm leading-relaxed"> 
                                 Manage your projects effortlessly: access,edit and update them from any desktop,anytime.</p></div>
