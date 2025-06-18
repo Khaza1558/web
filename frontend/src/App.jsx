@@ -416,7 +416,6 @@ const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPas
     const { setToken } = useContext(AuthContext); 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('');
     const [showForgotPassword, setShowForgotPassword] = useState(false); 
 
@@ -452,22 +451,6 @@ const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPas
         <div className="flex items-center justify-center p-5 w-full h-full"> {/* Added h-full to help centering */}
             <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col items-center animate-fade-in-up"> 
                 <h2 className="text-3xl font-bold text-gray-800 mb-6">Login</h2>
-                
-                {/* Ad Image Holder for Login Page */}
-                <div className="w-full mb-6">
-                    <div className="bg-gray-100 rounded-xl p-4 text-center border-2 border-dashed border-gray-300">
-                        <img 
-                            src="/ad-login.jpg" 
-                            alt="Advertisement" 
-                            className="w-full h-48 object-cover rounded-lg mb-2"
-                            onError={(e) => {
-                                e.target.style.display = 'none';
-                                e.target.nextSibling.style.display = 'block';
-                            }}
-                        />
-                    </div>
-                </div>
-                
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full max-w-xs"> 
                     <label htmlFor="loginUsername" className="font-semibold text-gray-700 mb-1">Username:</label> 
                     <input
@@ -480,32 +463,14 @@ const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPas
                     />
 
                     <label htmlFor="loginPassword" className="font-semibold text-gray-700 mb-1">Password:</label> 
-                    <div className="relative">
-                        <input
-                            type={showPassword ? "text" : "password"}
-                            id="loginPassword"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            className="p-3 pr-10 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition w-full"
-                            required
-                        />
-                        <button
-                            type="button"
-                            onClick={() => setShowPassword(!showPassword)}
-                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
-                        >
-                            {showPassword ? (
-                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21" />
-                                </svg>
-                            ) : (
-                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                </svg>
-                            )}
-                        </button>
-                    </div>
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition"
+                        required
+                    />
 
                     {error && <p className="text-red-500 text-sm text-center mt-2">{error}</p>}
 
@@ -543,10 +508,7 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
         collegeName: '',
         branch: '',
         rollNumber: '',
-        mobileNumber: '',
     });
-    const [showPassword, setShowPassword] = useState(false);
-    const [showReEnterPassword, setShowReEnterPassword] = useState(false);
     const [error, setError] = useState('');
 
     const handleChange = (e) => {
@@ -575,7 +537,6 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
                     college: formData.collegeName,
                     branch: formData.branch,
                     rollNumber: formData.rollNumber,
-                    mobileNumber: formData.mobileNumber,
                 })
             });
 
@@ -599,22 +560,6 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
         <div className="flex items-center justify-center p-5 w-full h-full"> {/* Added h-full to help centering */}
             <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-xl flex flex-col items-center animate-fade-in-up"> 
                 <h2 className="text-3xl font-bold text-gray-800 mb-6">Register</h2>
-                
-                {/* Ad Image Holder for Register Page */}
-                <div className="w-full mb-6">
-                    <div className="bg-gray-100 rounded-xl p-4 text-center border-2 border-dashed border-gray-300">
-                        <img 
-                            src="/ad-register.jpg" 
-                            alt="Advertisement" 
-                            className="w-full h-48 object-cover rounded-lg mb-2"
-                            onError={(e) => {
-                                e.target.style.display = 'none';
-                                e.target.nextSibling.style.display = 'block';
-                            }}
-                        />
-                    </div>
-                </div>
-                
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-lg mx-auto"> 
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2"> 
                         <label htmlFor="email" className="font-semibold text-gray-700 text-sm sm:w-1/4 flex-shrink-0">Email:</label>
@@ -630,62 +575,14 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
 
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
                         <label htmlFor="password" className="font-semibold text-gray-700 text-sm sm:w-1/4 flex-shrink-0">Password:</label>
-                        <div className="relative flex-grow">
-                            <input
-                                type={showPassword ? "text" : "password"}
-                                id="password"
-                                value={formData.password}
-                                onChange={handleChange}
-                                className="p-3 pr-10 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition w-full"
-                                required
-                            />
-                            <button
-                                type="button"
-                                onClick={() => setShowPassword(!showPassword)}
-                                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
-                            >
-                                {showPassword ? (
-                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21" />
-                                    </svg>
-                                ) : (
-                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                    </svg>
-                                )}
-                            </button>
-                        </div>
+                        <input type="password" id="password" value={formData.password} onChange={handleChange}
+                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow" required />
                     </div>
 
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
                         <label htmlFor="reEnterPassword" className="font-semibold text-gray-700 text-sm sm:w-1/4 flex-shrink-0">Re-enter Password:</label>
-                        <div className="relative flex-grow">
-                            <input
-                                type={showReEnterPassword ? "text" : "password"}
-                                id="reEnterPassword"
-                                value={formData.reEnterPassword}
-                                onChange={handleChange}
-                                className="p-3 pr-10 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition w-full"
-                                required
-                            />
-                            <button
-                                type="button"
-                                onClick={() => setShowReEnterPassword(!showReEnterPassword)}
-                                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
-                            >
-                                {showReEnterPassword ? (
-                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21" />
-                                    </svg>
-                                ) : (
-                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                    </svg>
-                                )}
-                            </button>
-                        </div>
+                        <input type="password" id="reEnterPassword" value={formData.reEnterPassword} onChange={handleChange}
+                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow" required />
                     </div>
 
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
@@ -704,12 +601,6 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
                         <label htmlFor="rollNumber" className="font-semibold text-gray-700 text-sm sm:w-1/4 flex-shrink-0">Roll Number:</label>
                         <input type="text" id="rollNumber" value={formData.rollNumber} onChange={handleChange}
                             className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow" required />
-                    </div>
-
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
-                        <label htmlFor="mobileNumber" className="font-semibold text-gray-700 text-sm sm:w-1/4 flex-shrink-0">Mobile Number:</label>
-                        <input type="tel" id="mobileNumber" value={formData.mobileNumber} onChange={handleChange}
-                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow" required pattern="[0-9]{10,15}" maxLength={15} placeholder="e.g. 9876543210" />
                     </div>
 
                     {error && <p className="text-red-500 text-sm text-center mt-2">{error}</p>}
@@ -838,8 +729,6 @@ const ResetPasswordPage = ({ onNavigateToLogin, initialToken }) => {
     const [token, setToken] = useState(initialToken || '');
     const [newPassword, setNewPassword] = useState('');
     const [reEnterNewPassword, setReEnterNewPassword] = useState('');
-    const [showNewPassword, setShowNewPassword] = useState(false);
-    const [showReEnterNewPassword, setShowReEnterNewPassword] = useState(false);
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
     const modalRef = useRef(null);
@@ -924,60 +813,24 @@ const ResetPasswordPage = ({ onNavigateToLogin, initialToken }) => {
                     />
 
                     <label htmlFor="newPassword" className="font-semibold text-gray-700 mb-1">New Password:</label>
-                    <div className="relative">
-                        <input
-                            type={showNewPassword ? "text" : "password"}
-                            id="newPassword"
-                            value={newPassword}
-                            onChange={(e) => setNewPassword(e.target.value)}
-                            className="p-3 pr-10 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition w-full"
-                            required
-                        />
-                        <button
-                            type="button"
-                            onClick={() => setShowNewPassword(!showNewPassword)}
-                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
-                        >
-                            {showNewPassword ? (
-                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21" />
-                                </svg>
-                            ) : (
-                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                </svg>
-                            )}
-                        </button>
-                    </div>
+                    <input
+                        type="password"
+                        id="newPassword"
+                        value={newPassword}
+                        onChange={(e) => setNewPassword(e.target.value)}
+                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition"
+                        required
+                    />
 
                     <label htmlFor="reEnterNewPassword" className="font-semibold text-gray-700 mb-1">Re-enter New Password:</label>
-                    <div className="relative">
-                        <input
-                            type={showReEnterNewPassword ? "text" : "password"}
-                            id="reEnterNewPassword"
-                            value={reEnterNewPassword}
-                            onChange={(e) => setReEnterNewPassword(e.target.value)}
-                            className="p-3 pr-10 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition w-full"
-                            required
-                        />
-                        <button
-                            type="button"
-                            onClick={() => setShowReEnterNewPassword(!showReEnterNewPassword)}
-                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
-                        >
-                            {showReEnterNewPassword ? (
-                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21" />
-                                </svg>
-                            ) : (
-                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                </svg>
-                            )}
-                        </button>
-                    </div>
+                    <input
+                        type="password"
+                        id="reEnterNewPassword"
+                        value={reEnterNewPassword}
+                        onChange={(e) => setReEnterNewPassword(e.target.value)}
+                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition"
+                        required
+                    />
 
                     {error && <p className="text-red-500 text-sm text-center mt-2">{error}</p>}
                     {message && <p className="text-green-500 text-sm text-center mt-2">{message}</p>}
@@ -1000,42 +853,8 @@ const ResetPasswordPage = ({ onNavigateToLogin, initialToken }) => {
 };
 
 
-const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects, onProjectSuggest }) => {
+const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects }) => {
     const { userDetails, removeToken, fetchUserDetails, isAuthLoading } = useContext(AuthContext); 
-
-    // Project suggestions for users
-    const projectSuggestions = [
-        {
-            title: "Web Development Portfolio",
-            description: "Create a personal website showcasing your skills and projects",
-            category: "Web Development"
-        },
-        {
-            title: "Mobile App Prototype",
-            description: "Design and develop a mobile application for iOS or Android",
-            category: "Mobile Development"
-        },
-        {
-            title: "Data Analysis Project",
-            description: "Analyze datasets and create visualizations using Python/R",
-            category: "Data Science"
-        },
-        {
-            title: "Machine Learning Model",
-            description: "Build and train a machine learning model for prediction",
-            category: "AI/ML"
-        },
-        {
-            title: "Database Management System",
-            description: "Design and implement a database for a business application",
-            category: "Database"
-        },
-        {
-            title: "Game Development",
-            description: "Create a simple game using Unity, Python, or JavaScript",
-            category: "Game Development"
-        }
-    ];
 
     useEffect(() => {
         if (!userDetails && !isAuthLoading) { 
@@ -1051,23 +870,8 @@ const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects, onPr
 
     return (
         <div className="flex flex-col items-center justify-center p-5 w-full h-full"> {/* Added h-full to help centering */}
-            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-4xl flex flex-col items-center animate-fade-in-up"> 
+            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col items-center animate-fade-in-up"> 
                 <h1 className="text-3xl font-bold text-gray-800 mb-6">Welcome, {userDetails?.username || 'User'}!</h1>
-
-                {/* Ad Image Holder for Welcome Page */}
-                <div className="w-full mb-6">
-                    <div className="bg-gray-100 rounded-xl p-4 text-center border-2 border-dashed border-gray-300">
-                        <img 
-                            src="/ad-welcome.jpg" 
-                            alt="Advertisement" 
-                            className="w-full h-48 object-cover rounded-lg mb-2"
-                            onError={(e) => {
-                                e.target.style.display = 'none';
-                                e.target.nextSibling.style.display = 'block';
-                            }}
-                        />
-                    </div>
-                </div>
 
                 {isAuthLoading ? (
                     <p className="text-gray-600 mb-6">Loading user details...</p>
@@ -1080,24 +884,6 @@ const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects, onPr
                 ) : (
                     <p className="text-red-500 mb-6">Could not load user details. Please try logging in again.</p>
                 )}
-
-                {/* Project Suggestions Section */}
-                <div className="w-full mb-6">
-                    <h3 className="text-2xl font-bold mb-4 text-gray-800 text-center">Project Ideas to Get Started</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {projectSuggestions.map((suggestion, index) => (
-                            <div key={index} className="bg-gradient-to-br from-blue-50 to-indigo-100 p-4 rounded-xl border border-blue-200 shadow-md hover:shadow-lg transition duration-300">
-                                <div className="flex items-center justify-between mb-2">
-                                    <span className="text-xs font-semibold text-blue-600 bg-blue-200 px-2 py-1 rounded-full">
-                                        {suggestion.category}
-                                    </span>
-                                </div>
-                                <h4 className="font-bold text-gray-800 mb-2">{suggestion.title}</h4>
-                                <p className="text-gray-600 text-sm">{suggestion.description}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
 
                 <div className="flex flex-col sm:flex-row gap-4 mt-6 w-full max-w-xs justify-center">
                     <button
@@ -1119,15 +905,6 @@ const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects, onPr
                     className="bg-gray-300 text-gray-800 py-2 px-5 rounded-lg font-bold transition duration-300 hover:bg-gray-400 shadow-md hover:shadow-lg mt-6 w-full max-w-[150px] mx-auto focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-75"
                 >
                     Logout
-                </button>
-
-                {/* Project Suggest Button */}
-                <button
-                    onClick={onProjectSuggest}
-                    className="flex items-center gap-2 bg-yellow-100 text-yellow-800 font-bold py-3 px-6 rounded-xl shadow hover:bg-yellow-200 transition mb-8 mt-2 text-lg"
-                    style={{fontFamily: 'Montserrat, Poppins, Arial, sans-serif'}}
-                >
-                    <ThunderIcon /> Project Suggest
                 </button>
             </div>
         </div>
@@ -1476,21 +1253,6 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
             <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-xl flex flex-col items-start animate-fade-in-up"> 
                 <h1 className="text-3xl font-bold mb-6 text-gray-800 self-center">View Projects</h1>
 
-                {/* Ad Image Holder for View Projects Page */}
-                <div className="w-full mb-6">
-                    <div className="bg-gray-100 rounded-xl p-4 text-center border-2 border-dashed border-gray-300">
-                        <img 
-                            src="/ad-view-projects.jpg" 
-                            alt="Advertisement" 
-                            className="w-full h-48 object-cover rounded-lg mb-2"
-                            onError={(e) => {
-                                e.target.style.display = 'none';
-                                e.target.nextSibling.style.display = 'block';
-                            }}
-                        />
-                    </div>
-                </div>
-
                 {showSearchAndList ? (
                     <>
                         <form onSubmit={(e) => { e.preventDefault(); fetchProjects(); }} className="flex flex-col gap-5 w-full max-w-xs mx-auto mb-6"> 
@@ -1778,22 +1540,6 @@ const CreateProjectPage = ({ onNavigateToWelcome }) => {
         <div className="flex items-center justify-center p-5 w-full h-full"> {/* Added h-full to help centering */}
             <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-xl flex flex-col items-center animate-fade-in-up"> 
                 <h2 className="text-3xl font-bold text-gray-800 mb-6">Create New Project</h2>
-                
-                {/* Ad Image Holder for Create Project Page */}
-                <div className="w-full mb-6">
-                    <div className="bg-gray-100 rounded-xl p-4 text-center border-2 border-dashed border-gray-300">
-                        <img 
-                            src="/ad-create-project.jpg" 
-                            alt="Advertisement" 
-                            className="w-full h-48 object-cover rounded-lg mb-2"
-                            onError={(e) => {
-                                e.target.style.display = 'none';
-                                e.target.nextSibling.style.display = 'block';
-                            }}
-                        />
-                    </div>
-                </div>
-                
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full max-w-lg mx-auto"> 
                     <label htmlFor="projectName" className="font-semibold text-gray-700 mb-1">Project Name:</label>
                     <input
@@ -1933,55 +1679,6 @@ const SplashVideo = ({ onVideoEnd }) => {
     );
 };
 
-// Thunder SVG Icon
-const ThunderIcon = () => (
-    <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="inline-block align-middle mr-2 text-yellow-500">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-    </svg>
-);
-
-// Project Suggest Modal with Ad Image
-const ProjectSuggestAdModal = ({ onClose, adImage }) => (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
-        <div className="relative bg-white rounded-2xl shadow-2xl p-0 overflow-hidden max-w-md w-full">
-            <button onClick={onClose} className="absolute top-2 right-2 text-gray-700 bg-white bg-opacity-80 rounded-full p-1 hover:bg-gray-200 z-10">
-                <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
-            <img src={adImage} alt="Ad" className="w-full h-80 object-cover rounded-2xl" />
-        </div>
-    </div>
-);
-
-// Projects For You Page
-const ProjectsForYouPage = ({ onNavigateToWelcome }) => {
-    const projectTitles = [
-        "AI-Powered Attendance System",
-        "Smart Waste Management",
-        "E-Learning Platform",
-        "IoT Home Automation",
-        "Blockchain Voting App"
-    ];
-    return (
-        <div className="flex flex-col items-center justify-center min-h-[60vh] w-full">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-[#1a237e]" style={{fontFamily: 'Montserrat, Poppins, Arial, sans-serif'}}>Projects For You</h2>
-            <div className="w-full max-w-lg flex flex-col gap-4 mb-10">
-                {projectTitles.map((title, idx) => (
-                    <div key={idx} className="bg-white border border-gray-300 rounded-xl shadow-md p-5 text-lg font-semibold text-gray-800 text-center" style={{fontFamily: 'Inter, Roboto, Arial, sans-serif'}}>
-                        {title}
-                    </div>
-                ))}
-            </div>
-            <button
-                onClick={onNavigateToWelcome}
-                className="bg-gray-200 text-[#1a237e] font-bold py-2 px-6 rounded-lg shadow hover:bg-gray-300 transition"
-            >
-                Go to Welcome
-            </button>
-        </div>
-    );
-};
 
 // Main App component
 function App() { 
@@ -2043,49 +1740,7 @@ function App() {
         setCurrentPage(page);
     }, []);
 
-    const [showProjectSuggestAd, setShowProjectSuggestAd] = useState(false);
-    const [showProjectsForYou, setShowProjectsForYou] = useState(false);
-
-    const handleProjectSuggest = () => {
-        setShowProjectSuggestAd(true);
-    };
-    const handleCloseProjectSuggestAd = () => {
-        setShowProjectSuggestAd(false);
-        setShowProjectsForYou(true);
-    };
-    const handleGoToWelcome = () => {
-        setShowProjectsForYou(false);
-        setCurrentPage('welcome');
-    };
-
-    // Ad images for each page
-    const adImages = {
-        login: '/ad-login.jpg',
-        register: '/ad-register.jpg',
-        welcome: '/ad-welcome.jpg',
-        'createProject': '/ad-create-project.jpg',
-        'viewProjects': '/ad-view-projects.jpg',
-        // Add more as needed
-    };
-    const adLinks = {
-        login: '#',
-        register: '#',
-        welcome: '#',
-        'createProject': '#',
-        'viewProjects': '#',
-    };
-    const adTexts = {
-        login: 'Click here for more info →',
-        register: 'Click here for more info →',
-        welcome: 'Click here for more info →',
-        'createProject': 'Click here for more info →',
-        'viewProjects': 'Click here for more info →',
-    };
-
     const renderPage = () => {
-        if (showProjectsForYou) {
-            return <ProjectsForYouPage onNavigateToWelcome={handleGoToWelcome} />;
-        }
         switch (currentPage) {
             case 'login':
                 return <LoginPage onLoginSuccess={() => setCurrentPage('welcome')} onNavigateToRegister={() => navigate('register')} onNavigateToForgotPassword={() => navigate('forgotPassword')} />;
@@ -2096,7 +1751,7 @@ function App() {
             case 'resetPassword':
                 return <ResetPasswordPage onNavigateToLogin={() => navigate('login')} initialToken={resetTokenFromUrl} />;
             case 'welcome':
-                return <WelcomePage onNavigateToCreateProject={() => navigate('createProject')} onNavigateToViewProjects={() => navigate('viewProjects')} onProjectSuggest={handleProjectSuggest} />;
+                return <WelcomePage onNavigateToCreateProject={() => navigate('createProject')} onNavigateToViewProjects={() => navigate('viewProjects')} />;
             case 'createProject':
                 return <CreateProjectPage onNavigateToWelcome={() => navigate('welcome')} />; 
             case 'viewProjects':
@@ -2106,58 +1761,35 @@ function App() {
         }
     };
 
-    // --- MAIN LAYOUT ---
     return (
+        // Conditional rendering: Show SplashVideo first, then the main app
         <>
             {showSplash ? (
                 <SplashVideo onVideoEnd={handleVideoEnd} />
             ) : (
-                <div className="min-h-screen w-full bg-[#e1e1e1] text-[#181c20] font-sans" style={{fontFamily: 'Inter, Roboto, Arial, sans-serif'}}>
-                    {/* LOGIN/REGISTER/FORGOT/RESET: No Ad Section */}
-                    {['login', 'register', 'forgotPassword', 'resetPassword'].includes(currentPage) ? (
-                        <div className="flex flex-row min-h-screen w-full">
-                            {/* Left: Title, Slogan */}
-                            <div className="flex flex-col justify-center items-start w-[420px] max-w-[480px] px-12">
-                                <div className="mb-10">
-                                    <img src="/tit.png" alt="KROXNEST." className="h-32 md:h-56 w-auto mb-4" style={{objectFit: 'contain'}} />
-                                    <div className="text-3xl md:text-4xl font-extrabold text-black mb-2" style={{fontFamily: 'Montserrat, Poppins, Arial, sans-serif'}}>KROXNEST.</div>
-                                    <div className="text-lg md:text-2xl font-medium text-gray-700" style={{fontFamily: 'Montserrat, Poppins, Arial, sans-serif', letterSpacing: '0.03em'}}>knowledge repository of exhibits & networked educational student tasks</div>
-                                </div>
-                            </div>
-                            {/* Middle Spacer */}
-                            <div className="flex-grow" />
-                            {/* Right: Form */}
-                            <div className="flex flex-col justify-center items-end w-[600px] max-w-[700px] px-16">
-                                <div className="w-full max-w-xl">
-                                    {renderPage()}
-                                </div>
-                            </div>
-                        </div>
-                    ) : (
-                        <>
-                            {/* Top Bar: Logo and Slogan (left-aligned) */}
-                            <div className="flex flex-row items-center w-full px-8 pt-10 pb-4">
-                                <div className="flex flex-col items-start">
-                                    <img src="/tit.png" alt="KROXNEST." className="h-32 md:h-56 w-auto mb-4" style={{objectFit: 'contain'}} />
-                                    <div className="text-3xl md:text-4xl font-extrabold text-black mb-2" style={{fontFamily: 'Montserrat, Poppins, Arial, sans-serif'}}>KROXNEST.</div>
-                                    <div className="text-lg md:text-2xl font-medium text-gray-700" style={{fontFamily: 'Montserrat, Poppins, Arial, sans-serif', letterSpacing: '0.03em'}}>knowledge repository of exhibits & networked educational student tasks</div>
-                                </div>
-                                {/* Ad image for other pages */}
-                                <div className="ml-12">
-                                    <div className="bg-white border-2 border-dashed border-gray-300 rounded-2xl p-8 w-full max-w-md mb-8 shadow-xl">
-                                        <img 
-                                            src={adImages[currentPage] || adImages['welcome']} 
-                                            alt="Advertisement" 
-                                            className="w-full h-80 object-contain rounded-lg mb-4"
-                                            style={{background: '#f3f3f3'}}
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                            {/* Main Content, What We Do, How It Works, Footer ... */}
-                            {/* ... (rest of your code) ... */}
-                        </>
-                    )}
+                // Main container with black background and horizontal layout from the new screenshot
+                <div className="min-h-screen flex flex-col md:flex-row bg-black font-sans">
+                    {/* Left section for Logo and Slogan */}
+                    <div className="w-full md:w-1/2 p-8 flex flex-col justify-start items-start"> {/* Adjusted justify-start */}
+                        <header className="mb-8 md:mb-0">
+                            {/* Logo image with precise height and alignment */}
+                            <img src="/tit.png" alt="kroxnest" className="h-20 sm:h-24 md:h-[100px] mb-[-10px] drop-shadow-lg filter invert" /> {/* md:h-[100px] for more exact height, negative margin for tighter spacing */}
+                            {/* Slogan with refined font size and color */}
+                            <p className="text-xl sm:text-2xl text-white italic pl-2" style={{ fontFamily: 'Inter, sans-serif' }}>portfolio of talent & exhibits</p> 
+                            <div className="md:mt-auto pb-10 pl-2"> {/* Removed hidden for md:block to ensure consistency on all sizes */}
+                            <p className="text-lg text-white max-w-sm leading-relaxed"> 
+                                Manage your projects effortlessly: access,edit and update them from any desktop,anytime.</p></div>
+                        </header>
+                         {/* Footer for the main app - moved here to align with the left section content */}
+                        <footer className="w-full text-left py-4 text-gray-500 text-sm md:absolute md:bottom-0 md:left-8">
+                            © 2025 plote from KHAZA
+                        </footer>
+                    </div>
+
+                    {/* Right section for dynamic page content */}
+                    <main className="flex-grow flex items-center justify-center w-full md:w-1/2 p-4">
+                        {renderPage()}
+                    </main>
                 </div>
             )}
         </>
