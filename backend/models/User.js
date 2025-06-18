@@ -23,6 +23,15 @@ const User = sequelize.define('User', {
             isEmail: true // Sequelize validation for email format
         }
     },
+    mobile_number: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+        validate: {
+            is: /^[0-9]{10}$/, // Validates exactly 10 digits
+            notEmpty: true
+        }
+    },
     password: {
         type: DataTypes.STRING,
         allowNull: false
