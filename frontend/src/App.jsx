@@ -1947,7 +1947,7 @@ const SplashVideo = ({ onVideoEnd }) => {
         <div className="fixed inset-0 z-50 bg-black flex items-center justify-center overflow-hidden">
             <video
                 ref={videoRef}
-                src="/main-v.mp4" // IMPORTANT: Replace this with your actual video URL!
+                src="/video.mp4" // IMPORTANT: Replace this with your actual video URL!
                 autoPlay
                 muted
                 playsInline // Crucial for mobile autoplay
@@ -2100,7 +2100,7 @@ function App() {
                         {/* Left: Logo, Slogan, Ad */}
                         <div className="flex flex-col items-start w-full md:w-1/2 pr-0 md:pr-8 mb-8 md:mb-0">
                             <div className="flex flex-col items-start w-full">
-                                <img src="/title.jpg" alt="KROXNEST." className="h-14 md:h-20 w-auto mb-1" style={{objectFit: 'contain'}} />
+                                <img src="/tit.png" alt="KROXNEST." className="h-14 md:h-20 w-auto mb-1" style={{objectFit: 'contain'}} />
                                 <div className="text-xs md:text-sm text-black font-normal mb-4 pl-1 tracking-wide" style={{letterSpacing: '0.01em'}}>
                                     knowledge repository of exhibits & networked educational student tasks
                                 </div>
