@@ -1808,7 +1808,20 @@ function App() {
     const renderPage = () => {
         switch (currentPage) {
             case 'login':
-                return <LoginPage onLoginSuccess={() => setCurrentPage('welcome')} onNavigateToRegister={() => navigate('register')} onNavigateToForgotPassword={() => navigate('forgotPassword')} />;
+                return (
+                    <div className="flex flex-row w-full h-full">
+                        <div className="w-1/2 flex items-center justify-center">
+                            <Advertisement
+                                imageUrl="/public/logo.jpg" // Replace with your ad image
+                                linkUrl="https://example.com/login-ad" // Replace with your ad link
+                                altText="Login Advertisement"
+                            />
+                        </div>
+                        <div className="w-1/2 flex items-center justify-center">
+                            <LoginPage onLoginSuccess={() => setCurrentPage('welcome')} onNavigateToRegister={() => navigate('register')} onNavigateToForgotPassword={() => navigate('forgotPassword')} />
+                        </div>
+                    </div>
+                );
             case 'register':
                 return <RegisterPage onRegisterSuccess={() => navigate('login')} onNavigateToLogin={() => navigate('login')} />;
             case 'forgotPassword':
@@ -1816,7 +1829,20 @@ function App() {
             case 'resetPassword':
                 return <ResetPasswordPage onNavigateToLogin={() => navigate('login')} initialToken={resetTokenFromUrl} />;
             case 'welcome':
-                return <WelcomePage onNavigateToCreateProject={() => navigate('createProject')} onNavigateToViewProjects={() => navigate('viewProjects')} />;
+                return (
+                    <div className="flex flex-row w-full h-full">
+                        <div className="w-1/2 flex items-center justify-center">
+                            <Advertisement
+                                imageUrl="/public/tit.png" // Replace with your ad image
+                                linkUrl="https://example.com/welcome-ad" // Replace with your ad link
+                                altText="Welcome Advertisement"
+                            />
+                        </div>
+                        <div className="w-1/2 flex items-center justify-center">
+                            <WelcomePage onNavigateToCreateProject={() => navigate('createProject')} onNavigateToViewProjects={() => navigate('viewProjects')} />
+                        </div>
+                    </div>
+                );
             case 'createProject':
                 return <CreateProjectPage onNavigateToWelcome={() => navigate('welcome')} />; 
             case 'viewProjects':
@@ -1840,7 +1866,10 @@ function App() {
                             {/* Logo image with precise height and alignment */}
                             <img src="/tit.png" alt="kroxnest." className="h-20 sm:h-24 md:h-[100px] mb-[-10px] drop-shadow-lg filter invert" /> {/* md:h-[100px] for more exact height, negative margin for tighter spacing */}
                             {/* Slogan with refined font size and color */}
-                            <p className="text-xl sm:text-2xl text-white italic pl-2" style={{ fontFamily: 'Inter, sans-serif' }}>Knowledge Repository Of eXhibits & Networked Educational Student Tracks</p> 
+                            <p className="text-xl sm:text-2xl text-white italic pl-2" style={{ fontFamily: 'Inter, sans-serif' }}>portfolio of talent & exhibits</p> 
+                            <div className="md:mt-auto pb-10 pl-2"> {/* Removed hidden for md:block to ensure consistency on all sizes */}
+                            <p className="text-lg text-white max-w-sm leading-relaxed"> 
+                                Manage your projects effortlessly: access,edit and update them from any desktop,anytime.</p></div>
                         </header>
                          {/* Footer for the main app - moved here to align with the left section content */}
                         <footer className="w-full text-left py-4 text-gray-500 text-sm md:absolute md:bottom-0 md:left-8">
