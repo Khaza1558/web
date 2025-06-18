@@ -2124,17 +2124,21 @@ function App() {
             ) : (
                 <div className="min-h-screen w-full bg-[#e1e1e1] text-[#181c20] font-sans" style={{fontFamily: 'Inter, Roboto, Arial, sans-serif'}}>
                     {/* Top Bar: Logo and Slogan */}
-                    <div className="flex flex-col md:flex-row items-start justify-between w-full px-8 pt-10 pb-4">
-                        <div className="flex flex-col items-start">
-                            <img src="/tit.png" alt="KROXNEST." className="h-24 md:h-32 w-auto mb-2" style={{objectFit: 'contain'}} />
-                            <div className="text-2xl md:text-4xl font-bold text-black mb-2" style={{fontFamily: 'Montserrat, Poppins, Arial, sans-serif', letterSpacing: '0.03em'}}>
-                                knowledge repository of exhibits & networked educational student tasks
-                            </div>
+                    <div className="flex flex-col items-center w-full px-8 pt-10 pb-4">
+                        <img src="/tit.png" alt="KROXNEST." className="h-32 md:h-48 w-auto mb-2" style={{objectFit: 'contain'}} />
+                        <div className="text-base md:text-xl font-medium text-black mb-2" style={{fontFamily: 'Montserrat, Poppins, Arial, sans-serif', letterSpacing: '0.03em'}}>
+                            knowledge repository of exhibits & networked educational student tasks
                         </div>
-                        <div className="flex-1 flex justify-end items-start w-full md:w-auto mt-8 md:mt-0">
-                            <div className="w-full max-w-lg">
-                                {renderPage()}
-                            </div>
+                        {/* Ad image below slogan, above main content */}
+                        <img src="/ad-login.jpg" alt="Ad" className="w-full max-w-2xl h-40 object-cover rounded-xl shadow mb-6" style={{display: currentPage === 'login' ? 'block' : 'none'}} />
+                        <img src="/ad-register.jpg" alt="Ad" className="w-full max-w-2xl h-40 object-cover rounded-xl shadow mb-6" style={{display: currentPage === 'register' ? 'block' : 'none'}} />
+                        <img src="/ad-welcome.jpg" alt="Ad" className="w-full max-w-2xl h-40 object-cover rounded-xl shadow mb-6" style={{display: currentPage === 'welcome' ? 'block' : 'none'}} />
+                    </div>
+
+                    {/* Main Content: Centered and starts from half the page */}
+                    <div className="flex flex-col items-center justify-center w-full min-h-[50vh]" style={{marginTop: '0'}}>
+                        <div className="w-full max-w-lg">
+                            {renderPage()}
                         </div>
                     </div>
 
@@ -2180,19 +2184,8 @@ function App() {
                     </div>
 
                     {/* Footer */}
-                    <footer className="w-full text-center py-6 text-gray-700 text-base mt-8" style={{fontFamily: 'Inter, Roboto, Arial, sans-serif'}}>
-                        © 2025 KROXNEST &nbsp;|&nbsp; 
-                        <a href="#" className="text-[#1565c0] hover:underline font-semibold">Contact</a>
-                        <span className="mx-2">|</span>
-                        <span className="inline-block">
-                            <span className="font-semibold">Email:</span> <a href="mailto:info@kroxnest.com" className="text-[#1565c0] hover:underline">info@kroxnest.com</a>
-                        </span>
-                        <span className="mx-2">|</span>
-                        <span className="inline-block">
-                            <span className="font-semibold">Mobile:</span> <a href="tel:+911234567890" className="text-[#1565c0] hover:underline">+91 12345 67890</a>
-                        </span>
-                        <span className="mx-2">|</span>
-                        <span className="inline-block font-bold text-[#1a237e]">by KHAZA</span>
+                    <footer className="w-full text-center py-6 text-gray-700 text-base mt-8" style={{fontFamily: 'sans-serif', fontWeight: 'normal', background: 'none', boxShadow: 'none'}}>
+                        © 2025 KROXNEST | Contact | Email: info@kroxnest.com | Mobile: +91 12345 67890 | KHAZA
                     </footer>
 
                     {showProjectSuggestAd && (
