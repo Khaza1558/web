@@ -416,6 +416,7 @@ const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPas
     const { setToken } = useContext(AuthContext); 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('');
     const [showForgotPassword, setShowForgotPassword] = useState(false); 
 
@@ -451,6 +452,29 @@ const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPas
         <div className="flex items-center justify-center p-5 w-full h-full"> {/* Added h-full to help centering */}
             <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col items-center animate-fade-in-up"> 
                 <h2 className="text-3xl font-bold text-gray-800 mb-6">Login</h2>
+                
+                {/* Ad Image Holder for Login Page */}
+                <div className="w-full mb-6">
+                    <div className="bg-gray-100 rounded-xl p-4 text-center border-2 border-dashed border-gray-300">
+                        <img 
+                            src="/ad-login.jpg" 
+                            alt="Advertisement" 
+                            className="w-full h-48 object-cover rounded-lg mb-2"
+                            onError={(e) => {
+                                e.target.style.display = 'none';
+                                e.target.nextSibling.style.display = 'block';
+                            }}
+                        />
+                        <div className="hidden text-gray-500 text-sm">
+                            <p>Ad Space for Login Page</p>
+                            <p>Replace with your image and link</p>
+                        </div>
+                        <a href="#" className="text-blue-500 hover:underline text-sm font-medium">
+                            Click here for more info →
+                        </a>
+                    </div>
+                </div>
+                
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full max-w-xs"> 
                     <label htmlFor="loginUsername" className="font-semibold text-gray-700 mb-1">Username:</label> 
                     <input
@@ -463,14 +487,32 @@ const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPas
                     />
 
                     <label htmlFor="loginPassword" className="font-semibold text-gray-700 mb-1">Password:</label> 
-                    <input
-                        type="password"
-                        id="loginPassword"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition"
-                        required
-                    />
+                    <div className="relative">
+                        <input
+                            type={showPassword ? "text" : "password"}
+                            id="loginPassword"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            className="p-3 pr-10 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition w-full"
+                            required
+                        />
+                        <button
+                            type="button"
+                            onClick={() => setShowPassword(!showPassword)}
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
+                        >
+                            {showPassword ? (
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21" />
+                                </svg>
+                            ) : (
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                </svg>
+                            )}
+                        </button>
+                    </div>
 
                     {error && <p className="text-red-500 text-sm text-center mt-2">{error}</p>}
 
@@ -508,7 +550,10 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
         collegeName: '',
         branch: '',
         rollNumber: '',
+        mobileNumber: '',
     });
+    const [showPassword, setShowPassword] = useState(false);
+    const [showReEnterPassword, setShowReEnterPassword] = useState(false);
     const [error, setError] = useState('');
 
     const handleChange = (e) => {
@@ -537,6 +582,7 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
                     college: formData.collegeName,
                     branch: formData.branch,
                     rollNumber: formData.rollNumber,
+                    mobileNumber: formData.mobileNumber,
                 })
             });
 
@@ -560,6 +606,29 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
         <div className="flex items-center justify-center p-5 w-full h-full"> {/* Added h-full to help centering */}
             <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-xl flex flex-col items-center animate-fade-in-up"> 
                 <h2 className="text-3xl font-bold text-gray-800 mb-6">Register</h2>
+                
+                {/* Ad Image Holder for Register Page */}
+                <div className="w-full mb-6">
+                    <div className="bg-gray-100 rounded-xl p-4 text-center border-2 border-dashed border-gray-300">
+                        <img 
+                            src="/ad-register.jpg" 
+                            alt="Advertisement" 
+                            className="w-full h-48 object-cover rounded-lg mb-2"
+                            onError={(e) => {
+                                e.target.style.display = 'none';
+                                e.target.nextSibling.style.display = 'block';
+                            }}
+                        />
+                        <div className="hidden text-gray-500 text-sm">
+                            <p>Ad Space for Register Page</p>
+                            <p>Replace with your image and link</p>
+                        </div>
+                        <a href="#" className="text-blue-500 hover:underline text-sm font-medium">
+                            Click here for more info →
+                        </a>
+                    </div>
+                </div>
+                
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-lg mx-auto"> 
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2"> 
                         <label htmlFor="email" className="font-semibold text-gray-700 text-sm sm:w-1/4 flex-shrink-0">Email:</label>
@@ -575,14 +644,62 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
 
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
                         <label htmlFor="password" className="font-semibold text-gray-700 text-sm sm:w-1/4 flex-shrink-0">Password:</label>
-                        <input type="password" id="password" value={formData.password} onChange={handleChange}
-                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow" required />
+                        <div className="relative flex-grow">
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                id="password"
+                                value={formData.password}
+                                onChange={handleChange}
+                                className="p-3 pr-10 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition w-full"
+                                required
+                            />
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
+                            >
+                                {showPassword ? (
+                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21" />
+                                    </svg>
+                                ) : (
+                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                    </svg>
+                                )}
+                            </button>
+                        </div>
                     </div>
 
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
                         <label htmlFor="reEnterPassword" className="font-semibold text-gray-700 text-sm sm:w-1/4 flex-shrink-0">Re-enter Password:</label>
-                        <input type="password" id="reEnterPassword" value={formData.reEnterPassword} onChange={handleChange}
-                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow" required />
+                        <div className="relative flex-grow">
+                            <input
+                                type={showReEnterPassword ? "text" : "password"}
+                                id="reEnterPassword"
+                                value={formData.reEnterPassword}
+                                onChange={handleChange}
+                                className="p-3 pr-10 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition w-full"
+                                required
+                            />
+                            <button
+                                type="button"
+                                onClick={() => setShowReEnterPassword(!showReEnterPassword)}
+                                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
+                            >
+                                {showReEnterPassword ? (
+                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21" />
+                                    </svg>
+                                ) : (
+                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                    </svg>
+                                )}
+                            </button>
+                        </div>
                     </div>
 
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
@@ -601,6 +718,12 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
                         <label htmlFor="rollNumber" className="font-semibold text-gray-700 text-sm sm:w-1/4 flex-shrink-0">Roll Number:</label>
                         <input type="text" id="rollNumber" value={formData.rollNumber} onChange={handleChange}
                             className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow" required />
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
+                        <label htmlFor="mobileNumber" className="font-semibold text-gray-700 text-sm sm:w-1/4 flex-shrink-0">Mobile Number:</label>
+                        <input type="tel" id="mobileNumber" value={formData.mobileNumber} onChange={handleChange}
+                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow" required pattern="[0-9]{10,15}" maxLength={15} placeholder="e.g. 9876543210" />
                     </div>
 
                     {error && <p className="text-red-500 text-sm text-center mt-2">{error}</p>}
@@ -729,6 +852,8 @@ const ResetPasswordPage = ({ onNavigateToLogin, initialToken }) => {
     const [token, setToken] = useState(initialToken || '');
     const [newPassword, setNewPassword] = useState('');
     const [reEnterNewPassword, setReEnterNewPassword] = useState('');
+    const [showNewPassword, setShowNewPassword] = useState(false);
+    const [showReEnterNewPassword, setShowReEnterNewPassword] = useState(false);
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
     const modalRef = useRef(null);
@@ -813,24 +938,60 @@ const ResetPasswordPage = ({ onNavigateToLogin, initialToken }) => {
                     />
 
                     <label htmlFor="newPassword" className="font-semibold text-gray-700 mb-1">New Password:</label>
-                    <input
-                        type="password"
-                        id="newPassword"
-                        value={newPassword}
-                        onChange={(e) => setNewPassword(e.target.value)}
-                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition"
-                        required
-                    />
+                    <div className="relative">
+                        <input
+                            type={showNewPassword ? "text" : "password"}
+                            id="newPassword"
+                            value={newPassword}
+                            onChange={(e) => setNewPassword(e.target.value)}
+                            className="p-3 pr-10 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition w-full"
+                            required
+                        />
+                        <button
+                            type="button"
+                            onClick={() => setShowNewPassword(!showNewPassword)}
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
+                        >
+                            {showNewPassword ? (
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21" />
+                                </svg>
+                            ) : (
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                </svg>
+                            )}
+                        </button>
+                    </div>
 
                     <label htmlFor="reEnterNewPassword" className="font-semibold text-gray-700 mb-1">Re-enter New Password:</label>
-                    <input
-                        type="password"
-                        id="reEnterNewPassword"
-                        value={reEnterNewPassword}
-                        onChange={(e) => setReEnterNewPassword(e.target.value)}
-                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition"
-                        required
-                    />
+                    <div className="relative">
+                        <input
+                            type={showReEnterNewPassword ? "text" : "password"}
+                            id="reEnterNewPassword"
+                            value={reEnterNewPassword}
+                            onChange={(e) => setReEnterNewPassword(e.target.value)}
+                            className="p-3 pr-10 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition w-full"
+                            required
+                        />
+                        <button
+                            type="button"
+                            onClick={() => setShowReEnterNewPassword(!showReEnterNewPassword)}
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
+                        >
+                            {showReEnterNewPassword ? (
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21" />
+                                </svg>
+                            ) : (
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                </svg>
+                            )}
+                        </button>
+                    </div>
 
                     {error && <p className="text-red-500 text-sm text-center mt-2">{error}</p>}
                     {message && <p className="text-green-500 text-sm text-center mt-2">{message}</p>}
@@ -856,6 +1017,40 @@ const ResetPasswordPage = ({ onNavigateToLogin, initialToken }) => {
 const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects }) => {
     const { userDetails, removeToken, fetchUserDetails, isAuthLoading } = useContext(AuthContext); 
 
+    // Project suggestions for users
+    const projectSuggestions = [
+        {
+            title: "Web Development Portfolio",
+            description: "Create a personal website showcasing your skills and projects",
+            category: "Web Development"
+        },
+        {
+            title: "Mobile App Prototype",
+            description: "Design and develop a mobile application for iOS or Android",
+            category: "Mobile Development"
+        },
+        {
+            title: "Data Analysis Project",
+            description: "Analyze datasets and create visualizations using Python/R",
+            category: "Data Science"
+        },
+        {
+            title: "Machine Learning Model",
+            description: "Build and train a machine learning model for prediction",
+            category: "AI/ML"
+        },
+        {
+            title: "Database Management System",
+            description: "Design and implement a database for a business application",
+            category: "Database"
+        },
+        {
+            title: "Game Development",
+            description: "Create a simple game using Unity, Python, or JavaScript",
+            category: "Game Development"
+        }
+    ];
+
     useEffect(() => {
         if (!userDetails && !isAuthLoading) { 
             fetchUserDetails();
@@ -870,8 +1065,30 @@ const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects }) =>
 
     return (
         <div className="flex flex-col items-center justify-center p-5 w-full h-full"> {/* Added h-full to help centering */}
-            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col items-center animate-fade-in-up"> 
+            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-4xl flex flex-col items-center animate-fade-in-up"> 
                 <h1 className="text-3xl font-bold text-gray-800 mb-6">Welcome, {userDetails?.username || 'User'}!</h1>
+
+                {/* Ad Image Holder for Welcome Page */}
+                <div className="w-full mb-6">
+                    <div className="bg-gray-100 rounded-xl p-4 text-center border-2 border-dashed border-gray-300">
+                        <img 
+                            src="/ad-welcome.jpg" 
+                            alt="Advertisement" 
+                            className="w-full h-48 object-cover rounded-lg mb-2"
+                            onError={(e) => {
+                                e.target.style.display = 'none';
+                                e.target.nextSibling.style.display = 'block';
+                            }}
+                        />
+                        <div className="hidden text-gray-500 text-sm">
+                            <p>Ad Space for Welcome Page</p>
+                            <p>Replace with your image and link</p>
+                        </div>
+                        <a href="#" className="text-blue-500 hover:underline text-sm font-medium">
+                            Click here for more info →
+                        </a>
+                    </div>
+                </div>
 
                 {isAuthLoading ? (
                     <p className="text-gray-600 mb-6">Loading user details...</p>
@@ -884,6 +1101,24 @@ const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects }) =>
                 ) : (
                     <p className="text-red-500 mb-6">Could not load user details. Please try logging in again.</p>
                 )}
+
+                {/* Project Suggestions Section */}
+                <div className="w-full mb-6">
+                    <h3 className="text-2xl font-bold mb-4 text-gray-800 text-center">Project Ideas to Get Started</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {projectSuggestions.map((suggestion, index) => (
+                            <div key={index} className="bg-gradient-to-br from-blue-50 to-indigo-100 p-4 rounded-xl border border-blue-200 shadow-md hover:shadow-lg transition duration-300">
+                                <div className="flex items-center justify-between mb-2">
+                                    <span className="text-xs font-semibold text-blue-600 bg-blue-200 px-2 py-1 rounded-full">
+                                        {suggestion.category}
+                                    </span>
+                                </div>
+                                <h4 className="font-bold text-gray-800 mb-2">{suggestion.title}</h4>
+                                <p className="text-gray-600 text-sm">{suggestion.description}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
 
                 <div className="flex flex-col sm:flex-row gap-4 mt-6 w-full max-w-xs justify-center">
                     <button
@@ -1253,6 +1488,28 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
             <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-xl flex flex-col items-start animate-fade-in-up"> 
                 <h1 className="text-3xl font-bold mb-6 text-gray-800 self-center">View Projects</h1>
 
+                {/* Ad Image Holder for View Projects Page */}
+                <div className="w-full mb-6">
+                    <div className="bg-gray-100 rounded-xl p-4 text-center border-2 border-dashed border-gray-300">
+                        <img 
+                            src="/ad-view-projects.jpg" 
+                            alt="Advertisement" 
+                            className="w-full h-48 object-cover rounded-lg mb-2"
+                            onError={(e) => {
+                                e.target.style.display = 'none';
+                                e.target.nextSibling.style.display = 'block';
+                            }}
+                        />
+                        <div className="hidden text-gray-500 text-sm">
+                            <p>Ad Space for View Projects Page</p>
+                            <p>Replace with your image and link</p>
+                        </div>
+                        <a href="#" className="text-blue-500 hover:underline text-sm font-medium">
+                            Click here for more info →
+                        </a>
+                    </div>
+                </div>
+
                 {showSearchAndList ? (
                     <>
                         <form onSubmit={(e) => { e.preventDefault(); fetchProjects(); }} className="flex flex-col gap-5 w-full max-w-xs mx-auto mb-6"> 
@@ -1540,6 +1797,29 @@ const CreateProjectPage = ({ onNavigateToWelcome }) => {
         <div className="flex items-center justify-center p-5 w-full h-full"> {/* Added h-full to help centering */}
             <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-xl flex flex-col items-center animate-fade-in-up"> 
                 <h2 className="text-3xl font-bold text-gray-800 mb-6">Create New Project</h2>
+                
+                {/* Ad Image Holder for Create Project Page */}
+                <div className="w-full mb-6">
+                    <div className="bg-gray-100 rounded-xl p-4 text-center border-2 border-dashed border-gray-300">
+                        <img 
+                            src="/ad-create-project.jpg" 
+                            alt="Advertisement" 
+                            className="w-full h-48 object-cover rounded-lg mb-2"
+                            onError={(e) => {
+                                e.target.style.display = 'none';
+                                e.target.nextSibling.style.display = 'block';
+                            }}
+                        />
+                        <div className="hidden text-gray-500 text-sm">
+                            <p>Ad Space for Create Project Page</p>
+                            <p>Replace with your image and link</p>
+                        </div>
+                        <a href="#" className="text-blue-500 hover:underline text-sm font-medium">
+                            Click here for more info →
+                        </a>
+                    </div>
+                </div>
+                
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full max-w-lg mx-auto"> 
                     <label htmlFor="projectName" className="font-semibold text-gray-700 mb-1">Project Name:</label>
                     <input
@@ -1767,29 +2047,106 @@ function App() {
             {showSplash ? (
                 <SplashVideo onVideoEnd={handleVideoEnd} />
             ) : (
-                // Main container with black background and horizontal layout from the new screenshot
-                <div className="min-h-screen flex flex-col md:flex-row bg-black font-sans">
-                    {/* Left section for Logo and Slogan */}
-                    <div className="w-full md:w-1/2 p-8 flex flex-col justify-start items-start"> {/* Adjusted justify-start */}
-                        <header className="mb-8 md:mb-0">
-                            {/* Logo image with precise height and alignment */}
-                            <img src="/main-t.png" alt="Plote." className="h-20 sm:h-24 md:h-[100px] mb-[-10px] drop-shadow-lg filter invert" /> {/* md:h-[100px] for more exact height, negative margin for tighter spacing */}
-                            {/* Slogan with refined font size and color */}
-                            <p className="text-xl sm:text-2xl text-white italic pl-2" style={{ fontFamily: 'Inter, sans-serif' }}>portfolio of talent & exhibits</p> 
-                            <div className="md:mt-auto pb-10 pl-2"> {/* Removed hidden for md:block to ensure consistency on all sizes */}
-                            <p className="text-lg text-white max-w-sm leading-relaxed"> 
-                                Manage your projects effortlessly: access,edit and update them from any desktop,anytime.</p></div>
-                        </header>
-                         {/* Footer for the main app - moved here to align with the left section content */}
-                        <footer className="w-full text-left py-4 text-gray-500 text-sm md:absolute md:bottom-0 md:left-8">
-                            © 2025 plote from KHAZA
-                        </footer>
+                <div className="min-h-screen flex flex-col items-center justify-start bg-gradient-to-br from-[#e1e1e1] to-[#f5f7fa] text-[#181c20] font-sans" style={{fontFamily: 'Inter, Poppins, Montserrat, sans-serif'}}>
+                    {/* Hero Section with Title Image */}
+                    <div className="w-full flex flex-col items-center pt-12 pb-6">
+                        <img src="/title-removebg-preview.png" alt="KROXNEST." className="w-full max-w-4xl h-auto object-contain mb-3 drop-shadow-2xl" style={{minHeight: '140px'}} />
+                        <div className="text-xl md:text-3xl font-bold text-center mb-2 tracking-wide" style={{letterSpacing: '0.04em'}}>
+                            knowledge repository of exhibits & networked educational student tasks
+                        </div>
                     </div>
 
-                    {/* Right section for dynamic page content */}
-                    <main className="flex-grow flex items-center justify-center w-full md:w-1/2 p-4">
+                    {/* Ad Display (if any) */}
+                    <div className="w-full max-w-2xl mb-10 px-4">
+                        {/* This will be replaced by the ad image holder from the page components */}
+                    </div>
+
+                    {/* What We Do Section */}
+                    <div className="w-full max-w-5xl flex flex-col items-center mb-14 px-4">
+                        <h2 className="text-4xl md:text-5xl font-extrabold mb-8 text-center text-[#1a237e] drop-shadow-lg" style={{letterSpacing: '0.03em'}}>What We Do</h2>
+                        {/* 3 Images Row */}
+                        <div className="flex flex-col md:flex-row gap-10 justify-center items-center w-full mb-6">
+                            {[1,2,3].map(i => (
+                                <div key={i} className="flex-1 flex flex-col items-center">
+                                    <div className="w-40 h-40 bg-gray-200 rounded-2xl flex items-center justify-center mb-3 shadow-xl border border-gray-300">
+                                        <span className="text-gray-400 text-2xl">Image {i}</span>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        {/* 3 Paragraphs Row */}
+                        <div className="flex flex-col md:flex-row gap-10 w-full">
+                            <div className="flex-1 text-center bg-white bg-opacity-90 rounded-2xl p-6 shadow-lg border border-gray-200">
+                                <p className="text-lg md:text-xl font-medium">Showcase your academic, technical, and creative projects in a professional, organized portfolio.</p>
+                            </div>
+                            <div className="flex-1 text-center bg-white bg-opacity-90 rounded-2xl p-6 shadow-lg border border-gray-200">
+                                <p className="text-lg md:text-xl font-medium">Connect and collaborate with peers, educators, and industry professionals through your exhibits.</p>
+                            </div>
+                            <div className="flex-1 text-center bg-white bg-opacity-90 rounded-2xl p-6 shadow-lg border border-gray-200">
+                                <p className="text-lg md:text-xl font-medium">Access a growing repository of student work and educational resources for inspiration and learning.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* How It Works Section */}
+                    <div className="w-full max-w-5xl flex flex-col items-center mb-14 px-4">
+                        <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center text-[#1565c0] drop-shadow">How It Works</h2>
+                        <div className="flex flex-col md:flex-row gap-8 w-full justify-center">
+                            <div className="flex-1 bg-white bg-opacity-95 rounded-2xl p-6 shadow-xl border border-blue-100 flex flex-col items-center">
+                                <div className="w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center mb-3 text-2xl font-bold text-[#1565c0]">1</div>
+                                <div className="font-semibold text-lg mb-2">Sign Up</div>
+                                <div className="text-gray-700">Create your account and set up your profile in minutes.</div>
+                            </div>
+                            <div className="flex-1 bg-white bg-opacity-95 rounded-2xl p-6 shadow-xl border border-blue-100 flex flex-col items-center">
+                                <div className="w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center mb-3 text-2xl font-bold text-[#1565c0]">2</div>
+                                <div className="font-semibold text-lg mb-2">Upload & Organize</div>
+                                <div className="text-gray-700">Add your projects, files, and exhibits. Organize them by category or subject.</div>
+                            </div>
+                            <div className="flex-1 bg-white bg-opacity-95 rounded-2xl p-6 shadow-xl border border-blue-100 flex flex-col items-center">
+                                <div className="w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center mb-3 text-2xl font-bold text-[#1565c0]">3</div>
+                                <div className="font-semibold text-lg mb-2">Share & Connect</div>
+                                <div className="text-gray-700">Share your portfolio, connect with others, and get inspired by the community.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Testimonials Section */}
+                    <div className="w-full max-w-5xl flex flex-col items-center mb-14 px-4">
+                        <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center text-[#00897b] drop-shadow">Testimonials</h2>
+                        <div className="flex flex-col md:flex-row gap-8 w-full justify-center">
+                            <div className="flex-1 bg-white bg-opacity-95 rounded-2xl p-6 shadow-xl border border-gray-200 flex flex-col items-center">
+                                <div className="italic text-lg text-gray-700 mb-2">"A fantastic platform to showcase my work and connect with other students!"</div>
+                                <div className="font-semibold text-[#00897b]">— Student User</div>
+                            </div>
+                            <div className="flex-1 bg-white bg-opacity-95 rounded-2xl p-6 shadow-xl border border-gray-200 flex flex-col items-center">
+                                <div className="italic text-lg text-gray-700 mb-2">"The best way to organize and present my academic projects."</div>
+                                <div className="font-semibold text-[#00897b]">— College Student</div>
+                            </div>
+                            <div className="flex-1 bg-white bg-opacity-95 rounded-2xl p-6 shadow-xl border border-gray-200 flex flex-col items-center">
+                                <div className="italic text-lg text-gray-700 mb-2">"Easy to use and visually appealing. Highly recommended!"</div>
+                                <div className="font-semibold text-[#00897b]">— Educator</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Main App Content */}
+                    <main className="flex-grow flex items-center justify-center w-full">
                         {renderPage()}
                     </main>
+
+                    {/* Footer */}
+                    <footer className="w-full text-center py-6 text-gray-700 text-base mt-8 bg-white bg-opacity-80 shadow-inner border-t border-gray-200">
+                        © 2025 KROXNEST &nbsp;|&nbsp; 
+                        <a href="#" className="text-[#1565c0] hover:underline font-semibold">Contact</a>
+                        <span className="mx-2">|</span>
+                        <span className="inline-block">
+                            <span className="font-semibold">Email:</span> <a href="mailto:info@kroxnest.com" className="text-[#1565c0] hover:underline">info@kroxnest.com</a>
+                        </span>
+                        <span className="mx-2">|</span>
+                        <span className="inline-block">
+                            <span className="font-semibold">Mobile:</span> <a href="tel:+911234567890" className="text-[#1565c0] hover:underline">+91 12345 67890</a>
+                        </span>
+                    </footer>
                 </div>
             )}
         </>
