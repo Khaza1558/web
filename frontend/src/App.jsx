@@ -488,7 +488,7 @@ const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPas
                         </a>
                     </p>
                 )}
-                <p className="mt-6 text-gray-700 text-base"> 
+                <p className="mt-4 text-gray-700 text-base text-center w-full">
                     Don't have an account?{' '}
                     <a href="#" onClick={onNavigateToRegister} className="text-blue-500 font-semibold hover:underline">
                         Register here
@@ -1726,22 +1726,24 @@ const PasswordInput = ({ id, value, onChange, placeholder, required = true }) =>
                 value={value}
                 onChange={onChange}
                 placeholder={placeholder}
-                className="p-3 pr-12 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition w-full"
+                className="p-3 pr-10 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition w-full"
                 required={required}
             />
             <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600 hover:text-gray-800 focus:outline-none"
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-800 focus:outline-none"
+                tabIndex={-1}
+                style={{ padding: 0 }}
             >
                 {showPassword ? (
-                    // Eye crossed (hidden password)
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                    // Eye Off (Heroicons outline, 20x20)
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
                     </svg>
                 ) : (
-                    // Eye open (visible password)
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                    // Eye (Heroicons outline, 20x20)
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
@@ -1875,6 +1877,11 @@ function App() {
                         <header className="mb-8 md:mb-0">
                             <img src="/tit.png" alt="kroxnest." className="h-20 sm:h-24 md:h-[100px] mb-[-10px] drop-shadow-lg filter invert" />
                             <p className="text-xl sm:text-2xl text-white italic pl-2" style={{ fontFamily: 'Inter, sans-serif' }}>portfolio of talent & exhibits</p>
+                            <div className="md:mt-auto pb-10 pl-2">
+                                <p className="text-lg text-white max-w-sm leading-relaxed">
+                                    Manage your projects effortlessly: access,edit and update them from any desktop,anytime.
+                                </p>
+                            </div>
                         </header>
                         {/* Advertisement below slogan, with gap */}
                         <div style={{ marginTop: 48, marginBottom: 24 }}>
