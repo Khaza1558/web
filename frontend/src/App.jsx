@@ -1014,7 +1014,7 @@ const ResetPasswordPage = ({ onNavigateToLogin, initialToken }) => {
 };
 
 
-const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects }) => {
+const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects, onProjectSuggest }) => {
     const { userDetails, removeToken, fetchUserDetails, isAuthLoading } = useContext(AuthContext); 
 
     // Project suggestions for users
@@ -1140,6 +1140,15 @@ const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects }) =>
                     className="bg-gray-300 text-gray-800 py-2 px-5 rounded-lg font-bold transition duration-300 hover:bg-gray-400 shadow-md hover:shadow-lg mt-6 w-full max-w-[150px] mx-auto focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-75"
                 >
                     Logout
+                </button>
+
+                {/* Project Suggest Button */}
+                <button
+                    onClick={onProjectSuggest}
+                    className="flex items-center gap-2 bg-yellow-100 text-yellow-800 font-bold py-3 px-6 rounded-xl shadow hover:bg-yellow-200 transition mb-8 mt-2 text-lg"
+                    style={{fontFamily: 'Montserrat, Poppins, Arial, sans-serif'}}
+                >
+                    <ThunderIcon /> Project Suggest
                 </button>
             </div>
         </div>
@@ -1959,51 +1968,53 @@ const SplashVideo = ({ onVideoEnd }) => {
     );
 };
 
-// Dynamic AdSpace component
-const AdSpace = ({ currentPage }) => {
-    let adContent = null;
-    if (currentPage === 'login') {
-        adContent = (
-            <>
-                <div className="bg-white border border-gray-300 rounded-xl shadow-lg flex flex-col justify-center items-center w-full h-80 p-6 text-center">
-                    <p className="text-xl font-normal text-black mb-2">Ad Space for Login Page</p>
-                    <p className="text-base text-gray-700 mb-4">Replace with your image and link</p>
-                    <a href="#" className="text-lg text-blue-700 underline font-medium">Click here for more info →</a>
-                </div>
-            </>
-        );
-    } else if (currentPage === 'register') {
-        adContent = (
-            <>
-                <div className="bg-white border border-gray-300 rounded-xl shadow-lg flex flex-col justify-center items-center w-full h-80 p-6 text-center">
-                    <p className="text-xl font-normal text-black mb-2">Ad Space for Register Page</p>
-                    <p className="text-base text-gray-700 mb-4">Show a different ad or info here</p>
-                    <a href="#" className="text-lg text-blue-700 underline font-medium">Register Ad Link →</a>
-                </div>
-            </>
-        );
-    } else if (currentPage === 'welcome') {
-        adContent = (
-            <>
-                <div className="bg-white border border-gray-300 rounded-xl shadow-lg flex flex-col justify-center items-center w-full h-80 p-6 text-center">
-                    <p className="text-xl font-normal text-black mb-2">Ad Space for Main Page</p>
-                    <p className="text-base text-gray-700 mb-4">Show a main page ad or info here</p>
-                    <a href="#" className="text-lg text-blue-700 underline font-medium">Main Page Ad Link →</a>
-                </div>
-            </>
-        );
-    } else {
-        adContent = (
-            <>
-                <div className="bg-white border border-gray-300 rounded-xl shadow-lg flex flex-col justify-center items-center w-full h-80 p-6 text-center">
-                    <p className="text-xl font-normal text-black mb-2">Ad Space</p>
-                    <p className="text-base text-gray-700 mb-4">Default ad or info</p>
-                </div>
-            </>
-        );
-    }
+// Thunder SVG Icon
+const ThunderIcon = () => (
+    <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="inline-block align-middle mr-2 text-yellow-500">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+    </svg>
+);
+
+// Project Suggest Modal with Ad Image
+const ProjectSuggestAdModal = ({ onClose, adImage }) => (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
+        <div className="relative bg-white rounded-2xl shadow-2xl p-0 overflow-hidden max-w-md w-full">
+            <button onClick={onClose} className="absolute top-2 right-2 text-gray-700 bg-white bg-opacity-80 rounded-full p-1 hover:bg-gray-200 z-10">
+                <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <img src={adImage} alt="Ad" className="w-full h-80 object-cover rounded-2xl" />
+        </div>
+    </div>
+);
+
+// Projects For You Page
+const ProjectsForYouPage = ({ onNavigateToWelcome }) => {
+    const projectTitles = [
+        "AI-Powered Attendance System",
+        "Smart Waste Management",
+        "E-Learning Platform",
+        "IoT Home Automation",
+        "Blockchain Voting App"
+    ];
     return (
-        <div className="w-full max-w-xs mb-8">{adContent}</div>
+        <div className="flex flex-col items-center justify-center min-h-[60vh] w-full">
+            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-[#1a237e]" style={{fontFamily: 'Montserrat, Poppins, Arial, sans-serif'}}>Projects For You</h2>
+            <div className="w-full max-w-lg flex flex-col gap-4 mb-10">
+                {projectTitles.map((title, idx) => (
+                    <div key={idx} className="bg-white border border-gray-300 rounded-xl shadow-md p-5 text-lg font-semibold text-gray-800 text-center" style={{fontFamily: 'Inter, Roboto, Arial, sans-serif'}}>
+                        {title}
+                    </div>
+                ))}
+            </div>
+            <button
+                onClick={onNavigateToWelcome}
+                className="bg-gray-200 text-[#1a237e] font-bold py-2 px-6 rounded-lg shadow hover:bg-gray-300 transition"
+            >
+                Go to Welcome
+            </button>
+        </div>
     );
 };
 
@@ -2067,7 +2078,25 @@ function App() {
         setCurrentPage(page);
     }, []);
 
+    const [showProjectSuggestAd, setShowProjectSuggestAd] = useState(false);
+    const [showProjectsForYou, setShowProjectsForYou] = useState(false);
+
+    const handleProjectSuggest = () => {
+        setShowProjectSuggestAd(true);
+    };
+    const handleCloseProjectSuggestAd = () => {
+        setShowProjectSuggestAd(false);
+        setShowProjectsForYou(true);
+    };
+    const handleGoToWelcome = () => {
+        setShowProjectsForYou(false);
+        setCurrentPage('welcome');
+    };
+
     const renderPage = () => {
+        if (showProjectsForYou) {
+            return <ProjectsForYouPage onNavigateToWelcome={handleGoToWelcome} />;
+        }
         switch (currentPage) {
             case 'login':
                 return <LoginPage onLoginSuccess={() => setCurrentPage('welcome')} onNavigateToRegister={() => navigate('register')} onNavigateToForgotPassword={() => navigate('forgotPassword')} />;
@@ -2078,7 +2107,7 @@ function App() {
             case 'resetPassword':
                 return <ResetPasswordPage onNavigateToLogin={() => navigate('login')} initialToken={resetTokenFromUrl} />;
             case 'welcome':
-                return <WelcomePage onNavigateToCreateProject={() => navigate('createProject')} onNavigateToViewProjects={() => navigate('viewProjects')} />;
+                return <WelcomePage onNavigateToCreateProject={() => navigate('createProject')} onNavigateToViewProjects={() => navigate('viewProjects')} onProjectSuggest={handleProjectSuggest} />;
             case 'createProject':
                 return <CreateProjectPage onNavigateToWelcome={() => navigate('welcome')} />; 
             case 'viewProjects':
@@ -2089,72 +2118,69 @@ function App() {
     };
 
     return (
-        // Conditional rendering: Show SplashVideo first, then the main app
         <>
             {showSplash ? (
                 <SplashVideo onVideoEnd={handleVideoEnd} />
             ) : (
-                <div className="min-h-screen flex flex-col bg-[#e1e1e1] text-[#181c20] font-sans" style={{fontFamily: 'Inter, Poppins, Montserrat, sans-serif'}}>
-                    {/* Top Section: Two Columns */}
-                    <div className="flex flex-col md:flex-row w-full max-w-6xl mx-auto pt-6 pb-2 px-2 md:px-0">
-                        {/* Left: Logo, Slogan, Ad */}
-                        <div className="flex flex-col items-start w-full md:w-1/2 pr-0 md:pr-8 mb-8 md:mb-0">
-                            <div className="flex flex-col items-start w-full">
-                                <img src="/tit.png" alt="KROXNEST." className="h-14 md:h-20 w-auto mb-1" style={{objectFit: 'contain'}} />
-                                <div className="text-xs md:text-sm text-black font-normal mb-4 pl-1 tracking-wide" style={{letterSpacing: '0.01em'}}>
-                                    knowledge repository of exhibits & networked educational student tasks
-                                </div>
+                <div className="min-h-screen w-full bg-[#e1e1e1] text-[#181c20] font-sans" style={{fontFamily: 'Inter, Roboto, Arial, sans-serif'}}>
+                    {/* Top Bar: Logo and Slogan */}
+                    <div className="flex flex-col md:flex-row items-start justify-between w-full px-8 pt-10 pb-4">
+                        <div className="flex flex-col items-start">
+                            <img src="/tit.png" alt="KROXNEST." className="h-24 md:h-32 w-auto mb-2" style={{objectFit: 'contain'}} />
+                            <div className="text-2xl md:text-4xl font-bold text-black mb-2" style={{fontFamily: 'Montserrat, Poppins, Arial, sans-serif', letterSpacing: '0.03em'}}>
+                                knowledge repository of exhibits & networked educational student tasks
                             </div>
-                            <AdSpace currentPage={currentPage} />
                         </div>
-                        {/* Right: Page Content Card */}
-                        <div className="flex flex-col items-center w-full md:w-1/2">
-                            <div className="w-full max-w-md">
+                        <div className="flex-1 flex justify-end items-start w-full md:w-auto mt-8 md:mt-0">
+                            <div className="w-full max-w-lg">
                                 {renderPage()}
                             </div>
                         </div>
                     </div>
 
-                    {/* What We Do, How It Works, Footer (full width) */}
-                    <div className="w-full max-w-6xl mx-auto px-2 md:px-0">
-                        {/* What We Do Section */}
-                        <div className="mb-8">
-                            <h2 className="text-xl md:text-2xl font-bold mb-6 mt-2" style={{fontFamily: 'Inter, Poppins, Montserrat, sans-serif'}}>What We Do</h2>
-                            <div className="flex flex-col md:flex-row gap-6 mb-4">
-                                {[1,2,3].map(i => (
-                                    <div key={i} className="flex-1 flex flex-col items-center">
-                                        <div className="w-32 h-32 bg-gray-200 rounded-xl flex items-center justify-center mb-2 shadow-md border border-gray-300">
-                                            <span className="text-gray-700 font-bold italic">image {i}</span>
-                                        </div>
-                                        <div className="text-center text-sm text-gray-800">
-                                            {i === 1 && 'Showcase your academic, technical, and creative projects in a professional, organized portfolio.'}
-                                            {i === 2 && 'Connect and collaborate with peers, educators, and industry professionals through your exhibits.'}
-                                            {i === 3 && 'Access a growing repository of student work and educational resources for inspiration and learning.'}
-                                        </div>
+                    {/* What We Do Section */}
+                    <div className="w-full max-w-7xl mx-auto px-8 py-12">
+                        <h2 className="text-3xl md:text-5xl font-extrabold mb-10 text-left text-[#1a237e]" style={{fontFamily: 'Montserrat, Poppins, Arial, sans-serif'}}>What We Do</h2>
+                        <div className="flex flex-col md:flex-row gap-12 mb-8">
+                            {[1,2,3].map(i => (
+                                <div key={i} className="flex-1 flex flex-col items-center">
+                                    <div className="w-60 h-60 bg-gray-200 rounded-3xl flex items-center justify-center mb-4 shadow-2xl border-2 border-gray-300 text-3xl font-bold text-gray-500" style={{fontFamily: 'Montserrat, Poppins, Arial, sans-serif'}}>
+                                        image {i}
                                     </div>
-                                ))}
-                            </div>
+                                    <div className="text-lg md:text-xl text-gray-800 text-center" style={{fontFamily: 'Inter, Roboto, Arial, sans-serif'}}>
+                                        {i === 1 && 'Showcase your academic, technical, and creative projects in a professional, organized portfolio.'}
+                                        {i === 2 && 'Connect and collaborate with peers, educators, and industry professionals through your exhibits.'}
+                                        {i === 3 && 'Access a growing repository of student work and educational resources for inspiration and learning.'}
+                                    </div>
+                                </div>
+                            ))}
                         </div>
-                        {/* How It Works Section */}
-                        <div className="mb-8">
-                            <h2 className="text-lg md:text-xl font-bold mb-4 mt-2" style={{fontFamily: 'Inter, Poppins, Montserrat, sans-serif'}}>How It Works</h2>
-                            <div className="flex flex-col md:flex-row gap-6">
-                                {[1,2,3].map(i => (
-                                    <div key={i} className="flex-1 bg-white border border-gray-300 rounded-xl shadow-md p-3 text-xs md:text-sm">
-                                        <div className="font-bold mb-1">{i}</div>
-                                        <div>
-                                            {i === 1 && (<><span className="font-semibold">Sign Up</span><br/>Create your account and set up your profile in minutes.</>)}
-                                            {i === 2 && (<><span className="font-semibold">Upload & Organize</span><br/>Add your projects, files, and exhibits. Organize them by category or subject.</>)}
-                                            {i === 3 && (<><span className="font-semibold">Share & Connect</span><br/>Share your portfolio, connect with others, and get inspired by the community.</>)}
-                                        </div>
+                    </div>
+
+                    {/* How It Works Section */}
+                    <div className="w-full max-w-7xl mx-auto px-8 py-12">
+                        <h2 className="text-2xl md:text-4xl font-bold mb-8 text-left text-[#1565c0]" style={{fontFamily: 'Montserrat, Poppins, Arial, sans-serif'}}>How It Works</h2>
+                        <div className="flex flex-col md:flex-row gap-12">
+                            {[1,2,3].map(i => (
+                                <div key={i} className="flex-1 bg-white border-2 border-blue-200 rounded-3xl shadow-2xl p-8 md:p-10 flex flex-col items-center min-h-[220px] md:min-h-[260px]" style={{fontFamily: 'Inter, Roboto, Arial, sans-serif'}}>
+                                    <div className="text-4xl font-extrabold text-[#1565c0] mb-4" style={{fontFamily: 'Montserrat, Poppins, Arial, sans-serif'}}>{i}</div>
+                                    <div className="text-xl font-bold mb-2" style={{fontFamily: 'Montserrat, Poppins, Arial, sans-serif'}}>
+                                        {i === 1 && 'Sign Up'}
+                                        {i === 2 && 'Upload & Organize'}
+                                        {i === 3 && 'Share & Connect'}
                                     </div>
-                                ))}
-                            </div>
+                                    <div className="text-lg text-gray-700 text-center">
+                                        {i === 1 && 'Create your account and set up your profile in minutes.'}
+                                        {i === 2 && 'Add your projects, files, and exhibits. Organize them by category or subject.'}
+                                        {i === 3 && 'Share your portfolio, connect with others, and get inspired by the community.'}
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                     </div>
 
                     {/* Footer */}
-                    <footer className="w-full text-center py-4 text-gray-700 text-xs md:text-base bg-white bg-opacity-80 shadow-inner border-t border-gray-200">
+                    <footer className="w-full text-center py-6 text-gray-700 text-base mt-8" style={{fontFamily: 'Inter, Roboto, Arial, sans-serif'}}>
                         © 2025 KROXNEST &nbsp;|&nbsp; 
                         <a href="#" className="text-[#1565c0] hover:underline font-semibold">Contact</a>
                         <span className="mx-2">|</span>
@@ -2168,6 +2194,10 @@ function App() {
                         <span className="mx-2">|</span>
                         <span className="inline-block font-bold text-[#1a237e]">by KHAZA</span>
                     </footer>
+
+                    {showProjectSuggestAd && (
+                        <ProjectSuggestAdModal onClose={handleCloseProjectSuggestAd} adImage="/ad-project-suggest.jpg" />
+                    )}
                 </div>
             )}
         </>
