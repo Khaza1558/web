@@ -1968,7 +1968,12 @@ function App() {
                     <div className="w-full md:w-1/2 p-8 flex flex-col justify-start items-start relative">
                         <header className="mb-8 md:mb-0">
                             <img src="/tit.png" alt="kroxnest." className="h-20 sm:h-24 md:h-[100px] mb-[-10px] drop-shadow-lg filter invert" />
-                            <p className="text-xl sm:text-2xl text-white italic pl-2" style={{ fontFamily: 'Inter, sans-serif' }}>Knowledge Repository Of eXhibits & Networked Educational Student Tracks</p>
+                            <p className="text-xl sm:text-2xl text-white italic pl-2" style={{ fontFamily: 'Inter, sans-serif' }}>portfolio of talent & exhibits</p>
+                            <div className="md:mt-auto pb-10 pl-2">
+                                <p className="text-lg text-white max-w-sm leading-relaxed">
+                                    Manage your projects effortlessly: access,edit and update them from any desktop,anytime.
+                                </p>
+                            </div>
                         </header>
                         {/* Advertisement below slogan, with gap */}
                         <div style={{ marginTop: 48, marginBottom: 24 }}>
@@ -2028,11 +2033,11 @@ function App() {
                         {/* Modern Footer with contact info - two lines, centered */}
                         <footer className="w-full flex flex-col items-center justify-center py-6 px-2 mt-12 bg-black bg-opacity-60 rounded-2xl gap-1 shadow-lg text-center">
                             <div>
-                                <span className="text-gray-300 text-sm mr-6">Contact: <a href="mailto:info@kroxnext.com" className="underline hover:text-blue-400">info@plote.com</a></span>
+                                <span className="text-gray-300 text-sm mr-6">Contact: <a href="mailto:info@plote.com" className="underline hover:text-blue-400">info@plote.com</a></span>
                                 <span className="text-gray-300 text-sm">Phone: <a href="tel:+1234567890" className="underline hover:text-blue-400">+1 234 567 890</a></span>
                             </div>
                             <div>
-                                <span className="block text-gray-300 text-base font-semibold">© 2025 Kroxnest</span>
+                                <span className="block text-gray-300 text-base font-semibold">© 2025 plote from KHAZA</span>
                                 <span className="block text-gray-400 text-sm">All rights reserved.</span>
                             </div>
                         </footer>
