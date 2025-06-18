@@ -1900,7 +1900,7 @@ function App() {
     const adConfig = {
         login: {
             href: 'https://ad-link-login.com',
-            src: 'what1.jpg/600x600',
+            src: 'https://img.freepik.com/free-photo/people-working-as-team-company_23-2149136895.jpg?ga=GA1.1.888221993.1750255895&semt=ais_hybrid&w=740/600x600',
             alt: 'Login Advertisement',
         },
         welcome: {
