@@ -1963,81 +1963,78 @@ function App() {
 
     return (
         <>
-            {showSplash ? (
-                <SplashVideo onVideoEnd={handleVideoEnd} />
-            ) : (
-                <div className="min-h-screen flex flex-col md:flex-row bg-black font-sans">
-                    {/* Left section for Logo, Slogan, Advertisement */}
-                    <div className="w-full md:w-1/2 p-8 flex flex-col relative min-h-screen">
-                        <header>
-                            <img src="/tit.png" alt="kroxnest." className="h-20 sm:h-24 md:h-[100px] mb-[-10px] drop-shadow-lg filter invert" />
-                            <p className="text-xl sm:text-2xl text-white italic pl-2" style={{ fontFamily: 'Inter, sans-serif' }}>portfolio of talent & exhibits</p>
-                            <div className="pb-10 pl-2">
-                                <p className="text-lg text-white max-w-sm leading-relaxed">
-                                    Manage your projects effortlessly: access,edit and update them from any desktop,anytime.
-                                </p>
+            <div className="bg-black min-h-screen w-full">
+                {showSplash ? (
+                    <SplashVideo onVideoEnd={handleVideoEnd} />
+                ) : (
+                    <div className="min-h-screen flex flex-col md:flex-row bg-black font-sans">
+                        {/* Left section for Logo, Slogan, Advertisement */}
+                        <div className="w-full md:w-1/2 p-8 flex flex-col relative min-h-screen">
+                            <header>
+                                <img src="/tit.png" alt="kroxnest." className="h-20 sm:h-24 md:h-[100px] mb-[-10px] drop-shadow-lg filter invert" />
+                                <p className="text-xl sm:text-2xl text-white italic pl-2" style={{ fontFamily: 'Inter, sans-serif' }}>portfolio of talent & exhibits</p>
+                            </header>
+                            {/* Advertisement section with white background */}
+                            <div className="mt-8 w-full flex justify-center">
+                                <div className="bg-white rounded-2xl shadow-lg p-4 flex items-center justify-center" style={{ width: 600, height: 600 }}>
+                                    <a href={currentAd.href} target="_blank" rel="noopener noreferrer" className="block w-full h-full">
+                                        <img
+                                            src={currentAd.src}
+                                            alt={currentAd.alt}
+                                            className="w-full h-full object-cover rounded-xl"
+                                        />
+                                    </a>
+                                </div>
                             </div>
-                        </header>
-                        {/* Advertisement section with white background */}
-                        <div className="mt-8 w-full flex justify-center">
-                            <div className="bg-white rounded-2xl shadow-lg p-4 flex items-center justify-center" style={{ width: 600, height: 600 }}>
-                                <a href={currentAd.href} target="_blank" rel="noopener noreferrer" className="block w-full h-full">
-                                    <img
-                                        src={currentAd.src}
-                                        alt={currentAd.alt}
-                                        className="w-full h-full object-cover rounded-xl"
-                                    />
-                                </a>
-                            </div>
+                        </div>
+
+                        {/* Right section for content (login, register, etc.) - top aligned with 30px padding */}
+                        <div className="w-full md:w-1/2 flex justify-center items-start pt-[30px]"> {/* pt-[30px] for top padding */}
+                            {renderPage()}
                         </div>
                     </div>
+                )}
 
-                    {/* Right section for content (login, register, etc.) - top aligned with 30px padding */}
-                    <div className="w-full md:w-1/2 flex justify-center items-start pt-[30px]"> {/* pt-[30px] for top padding */}
-                        {renderPage()}
+                {/* What we do section with wide container and centered grid, now spanning both columns */}
+                <div className="w-full mt-16 bg-black py-0 px-0">
+                    <h2 className="text-2xl font-bold text-white mb-8 text-left pl-8">What we do</h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 w-full px-8">
+                        {whatWeDoImages.map((item, idx) => (
+                            <div key={idx} className="flex flex-col items-center bg-black rounded-2xl shadow-lg p-6 h-[340px]">
+                                <div className="bg-white border-2 border-white rounded-xl mb-4 flex items-center justify-center" style={{ width: '180px', height: '180px' }}>
+                                    <img src={item.src} alt={item.alt} className="w-full h-full object-cover rounded-xl" />
+                                </div>
+                                <p className="text-white text-center mt-2">{item.desc}</p>
+                            </div>
+                        ))}
                     </div>
                 </div>
-            )}
+                {/* How to use section with wide container and centered grid, now spanning both columns */}
+                <div className="w-full mt-16 bg-black py-0 px-0">
+                    <h2 className="text-2xl font-bold text-white mb-8 text-left pl-8">How to use</h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 w-full px-8">
+                        {howToUseSteps.map((step, idx) => (
+                            <div key={idx} className="flex flex-col items-center bg-black rounded-2xl shadow-lg p-6 h-[380px]">
+                                <div className="border-2 border-white rounded-xl mb-4 flex flex-col items-center justify-center p-2" style={{ width: '200px', height: '260px' }}>
+                                    <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white text-2xl font-bold mt-8">{step.step}</div>
+                                    <h3 className="text-lg font-bold text-white mt-6 mb-2">{step.title}</h3>
+                                    <p className="text-white text-base text-center px-2">{step.desc}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
 
-            {/* What we do section with wide container and centered grid, now spanning both columns */}
-            <div className="w-full mt-16 bg-black py-0 px-0">
-                <h2 className="text-2xl font-bold text-white mb-8 text-left pl-8">What we do</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 w-full px-8">
-                    {whatWeDoImages.map((item, idx) => (
-                        <div key={idx} className="flex flex-col items-center bg-black rounded-2xl shadow-lg p-6 h-[340px]">
-                            <div className="bg-white border-2 border-white rounded-xl mb-4 flex items-center justify-center" style={{ width: '180px', height: '180px' }}>
-                                <img src={item.src} alt={item.alt} className="w-full h-full object-cover rounded-xl" />
-                            </div>
-                            <p className="text-white text-center mt-2">{item.desc}</p>
-                        </div>
-                    ))}
-                </div>
+                {/* Footer centered at the bottom of the entire page, not fixed */}
+                <footer className="w-full flex flex-col items-center justify-center py-6 px-2 bg-black bg-opacity-80 gap-1 text-center mt-16">
+                    <div>
+                        <span className="text-gray-300 text-sm mr-6">Contact: <a href="tel:+1234567890" className="underline hover:text-blue-400">+1 234 567 890</a> | <a href="mailto:dummy@email.com" className="underline hover:text-blue-400">info@kroxnest.com</a></span>
+                    </div>
+                    <div>
+                        <span className="block text-gray-300 text-base font-semibold">© 2025 Kroxnest. All rights reserved.</span>
+                    </div>
+                </footer>
             </div>
-            {/* How to use section with wide container and centered grid, now spanning both columns */}
-            <div className="w-full mt-16 bg-black py-0 px-0">
-                <h2 className="text-2xl font-bold text-white mb-8 text-left pl-8">How to use</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 w-full px-8">
-                    {howToUseSteps.map((step, idx) => (
-                        <div key={idx} className="flex flex-col items-center bg-black rounded-2xl shadow-lg p-6 h-[340px]">
-                            <div className="border-2 border-white rounded-xl mb-4 flex flex-col items-center justify-center" style={{ width: '180px', height: '180px' }}>
-                                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white text-2xl font-bold mt-8">{step.step}</div>
-                                <h3 className="text-lg font-bold text-white mt-6 mb-2">{step.title}</h3>
-                                <p className="text-white text-base text-center px-2">{step.desc}</p>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-            {/* Footer centered at the bottom of the entire page, not fixed */}
-            <footer className="w-full flex flex-col items-center justify-center py-6 px-2 bg-black bg-opacity-80 gap-1 text-center mt-16">
-                <div>
-                    <span className="text-gray-300 text-sm mr-6">Contact: <a href="tel:+1234567890" className="underline hover:text-blue-400">+1 234 567 890</a> | <a href="mailto:dummy@email.com" className="underline hover:text-blue-400">dummy@email.com</a></span>
-                </div>
-                <div>
-                    <span className="block text-gray-300 text-base font-semibold">© 
-                        2024 Kroxnest. All rights reserved.</span>
-                </div>
-            </footer>
         </>
     );
 }
