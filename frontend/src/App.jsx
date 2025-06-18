@@ -1947,7 +1947,7 @@ const SplashVideo = ({ onVideoEnd }) => {
         <div className="fixed inset-0 z-50 bg-black flex items-center justify-center overflow-hidden">
             <video
                 ref={videoRef}
-                src="/main-v.mp4" // IMPORTANT: Replace this with your actual video URL!
+                src="/video.mp4" // IMPORTANT: Replace this with your actual video URL!
                 autoPlay
                 muted
                 playsInline // Crucial for mobile autoplay
@@ -2050,7 +2050,7 @@ function App() {
                 <div className="min-h-screen flex flex-col items-center justify-start bg-gradient-to-br from-[#e1e1e1] to-[#f5f7fa] text-[#181c20] font-sans" style={{fontFamily: 'Inter, Poppins, Montserrat, sans-serif'}}>
                     {/* Hero Section with Title Image */}
                     <div className="w-full flex flex-col items-center pt-12 pb-6">
-                        <img src="/title-removebg-preview.png" alt="KROXNEST." className="w-full max-w-4xl h-auto object-contain mb-3 drop-shadow-2xl" style={{minHeight: '140px'}} />
+                        <img src="/title.jpg" alt="KROXNEST." className="w-full max-w-6xl h-auto object-contain mb-3 drop-shadow-2xl" style={{minHeight: '200px', maxHeight: '320px'}} />
                         <div className="text-xl md:text-3xl font-bold text-center mb-2 tracking-wide" style={{letterSpacing: '0.04em'}}>
                             knowledge repository of exhibits & networked educational student tasks
                         </div>
@@ -2146,6 +2146,8 @@ function App() {
                         <span className="inline-block">
                             <span className="font-semibold">Mobile:</span> <a href="tel:+911234567890" className="text-[#1565c0] hover:underline">+91 12345 67890</a>
                         </span>
+                        <span className="mx-2">|</span>
+                        <span className="inline-block font-bold text-[#1a237e]">by KHAZA</span>
                     </footer>
                 </div>
             )}
