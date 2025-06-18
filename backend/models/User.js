@@ -27,13 +27,6 @@ const User = sequelize.define('User', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    mobile_number: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            is: /^[0-9]{10}$/ // Validates 10-digit phone numbers
-        }
-    },
     college: {
         type: DataTypes.STRING,
         allowNull: false
@@ -74,6 +67,7 @@ const User = sequelize.define('User', {
 User.prototype.matchPassword = async function(enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password);
 };
+
 
 module.exports = User;
 
