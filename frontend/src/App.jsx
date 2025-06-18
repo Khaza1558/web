@@ -1900,7 +1900,7 @@ function App() {
     const adConfig = {
         login: {
             href: 'https://ad-link-login.com',
-            src: 'what2.jpg',
+            src: 'S.jpg',
             alt: 'Login Advertisement',
         },
         welcome: {
