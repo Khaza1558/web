@@ -1900,7 +1900,7 @@ function App() {
     const adConfig = {
         login: {
             href: 'https://ad-link-login.com',
-            src: 'https://via.placeholder.com/600x600',
+            src: 'what1.jpg/600x600',
             alt: 'Login Advertisement',
         },
         welcome: {
@@ -1926,17 +1926,17 @@ function App() {
     // What we do section images and text
     const whatWeDoImages = [
         {
-            src: '/ads/what1.jpg',
+            src: 'what1.jpg',
             alt: 'Showcase Projects',
             desc: 'Showcase your best projects and get discovered by recruiters and peers.',
         },
         {
-            src: '/ads/what2.jpg',
+            src: 'what2.jpg',
             alt: 'Collaborate',
             desc: 'Collaborate with others, share files, and work as a team on innovative ideas.',
         },
         {
-            src: '/ads/what3.jpg',
+            src: 'what3.jpg',
             alt: 'Track Progress',
             desc: 'Track your project progress and keep your portfolio up to date easily.',
         },
@@ -1957,7 +1957,7 @@ function App() {
         {
             step: 3,
             title: 'Share & Track',
-            desc: 'Share your portfolio link, get feedback, and track your project progress anytime, anywhere.'
+            desc: 'Share your portfolio rollnumber, get feedback, and track your project progress anytime, anywhere.'
         }
     ];
 
