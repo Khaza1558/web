@@ -2005,7 +2005,9 @@ function App() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 w-full px-8">
                     {whatWeDoImages.map((item, idx) => (
                         <div key={idx} className="flex flex-col items-center bg-black rounded-2xl shadow-lg p-6 h-[340px]">
-                            <img src={item.src} alt={item.alt} className="w-[180px] h-[180px] object-cover rounded-xl mb-4" />
+                            <div className="bg-white border-2 border-white rounded-xl mb-4 flex items-center justify-center" style={{ width: '180px', height: '180px' }}>
+                                <img src={item.src} alt={item.alt} className="w-full h-full object-cover rounded-xl" />
+                            </div>
                             <p className="text-white text-center mt-2">{item.desc}</p>
                         </div>
                     ))}
@@ -2017,7 +2019,11 @@ function App() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 w-full px-8">
                     {howToUseSteps.map((step, idx) => (
                         <div key={idx} className="flex flex-col items-center bg-black rounded-2xl shadow-lg p-6 h-[340px]">
-                            <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white text-2xl font-bold mb-4">{step.step}</div>
+                            <div className="bg-white border-2 border-white rounded-xl mb-4 flex items-center justify-center" style={{ width: '180px', height: '180px' }}>
+                                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white text-2xl font-bold">
+                                    {step.step}
+                                </div>
+                            </div>
                             <h3 className="text-lg font-bold text-white mb-2">{step.title}</h3>
                             <p className="text-white text-base text-center">{step.desc}</p>
                         </div>
