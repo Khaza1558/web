@@ -1947,7 +1947,7 @@ const SplashVideo = ({ onVideoEnd }) => {
         <div className="fixed inset-0 z-50 bg-black flex items-center justify-center overflow-hidden">
             <video
                 ref={videoRef}
-                src="/video.mp4" // IMPORTANT: Replace this with your actual video URL!
+                src="/main-v.mp4" // IMPORTANT: Replace this with your actual video URL!
                 autoPlay
                 muted
                 playsInline // Crucial for mobile autoplay
@@ -1959,6 +1959,53 @@ const SplashVideo = ({ onVideoEnd }) => {
     );
 };
 
+// Dynamic AdSpace component
+const AdSpace = ({ currentPage }) => {
+    let adContent = null;
+    if (currentPage === 'login') {
+        adContent = (
+            <>
+                <div className="bg-white border border-gray-300 rounded-xl shadow-lg flex flex-col justify-center items-center w-full h-80 p-6 text-center">
+                    <p className="text-xl font-normal text-black mb-2">Ad Space for Login Page</p>
+                    <p className="text-base text-gray-700 mb-4">Replace with your image and link</p>
+                    <a href="#" className="text-lg text-blue-700 underline font-medium">Click here for more info →</a>
+                </div>
+            </>
+        );
+    } else if (currentPage === 'register') {
+        adContent = (
+            <>
+                <div className="bg-white border border-gray-300 rounded-xl shadow-lg flex flex-col justify-center items-center w-full h-80 p-6 text-center">
+                    <p className="text-xl font-normal text-black mb-2">Ad Space for Register Page</p>
+                    <p className="text-base text-gray-700 mb-4">Show a different ad or info here</p>
+                    <a href="#" className="text-lg text-blue-700 underline font-medium">Register Ad Link →</a>
+                </div>
+            </>
+        );
+    } else if (currentPage === 'welcome') {
+        adContent = (
+            <>
+                <div className="bg-white border border-gray-300 rounded-xl shadow-lg flex flex-col justify-center items-center w-full h-80 p-6 text-center">
+                    <p className="text-xl font-normal text-black mb-2">Ad Space for Main Page</p>
+                    <p className="text-base text-gray-700 mb-4">Show a main page ad or info here</p>
+                    <a href="#" className="text-lg text-blue-700 underline font-medium">Main Page Ad Link →</a>
+                </div>
+            </>
+        );
+    } else {
+        adContent = (
+            <>
+                <div className="bg-white border border-gray-300 rounded-xl shadow-lg flex flex-col justify-center items-center w-full h-80 p-6 text-center">
+                    <p className="text-xl font-normal text-black mb-2">Ad Space</p>
+                    <p className="text-base text-gray-700 mb-4">Default ad or info</p>
+                </div>
+            </>
+        );
+    }
+    return (
+        <div className="w-full max-w-xs mb-8">{adContent}</div>
+    );
+};
 
 // Main App component
 function App() { 
@@ -2047,95 +2094,67 @@ function App() {
             {showSplash ? (
                 <SplashVideo onVideoEnd={handleVideoEnd} />
             ) : (
-                <div className="min-h-screen flex flex-col items-center justify-start bg-gradient-to-br from-[#e1e1e1] to-[#f5f7fa] text-[#181c20] font-sans" style={{fontFamily: 'Inter, Poppins, Montserrat, sans-serif'}}>
-                    {/* Hero Section with Title Image */}
-                    <div className="w-full flex flex-col items-center pt-12 pb-6">
-                        <img src="/title.jpg" alt="KROXNEST." className="w-full max-w-6xl h-auto object-contain mb-3 drop-shadow-2xl" style={{minHeight: '200px', maxHeight: '320px'}} />
-                        <div className="text-xl md:text-3xl font-bold text-center mb-2 tracking-wide" style={{letterSpacing: '0.04em'}}>
-                            knowledge repository of exhibits & networked educational student tasks
-                        </div>
-                    </div>
-
-                    {/* Ad Display (if any) */}
-                    <div className="w-full max-w-2xl mb-10 px-4">
-                        {/* This will be replaced by the ad image holder from the page components */}
-                    </div>
-
-                    {/* What We Do Section */}
-                    <div className="w-full max-w-5xl flex flex-col items-center mb-14 px-4">
-                        <h2 className="text-4xl md:text-5xl font-extrabold mb-8 text-center text-[#1a237e] drop-shadow-lg" style={{letterSpacing: '0.03em'}}>What We Do</h2>
-                        {/* 3 Images Row */}
-                        <div className="flex flex-col md:flex-row gap-10 justify-center items-center w-full mb-6">
-                            {[1,2,3].map(i => (
-                                <div key={i} className="flex-1 flex flex-col items-center">
-                                    <div className="w-40 h-40 bg-gray-200 rounded-2xl flex items-center justify-center mb-3 shadow-xl border border-gray-300">
-                                        <span className="text-gray-400 text-2xl">Image {i}</span>
-                                    </div>
+                <div className="min-h-screen flex flex-col bg-[#e1e1e1] text-[#181c20] font-sans" style={{fontFamily: 'Inter, Poppins, Montserrat, sans-serif'}}>
+                    {/* Top Section: Two Columns */}
+                    <div className="flex flex-col md:flex-row w-full max-w-6xl mx-auto pt-6 pb-2 px-2 md:px-0">
+                        {/* Left: Logo, Slogan, Ad */}
+                        <div className="flex flex-col items-start w-full md:w-1/2 pr-0 md:pr-8 mb-8 md:mb-0">
+                            <div className="flex flex-col items-start w-full">
+                                <img src="/title.jpg" alt="KROXNEST." className="h-14 md:h-20 w-auto mb-1" style={{objectFit: 'contain'}} />
+                                <div className="text-xs md:text-sm text-black font-normal mb-4 pl-1 tracking-wide" style={{letterSpacing: '0.01em'}}>
+                                    knowledge repository of exhibits & networked educational student tasks
                                 </div>
-                            ))}
+                            </div>
+                            <AdSpace currentPage={currentPage} />
                         </div>
-                        {/* 3 Paragraphs Row */}
-                        <div className="flex flex-col md:flex-row gap-10 w-full">
-                            <div className="flex-1 text-center bg-white bg-opacity-90 rounded-2xl p-6 shadow-lg border border-gray-200">
-                                <p className="text-lg md:text-xl font-medium">Showcase your academic, technical, and creative projects in a professional, organized portfolio.</p>
-                            </div>
-                            <div className="flex-1 text-center bg-white bg-opacity-90 rounded-2xl p-6 shadow-lg border border-gray-200">
-                                <p className="text-lg md:text-xl font-medium">Connect and collaborate with peers, educators, and industry professionals through your exhibits.</p>
-                            </div>
-                            <div className="flex-1 text-center bg-white bg-opacity-90 rounded-2xl p-6 shadow-lg border border-gray-200">
-                                <p className="text-lg md:text-xl font-medium">Access a growing repository of student work and educational resources for inspiration and learning.</p>
+                        {/* Right: Page Content Card */}
+                        <div className="flex flex-col items-center w-full md:w-1/2">
+                            <div className="w-full max-w-md">
+                                {renderPage()}
                             </div>
                         </div>
                     </div>
 
-                    {/* How It Works Section */}
-                    <div className="w-full max-w-5xl flex flex-col items-center mb-14 px-4">
-                        <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center text-[#1565c0] drop-shadow">How It Works</h2>
-                        <div className="flex flex-col md:flex-row gap-8 w-full justify-center">
-                            <div className="flex-1 bg-white bg-opacity-95 rounded-2xl p-6 shadow-xl border border-blue-100 flex flex-col items-center">
-                                <div className="w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center mb-3 text-2xl font-bold text-[#1565c0]">1</div>
-                                <div className="font-semibold text-lg mb-2">Sign Up</div>
-                                <div className="text-gray-700">Create your account and set up your profile in minutes.</div>
+                    {/* What We Do, How It Works, Footer (full width) */}
+                    <div className="w-full max-w-6xl mx-auto px-2 md:px-0">
+                        {/* What We Do Section */}
+                        <div className="mb-8">
+                            <h2 className="text-xl md:text-2xl font-bold mb-6 mt-2" style={{fontFamily: 'Inter, Poppins, Montserrat, sans-serif'}}>What We Do</h2>
+                            <div className="flex flex-col md:flex-row gap-6 mb-4">
+                                {[1,2,3].map(i => (
+                                    <div key={i} className="flex-1 flex flex-col items-center">
+                                        <div className="w-32 h-32 bg-gray-200 rounded-xl flex items-center justify-center mb-2 shadow-md border border-gray-300">
+                                            <span className="text-gray-700 font-bold italic">image {i}</span>
+                                        </div>
+                                        <div className="text-center text-sm text-gray-800">
+                                            {i === 1 && 'Showcase your academic, technical, and creative projects in a professional, organized portfolio.'}
+                                            {i === 2 && 'Connect and collaborate with peers, educators, and industry professionals through your exhibits.'}
+                                            {i === 3 && 'Access a growing repository of student work and educational resources for inspiration and learning.'}
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
-                            <div className="flex-1 bg-white bg-opacity-95 rounded-2xl p-6 shadow-xl border border-blue-100 flex flex-col items-center">
-                                <div className="w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center mb-3 text-2xl font-bold text-[#1565c0]">2</div>
-                                <div className="font-semibold text-lg mb-2">Upload & Organize</div>
-                                <div className="text-gray-700">Add your projects, files, and exhibits. Organize them by category or subject.</div>
-                            </div>
-                            <div className="flex-1 bg-white bg-opacity-95 rounded-2xl p-6 shadow-xl border border-blue-100 flex flex-col items-center">
-                                <div className="w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center mb-3 text-2xl font-bold text-[#1565c0]">3</div>
-                                <div className="font-semibold text-lg mb-2">Share & Connect</div>
-                                <div className="text-gray-700">Share your portfolio, connect with others, and get inspired by the community.</div>
+                        </div>
+                        {/* How It Works Section */}
+                        <div className="mb-8">
+                            <h2 className="text-lg md:text-xl font-bold mb-4 mt-2" style={{fontFamily: 'Inter, Poppins, Montserrat, sans-serif'}}>How It Works</h2>
+                            <div className="flex flex-col md:flex-row gap-6">
+                                {[1,2,3].map(i => (
+                                    <div key={i} className="flex-1 bg-white border border-gray-300 rounded-xl shadow-md p-3 text-xs md:text-sm">
+                                        <div className="font-bold mb-1">{i}</div>
+                                        <div>
+                                            {i === 1 && (<><span className="font-semibold">Sign Up</span><br/>Create your account and set up your profile in minutes.</>)}
+                                            {i === 2 && (<><span className="font-semibold">Upload & Organize</span><br/>Add your projects, files, and exhibits. Organize them by category or subject.</>)}
+                                            {i === 3 && (<><span className="font-semibold">Share & Connect</span><br/>Share your portfolio, connect with others, and get inspired by the community.</>)}
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>
-
-                    {/* Testimonials Section */}
-                    <div className="w-full max-w-5xl flex flex-col items-center mb-14 px-4">
-                        <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center text-[#00897b] drop-shadow">Testimonials</h2>
-                        <div className="flex flex-col md:flex-row gap-8 w-full justify-center">
-                            <div className="flex-1 bg-white bg-opacity-95 rounded-2xl p-6 shadow-xl border border-gray-200 flex flex-col items-center">
-                                <div className="italic text-lg text-gray-700 mb-2">"A fantastic platform to showcase my work and connect with other students!"</div>
-                                <div className="font-semibold text-[#00897b]">— Student User</div>
-                            </div>
-                            <div className="flex-1 bg-white bg-opacity-95 rounded-2xl p-6 shadow-xl border border-gray-200 flex flex-col items-center">
-                                <div className="italic text-lg text-gray-700 mb-2">"The best way to organize and present my academic projects."</div>
-                                <div className="font-semibold text-[#00897b]">— College Student</div>
-                            </div>
-                            <div className="flex-1 bg-white bg-opacity-95 rounded-2xl p-6 shadow-xl border border-gray-200 flex flex-col items-center">
-                                <div className="italic text-lg text-gray-700 mb-2">"Easy to use and visually appealing. Highly recommended!"</div>
-                                <div className="font-semibold text-[#00897b]">— Educator</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Main App Content */}
-                    <main className="flex-grow flex items-center justify-center w-full">
-                        {renderPage()}
-                    </main>
 
                     {/* Footer */}
-                    <footer className="w-full text-center py-6 text-gray-700 text-base mt-8 bg-white bg-opacity-80 shadow-inner border-t border-gray-200">
+                    <footer className="w-full text-center py-4 text-gray-700 text-xs md:text-base bg-white bg-opacity-80 shadow-inner border-t border-gray-200">
                         © 2025 KROXNEST &nbsp;|&nbsp; 
                         <a href="#" className="text-[#1565c0] hover:underline font-semibold">Contact</a>
                         <span className="mx-2">|</span>
