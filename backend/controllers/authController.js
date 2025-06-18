@@ -16,11 +16,17 @@ const generateToken = (id) => {
 // @access  Public
 exports.registerUser = async (req, res) => {
     try {
-        const { username, email, password, college, branch, rollNumber } = req.body;
+        const { username, email, password, college, branch, rollNumber, mobileNumber } = req.body;
 
         // Simple validation
-        if (!username || !email || !password || !college || !branch || !rollNumber) {
+        if (!username || !email || !password || !college || !branch || !rollNumber || !mobileNumber) {
             return res.status(400).json({ success: false, message: 'Please enter all fields.' });
+        }
+
+        // Validate mobile number format
+        const mobileNumberRegex = /^[0-9]{10}$/;
+        if (!mobileNumberRegex.test(mobileNumber)) {
+            return res.status(400).json({ success: false, message: 'Please enter a valid 10-digit mobile number.' });
         }
 
         // Check if user already exists
@@ -36,6 +42,10 @@ exports.registerUser = async (req, res) => {
         if (rollNumberExists) {
             return res.status(400).json({ success: false, message: 'Roll number already exists.' });
         }
+        const mobileExists = await User.findOne({ where: { mobile_number: mobileNumber } });
+        if (mobileExists) {
+            return res.status(400).json({ success: false, message: 'Mobile number already exists.' });
+        }
 
         // Password hashing is handled by a Sequelize hook in the User model (beforeCreate)
 
@@ -45,7 +55,8 @@ exports.registerUser = async (req, res) => {
             password, // Password will be hashed by the hook
             college,
             branch,
-            roll_number: rollNumber
+            roll_number: rollNumber,
+            mobile_number: mobileNumber
         });
 
         if (newUser) {
@@ -59,7 +70,8 @@ exports.registerUser = async (req, res) => {
                     email: newUser.email,
                     roll_number: newUser.roll_number,
                     college: newUser.college,
-                    branch: newUser.branch
+                    branch: newUser.branch,
+                    mobile_number: newUser.mobile_number
                 }
             });
         } else {
