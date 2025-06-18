@@ -1979,22 +1979,22 @@ function App() {
                                 </p>
                             </div>
                         </header>
-
-                        {/* Advertisement section with proper spacing */}
+                        {/* Advertisement section with white background */}
                         <div className="mt-8 w-full flex justify-center">
-                            <a href={currentAd.href} target="_blank" rel="noopener noreferrer" className="block">
-                                <img
-                                    src={currentAd.src}
-                                    alt={currentAd.alt}
-                                    className="w-[600px] h-[600px] object-cover rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300"
-                                />
-                            </a>
+                            <div className="bg-white rounded-2xl shadow-lg p-4 flex items-center justify-center" style={{ width: 600, height: 600 }}>
+                                <a href={currentAd.href} target="_blank" rel="noopener noreferrer" className="block w-full h-full">
+                                    <img
+                                        src={currentAd.src}
+                                        alt={currentAd.alt}
+                                        className="w-full h-full object-cover rounded-xl"
+                                    />
+                                </a>
+                            </div>
                         </div>
-
-                        {/* What we do section with grid for even spacing */}
-                        <div className="w-full mt-16">
+                        {/* What we do section with wide container and centered grid */}
+                        <div className="w-full max-w-6xl mx-auto mt-16">
                             <h2 className="text-2xl font-bold text-white mb-8 text-left">What we do</h2>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 w-full">
                                 {whatWeDoImages.map((item, idx) => (
                                     <div key={idx} className="flex flex-col items-center bg-white bg-opacity-10 rounded-2xl shadow-lg p-6 h-[340px]">
                                         <img src={item.src} alt={item.alt} className="w-[180px] h-[180px] object-cover rounded-xl mb-4" />
@@ -2003,11 +2003,10 @@ function App() {
                                 ))}
                             </div>
                         </div>
-
-                        {/* How to use section with grid for even spacing */}
-                        <div className="w-full mt-16">
+                        {/* How to use section with wide container and centered grid */}
+                        <div className="w-full max-w-6xl mx-auto mt-16">
                             <h2 className="text-2xl font-bold text-white mb-8 text-left">How to use</h2>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 w-full">
                                 {howToUseSteps.map((step, idx) => (
                                     <div key={idx} className="flex flex-col items-center bg-white bg-opacity-10 rounded-2xl shadow-lg p-6 h-[340px]">
                                         <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white text-2xl font-bold mb-4">{step.step}</div>
@@ -2017,22 +2016,23 @@ function App() {
                                 ))}
                             </div>
                         </div>
-
-                        {/* Footer absolutely centered at the bottom of the left section */}
-                        <div className="absolute left-1/2 bottom-8 transform -translate-x-1/2 w-full flex justify-center">
-                            <div className="text-center">
-                                <p className="text-white text-sm mb-2">Contact us: support@kroxnest.com</p>
-                                <p className="text-white text-sm">© 2024 Kroxnest. All rights reserved.</p>
-                            </div>
-                        </div>
                     </div>
 
-                    {/* Right section for content (login, register, etc.) - always starts after slogan height */}
-                    <div className="w-full md:w-1/2 flex justify-center items-start pt-[180px]"> {/* pt-[180px] matches the slogan height */}
+                    {/* Right section for content (login, register, etc.) - top aligned with 30px padding */}
+                    <div className="w-full md:w-1/2 flex justify-center items-start pt-[30px]"> {/* pt-[30px] for top padding */}
                         {renderPage()}
                     </div>
                 </div>
             )}
+            {/* Footer centered at the bottom of the entire page */}
+            <footer className="w-full flex flex-col items-center justify-center py-6 px-2 bg-black bg-opacity-80 gap-1 text-center fixed left-0 bottom-0 z-50">
+                <div>
+                    <span className="text-gray-300 text-sm mr-6">Contact: <a href="mailto:support@kroxnest.com" className="underline hover:text-blue-400">support@kroxnest.com</a></span>
+                </div>
+                <div>
+                    <span className="block text-gray-300 text-base font-semibold">© 2024 Kroxnest. All rights reserved.</span>
+                </div>
+            </footer>
         </>
     );
 }
