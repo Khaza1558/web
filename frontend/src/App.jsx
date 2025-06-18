@@ -922,14 +922,14 @@ const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects, onNa
                     <p className="text-red-500 mb-6">Could not load user details. Please try logging in again.</p>
                 )}
 
-                {/* Project Suggestions Button */}
+                {/* Project Suggestions Button - blue with thunder icon */}
                 <button
                     onClick={onNavigateToSuggestions}
-                    className="flex items-center gap-2 bg-yellow-400 text-gray-900 py-2 px-5 rounded-lg font-bold transition duration-300 hover:bg-yellow-500 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-opacity-75 mb-4"
+                    className="flex items-center gap-2 bg-blue-500 text-white py-2 px-5 rounded-lg font-bold transition duration-300 hover:bg-blue-600 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 mb-4"
                     style={{ fontSize: '1.1rem' }}
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-yellow-700">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v13.5m0 0l-3.75-3.75m3.75 3.75l3.75-3.75M21 21H3" />
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-white">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                     Project Suggestions
                 </button>
@@ -1919,6 +1919,25 @@ function App() {
     // Pick ad config for current page, fallback to login ad
     const currentAd = adConfig[currentPage] || adConfig.login;
 
+    // What we do section images and text
+    const whatWeDoImages = [
+        {
+            src: '/ads/what1.jpg',
+            alt: 'Showcase Projects',
+            desc: 'Showcase your best projects and get discovered by recruiters and peers.',
+        },
+        {
+            src: '/ads/what2.jpg',
+            alt: 'Collaborate',
+            desc: 'Collaborate with others, share files, and work as a team on innovative ideas.',
+        },
+        {
+            src: '/ads/what3.jpg',
+            alt: 'Track Progress',
+            desc: 'Track your project progress and keep your portfolio up to date easily.',
+        },
+    ];
+
     return (
         // Conditional rendering: Show SplashVideo first, then the main app
         <>
@@ -1926,7 +1945,7 @@ function App() {
                 <SplashVideo onVideoEnd={handleVideoEnd} />
             ) : (
                 <div className="min-h-screen flex flex-col md:flex-row bg-black font-sans">
-                    {/* Left section for Logo, Slogan, and Advertisement */}
+                    {/* Left section for Logo, Slogan, Advertisement, and What we do */}
                     <div className="w-full md:w-1/2 p-8 flex flex-col justify-start items-start relative">
                         <header className="mb-8 md:mb-0">
                             <img src="/tit.png" alt="kroxnest." className="h-20 sm:h-24 md:h-[100px] mb-[-10px] drop-shadow-lg filter invert" />
@@ -1967,8 +1986,52 @@ function App() {
                                 />
                             </a>
                         </div>
-                        <footer className="w-full text-left py-4 text-gray-500 text-sm md:absolute md:bottom-0 md:left-8">
-                            © 2025 plote from KHAZA
+                        {/* What we do section */}
+                        <div style={{ marginTop: 48, marginBottom: 48, width: '100%' }}>
+                            <h2 className="text-2xl font-bold text-white mb-6" style={{ textAlign: 'left' }}>What we do</h2>
+                            <div className="flex flex-row gap-8 justify-start items-start w-full">
+                                {whatWeDoImages.map((item, idx) => (
+                                    <div key={idx} className="flex flex-col items-center" style={{ width: 300 }}>
+                                        <img src={item.src} alt={item.alt} style={{ width: 300, height: 300, borderRadius: 16, objectFit: 'cover', marginBottom: 16, background: '#f3f4f6' }} />
+                                        <p className="text-white text-base text-center" style={{ maxWidth: 300 }}>{item.desc}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        {/* How to use section */}
+                        <div style={{ marginTop: 64, width: '100%' }}>
+                            <h2 className="text-2xl font-bold text-white mb-6" style={{ textAlign: 'left' }}>How to use</h2>
+                            <div className="flex flex-row gap-8 justify-start items-start w-full">
+                                {/* Step 1 */}
+                                <div className="flex flex-col items-center bg-white bg-opacity-10 rounded-2xl shadow-lg p-6" style={{ width: 300, height: 300 }}>
+                                    <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white text-2xl font-bold mb-4">1</div>
+                                    <h3 className="text-lg font-bold text-white mb-2">Register & Login</h3>
+                                    <p className="text-white text-base text-center">Create your account, log in, and set up your profile to get started with your project portfolio.</p>
+                                </div>
+                                {/* Step 2 */}
+                                <div className="flex flex-col items-center bg-white bg-opacity-10 rounded-2xl shadow-lg p-6" style={{ width: 300, height: 300 }}>
+                                    <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white text-2xl font-bold mb-4">2</div>
+                                    <h3 className="text-lg font-bold text-white mb-2">Create & Upload</h3>
+                                    <p className="text-white text-base text-center">Create new projects, upload files, and describe your work. Collaborate with your team easily.</p>
+                                </div>
+                                {/* Step 3 */}
+                                <div className="flex flex-col items-center bg-white bg-opacity-10 rounded-2xl shadow-lg p-6" style={{ width: 300, height: 300 }}>
+                                    <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white text-2xl font-bold mb-4">3</div>
+                                    <h3 className="text-lg font-bold text-white mb-2">Share & Track</h3>
+                                    <p className="text-white text-base text-center">Share your portfolio link, get feedback, and track your project progress anytime, anywhere.</p>
+                                </div>
+                            </div>
+                        </div>
+                        {/* Modern Footer with contact info */}
+                        <footer className="w-full flex flex-col items-center justify-center py-6 px-2 mt-12 bg-black bg-opacity-60 rounded-2xl gap-2 shadow-lg">
+                            <div className="text-center">
+                                <span className="block text-gray-300 text-base font-semibold">© 2025 plote from KHAZA</span>
+                                <span className="block text-gray-400 text-sm">All rights reserved.</span>
+                            </div>
+                            <div className="flex flex-col items-center">
+                                <span className="text-gray-300 text-sm">Contact: <a href="mailto:info@plote.com" className="underline hover:text-blue-400">info@plote.com</a></span>
+                                <span className="text-gray-300 text-sm">Phone: <a href="tel:+1234567890" className="underline hover:text-blue-400">+1 234 567 890</a></span>
+                            </div>
                         </footer>
                     </div>
                     {/* Right section for dynamic page content */}
