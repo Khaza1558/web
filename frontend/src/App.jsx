@@ -1969,11 +1969,11 @@ function App() {
             ) : (
                 <div className="min-h-screen flex flex-col md:flex-row bg-black font-sans">
                     {/* Left section for Logo, Slogan, Advertisement, and What we do */}
-                    <div className="w-full md:w-1/2 p-8 flex flex-col justify-start items-start relative">
-                        <header className="mb-8 md:mb-0">
+                    <div className="w-full md:w-1/2 p-8 flex flex-col relative min-h-screen">
+                        <header>
                             <img src="/tit.png" alt="kroxnest." className="h-20 sm:h-24 md:h-[100px] mb-[-10px] drop-shadow-lg filter invert" />
                             <p className="text-xl sm:text-2xl text-white italic pl-2" style={{ fontFamily: 'Inter, sans-serif' }}>portfolio of talent & exhibits</p>
-                            <div className="md:mt-auto pb-10 pl-2">
+                            <div className="pb-10 pl-2">
                                 <p className="text-lg text-white max-w-sm leading-relaxed">
                                     Manage your projects effortlessly: access,edit and update them from any desktop,anytime.
                                 </p>
@@ -1981,7 +1981,7 @@ function App() {
                         </header>
 
                         {/* Advertisement section with proper spacing */}
-                        <div className="mt-8 w-full">
+                        <div className="mt-8 w-full flex justify-center">
                             <a href={currentAd.href} target="_blank" rel="noopener noreferrer" className="block">
                                 <img
                                     src={currentAd.src}
@@ -1991,25 +1991,25 @@ function App() {
                             </a>
                         </div>
 
-                        {/* What we do section with increased spacing */}
-                        <div className="w-full mt-20">
-                            <h2 className="text-2xl font-bold text-white mb-8" style={{ textAlign: 'left' }}>What we do</h2>
-                            <div className="flex flex-row gap-12 justify-between items-start w-full">
+                        {/* What we do section with grid for even spacing */}
+                        <div className="w-full mt-16">
+                            <h2 className="text-2xl font-bold text-white mb-8 text-left">What we do</h2>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
                                 {whatWeDoImages.map((item, idx) => (
-                                    <div key={idx} className="flex flex-col items-center bg-white bg-opacity-10 rounded-2xl shadow-lg p-6 flex-1 mx-2" style={{ width: '100%', maxWidth: 300, height: 300, minWidth: 0 }}>
-                                        <img src={item.src} alt={item.alt} className="w-[300px] h-[300px] object-cover rounded-xl mb-4" />
+                                    <div key={idx} className="flex flex-col items-center bg-white bg-opacity-10 rounded-2xl shadow-lg p-6 h-[340px]">
+                                        <img src={item.src} alt={item.alt} className="w-[180px] h-[180px] object-cover rounded-xl mb-4" />
                                         <p className="text-white text-center mt-2">{item.desc}</p>
                                     </div>
                                 ))}
                             </div>
                         </div>
 
-                        {/* How to use section with increased spacing */}
-                        <div className="w-full mt-32">
-                            <h2 className="text-2xl font-bold text-white mb-8" style={{ textAlign: 'left' }}>How to use</h2>
-                            <div className="flex flex-row gap-12 justify-between items-start w-full">
+                        {/* How to use section with grid for even spacing */}
+                        <div className="w-full mt-16">
+                            <h2 className="text-2xl font-bold text-white mb-8 text-left">How to use</h2>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
                                 {howToUseSteps.map((step, idx) => (
-                                    <div key={idx} className="flex flex-col items-center bg-white bg-opacity-10 rounded-2xl shadow-lg p-6 flex-1 mx-2" style={{ width: '100%', maxWidth: 300, height: 300, minWidth: 0 }}>
+                                    <div key={idx} className="flex flex-col items-center bg-white bg-opacity-10 rounded-2xl shadow-lg p-6 h-[340px]">
                                         <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white text-2xl font-bold mb-4">{step.step}</div>
                                         <h3 className="text-lg font-bold text-white mb-2">{step.title}</h3>
                                         <p className="text-white text-base text-center">{step.desc}</p>
@@ -2018,8 +2018,8 @@ function App() {
                             </div>
                         </div>
 
-                        {/* Footer centered in the image section */}
-                        <div className="w-full flex justify-center mt-16 mb-8">
+                        {/* Footer absolutely centered at the bottom of the left section */}
+                        <div className="absolute left-1/2 bottom-8 transform -translate-x-1/2 w-full flex justify-center">
                             <div className="text-center">
                                 <p className="text-white text-sm mb-2">Contact us: support@kroxnest.com</p>
                                 <p className="text-white text-sm">© 2024 Kroxnest. All rights reserved.</p>
@@ -2027,8 +2027,8 @@ function App() {
                         </div>
                     </div>
 
-                    {/* Right section for content (login, register, etc.) */}
-                    <div className="w-full md:w-1/2 flex justify-center items-start" style={{ marginTop: '180px' }}> {/* Adjusted to align with slogan height */}
+                    {/* Right section for content (login, register, etc.) - always starts after slogan height */}
+                    <div className="w-full md:w-1/2 flex justify-center items-start pt-[180px]"> {/* pt-[180px] matches the slogan height */}
                         {renderPage()}
                     </div>
                 </div>
