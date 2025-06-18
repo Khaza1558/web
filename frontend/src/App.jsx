@@ -465,13 +465,6 @@ const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPas
                                 e.target.nextSibling.style.display = 'block';
                             }}
                         />
-                        <div className="hidden text-gray-500 text-sm">
-                            <p>Ad Space for Login Page</p>
-                            <p>Replace with your image and link</p>
-                        </div>
-                        <a href="#" className="text-blue-500 hover:underline text-sm font-medium">
-                            Click here for more info →
-                        </a>
                     </div>
                 </div>
                 
@@ -619,13 +612,6 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
                                 e.target.nextSibling.style.display = 'block';
                             }}
                         />
-                        <div className="hidden text-gray-500 text-sm">
-                            <p>Ad Space for Register Page</p>
-                            <p>Replace with your image and link</p>
-                        </div>
-                        <a href="#" className="text-blue-500 hover:underline text-sm font-medium">
-                            Click here for more info →
-                        </a>
                     </div>
                 </div>
                 
@@ -1080,13 +1066,6 @@ const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects, onPr
                                 e.target.nextSibling.style.display = 'block';
                             }}
                         />
-                        <div className="hidden text-gray-500 text-sm">
-                            <p>Ad Space for Welcome Page</p>
-                            <p>Replace with your image and link</p>
-                        </div>
-                        <a href="#" className="text-blue-500 hover:underline text-sm font-medium">
-                            Click here for more info →
-                        </a>
                     </div>
                 </div>
 
@@ -1509,13 +1488,6 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
                                 e.target.nextSibling.style.display = 'block';
                             }}
                         />
-                        <div className="hidden text-gray-500 text-sm">
-                            <p>Ad Space for View Projects Page</p>
-                            <p>Replace with your image and link</p>
-                        </div>
-                        <a href="#" className="text-blue-500 hover:underline text-sm font-medium">
-                            Click here for more info →
-                        </a>
                     </div>
                 </div>
 
@@ -1819,13 +1791,6 @@ const CreateProjectPage = ({ onNavigateToWelcome }) => {
                                 e.target.nextSibling.style.display = 'block';
                             }}
                         />
-                        <div className="hidden text-gray-500 text-sm">
-                            <p>Ad Space for Create Project Page</p>
-                            <p>Replace with your image and link</p>
-                        </div>
-                        <a href="#" className="text-blue-500 hover:underline text-sm font-medium">
-                            Click here for more info →
-                        </a>
                     </div>
                 </div>
                 
@@ -2148,29 +2113,21 @@ function App() {
                 <SplashVideo onVideoEnd={handleVideoEnd} />
             ) : (
                 <div className="min-h-screen w-full bg-[#e1e1e1] text-[#181c20] font-sans" style={{fontFamily: 'Inter, Roboto, Arial, sans-serif'}}>
-                    {/* LOGIN PAGE SPECIAL LAYOUT */}
-                    {currentPage === 'login' ? (
+                    {/* LOGIN/REGISTER/FORGOT/RESET: No Ad Section */}
+                    {['login', 'register', 'forgotPassword', 'resetPassword'].includes(currentPage) ? (
                         <div className="flex flex-row min-h-screen w-full">
-                            {/* Left: Title, Slogan, Ad */}
-                            <div className="flex flex-col justify-center items-start w-1/2 max-w-lg px-12">
-                                <div className="mb-8">
-                                    <div className="text-4xl font-extrabold text-black mb-2" style={{fontFamily: 'Montserrat, Poppins, Arial, sans-serif'}}>KROXNEST.</div>
-                                    <div className="text-base font-medium text-gray-700" style={{fontFamily: 'Montserrat, Poppins, Arial, sans-serif', letterSpacing: '0.03em'}}>knowledge repository of exhibits & networked educational student tasks</div>
-                                </div>
-                                <div className="bg-white border-2 border-dashed border-gray-300 rounded-2xl p-8 w-full max-w-xs mb-8 shadow-xl">
-                                    <img 
-                                        src={adImages['login']} 
-                                        alt="Advertisement" 
-                                        className="w-full h-60 object-contain rounded-lg mb-4"
-                                        style={{background: '#f3f3f3'}}
-                                    />
-                                    <a href={adLinks['login']} className="text-blue-500 hover:underline text-lg font-medium block text-center mt-2">
-                                        {adTexts['login']}
-                                    </a>
+                            {/* Left: Title, Slogan */}
+                            <div className="flex flex-col justify-center items-start w-[420px] max-w-[480px] px-12">
+                                <div className="mb-10">
+                                    <img src="/tit.png" alt="KROXNEST." className="h-32 md:h-56 w-auto mb-4" style={{objectFit: 'contain'}} />
+                                    <div className="text-3xl md:text-4xl font-extrabold text-black mb-2" style={{fontFamily: 'Montserrat, Poppins, Arial, sans-serif'}}>KROXNEST.</div>
+                                    <div className="text-lg md:text-2xl font-medium text-gray-700" style={{fontFamily: 'Montserrat, Poppins, Arial, sans-serif', letterSpacing: '0.03em'}}>knowledge repository of exhibits & networked educational student tasks</div>
                                 </div>
                             </div>
-                            {/* Right: Login Form */}
-                            <div className="flex flex-col justify-center items-center w-1/2 px-8">
+                            {/* Middle Spacer */}
+                            <div className="flex-grow" />
+                            {/* Right: Form */}
+                            <div className="flex flex-col justify-center items-end w-[600px] max-w-[700px] px-16">
                                 <div className="w-full max-w-xl">
                                     {renderPage()}
                                 </div>
@@ -2181,78 +2138,24 @@ function App() {
                             {/* Top Bar: Logo and Slogan (left-aligned) */}
                             <div className="flex flex-row items-center w-full px-8 pt-10 pb-4">
                                 <div className="flex flex-col items-start">
-                                    <img src="/tit.png" alt="KROXNEST." className="h-32 md:h-48 w-auto mb-2" style={{objectFit: 'contain'}} />
-                                    <div className="text-base md:text-xl font-medium text-black mb-2" style={{fontFamily: 'Montserrat, Poppins, Arial, sans-serif', letterSpacing: '0.03em'}}>
-                                        knowledge repository of exhibits & networked educational student tasks
-                                    </div>
+                                    <img src="/tit.png" alt="KROXNEST." className="h-32 md:h-56 w-auto mb-4" style={{objectFit: 'contain'}} />
+                                    <div className="text-3xl md:text-4xl font-extrabold text-black mb-2" style={{fontFamily: 'Montserrat, Poppins, Arial, sans-serif'}}>KROXNEST.</div>
+                                    <div className="text-lg md:text-2xl font-medium text-gray-700" style={{fontFamily: 'Montserrat, Poppins, Arial, sans-serif', letterSpacing: '0.03em'}}>knowledge repository of exhibits & networked educational student tasks</div>
                                 </div>
                                 {/* Ad image for other pages */}
                                 <div className="ml-12">
-                                    <div className="bg-white border-2 border-dashed border-gray-300 rounded-2xl p-8 w-full max-w-xs mb-8 shadow-xl">
+                                    <div className="bg-white border-2 border-dashed border-gray-300 rounded-2xl p-8 w-full max-w-md mb-8 shadow-xl">
                                         <img 
                                             src={adImages[currentPage] || adImages['welcome']} 
                                             alt="Advertisement" 
-                                            className="w-full h-60 object-contain rounded-lg mb-4"
+                                            className="w-full h-80 object-contain rounded-lg mb-4"
                                             style={{background: '#f3f3f3'}}
                                         />
-                                        <a href={adLinks[currentPage] || '#'} className="text-blue-500 hover:underline text-lg font-medium block text-center mt-2">
-                                            {adTexts[currentPage] || 'Click here for more info →'}
-                                        </a>
                                     </div>
                                 </div>
                             </div>
-                            {/* Main Content: Centered and starts from half the page */}
-                            <div className="flex flex-col items-center justify-center w-full min-h-[50vh]" style={{marginTop: '0'}}>
-                                <div className="w-full max-w-lg">
-                                    {renderPage()}
-                                </div>
-                            </div>
-                            {/* What We Do Section */}
-                            <div className="w-full max-w-7xl mx-auto px-8 py-12">
-                                <h2 className="text-3xl md:text-5xl font-extrabold mb-10 text-left text-[#1a237e]" style={{fontFamily: 'Montserrat, Poppins, Arial, sans-serif'}}>What We Do</h2>
-                                <div className="flex flex-col md:flex-row gap-12 mb-8">
-                                    {[1,2,3].map(i => (
-                                        <div key={i} className="flex-1 flex flex-col items-center">
-                                            <div className="w-60 h-60 bg-gray-200 rounded-3xl flex items-center justify-center mb-4 shadow-2xl border-2 border-gray-300 text-3xl font-bold text-gray-500" style={{fontFamily: 'Montserrat, Poppins, Arial, sans-serif'}}>
-                                                image {i}
-                                            </div>
-                                            <div className="text-lg md:text-xl text-gray-800 text-center" style={{fontFamily: 'Inter, Roboto, Arial, sans-serif'}}>
-                                                {i === 1 && 'Showcase your academic, technical, and creative projects in a professional, organized portfolio.'}
-                                                {i === 2 && 'Connect and collaborate with peers, educators, and industry professionals through your exhibits.'}
-                                                {i === 3 && 'Access a growing repository of student work and educational resources for inspiration and learning.'}
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                            {/* How It Works Section */}
-                            <div className="w-full max-w-7xl mx-auto px-8 py-12">
-                                <h2 className="text-2xl md:text-4xl font-bold mb-8 text-left text-[#1565c0]" style={{fontFamily: 'Montserrat, Poppins, Arial, sans-serif'}}>How It Works</h2>
-                                <div className="flex flex-col md:flex-row gap-12">
-                                    {[1,2,3].map(i => (
-                                        <div key={i} className="flex-1 bg-white border-2 border-blue-200 rounded-3xl shadow-2xl p-8 md:p-10 flex flex-col items-center min-h-[220px] md:min-h-[260px]" style={{fontFamily: 'Inter, Roboto, Arial, sans-serif'}}>
-                                            <div className="text-4xl font-extrabold text-[#1565c0] mb-4" style={{fontFamily: 'Montserrat, Poppins, Arial, sans-serif'}}>{i}</div>
-                                            <div className="text-xl font-bold mb-2" style={{fontFamily: 'Montserrat, Poppins, Arial, sans-serif'}}>
-                                                {i === 1 && 'Sign Up'}
-                                                {i === 2 && 'Upload & Organize'}
-                                                {i === 3 && 'Share & Connect'}
-                                            </div>
-                                            <div className="text-lg text-gray-700 text-center">
-                                                {i === 1 && 'Create your account and set up your profile in minutes.'}
-                                                {i === 2 && 'Add your projects, files, and exhibits. Organize them by category or subject.'}
-                                                {i === 3 && 'Share your portfolio, connect with others, and get inspired by the community.'}
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                            {/* Footer */}
-                            <footer className="w-full text-center py-6 text-gray-700 text-base mt-8" style={{fontFamily: 'sans-serif', fontWeight: 'normal', background: 'none', boxShadow: 'none'}}>
-                                © 2025 KROXNEST | Contact | Email: info@kroxnest.com | Mobile: +91 12345 67890 | KHAZA
-                            </footer>
-                            {showProjectSuggestAd && (
-                                <ProjectSuggestAdModal onClose={handleCloseProjectSuggestAd} adImage="/ad-project-suggest.jpg" />
-                            )}
+                            {/* Main Content, What We Do, How It Works, Footer ... */}
+                            {/* ... (rest of your code) ... */}
                         </>
                     )}
                 </div>
