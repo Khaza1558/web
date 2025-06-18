@@ -16,16 +16,11 @@ const generateToken = (id) => {
 // @access  Public
 exports.registerUser = async (req, res) => {
     try {
-        const { username, email, password, mobileNumber, college, branch, rollNumber } = req.body;
+        const { username, email, password, college, branch, rollNumber } = req.body;
 
         // Simple validation
-        if (!username || !email || !password || !mobileNumber || !college || !branch || !rollNumber) {
+        if (!username || !email || !password || !college || !branch || !rollNumber) {
             return res.status(400).json({ success: false, message: 'Please enter all fields.' });
-        }
-
-        // Validate mobile number format
-        if (!/^[0-9]{10}$/.test(mobileNumber)) {
-            return res.status(400).json({ success: false, message: 'Please enter a valid 10-digit mobile number.' });
         }
 
         // Check if user already exists
@@ -41,10 +36,6 @@ exports.registerUser = async (req, res) => {
         if (rollNumberExists) {
             return res.status(400).json({ success: false, message: 'Roll number already exists.' });
         }
-        const mobileNumberExists = await User.findOne({ where: { mobile_number: mobileNumber } });
-        if (mobileNumberExists) {
-            return res.status(400).json({ success: false, message: 'Mobile number already exists.' });
-        }
 
         // Password hashing is handled by a Sequelize hook in the User model (beforeCreate)
 
@@ -52,7 +43,6 @@ exports.registerUser = async (req, res) => {
             username,
             email,
             password, // Password will be hashed by the hook
-            mobile_number: mobileNumber,
             college,
             branch,
             roll_number: rollNumber
@@ -67,7 +57,6 @@ exports.registerUser = async (req, res) => {
                     id: newUser.id,
                     username: newUser.username,
                     email: newUser.email,
-                    mobile_number: newUser.mobile_number,
                     roll_number: newUser.roll_number,
                     college: newUser.college,
                     branch: newUser.branch
@@ -78,11 +67,7 @@ exports.registerUser = async (req, res) => {
         }
     } catch (error) {
         console.error('Error during registration:', error);
-        if (error.name === 'SequelizeValidationError') {
-            res.status(400).json({ success: false, message: 'Invalid input data. Please check all fields.' });
-        } else {
-            res.status(500).json({ success: false, message: 'Server error during registration.' });
-        }
+        res.status(500).json({ success: false, message: 'Server error during registration.' });
     }
 };
 
