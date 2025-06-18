@@ -448,7 +448,7 @@ const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPas
     };
 
     return (
-        <div className="flex items-center justify-center p-5 w-full h-full">
+        <div className="flex items-start justify-center p-5 w-full h-full"> {/* items-start for top alignment */}
             <div
                 className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col items-center animate-fade-in-up relative"
                 style={{ width: 450, height: 450, minWidth: 450, minHeight: 450 }}
@@ -1938,6 +1938,25 @@ function App() {
         },
     ];
 
+    // How to use steps
+    const howToUseSteps = [
+        {
+            step: 1,
+            title: 'Register & Login',
+            desc: 'Create your account, log in, and set up your profile to get started with your project portfolio.'
+        },
+        {
+            step: 2,
+            title: 'Create & Upload',
+            desc: 'Create new projects, upload files, and describe your work. Collaborate with your team easily.'
+        },
+        {
+            step: 3,
+            title: 'Share & Track',
+            desc: 'Share your portfolio link, get feedback, and track your project progress anytime, anywhere.'
+        }
+    ];
+
     return (
         // Conditional rendering: Show SplashVideo first, then the main app
         <>
@@ -1949,12 +1968,7 @@ function App() {
                     <div className="w-full md:w-1/2 p-8 flex flex-col justify-start items-start relative">
                         <header className="mb-8 md:mb-0">
                             <img src="/tit.png" alt="kroxnest." className="h-20 sm:h-24 md:h-[100px] mb-[-10px] drop-shadow-lg filter invert" />
-                            <p className="text-xl sm:text-2xl text-white italic pl-2" style={{ fontFamily: 'Inter, sans-serif' }}>portfolio of talent & exhibits</p>
-                            <div className="md:mt-auto pb-10 pl-2">
-                                <p className="text-lg text-white max-w-sm leading-relaxed">
-                                    Manage your projects effortlessly: access,edit and update them from any desktop,anytime.
-                                </p>
-                            </div>
+                            <p className="text-xl sm:text-2xl text-white italic pl-2" style={{ fontFamily: 'Inter, sans-serif' }}>Knowledge Repository Of eXhibits & Networked Educational Student Tracks</p>
                         </header>
                         {/* Advertisement below slogan, with gap */}
                         <div style={{ marginTop: 48, marginBottom: 24 }}>
@@ -1986,56 +2000,45 @@ function App() {
                                 />
                             </a>
                         </div>
-                        {/* What we do section */}
-                        <div style={{ marginTop: 48, marginBottom: 48, width: '100%' }}>
-                            <h2 className="text-2xl font-bold text-white mb-6" style={{ textAlign: 'left' }}>What we do</h2>
-                            <div className="flex flex-row gap-8 justify-start items-start w-full">
+                        {/* What we do section - full width, spaced */}
+                        <div className="w-full" style={{ marginTop: 48, marginBottom: 48 }}>
+                            <h2 className="text-2xl font-bold text-white mb-8" style={{ textAlign: 'left' }}>What we do</h2>
+                            <div className="flex flex-row gap-12 justify-between items-start w-full">
                                 {whatWeDoImages.map((item, idx) => (
-                                    <div key={idx} className="flex flex-col items-center" style={{ width: 300 }}>
-                                        <img src={item.src} alt={item.alt} style={{ width: 300, height: 300, borderRadius: 16, objectFit: 'cover', marginBottom: 16, background: '#f3f4f6' }} />
-                                        <p className="text-white text-base text-center" style={{ maxWidth: 300 }}>{item.desc}</p>
+                                    <div key={idx} className="flex flex-col items-center flex-1 mx-2" style={{ minWidth: 0 }}>
+                                        <img src={item.src} alt={item.alt} style={{ width: '100%', maxWidth: 340, height: 300, borderRadius: 16, objectFit: 'cover', marginBottom: 16, background: '#f3f4f6' }} />
+                                        <p className="text-white text-base text-center" style={{ maxWidth: 340 }}>{item.desc}</p>
                                     </div>
                                 ))}
                             </div>
                         </div>
-                        {/* How to use section */}
-                        <div style={{ marginTop: 64, width: '100%' }}>
-                            <h2 className="text-2xl font-bold text-white mb-6" style={{ textAlign: 'left' }}>How to use</h2>
-                            <div className="flex flex-row gap-8 justify-start items-start w-full">
-                                {/* Step 1 */}
-                                <div className="flex flex-col items-center bg-white bg-opacity-10 rounded-2xl shadow-lg p-6" style={{ width: 300, height: 300 }}>
-                                    <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white text-2xl font-bold mb-4">1</div>
-                                    <h3 className="text-lg font-bold text-white mb-2">Register & Login</h3>
-                                    <p className="text-white text-base text-center">Create your account, log in, and set up your profile to get started with your project portfolio.</p>
-                                </div>
-                                {/* Step 2 */}
-                                <div className="flex flex-col items-center bg-white bg-opacity-10 rounded-2xl shadow-lg p-6" style={{ width: 300, height: 300 }}>
-                                    <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white text-2xl font-bold mb-4">2</div>
-                                    <h3 className="text-lg font-bold text-white mb-2">Create & Upload</h3>
-                                    <p className="text-white text-base text-center">Create new projects, upload files, and describe your work. Collaborate with your team easily.</p>
-                                </div>
-                                {/* Step 3 */}
-                                <div className="flex flex-col items-center bg-white bg-opacity-10 rounded-2xl shadow-lg p-6" style={{ width: 300, height: 300 }}>
-                                    <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white text-2xl font-bold mb-4">3</div>
-                                    <h3 className="text-lg font-bold text-white mb-2">Share & Track</h3>
-                                    <p className="text-white text-base text-center">Share your portfolio link, get feedback, and track your project progress anytime, anywhere.</p>
-                                </div>
+                        {/* How to use section - full width, spaced */}
+                        <div className="w-full" style={{ marginTop: 64 }}>
+                            <h2 className="text-2xl font-bold text-white mb-8" style={{ textAlign: 'left' }}>How to use</h2>
+                            <div className="flex flex-row gap-12 justify-between items-start w-full">
+                                {howToUseSteps.map((step, idx) => (
+                                    <div key={idx} className="flex flex-col items-center bg-white bg-opacity-10 rounded-2xl shadow-lg p-6 flex-1 mx-2" style={{ width: '100%', maxWidth: 340, height: 300, minWidth: 0 }}>
+                                        <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white text-2xl font-bold mb-4">{step.step}</div>
+                                        <h3 className="text-lg font-bold text-white mb-2">{step.title}</h3>
+                                        <p className="text-white text-base text-center">{step.desc}</p>
+                                    </div>
+                                ))}
                             </div>
                         </div>
-                        {/* Modern Footer with contact info */}
-                        <footer className="w-full flex flex-col items-center justify-center py-6 px-2 mt-12 bg-black bg-opacity-60 rounded-2xl gap-2 shadow-lg">
-                            <div className="text-center">
-                                <span className="block text-gray-300 text-base font-semibold">© 2025 plote from KHAZA</span>
-                                <span className="block text-gray-400 text-sm">All rights reserved.</span>
-                            </div>
-                            <div className="flex flex-col items-center">
-                                <span className="text-gray-300 text-sm">Contact: <a href="mailto:info@plote.com" className="underline hover:text-blue-400">info@plote.com</a></span>
+                        {/* Modern Footer with contact info - two lines, centered */}
+                        <footer className="w-full flex flex-col items-center justify-center py-6 px-2 mt-12 bg-black bg-opacity-60 rounded-2xl gap-1 shadow-lg text-center">
+                            <div>
+                                <span className="text-gray-300 text-sm mr-6">Contact: <a href="mailto:info@kroxnext.com" className="underline hover:text-blue-400">info@plote.com</a></span>
                                 <span className="text-gray-300 text-sm">Phone: <a href="tel:+1234567890" className="underline hover:text-blue-400">+1 234 567 890</a></span>
+                            </div>
+                            <div>
+                                <span className="block text-gray-300 text-base font-semibold">© 2025 Kroxnest</span>
+                                <span className="block text-gray-400 text-sm">All rights reserved.</span>
                             </div>
                         </footer>
                     </div>
                     {/* Right section for dynamic page content */}
-                    <main className="flex-grow flex items-center justify-center w-full md:w-1/2 p-4">
+                    <main className="flex-grow flex items-start justify-center w-full md:w-1/2 p-4"> {/* items-start for top alignment */}
                         {renderPage()}
                     </main>
                 </div>
