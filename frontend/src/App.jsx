@@ -1900,31 +1900,85 @@ function App() {
         }
     };
 
+    // Ad configuration for each page
+    const adConfig = {
+        login: {
+            href: 'https://ad-link-login.com',
+            src: '/ads/login-ad.jpg',
+            alt: 'Login Advertisement',
+        },
+        welcome: {
+            href: 'https://ad-link-welcome.com',
+            src: '/ads/welcome-ad.jpg',
+            alt: 'Welcome Advertisement',
+        },
+        createProject: {
+            href: 'https://ad-link-create.com',
+            src: '/ads/create-ad.jpg',
+            alt: 'Create Project Advertisement',
+        },
+        viewProjects: {
+            href: 'https://ad-link-view.com',
+            src: '/ads/view-ad.jpg',
+            alt: 'View Projects Advertisement',
+        },
+    };
+
+    // Pick ad config for current page, fallback to login ad
+    const currentAd = adConfig[currentPage] || adConfig.login;
+
     return (
         // Conditional rendering: Show SplashVideo first, then the main app
         <>
             {showSplash ? (
                 <SplashVideo onVideoEnd={handleVideoEnd} />
             ) : (
-                // Main container with black background and horizontal layout from the new screenshot
                 <div className="min-h-screen flex flex-col md:flex-row bg-black font-sans">
-                    {/* Left section for Logo and Slogan */}
-                    <div className="w-full md:w-1/2 p-8 flex flex-col justify-start items-start"> {/* Adjusted justify-start */}
+                    {/* Left section for Logo, Slogan, and Advertisement */}
+                    <div className="w-full md:w-1/2 p-8 flex flex-col justify-start items-start relative">
                         <header className="mb-8 md:mb-0">
-                            {/* Logo image with precise height and alignment */}
-                            <img src="/tit.png" alt="kroxnest." className="h-20 sm:h-24 md:h-[100px] mb-[-10px] drop-shadow-lg filter invert" /> {/* md:h-[100px] for more exact height, negative margin for tighter spacing */}
-                            {/* Slogan with refined font size and color */}
-                            <p className="text-xl sm:text-2xl text-white italic pl-2" style={{ fontFamily: 'Inter, sans-serif' }}>portfolio of talent & exhibits</p> 
-                            <div className="md:mt-auto pb-10 pl-2"> {/* Removed hidden for md:block to ensure consistency on all sizes */}
-                            <p className="text-lg text-white max-w-sm leading-relaxed"> 
-                                Manage your projects effortlessly: access,edit and update them from any desktop,anytime.</p></div>
+                            <img src="/tit.png" alt="kroxnest." className="h-20 sm:h-24 md:h-[100px] mb-[-10px] drop-shadow-lg filter invert" />
+                            <p className="text-xl sm:text-2xl text-white italic pl-2" style={{ fontFamily: 'Inter, sans-serif' }}>portfolio of talent & exhibits</p>
+                            <div className="md:mt-auto pb-10 pl-2">
+                                <p className="text-lg text-white max-w-sm leading-relaxed">
+                                    Manage your projects effortlessly: access,edit and update them from any desktop,anytime.
+                                </p>
+                            </div>
                         </header>
-                         {/* Footer for the main app - moved here to align with the left section content */}
+                        {/* Advertisement below slogan, with gap */}
+                        <div style={{ marginTop: 48, marginBottom: 24 }}>
+                            <a
+                                href={currentAd.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{
+                                    display: 'block',
+                                    width: 600,
+                                    height: 600,
+                                    borderRadius: 32,
+                                    overflow: 'hidden',
+                                    boxShadow: '0 4px 24px rgba(0,0,0,0.12)',
+                                    border: '2px solid #3b82f6',
+                                    background: '#fff',
+                                }}
+                            >
+                                <img
+                                    src={currentAd.src}
+                                    alt={currentAd.alt}
+                                    style={{
+                                        width: '100%',
+                                        height: '100%',
+                                        objectFit: 'contain',
+                                        display: 'block',
+                                        background: '#fff',
+                                    }}
+                                />
+                            </a>
+                        </div>
                         <footer className="w-full text-left py-4 text-gray-500 text-sm md:absolute md:bottom-0 md:left-8">
                             © 2025 plote from KHAZA
                         </footer>
                     </div>
-
                     {/* Right section for dynamic page content */}
                     <main className="flex-grow flex items-center justify-center w-full md:w-1/2 p-4">
                         {renderPage()}
