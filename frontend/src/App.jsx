@@ -450,11 +450,11 @@ const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPas
     return (
         <div className="flex items-center justify-center p-5 w-full h-full">
             <div
-                className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col items-center animate-fade-in-up"
-                style={{ width: 420, height: 420, minWidth: 420, minHeight: 420 }}
+                className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col items-center animate-fade-in-up relative"
+                style={{ width: 450, height: 450, minWidth: 450, minHeight: 450 }}
             >
                 <h2 className="text-3xl font-bold text-gray-800 mb-6">Login</h2>
-                <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full max-w-xs"> 
+                <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full max-w-xs flex-grow">
                     <label htmlFor="loginUsername" className="font-semibold text-gray-700 mb-1">Username:</label> 
                     <input
                         type="text"
@@ -488,12 +488,15 @@ const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPas
                         </a>
                     </p>
                 )}
-                <p className="mt-4 text-gray-700 text-base text-center w-full">
-                    Don't have an account?{' '}
-                    <a href="#" onClick={onNavigateToRegister} className="text-blue-500 font-semibold hover:underline">
-                        Register here
-                    </a>
-                </p>
+                {/* Register link always at the bottom, inside the card */}
+                <div className="absolute bottom-6 left-0 w-full flex justify-center">
+                    <p className="text-gray-700 text-base text-center">
+                        Don't have an account?{' '}
+                        <a href="#" onClick={onNavigateToRegister} className="text-blue-500 font-semibold hover:underline">
+                            Register here
+                        </a>
+                    </p>
+                </div>
             </div>
         </div>
     );
@@ -885,7 +888,7 @@ const ResetPasswordPage = ({ onNavigateToLogin, initialToken }) => {
 };
 
 
-const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects }) => {
+const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects, onNavigateToSuggestions }) => {
     const { userDetails, removeToken, fetchUserDetails, isAuthLoading } = useContext(AuthContext); 
 
     useEffect(() => {
@@ -893,7 +896,6 @@ const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects }) =>
             fetchUserDetails();
         }
     }, [userDetails, fetchUserDetails, isAuthLoading]); 
-
 
     const handleLogout = () => {
         removeToken();
@@ -903,8 +905,8 @@ const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects }) =>
     return (
         <div className="flex flex-col items-center justify-center p-5 w-full h-full">
             <div
-                className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col items-center animate-fade-in-up"
-                style={{ width: 420, height: 420, minWidth: 420, minHeight: 420 }}
+                className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col items-center animate-fade-in-up relative"
+                style={{ width: 450, height: 450, minWidth: 450, minHeight: 450 }}
             >
                 <h1 className="text-3xl font-bold text-gray-800 mb-6">Welcome, {userDetails?.username || 'User'}!</h1>
 
@@ -919,6 +921,18 @@ const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects }) =>
                 ) : (
                     <p className="text-red-500 mb-6">Could not load user details. Please try logging in again.</p>
                 )}
+
+                {/* Project Suggestions Button */}
+                <button
+                    onClick={onNavigateToSuggestions}
+                    className="flex items-center gap-2 bg-yellow-400 text-gray-900 py-2 px-5 rounded-lg font-bold transition duration-300 hover:bg-yellow-500 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-opacity-75 mb-4"
+                    style={{ fontSize: '1.1rem' }}
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-yellow-700">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v13.5m0 0l-3.75-3.75m3.75 3.75l3.75-3.75M21 21H3" />
+                    </svg>
+                    Project Suggestions
+                </button>
 
                 <div className="flex flex-col sm:flex-row gap-4 mt-6 w-full max-w-xs justify-center">
                     <button
@@ -940,6 +954,40 @@ const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects }) =>
                     className="bg-gray-300 text-gray-800 py-2 px-5 rounded-lg font-bold transition duration-300 hover:bg-gray-400 shadow-md hover:shadow-lg mt-6 w-full max-w-[150px] mx-auto focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-75"
                 >
                     Logout
+                </button>
+            </div>
+        </div>
+    );
+};
+
+// Suggestions Page
+const SuggestionsPage = ({ onNavigateToWelcome }) => {
+    const suggestions = [
+        'AI-Powered Attendance System',
+        'Smart Waste Management',
+        'IoT Home Automation',
+        'Blockchain Voting Platform',
+        'Virtual Reality Learning App',
+    ];
+    return (
+        <div className="flex flex-col items-center justify-center p-5 w-full h-full">
+            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col items-center animate-fade-in-up" style={{ width: 450, minWidth: 450 }}>
+                <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-yellow-600">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v13.5m0 0l-3.75-3.75m3.75 3.75l3.75-3.75M21 21H3" />
+                    </svg>
+                    Project Suggestions
+                </h2>
+                <ul className="w-full list-disc pl-6 text-gray-700 text-lg mb-6">
+                    {suggestions.map((title, idx) => (
+                        <li key={idx} className="mb-2">{title}</li>
+                    ))}
+                </ul>
+                <button
+                    onClick={onNavigateToWelcome}
+                    className="bg-gray-300 text-gray-800 py-2 px-5 rounded-lg font-bold transition duration-300 hover:bg-gray-400 shadow-md hover:shadow-lg w-full max-w-[150px] mx-auto focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-75"
+                >
+                    Back to Welcome
                 </button>
             </div>
         </div>
@@ -1827,8 +1875,14 @@ function App() {
                 return <ResetPasswordPage onNavigateToLogin={() => navigate('login')} initialToken={resetTokenFromUrl} />;
             case 'welcome':
                 return (
-                    <WelcomePage onNavigateToCreateProject={() => navigate('createProject')} onNavigateToViewProjects={() => navigate('viewProjects')} />
+                    <WelcomePage
+                        onNavigateToCreateProject={() => navigate('createProject')}
+                        onNavigateToViewProjects={() => navigate('viewProjects')}
+                        onNavigateToSuggestions={() => setCurrentPage('suggestions')}
+                    />
                 );
+            case 'suggestions':
+                return <SuggestionsPage onNavigateToWelcome={() => setCurrentPage('welcome')} />;
             case 'createProject':
                 return <CreateProjectPage onNavigateToWelcome={() => navigate('welcome')} />; 
             case 'viewProjects':
