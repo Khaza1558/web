@@ -463,13 +463,10 @@ const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPas
                     />
 
                     <label htmlFor="loginPassword" className="font-semibold text-gray-700 mb-1">Password:</label> 
-                    <input
-                        type="password"
+                    <PasswordInput
                         id="loginPassword"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition"
-                        required
                     />
 
                     {error && <p className="text-red-500 text-sm text-center mt-2">{error}</p>}
@@ -575,14 +572,24 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
 
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
                         <label htmlFor="password" className="font-semibold text-gray-700 text-sm sm:w-1/4 flex-shrink-0">Password:</label>
-                        <input type="password" id="password" value={formData.password} onChange={handleChange}
-                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow" required />
+                        <div className="flex-grow">
+                            <PasswordInput
+                                id="password"
+                                value={formData.password}
+                                onChange={(e) => handleChange(e)}
+                            />
+                        </div>
                     </div>
 
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
                         <label htmlFor="reEnterPassword" className="font-semibold text-gray-700 text-sm sm:w-1/4 flex-shrink-0">Re-enter Password:</label>
-                        <input type="password" id="reEnterPassword" value={formData.reEnterPassword} onChange={handleChange}
-                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow" required />
+                        <div className="flex-grow">
+                            <PasswordInput
+                                id="reEnterPassword"
+                                value={formData.reEnterPassword}
+                                onChange={(e) => handleChange(e)}
+                            />
+                        </div>
                     </div>
 
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
@@ -813,23 +820,17 @@ const ResetPasswordPage = ({ onNavigateToLogin, initialToken }) => {
                     />
 
                     <label htmlFor="newPassword" className="font-semibold text-gray-700 mb-1">New Password:</label>
-                    <input
-                        type="password"
+                    <PasswordInput
                         id="newPassword"
                         value={newPassword}
                         onChange={(e) => setNewPassword(e.target.value)}
-                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition"
-                        required
                     />
 
                     <label htmlFor="reEnterNewPassword" className="font-semibold text-gray-700 mb-1">Re-enter New Password:</label>
-                    <input
-                        type="password"
+                    <PasswordInput
                         id="reEnterNewPassword"
                         value={reEnterNewPassword}
                         onChange={(e) => setReEnterNewPassword(e.target.value)}
-                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition"
-                        required
                     />
 
                     {error && <p className="text-red-500 text-sm text-center mt-2">{error}</p>}
@@ -1679,6 +1680,42 @@ const SplashVideo = ({ onVideoEnd }) => {
     );
 };
 
+// NEW: Password Input Component with Eye Toggle
+const PasswordInput = ({ id, value, onChange, placeholder, required = true }) => {
+    const [showPassword, setShowPassword] = useState(false);
+
+    return (
+        <div className="relative w-full">
+            <input
+                type={showPassword ? "text" : "password"}
+                id={id}
+                value={value}
+                onChange={onChange}
+                placeholder={placeholder}
+                className="p-3 pr-12 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition w-full"
+                required={required}
+            />
+            <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600 hover:text-gray-800 focus:outline-none"
+            >
+                {showPassword ? (
+                    // Eye crossed (hidden password)
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
+                    </svg>
+                ) : (
+                    // Eye open (visible password)
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                )}
+            </button>
+        </div>
+    );
+};
 
 // Main App component
 function App() { 
