@@ -1900,7 +1900,7 @@ function App() {
     const adConfig = {
         login: {
             href: 'https://ad-link-login.com',
-            src: 'https://img.freepik.com/free-photo/people-working-as-team-company_23-2149136895.jpg?ga=GA1.1.888221993.1750255895&semt=ais_hybrid&w=740/600x600',
+            src: 'what2.jpg',
             alt: 'Login Advertisement',
         },
         welcome: {
@@ -1972,7 +1972,7 @@ function App() {
                         <div className="w-full md:w-1/2 p-8 flex flex-col relative min-h-screen">
                             <header>
                                 <img src="/tit.png" alt="kroxnest." className="h-20 sm:h-24 md:h-[100px] mb-[-10px] drop-shadow-lg filter invert" />
-                                <p className="text-xl sm:text-2xl text-white italic pl-2" style={{ fontFamily: 'Inter, sans-serif' }}>portfolio of talent & exhibits</p>
+                                <p className="text-xl sm:text-2xl text-white italic pl-2" style={{ fontFamily: 'Inter, sans-serif' }}>Knowledge Repository Of eXhibits & Networked Educational Student Tracks</p>
                             </header>
                             {/* Advertisement section with white background */}
                             <div className="mt-8 w-full flex justify-center">
