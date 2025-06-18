@@ -1900,22 +1900,22 @@ function App() {
     const adConfig = {
         login: {
             href: 'https://ad-link-login.com',
-            src: '/ads/login-ad.jpg',
+            src: 'https://via.placeholder.com/600x600',
             alt: 'Login Advertisement',
         },
         welcome: {
             href: 'https://ad-link-welcome.com',
-            src: '/ads/welcome-ad.jpg',
+            src: 'https://via.placeholder.com/600x600',
             alt: 'Welcome Advertisement',
         },
         createProject: {
             href: 'https://ad-link-create.com',
-            src: '/ads/create-ad.jpg',
+            src: 'https://via.placeholder.com/600x600',
             alt: 'Create Project Advertisement',
         },
         viewProjects: {
             href: 'https://ad-link-view.com',
-            src: '/ads/view-ad.jpg',
+            src: 'https://via.placeholder.com/600x600',
             alt: 'View Projects Advertisement',
         },
     };
