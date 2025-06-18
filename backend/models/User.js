@@ -40,10 +40,6 @@ const User = sequelize.define('User', {
         allowNull: false,
         unique: true
     },
-    mobile_number: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
     resetPasswordToken: {
         type: DataTypes.STRING
     },
