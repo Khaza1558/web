@@ -1809,42 +1809,7 @@ function App() {
         switch (currentPage) {
             case 'login':
                 return (
-                    <div className="min-h-screen flex flex-col md:flex-row bg-black font-sans">
-                        {/* Left section for Advertisement */}
-                        <div className="w-full md:w-1/2 p-8 flex flex-col justify-center items-center">
-                            <a
-                                href="https://ad-link-login.com"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                style={{
-                                    display: 'block',
-                                    width: 600,
-                                    height: 600,
-                                    borderRadius: 32,
-                                    overflow: 'hidden',
-                                    boxShadow: '0 4px 24px rgba(0,0,0,0.12)',
-                                    border: '2px solid #3b82f6',
-                                    background: '#fff',
-                                }}
-                            >
-                                <img
-                                    src="/ads/login-ad.jpg"
-                                    alt="Login Advertisement"
-                                    style={{
-                                        width: '100%',
-                                        height: '100%',
-                                        objectFit: 'contain',
-                                        display: 'block',
-                                        background: '#fff',
-                                    }}
-                                />
-                            </a>
-                        </div>
-                        {/* Right section for Login Form */}
-                        <main className="flex-grow flex items-center justify-center w-full md:w-1/2 p-4">
-                            <LoginPage onLoginSuccess={() => setCurrentPage('welcome')} onNavigateToRegister={() => navigate('register')} onNavigateToForgotPassword={() => navigate('forgotPassword')} />
-                        </main>
-                    </div>
+                    <LoginPage onLoginSuccess={() => setCurrentPage('welcome')} onNavigateToRegister={() => navigate('register')} onNavigateToForgotPassword={() => navigate('forgotPassword')} />
                 );
             case 'register':
                 return <RegisterPage onRegisterSuccess={() => navigate('login')} onNavigateToLogin={() => navigate('login')} />;
@@ -1854,42 +1819,7 @@ function App() {
                 return <ResetPasswordPage onNavigateToLogin={() => navigate('login')} initialToken={resetTokenFromUrl} />;
             case 'welcome':
                 return (
-                    <div className="min-h-screen flex flex-col md:flex-row bg-black font-sans">
-                        {/* Left section for Advertisement */}
-                        <div className="w-full md:w-1/2 p-8 flex flex-col justify-center items-center">
-                            <a
-                                href="https://ad-link-welcome.com"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                style={{
-                                    display: 'block',
-                                    width: 600,
-                                    height: 600,
-                                    borderRadius: 32,
-                                    overflow: 'hidden',
-                                    boxShadow: '0 4px 24px rgba(0,0,0,0.12)',
-                                    border: '2px solid #3b82f6',
-                                    background: '#fff',
-                                }}
-                            >
-                                <img
-                                    src="/ads/welcome-ad.jpg"
-                                    alt="Welcome Advertisement"
-                                    style={{
-                                        width: '100%',
-                                        height: '100%',
-                                        objectFit: 'contain',
-                                        display: 'block',
-                                        background: '#fff',
-                                    }}
-                                />
-                            </a>
-                        </div>
-                        {/* Right section for Welcome Page */}
-                        <main className="flex-grow flex items-center justify-center w-full md:w-1/2 p-4">
-                            <WelcomePage onNavigateToCreateProject={() => navigate('createProject')} onNavigateToViewProjects={() => navigate('viewProjects')} />
-                        </main>
-                    </div>
+                    <WelcomePage onNavigateToCreateProject={() => navigate('createProject')} onNavigateToViewProjects={() => navigate('viewProjects')} />
                 );
             case 'createProject':
                 return <CreateProjectPage onNavigateToWelcome={() => navigate('welcome')} />; 
@@ -1938,12 +1868,7 @@ function App() {
                     <div className="w-full md:w-1/2 p-8 flex flex-col justify-start items-start relative">
                         <header className="mb-8 md:mb-0">
                             <img src="/tit.png" alt="kroxnest." className="h-20 sm:h-24 md:h-[100px] mb-[-10px] drop-shadow-lg filter invert" />
-                            <p className="text-xl sm:text-2xl text-white italic pl-2" style={{ fontFamily: 'Inter, sans-serif' }}>portfolio of talent & exhibits</p>
-                            <div className="md:mt-auto pb-10 pl-2">
-                                <p className="text-lg text-white max-w-sm leading-relaxed">
-                                    Manage your projects effortlessly: access,edit and update them from any desktop,anytime.
-                                </p>
-                            </div>
+                            <p className="text-xl sm:text-2xl text-white italic pl-2" style={{ fontFamily: 'Inter, sans-serif' }}>knowledge Repository Of eXhibits & Networked Educational Student Tracks</p>
                         </header>
                         {/* Advertisement below slogan, with gap */}
                         <div style={{ marginTop: 48, marginBottom: 24 }}>
