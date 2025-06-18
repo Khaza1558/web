@@ -505,12 +505,18 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
         collegeName: '',
         branch: '',
         rollNumber: '',
+        mobileNumber: ''
     });
     const [error, setError] = useState('');
 
     const handleChange = (e) => {
         const { id, value } = e.target;
         setFormData(prev => ({ ...prev, [id]: value }));
+    };
+
+    const validateMobileNumber = (number) => {
+        const regex = /^[0-9]{10}$/;
+        return regex.test(number);
     };
 
     const handleSubmit = async (e) => {
@@ -520,6 +526,12 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
         if (formData.password !== formData.reEnterPassword) {
             setError('Passwords do not match!');
             alert('Passwords do not match!');
+            return;
+        }
+
+        if (!validateMobileNumber(formData.mobileNumber)) {
+            setError('Please enter a valid 10-digit mobile number.');
+            alert('Please enter a valid 10-digit mobile number.');
             return;
         }
 
@@ -534,6 +546,7 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
                     college: formData.collegeName,
                     branch: formData.branch,
                     rollNumber: formData.rollNumber,
+                    mobileNumber: formData.mobileNumber
                 })
             });
 
@@ -554,10 +567,10 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
     };
 
     return (
-        <div className="flex items-center justify-center p-5 w-full h-full"> {/* Added h-full to help centering */}
-            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-xl flex flex-col items-center animate-fade-in-up"> 
+        <div className="flex items-center justify-center p-5 w-full h-full">
+            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-xl flex flex-col items-center animate-fade-in-up">
                 <h2 className="text-3xl font-bold text-gray-800 mb-6">Register</h2>
-                <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-lg mx-auto"> 
+                <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-lg mx-auto">
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2"> 
                         <label htmlFor="email" className="font-semibold text-gray-700 text-sm sm:w-1/4 flex-shrink-0">Email:</label>
                         <input type="email" id="email" value={formData.email} onChange={handleChange}
@@ -608,6 +621,21 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
                         <label htmlFor="rollNumber" className="font-semibold text-gray-700 text-sm sm:w-1/4 flex-shrink-0">Roll Number:</label>
                         <input type="text" id="rollNumber" value={formData.rollNumber} onChange={handleChange}
                             className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow" required />
+                    </div>
+
+                    {/* Mobile Number Field */}
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
+                        <label htmlFor="mobileNumber" className="font-semibold text-gray-700 text-sm sm:w-1/4 flex-shrink-0">Mobile Number:</label>
+                        <input
+                            type="tel"
+                            id="mobileNumber"
+                            value={formData.mobileNumber}
+                            onChange={handleChange}
+                            placeholder="Enter 10-digit mobile number"
+                            pattern="[0-9]{10}"
+                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow"
+                            required
+                        />
                     </div>
 
                     {error && <p className="text-red-500 text-sm text-center mt-2">{error}</p>}
@@ -1812,10 +1840,7 @@ function App() {
                             {/* Logo image with precise height and alignment */}
                             <img src="/tit.png" alt="kroxnest." className="h-20 sm:h-24 md:h-[100px] mb-[-10px] drop-shadow-lg filter invert" /> {/* md:h-[100px] for more exact height, negative margin for tighter spacing */}
                             {/* Slogan with refined font size and color */}
-                            <p className="text-xl sm:text-2xl text-white italic pl-2" style={{ fontFamily: 'Inter, sans-serif' }}>portfolio of talent & exhibits</p> 
-                            <div className="md:mt-auto pb-10 pl-2"> {/* Removed hidden for md:block to ensure consistency on all sizes */}
-                            <p className="text-lg text-white max-w-sm leading-relaxed"> 
-                                Manage your projects effortlessly: access,edit and update them from any desktop,anytime.</p></div>
+                            <p className="text-xl sm:text-2xl text-white italic pl-2" style={{ fontFamily: 'Inter, sans-serif' }}>Knowledge Repository Of eXhibits & Networked Educational Student Tracks</p> 
                         </header>
                          {/* Footer for the main app - moved here to align with the left section content */}
                         <footer className="w-full text-left py-4 text-gray-500 text-sm md:absolute md:bottom-0 md:left-8">
