@@ -448,7 +448,7 @@ const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPas
     };
 
     return (
-        <div className="flex items-start justify-center p-5 w-full h-full"> {/* items-start for top alignment */}
+        <div className="flex items-start justify-center p-5 w-full h-full mt-8"> {/* items-start for top alignment, mt-8 for spacing */}
             <div
                 className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col items-center animate-fade-in-up relative"
                 style={{ width: 450, height: 450, minWidth: 450, minHeight: 450 }}
@@ -573,8 +573,9 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
     };
 
     return (
-        <div className="flex items-center justify-center p-5 w-full h-full">
-            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-xl flex flex-col items-center animate-fade-in-up">
+        <div className="flex items-start justify-center p-5 w-full h-full mt-8">
+            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-xl flex flex-col items-center animate-fade-in-up"
+                style={{ width: 450, minWidth: 450 }}>
                 <h2 className="text-3xl font-bold text-gray-800 mb-6">Register</h2>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-lg mx-auto">
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2"> 
@@ -903,7 +904,7 @@ const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects, onNa
     };
 
     return (
-        <div className="flex flex-col items-center justify-center p-5 w-full h-full">
+        <div className="flex items-start justify-center p-5 w-full h-full mt-8">
             <div
                 className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col items-center animate-fade-in-up relative"
                 style={{ width: 450, height: 450, minWidth: 450, minHeight: 450 }}
@@ -970,8 +971,9 @@ const SuggestionsPage = ({ onNavigateToWelcome }) => {
         'Virtual Reality Learning App',
     ];
     return (
-        <div className="flex flex-col items-center justify-center p-5 w-full h-full">
-            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col items-center animate-fade-in-up" style={{ width: 450, minWidth: 450 }}>
+        <div className="flex items-start justify-center p-5 w-full h-full mt-8">
+            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col items-center animate-fade-in-up"
+                style={{ width: 450, minWidth: 450 }}>
                 <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-yellow-600">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v13.5m0 0l-3.75-3.75m3.75 3.75l3.75-3.75M21 21H3" />
@@ -1332,8 +1334,9 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
     console.log('ViewProjectsPage - Rendering. showSearchAndList:', showSearchAndList);
 
     return (
-        <div className="flex flex-col items-center justify-center p-5 w-full h-full"> {/* Added h-full to help centering */}
-            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-xl flex flex-col items-start animate-fade-in-up"> 
+        <div className="flex items-start justify-center p-5 w-full h-full mt-8">
+            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-xl flex flex-col items-start animate-fade-in-up"
+                style={{ width: 450, minWidth: 450 }}>
                 <h1 className="text-3xl font-bold mb-6 text-gray-800 self-center">View Projects</h1>
 
                 {showSearchAndList ? (
@@ -1620,8 +1623,9 @@ const CreateProjectPage = ({ onNavigateToWelcome }) => {
     };
 
     return (
-        <div className="flex items-center justify-center p-5 w-full h-full"> {/* Added h-full to help centering */}
-            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-xl flex flex-col items-center animate-fade-in-up"> 
+        <div className="flex items-start justify-center p-5 w-full h-full mt-8">
+            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-xl flex flex-col items-center animate-fade-in-up"
+                style={{ width: 450, minWidth: 450 }}>
                 <h2 className="text-3xl font-bold text-gray-800 mb-6">Create New Project</h2>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full max-w-lg mx-auto"> 
                     <label htmlFor="projectName" className="font-semibold text-gray-700 mb-1">Project Name:</label>
@@ -1975,54 +1979,37 @@ function App() {
                                 </p>
                             </div>
                         </header>
-                        {/* Advertisement below slogan, with gap */}
-                        <div style={{ marginTop: 48, marginBottom: 24 }}>
-                            <a
-                                href={currentAd.href}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                style={{
-                                    display: 'block',
-                                    width: 600,
-                                    height: 600,
-                                    borderRadius: 32,
-                                    overflow: 'hidden',
-                                    boxShadow: '0 4px 24px rgba(0,0,0,0.12)',
-                                    border: '2px solid #3b82f6',
-                                    background: '#fff',
-                                }}
-                            >
+
+                        {/* Advertisement section with proper spacing */}
+                        <div className="mt-8 w-full">
+                            <a href={currentAd.href} target="_blank" rel="noopener noreferrer" className="block">
                                 <img
                                     src={currentAd.src}
                                     alt={currentAd.alt}
-                                    style={{
-                                        width: '100%',
-                                        height: '100%',
-                                        objectFit: 'contain',
-                                        display: 'block',
-                                        background: '#fff',
-                                    }}
+                                    className="w-[600px] h-[600px] object-cover rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300"
                                 />
                             </a>
                         </div>
-                        {/* What we do section - full width, spaced */}
-                        <div className="w-full" style={{ marginTop: 48, marginBottom: 48 }}>
+
+                        {/* What we do section with increased spacing */}
+                        <div className="w-full mt-20">
                             <h2 className="text-2xl font-bold text-white mb-8" style={{ textAlign: 'left' }}>What we do</h2>
                             <div className="flex flex-row gap-12 justify-between items-start w-full">
                                 {whatWeDoImages.map((item, idx) => (
-                                    <div key={idx} className="flex flex-col items-center flex-1 mx-2" style={{ minWidth: 0 }}>
-                                        <img src={item.src} alt={item.alt} style={{ width: '100%', maxWidth: 340, height: 300, borderRadius: 16, objectFit: 'cover', marginBottom: 16, background: '#f3f4f6' }} />
-                                        <p className="text-white text-base text-center" style={{ maxWidth: 340 }}>{item.desc}</p>
+                                    <div key={idx} className="flex flex-col items-center bg-white bg-opacity-10 rounded-2xl shadow-lg p-6 flex-1 mx-2" style={{ width: '100%', maxWidth: 300, height: 300, minWidth: 0 }}>
+                                        <img src={item.src} alt={item.alt} className="w-[300px] h-[300px] object-cover rounded-xl mb-4" />
+                                        <p className="text-white text-center mt-2">{item.desc}</p>
                                     </div>
                                 ))}
                             </div>
                         </div>
-                        {/* How to use section - full width, spaced */}
-                        <div className="w-full" style={{ marginTop: 64 }}>
+
+                        {/* How to use section with increased spacing */}
+                        <div className="w-full mt-32">
                             <h2 className="text-2xl font-bold text-white mb-8" style={{ textAlign: 'left' }}>How to use</h2>
                             <div className="flex flex-row gap-12 justify-between items-start w-full">
                                 {howToUseSteps.map((step, idx) => (
-                                    <div key={idx} className="flex flex-col items-center bg-white bg-opacity-10 rounded-2xl shadow-lg p-6 flex-1 mx-2" style={{ width: '100%', maxWidth: 340, height: 300, minWidth: 0 }}>
+                                    <div key={idx} className="flex flex-col items-center bg-white bg-opacity-10 rounded-2xl shadow-lg p-6 flex-1 mx-2" style={{ width: '100%', maxWidth: 300, height: 300, minWidth: 0 }}>
                                         <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white text-2xl font-bold mb-4">{step.step}</div>
                                         <h3 className="text-lg font-bold text-white mb-2">{step.title}</h3>
                                         <p className="text-white text-base text-center">{step.desc}</p>
@@ -2030,22 +2017,20 @@ function App() {
                                 ))}
                             </div>
                         </div>
-                        {/* Modern Footer with contact info - two lines, centered */}
-                        <footer className="w-full flex flex-col items-center justify-center py-6 px-2 mt-12 bg-black bg-opacity-60 rounded-2xl gap-1 shadow-lg text-center">
-                            <div>
-                                <span className="text-gray-300 text-sm mr-6">Contact: <a href="mailto:info@plote.com" className="underline hover:text-blue-400">info@plote.com</a></span>
-                                <span className="text-gray-300 text-sm">Phone: <a href="tel:+1234567890" className="underline hover:text-blue-400">+1 234 567 890</a></span>
+
+                        {/* Footer centered in the image section */}
+                        <div className="w-full flex justify-center mt-16 mb-8">
+                            <div className="text-center">
+                                <p className="text-white text-sm mb-2">Contact us: support@kroxnest.com</p>
+                                <p className="text-white text-sm">© 2024 Kroxnest. All rights reserved.</p>
                             </div>
-                            <div>
-                                <span className="block text-gray-300 text-base font-semibold">© 2025 plote from KHAZA</span>
-                                <span className="block text-gray-400 text-sm">All rights reserved.</span>
-                            </div>
-                        </footer>
+                        </div>
                     </div>
-                    {/* Right section for dynamic page content */}
-                    <main className="flex-grow flex items-start justify-center w-full md:w-1/2 p-4"> {/* items-start for top alignment */}
+
+                    {/* Right section for content (login, register, etc.) */}
+                    <div className="w-full md:w-1/2 flex justify-center items-start" style={{ marginTop: '180px' }}> {/* Adjusted to align with slogan height */}
                         {renderPage()}
-                    </main>
+                    </div>
                 </div>
             )}
         </>
