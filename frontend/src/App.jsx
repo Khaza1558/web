@@ -448,8 +448,11 @@ const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPas
     };
 
     return (
-        <div className="flex items-center justify-center p-5 w-full h-full"> {/* Added h-full to help centering */}
-            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col items-center animate-fade-in-up"> 
+        <div className="flex items-center justify-center p-5 w-full h-full">
+            <div
+                className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col items-center animate-fade-in-up"
+                style={{ width: 420, height: 420, minWidth: 420, minHeight: 420 }}
+            >
                 <h2 className="text-3xl font-bold text-gray-800 mb-6">Login</h2>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full max-w-xs"> 
                     <label htmlFor="loginUsername" className="font-semibold text-gray-700 mb-1">Username:</label> 
@@ -898,8 +901,11 @@ const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects }) =>
     };
 
     return (
-        <div className="flex flex-col items-center justify-center p-5 w-full h-full"> {/* Added h-full to help centering */}
-            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col items-center animate-fade-in-up"> 
+        <div className="flex flex-col items-center justify-center p-5 w-full h-full">
+            <div
+                className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col items-center animate-fade-in-up"
+                style={{ width: 420, height: 420, minWidth: 420, minHeight: 420 }}
+            >
                 <h1 className="text-3xl font-bold text-gray-800 mb-6">Welcome, {userDetails?.username || 'User'}!</h1>
 
                 {isAuthLoading ? (
@@ -1868,7 +1874,7 @@ function App() {
                     <div className="w-full md:w-1/2 p-8 flex flex-col justify-start items-start relative">
                         <header className="mb-8 md:mb-0">
                             <img src="/tit.png" alt="kroxnest." className="h-20 sm:h-24 md:h-[100px] mb-[-10px] drop-shadow-lg filter invert" />
-                            <p className="text-xl sm:text-2xl text-white italic pl-2" style={{ fontFamily: 'Inter, sans-serif' }}>knowledge Repository Of eXhibits & Networked Educational Student Tracks</p>
+                            <p className="text-xl sm:text-2xl text-white italic pl-2" style={{ fontFamily: 'Inter, sans-serif' }}>portfolio of talent & exhibits</p>
                         </header>
                         {/* Advertisement below slogan, with gap */}
                         <div style={{ marginTop: 48, marginBottom: 24 }}>
