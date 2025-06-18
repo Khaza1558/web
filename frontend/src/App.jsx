@@ -2000,7 +2000,7 @@ function App() {
             )}
 
             {/* What we do section with wide container and centered grid, now spanning both columns */}
-            <div className="w-full mt-16 bg-black rounded-2xl py-10">
+            <div className="w-full mt-16 bg-black py-0 px-0">
                 <h2 className="text-2xl font-bold text-white mb-8 text-left pl-8">What we do</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 w-full px-8">
                     {whatWeDoImages.map((item, idx) => (
@@ -2014,18 +2014,16 @@ function App() {
                 </div>
             </div>
             {/* How to use section with wide container and centered grid, now spanning both columns */}
-            <div className="w-full mt-16 bg-black rounded-2xl py-10">
+            <div className="w-full mt-16 bg-black py-0 px-0">
                 <h2 className="text-2xl font-bold text-white mb-8 text-left pl-8">How to use</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 w-full px-8">
                     {howToUseSteps.map((step, idx) => (
                         <div key={idx} className="flex flex-col items-center bg-black rounded-2xl shadow-lg p-6 h-[340px]">
-                            <div className="bg-white border-2 border-white rounded-xl mb-4 flex items-center justify-center" style={{ width: '180px', height: '180px' }}>
-                                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white text-2xl font-bold">
-                                    {step.step}
-                                </div>
+                            <div className="border-2 border-white rounded-xl mb-4 flex flex-col items-center justify-center" style={{ width: '180px', height: '180px' }}>
+                                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white text-2xl font-bold mt-8">{step.step}</div>
+                                <h3 className="text-lg font-bold text-white mt-6 mb-2">{step.title}</h3>
+                                <p className="text-white text-base text-center px-2">{step.desc}</p>
                             </div>
-                            <h3 className="text-lg font-bold text-white mb-2">{step.title}</h3>
-                            <p className="text-white text-base text-center">{step.desc}</p>
                         </div>
                     ))}
                 </div>
