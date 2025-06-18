@@ -16,10 +16,10 @@ const generateToken = (id) => {
 // @access  Public
 exports.registerUser = async (req, res) => {
     try {
-        const { username, email, password, college, branch, rollNumber } = req.body;
+        const { username, email, password, college, branch, rollNumber, mobileNumber } = req.body;
 
         // Simple validation
-        if (!username || !email || !password || !college || !branch || !rollNumber) {
+        if (!username || !email || !password || !college || !branch || !rollNumber || !mobileNumber) {
             return res.status(400).json({ success: false, message: 'Please enter all fields.' });
         }
 
@@ -45,7 +45,8 @@ exports.registerUser = async (req, res) => {
             password, // Password will be hashed by the hook
             college,
             branch,
-            roll_number: rollNumber
+            roll_number: rollNumber,
+            mobile_number: mobileNumber
         });
 
         if (newUser) {
@@ -59,7 +60,8 @@ exports.registerUser = async (req, res) => {
                     email: newUser.email,
                     roll_number: newUser.roll_number,
                     college: newUser.college,
-                    branch: newUser.branch
+                    branch: newUser.branch,
+                    mobile_number: newUser.mobile_number
                 }
             });
         } else {
