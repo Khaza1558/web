@@ -1968,7 +1968,7 @@ function App() {
                 <SplashVideo onVideoEnd={handleVideoEnd} />
             ) : (
                 <div className="min-h-screen flex flex-col md:flex-row bg-black font-sans">
-                    {/* Left section for Logo, Slogan, Advertisement, and What we do */}
+                    {/* Left section for Logo, Slogan, Advertisement */}
                     <div className="w-full md:w-1/2 p-8 flex flex-col relative min-h-screen">
                         <header>
                             <img src="/tit.png" alt="kroxnest." className="h-20 sm:h-24 md:h-[100px] mb-[-10px] drop-shadow-lg filter invert" />
@@ -1991,31 +1991,6 @@ function App() {
                                 </a>
                             </div>
                         </div>
-                        {/* What we do section with wide container and centered grid */}
-                        <div className="w-full max-w-6xl mx-auto mt-16">
-                            <h2 className="text-2xl font-bold text-white mb-8 text-left">What we do</h2>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 w-full">
-                                {whatWeDoImages.map((item, idx) => (
-                                    <div key={idx} className="flex flex-col items-center bg-white bg-opacity-10 rounded-2xl shadow-lg p-6 h-[340px]">
-                                        <img src={item.src} alt={item.alt} className="w-[180px] h-[180px] object-cover rounded-xl mb-4" />
-                                        <p className="text-white text-center mt-2">{item.desc}</p>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                        {/* How to use section with wide container and centered grid */}
-                        <div className="w-full max-w-6xl mx-auto mt-16">
-                            <h2 className="text-2xl font-bold text-white mb-8 text-left">How to use</h2>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 w-full">
-                                {howToUseSteps.map((step, idx) => (
-                                    <div key={idx} className="flex flex-col items-center bg-white bg-opacity-10 rounded-2xl shadow-lg p-6 h-[340px]">
-                                        <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white text-2xl font-bold mb-4">{step.step}</div>
-                                        <h3 className="text-lg font-bold text-white mb-2">{step.title}</h3>
-                                        <p className="text-white text-base text-center">{step.desc}</p>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
                     </div>
 
                     {/* Right section for content (login, register, etc.) - top aligned with 30px padding */}
@@ -2023,16 +1998,44 @@ function App() {
                         {renderPage()}
                     </div>
                 </div>
+
+                {/* What we do section with wide container and centered grid, now spanning both columns */}
+                <div className="w-full max-w-6xl mx-auto mt-16">
+                    <h2 className="text-2xl font-bold text-white mb-8 text-left">What we do</h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 w-full">
+                        {whatWeDoImages.map((item, idx) => (
+                            <div key={idx} className="flex flex-col items-center bg-white bg-opacity-10 rounded-2xl shadow-lg p-6 h-[340px]">
+                                <img src={item.src} alt={item.alt} className="w-[180px] h-[180px] object-cover rounded-xl mb-4" />
+                                <p className="text-white text-center mt-2">{item.desc}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* How to use section with wide container and centered grid, now spanning both columns */}
+                <div className="w-full max-w-6xl mx-auto mt-16">
+                    <h2 className="text-2xl font-bold text-white mb-8 text-left">How to use</h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 w-full">
+                        {howToUseSteps.map((step, idx) => (
+                            <div key={idx} className="flex flex-col items-center bg-white bg-opacity-10 rounded-2xl shadow-lg p-6 h-[340px]">
+                                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white text-2xl font-bold mb-4">{step.step}</div>
+                                <h3 className="text-lg font-bold text-white mb-2">{step.title}</h3>
+                                <p className="text-white text-base text-center">{step.desc}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Footer centered at the bottom of the entire page, not fixed */}
+                <footer className="w-full flex flex-col items-center justify-center py-6 px-2 bg-black bg-opacity-80 gap-1 text-center mt-16">
+                    <div>
+                        <span className="text-gray-300 text-sm mr-6">Contact: <a href="mailto:support@kroxnest.com" className="underline hover:text-blue-400">support@kroxnest.com</a></span>
+                    </div>
+                    <div>
+                        <span className="block text-gray-300 text-base font-semibold">© 2024 Kroxnest. All rights reserved.</span>
+                    </div>
+                </footer>
             )}
-            {/* Footer centered at the bottom of the entire page */}
-            <footer className="w-full flex flex-col items-center justify-center py-6 px-2 bg-black bg-opacity-80 gap-1 text-center fixed left-0 bottom-0 z-50">
-                <div>
-                    <span className="text-gray-300 text-sm mr-6">Contact: <a href="mailto:support@kroxnest.com" className="underline hover:text-blue-400">support@kroxnest.com</a></span>
-                </div>
-                <div>
-                    <span className="block text-gray-300 text-base font-semibold">© 2024 Kroxnest. All rights reserved.</span>
-                </div>
-            </footer>
         </>
     );
 }
