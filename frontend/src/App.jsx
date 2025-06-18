@@ -2017,7 +2017,7 @@ function App() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 w-full">
                     {howToUseSteps.map((step, idx) => (
                         <div key={idx} className="flex flex-col items-center bg-black rounded-2xl shadow-lg p-6 h-[340px]">
-                            <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white text-2xl font-bold mb-4">{step.step}</div>
+                            <div className="flex items-center justify-center w-12 h-12 rounded-full bg-black-500 text-white text-2xl font-bold mb-4">{step.step}</div>
                             <h3 className="text-lg font-bold text-white mb-2">{step.title}</h3>
                             <p className="text-white text-base text-center">{step.desc}</p>
                         </div>
@@ -2027,11 +2027,11 @@ function App() {
             {/* Footer centered at the bottom of the entire page, not fixed */}
             <footer className="w-full flex flex-col items-center justify-center py-6 px-2 bg-black bg-opacity-80 gap-1 text-center mt-16">
                 <div>
-                    <span className="text-gray-300 text-sm mr-6">Contact: <a href="tel:+1234567890" className="underline hover:text-blue-400">+1 234 567 890</a> | <a href="mailto:dummy@email.com" className="underline hover:text-blue-400">dummy@email.com</a></span>
+                    <span className="text-gray-300 text-sm mr-6">Contact: <a href="tel:+1234567890" className="underline hover:text-blue-400">+1 234 567 890</a> | <a href="mailto:dummy@email.com" className="underline hover:text-blue-400">info@kroxnest.com</a></span>
                 </div>
                 <div>
                     <span className="block text-gray-300 text-base font-semibold">© 
-                        2024 Kroxnest. All rights reserved.</span>
+                        2025 Kroxnest. All rights reserved.</span>
                 </div>
             </footer>
         </>
