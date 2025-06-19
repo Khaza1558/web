@@ -1913,11 +1913,14 @@ function App() {
                     </div>
                     <div className="flex flex-row gap-4 w-full px-2 sm:px-6 md:px-12 max-w-7xl mx-auto overflow-x-auto snap-x sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-8 sm:overflow-x-visible">
                         {whatWeDoImages.map((item, idx) => (
-                            <div key={idx} className="flex flex-col items-center bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-8 h-[340px] min-w-[260px] max-w-xs snap-center sm:min-w-0 sm:max-w-none transition-all duration-300 hover:scale-105 hover:shadow-2xl w-full mx-2 sm:mx-0">
-                                <div className="bg-white border-4 border-white rounded-2xl mb-6 flex items-center justify-center shadow-lg w-[140px] h-[140px] sm:w-[180px] sm:h-[180px] md:w-[220px] md:h-[220px] mx-auto">
-                                    <img src={item.src} alt={item.alt} className="w-full h-full object-contain rounded-2xl" loading="lazy" />
+                            <div key={idx} className="flex flex-col items-center bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl border border-blue-200 hover:border-blue-400 hover:shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] transition-all duration-300 p-6 md:p-10 min-w-[260px] sm:min-w-[320px] lg:min-w-[340px] max-w-full snap-center sm:min-w-0 hover:scale-105 w-full mx-2 sm:mx-0 h-auto group">
+                                <div className="border-4 border-white rounded-2xl mb-6 flex flex-col items-center justify-center p-2 shadow-lg w-full max-w-[320px] mx-auto bg-gradient-to-tr from-blue-100 via-white to-purple-100 group-hover:from-blue-200 group-hover:to-purple-200 transition-all duration-300">
+                                    <div className="flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white text-3xl font-bold mt-8 shadow-md mb-4 group-hover:scale-110 transition-transform duration-300">
+                                        <img src={item.src} alt={item.alt} className="w-12 h-12 object-contain rounded-xl" loading="lazy" />
+                                    </div>
+                                    <h3 className="text-xl font-bold text-gray-800 mt-2 mb-2 text-center break-words w-full">{item.alt}</h3>
+                                    <p className="text-gray-700 text-lg text-center px-2 break-words w-full whitespace-pre-line font-normal">{item.desc}</p>
                                 </div>
-                                <p className="text-gray-800 text-center mt-2 font-normal text-base md:text-lg lg:text-base">{item.desc}</p>
                             </div>
                         ))}
                     </div>
