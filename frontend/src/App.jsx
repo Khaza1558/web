@@ -1861,6 +1861,7 @@ function App() {
                                     </a>
                                 </div>
                             </div>
+                            <div className="block sm:hidden w-full p-1"></div>
                         </div>
                         {/* Right section for content (login, register, etc.) */}
                         <div className="w-full md:w-1/2 flex justify-center items-start pt-8 md:pt-[60px] px-2 md:px-0">
@@ -1891,7 +1892,7 @@ function App() {
                                 <div className="bg-white border-4 border-white rounded-2xl mb-6 flex items-center justify-center shadow-lg w-[140px] h-[140px] sm:w-[180px] sm:h-[180px] md:w-[220px] md:h-[220px] mx-auto">
                                     <img src={item.src} alt={item.alt} className="w-full h-full object-contain rounded-2xl" loading="lazy" />
                                 </div>
-                                <p className="text-gray-800 text-center mt-2 font-semibold text-base md:text-lg lg:text-base">{item.desc}</p>
+                                <p className="text-gray-800 text-center mt-2 font-normal text-base md:text-lg lg:text-base">{item.desc}</p>
                             </div>
                         ))}
                     </div>
