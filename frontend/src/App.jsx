@@ -856,7 +856,6 @@ const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects, onNa
 // Suggestions Page
 const SuggestionsPage = ({ onNavigateToWelcome }) => {
     const suggestions = [
-        'virtual mouse using hand gesture- regd:358',
         'AI-Powered Attendance System',
         'Smart Waste Management',
         'IoT Home Automation',
@@ -1856,7 +1855,7 @@ function App() {
                                 <img 
                                     src="/tit.png" 
                                     alt="kroxnest." 
-                                    className="h-28 sm:h-36 md:h-[180px] lg:h-[220px] mb-[-10px] drop-shadow-2xl filter invert transition-all duration-500 ease-in-out mx-auto md:mx-0"
+                                    className="h-24 sm:h-32 md:h-[180px] lg:h-[220px] mb-[-10px] drop-shadow-2xl filter invert transition-all duration-500 ease-in-out mx-auto md:mx-0"
                                     style={{ maxWidth: '98vw', objectFit: 'contain' }}
                                     loading="eager"
                                 />
@@ -1864,25 +1863,28 @@ function App() {
                                     Knowledge Repository Of eXhibits & Networked Educational Student Tracks
                                 </p>
                             </header>
-                            {/* Advertisement section with gradient background and shadow */}
+                            {/* Advertisement section with responsive height */}
                             <div className="mt-8 w-full flex justify-center">
-                                <div className="bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-2 flex items-center justify-center transition-all duration-300 hover:scale-105 hover:shadow-2xl w-full max-w-2xl h-[320px] sm:h-[400px] md:h-[480px] lg:h-[540px]">
+                                <div className="bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-2 flex items-center justify-center transition-all duration-300 w-full h-32 sm:h-40 md:h-[480px] max-w-2xl">
                                     <a href={currentAd.href} target="_blank" rel="noopener noreferrer" className="block w-full h-full rounded-2xl overflow-hidden">
                                         <img
                                             src={currentAd.src}
                                             alt={currentAd.alt}
-                                            className="w-full h-full object-contain rounded-2xl transition-all duration-300 hover:scale-105 mx-auto"
+                                            className="w-full h-full object-contain rounded-2xl transition-all duration-300 mx-auto"
                                             loading="lazy"
                                         />
                                     </a>
                                 </div>
                             </div>
                         </div>
-
-                        {/* Right section for content (login, register, etc.) - top aligned with responsive padding */}
+                        {/* Right section for content (login, register, etc.) */}
                         <div className="w-full md:w-1/2 flex justify-center items-start pt-8 md:pt-[60px] px-2 md:px-0">
-                            <div className="w-full max-w-2xl flex flex-col items-center">
-                                <div className="w-full flex flex-col items-center">
+                            <div className={
+                                currentPage === 'login'
+                                    ? 'w-full max-w-sm sm:max-w-md mx-auto'
+                                    : 'w-full max-w-2xl flex flex-col items-center'
+                            }>
+                                <div className={currentPage === 'login' ? 'w-full flex flex-col items-center' : 'w-full'}>
                                     {renderPage()}
                                 </div>
                             </div>
