@@ -412,6 +412,7 @@ const ProjectCard = ({ project, onSelectProject }) => {
 
 // --- Page Components ---
 
+// LoginPage
 const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPassword }) => {
     const { setToken } = useContext(AuthContext); 
     const [username, setUsername] = useState('');
@@ -448,51 +449,50 @@ const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPas
     };
 
     return (
-        <div className="flex items-start justify-center p-5 w-full h-full mt-8"> {/* items-start for top alignment, mt-8 for spacing */}
-            <div
-                className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col items-center animate-fade-in-up relative"
-                style={{ width: 450, height: 450, minWidth: 450, minHeight: 450 }}
-            >
-                <h2 className="text-3xl font-bold text-gray-800 mb-6">Login</h2>
-                <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full max-w-xs flex-grow">
-                    <label htmlFor="loginUsername" className="font-semibold text-gray-700 mb-1">Username:</label> 
+        <div className="flex items-center justify-center w-full min-h-[80vh] animate-fade-in-up">
+            <div className="bg-white/20 backdrop-blur-2xl border border-blue-200/40 shadow-2xl rounded-3xl w-full max-w-lg p-10 flex flex-col items-center glass-card relative">
+                <h2 className="text-4xl font-extrabold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-6 text-center drop-shadow-lg relative inline-block">
+                    Login
+                    <span className="block h-1 w-24 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full mt-2 mx-auto animate-pulse"></span>
+                </h2>
+                <form onSubmit={handleSubmit} className="flex flex-col gap-6 w-full animate-fade-in">
+                    <label htmlFor="loginUsername" className="font-semibold text-gray-700 text-lg">Username</label> 
                     <input
                         type="text"
                         id="loginUsername"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
-                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition"
+                        className="p-4 border border-gray-300 rounded-xl text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition text-lg bg-white/60 backdrop-blur-md shadow-md"
                         required
                     />
 
-                    <label htmlFor="loginPassword" className="font-semibold text-gray-700 mb-1">Password:</label> 
+                    <label htmlFor="loginPassword" className="font-semibold text-gray-700 text-lg">Password</label> 
                     <PasswordInput
                         id="loginPassword"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
 
-                    {error && <p className="text-red-500 text-sm text-center mt-2">{error}</p>}
+                    {error && <p className="text-red-500 text-base text-center mt-2 animate-fade-in">{error}</p>}
 
                     <button
                         type="submit"
-                        className="bg-blue-500 text-white py-3 px-6 rounded-lg font-bold transition duration-300 hover:bg-blue-600 shadow-xl hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 mt-4" 
+                        className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white py-4 px-8 rounded-xl font-bold text-xl transition duration-300 hover:scale-105 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 mt-2 shadow-lg animate-scale-in"
                     >
                         Login
                     </button>
                 </form>
-                {showForgotPassword && ( 
+                {showForgotPassword && (
                     <p className="mt-4 text-gray-700">
-                        <a href="#" onClick={onNavigateToForgotPassword} className="text-blue-500 font-semibold hover:underline">
+                        <a href="#" onClick={onNavigateToForgotPassword} className="text-blue-500 font-semibold hover:underline hover:text-pink-500 transition-colors">
                             Forgot Password?
                         </a>
                     </p>
                 )}
-                {/* Register link always at the bottom, inside the card */}
                 <div className="absolute bottom-6 left-0 w-full flex justify-center">
-                    <p className="text-gray-700 text-base text-center">
+                    <p className="text-gray-700 text-lg text-center">
                         Don't have an account?{' '}
-                        <a href="#" onClick={onNavigateToRegister} className="text-blue-500 font-semibold hover:underline">
+                        <a href="#" onClick={onNavigateToRegister} className="text-blue-500 font-semibold hover:underline hover:text-pink-500 transition-colors">
                             Register here
                         </a>
                     </p>
@@ -502,6 +502,7 @@ const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPas
     );
 };
 
+// RegisterPage
 const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
     const [formData, setFormData] = useState({
         email: '',
@@ -573,25 +574,25 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
     };
 
     return (
-        <div className="flex items-start justify-center p-5 w-full h-full mt-8">
-            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-xl flex flex-col items-center animate-fade-in-up"
-                style={{ width: 450, minWidth: 450 }}>
-                <h2 className="text-3xl font-bold text-gray-800 mb-6">Register</h2>
-                <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-lg mx-auto">
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2"> 
-                        <label htmlFor="email" className="font-semibold text-gray-700 text-sm sm:w-1/4 flex-shrink-0">Email:</label>
+        <div className="flex items-center justify-center w-full min-h-[80vh] animate-fade-in-up">
+            <div className="bg-white/20 backdrop-blur-2xl border border-purple-200/40 shadow-2xl rounded-3xl w-full max-w-2xl p-10 flex flex-col items-center glass-card relative">
+                <h2 className="text-4xl font-extrabold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-6 text-center drop-shadow-lg relative inline-block">
+                    Register
+                    <span className="block h-1 w-24 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full mt-2 mx-auto animate-pulse"></span>
+                </h2>
+                <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full animate-fade-in">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
+                        <label htmlFor="email" className="font-semibold text-gray-700 text-lg sm:w-1/4 flex-shrink-0">Email</label>
                         <input type="email" id="email" value={formData.email} onChange={handleChange}
-                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow" required />
+                            className="p-4 border border-gray-300 rounded-xl text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow text-lg bg-white/60 backdrop-blur-md shadow-md" required />
                     </div>
-
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
-                        <label htmlFor="username" className="font-semibold text-gray-700 text-sm sm:w-1/4 flex-shrink-0">Username:</label>
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
+                        <label htmlFor="username" className="font-semibold text-gray-700 text-lg sm:w-1/4 flex-shrink-0">Username</label>
                         <input type="text" id="username" value={formData.username} onChange={handleChange}
-                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow" required />
+                            className="p-4 border border-gray-300 rounded-xl text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow text-lg bg-white/60 backdrop-blur-md shadow-md" required />
                     </div>
-
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
-                        <label htmlFor="password" className="font-semibold text-gray-700 text-sm sm:w-1/4 flex-shrink-0">Password:</label>
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
+                        <label htmlFor="password" className="font-semibold text-gray-700 text-lg sm:w-1/4 flex-shrink-0">Password</label>
                         <div className="flex-grow">
                             <PasswordInput
                                 id="password"
@@ -600,9 +601,8 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
                             />
                         </div>
                     </div>
-
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
-                        <label htmlFor="reEnterPassword" className="font-semibold text-gray-700 text-sm sm:w-1/4 flex-shrink-0">Re-enter Password:</label>
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
+                        <label htmlFor="reEnterPassword" className="font-semibold text-gray-700 text-lg sm:w-1/4 flex-shrink-0">Re-enter Password</label>
                         <div className="flex-grow">
                             <PasswordInput
                                 id="reEnterPassword"
@@ -611,28 +611,23 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
                             />
                         </div>
                     </div>
-
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
-                        <label htmlFor="collegeName" className="font-semibold text-gray-700 text-sm sm:w-1/4 flex-shrink-0">College Name:</label>
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
+                        <label htmlFor="collegeName" className="font-semibold text-gray-700 text-lg sm:w-1/4 flex-shrink-0">College Name</label>
                         <input type="text" id="collegeName" value={formData.collegeName} onChange={handleChange}
-                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow" required />
+                            className="p-4 border border-gray-300 rounded-xl text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow text-lg bg-white/60 backdrop-blur-md shadow-md" required />
                     </div>
-
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
-                        <label htmlFor="branch" className="font-semibold text-gray-700 text-sm sm:w-1/4 flex-shrink-0">Branch:</label>
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
+                        <label htmlFor="branch" className="font-semibold text-gray-700 text-lg sm:w-1/4 flex-shrink-0">Branch</label>
                         <input type="text" id="branch" value={formData.branch} onChange={handleChange}
-                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow" required />
+                            className="p-4 border border-gray-300 rounded-xl text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow text-lg bg-white/60 backdrop-blur-md shadow-md" required />
                     </div>
-
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
-                        <label htmlFor="rollNumber" className="font-semibold text-gray-700 text-sm sm:w-1/4 flex-shrink-0">Roll Number:</label>
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
+                        <label htmlFor="rollNumber" className="font-semibold text-gray-700 text-lg sm:w-1/4 flex-shrink-0">Roll Number</label>
                         <input type="text" id="rollNumber" value={formData.rollNumber} onChange={handleChange}
-                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow" required />
+                            className="p-4 border border-gray-300 rounded-xl text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow text-lg bg-white/60 backdrop-blur-md shadow-md" required />
                     </div>
-
-                    {/* Mobile Number Field */}
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
-                        <label htmlFor="mobileNumber" className="font-semibold text-gray-700 text-sm sm:w-1/4 flex-shrink-0">Mobile Number:</label>
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
+                        <label htmlFor="mobileNumber" className="font-semibold text-gray-700 text-lg sm:w-1/4 flex-shrink-0">Mobile Number</label>
                         <input
                             type="tel"
                             id="mobileNumber"
@@ -640,23 +635,21 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
                             onChange={handleChange}
                             placeholder="Enter 10-digit mobile number"
                             pattern="[0-9]{10}"
-                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow"
+                            className="p-4 border border-gray-300 rounded-xl text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow text-lg bg-white/60 backdrop-blur-md shadow-md"
                             required
                         />
                     </div>
-
-                    {error && <p className="text-red-500 text-sm text-center mt-2">{error}</p>}
-
+                    {error && <p className="text-red-500 text-base text-center mt-2 animate-fade-in">{error}</p>}
                     <button
                         type="submit"
-                        className="bg-blue-500 text-white py-3 px-6 rounded-lg font-bold transition duration-300 hover:bg-blue-600 shadow-xl hover:shadow-2xl mt-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75"
+                        className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white py-4 px-8 rounded-xl font-bold text-xl transition duration-300 hover:scale-105 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 mt-2 shadow-lg animate-scale-in"
                     >
                         Register
                     </button>
                 </form>
-                <p className="mt-6 text-gray-700 text-base">
+                <p className="mt-8 text-gray-700 text-lg">
                     Already have an account?{' '}
-                    <a href="#" onClick={onNavigateToLogin} className="text-blue-500 font-semibold hover:underline">
+                    <a href="#" onClick={onNavigateToLogin} className="text-blue-500 font-semibold hover:underline hover:text-pink-500 transition-colors">
                         Login here
                     </a>
                 </p>
