@@ -883,38 +883,36 @@ const SuggestionsPage = ({ onNavigateToWelcome }) => {
     );
 };
 
-// Updated FileItem component to include ownership logic and onViewFile prop
+// Updated FileItem component to ensure title and buttons are on the same line, never overflow, and look good on all screens
 const FileItem = ({ file, projectOwnerRollNumber, loggedInUserRollNumber, onReplace, onDelete, onViewFile }) => {
     const isOwner = loggedInUserRollNumber && projectOwnerRollNumber === loggedInUserRollNumber;
     return (
-        <div className="flex flex-col gap-2 mb-4 p-4 bg-gray-50 rounded-xl border border-gray-200 shadow-lg animate-fade-in-up">
-            <div className="flex flex-col sm:flex-row sm:items-center gap-2 w-full">
-                <span className="font-semibold text-gray-700 text-sm mb-1 sm:w-fit sm:min-w-[40px] flex-shrink-0">Title:</span>
-                <span className="font-bold text-gray-800 flex-grow">{file.file_name} ({file.original_name})</span>
-                <div className="flex flex-row gap-2 ml-0 sm:ml-4 mt-2 sm:mt-0">
-                    <button
-                        onClick={() => onViewFile(file.file_path, file.original_name)}
-                        className="bg-gray-200 text-gray-800 py-2 px-4 rounded-lg font-bold transition duration-200 hover:bg-gray-300 text-center"
-                    >
-                        View
-                    </button>
-                    {isOwner && (
-                        <>
-                            <button
-                                onClick={() => onReplace(file.id, file.file_name)}
-                                className="bg-gray-200 text-gray-800 py-2 px-4 rounded-lg font-bold transition duration-200 hover:bg-gray-300"
-                            >
-                                Replace
-                            </button>
-                            <button
-                                onClick={() => onDelete(file.id)}
-                                className="bg-red-500 text-white py-2 px-4 rounded-lg font-bold transition duration-200 hover:bg-red-600"
-                            >
-                                Delete
-                            </button>
-                        </>
-                    )}
-                </div>
+        <div className="flex flex-row flex-wrap items-center gap-2 mb-4 p-4 bg-gray-50 rounded-xl border border-gray-200 shadow-lg animate-fade-in-up w-full">
+            <span className="font-semibold text-gray-700 text-sm flex-shrink-0">Title:</span>
+            <span className="font-bold text-gray-800 flex-grow min-w-0 truncate">{file.file_name} ({file.original_name})</span>
+            <div className="flex flex-row gap-2 flex-shrink-0">
+                <button
+                    onClick={() => onViewFile(file.file_path, file.original_name)}
+                    className="bg-gray-200 text-gray-800 py-2 px-4 rounded-lg font-bold transition duration-200 hover:bg-gray-300 text-center"
+                >
+                    View
+                </button>
+                {isOwner && (
+                    <>
+                        <button
+                            onClick={() => onReplace(file.id, file.file_name)}
+                            className="bg-gray-200 text-gray-800 py-2 px-4 rounded-lg font-bold transition duration-200 hover:bg-gray-300"
+                        >
+                            Replace
+                        </button>
+                        <button
+                            onClick={() => onDelete(file.id)}
+                            className="bg-red-500 text-white py-2 px-4 rounded-lg font-bold transition duration-200 hover:bg-red-600"
+                        >
+                            Delete
+                        </button>
+                    </>
+                )}
             </div>
         </div>
     );
@@ -1307,26 +1305,26 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
                                     <h4 className="text-2xl font-bold mb-2 text-gray-800">Add New Files to this Project:</h4>
                                     <div className="flex flex-col gap-4 w-full">
                                         {addFiles.map(fileEntry => (
-                                            <div key={fileEntry.id} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 p-4 bg-gray-50 rounded-xl border border-gray-200 shadow-sm flex-wrap">
-                                                <div className="flex flex-col sm:flex-row sm:items-center gap-2 w-full sm:w-1/2">
-                                                    <label htmlFor={`addFile${fileEntry.id}`} className="font-semibold text-gray-700 sm:w-fit sm:min-w-[50px] flex-shrink-0">File {fileEntry.id}:</label>
+                                            <div key={fileEntry.id} className="flex flex-col md:flex-row items-stretch md:items-center gap-4 p-4 bg-gray-50 rounded-xl border border-gray-200 shadow-sm w-full max-w-3xl mx-auto">
+                                                <div className="flex flex-col md:flex-row md:items-center gap-2 w-full md:w-2/3">
+                                                    <label htmlFor={`addFile${fileEntry.id}`} className="font-semibold text-gray-700 md:w-fit md:min-w-[70px] flex-shrink-0">File {fileEntry.id}:</label>
                                                     <input
                                                         type="file"
                                                         id={`addFile${fileEntry.id}`}
                                                         onChange={(e) => handleAddFileChange(fileEntry.id, 'file', e.target.files[0])}
-                                                        className="p-2 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow w-full bg-white shadow-sm"
+                                                        className="p-2 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow w-full bg-white shadow-sm min-w-0"
                                                         required
                                                     />
                                                 </div>
-                                                <div className="flex flex-col sm:flex-row sm:items-center gap-2 w-full sm:w-1/2">
-                                                    <label htmlFor={`addFileTitle${fileEntry.id}`} className="font-semibold text-gray-700 sm:w-fit sm:min-w-[40px] flex-shrink-0">Title:</label>
+                                                <div className="flex flex-col md:flex-row md:items-center gap-2 w-full md:w-1/3">
+                                                    <label htmlFor={`addFileTitle${fileEntry.id}`} className="font-semibold text-gray-700 md:w-fit md:min-w-[50px] flex-shrink-0">Title:</label>
                                                     <input
                                                         type="text"
                                                         id={`addFileTitle${fileEntry.id}`}
                                                         value={fileEntry.title}
                                                         onChange={(e) => handleAddFileChange(fileEntry.id, 'title', e.target.value)}
                                                         placeholder="Enter title for this new file"
-                                                        className="p-2 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow w-full bg-white shadow-sm"
+                                                        className="p-2 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow w-full bg-white shadow-sm min-w-0"
                                                         required
                                                     />
                                                 </div>
@@ -1334,7 +1332,7 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
                                                     <button
                                                         type="button"
                                                         onClick={() => removeAddFileField(fileEntry.id)}
-                                                        className="bg-red-500 text-white py-2 px-4 rounded-lg font-bold transition duration-200 hover:bg-red-600 sm:ml-auto mt-2 sm:mt-0 w-full sm:w-auto"
+                                                        className="bg-red-500 text-white py-2 px-4 rounded-lg font-bold transition duration-200 hover:bg-red-600 md:ml-auto mt-2 md:mt-0 w-full md:w-auto"
                                                     >
                                                         Remove
                                                     </button>
