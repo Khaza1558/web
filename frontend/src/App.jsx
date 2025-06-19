@@ -1851,7 +1851,7 @@ function App() {
                     <div className="min-h-screen flex flex-col md:flex-row font-sans">
                         {/* Left section for Logo, Slogan, Advertisement */}
                         <div className="w-full md:w-1/2 px-2 sm:px-6 md:px-12 py-6 flex flex-col relative min-h-screen justify-between items-center md:items-start">
-                            <header className="flex flex-col items-center md:items-start mt-2 mb-8 w-full">
+                            <header className="flex flex-col items-center md:items-start mt-2 mb-8 w-full sm:mb-8 mb-2">
                                 <img 
                                     src="/tit.png" 
                                     alt="kroxnest." 
@@ -1892,7 +1892,7 @@ function App() {
                     </div>
                 )}
 
-                {/* What we do section with gradient header, underline, and responsive grid */}
+                {/* What we do section with horizontal scroll on mobile */}
                 <div className="w-full mt-16 bg-gradient-to-r from-[#232526] via-[#2c5364] to-[#0f2027] py-0 px-0">
                     <div className="w-full flex flex-col items-center">
                         <h2 className="text-4xl font-extrabold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-2 text-center drop-shadow-lg relative inline-block">
@@ -1900,10 +1900,10 @@ function App() {
                             <span className="block h-1 w-24 sm:w-32 md:w-40 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full mt-2 mx-auto animate-pulse"></span>
                         </h2>
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full px-2 sm:px-6 md:px-12 max-w-7xl mx-auto">
+                    <div className="flex flex-row gap-4 w-full px-2 sm:px-6 md:px-12 max-w-7xl mx-auto overflow-x-auto snap-x sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-8 sm:overflow-x-visible">
                         {whatWeDoImages.map((item, idx) => (
-                            <div key={idx} className="flex flex-col items-center bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-8 h-[380px] sm:h-[420px] md:h-[480px] transition-all duration-300 hover:scale-105 hover:shadow-2xl w-full max-w-md mx-auto">
-                                <div className="bg-white border-4 border-white rounded-2xl mb-6 flex items-center justify-center shadow-lg w-[160px] h-[160px] sm:w-[200px] sm:h-[200px] md:w-[240px] md:h-[240px] mx-auto">
+                            <div key={idx} className="flex flex-col items-center bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-8 h-[340px] min-w-[260px] max-w-xs snap-center sm:min-w-0 sm:max-w-none transition-all duration-300 hover:scale-105 hover:shadow-2xl w-full mx-2 sm:mx-0">
+                                <div className="bg-white border-4 border-white rounded-2xl mb-6 flex items-center justify-center shadow-lg w-[140px] h-[140px] mx-auto">
                                     <img src={item.src} alt={item.alt} className="w-full h-full object-contain rounded-2xl" loading="lazy" />
                                 </div>
                                 <p className="text-gray-800 text-center mt-2 font-semibold text-lg md:text-xl">{item.desc}</p>
@@ -1911,7 +1911,7 @@ function App() {
                         ))}
                     </div>
                 </div>
-                {/* How to use section with gradient header, underline, and responsive grid */}
+                {/* How to use section with horizontal scroll on mobile */}
                 <div className="w-full mt-16 bg-gradient-to-r from-[#232526] via-[#2c5364] to-[#0f2027] py-0 px-0">
                     <div className="w-full flex flex-col items-center">
                         <h2 className="text-4xl font-extrabold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-2 text-center drop-shadow-lg relative inline-block">
@@ -1919,10 +1919,10 @@ function App() {
                             <span className="block h-1 w-24 sm:w-32 md:w-40 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full mt-2 mx-auto animate-pulse"></span>
                         </h2>
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full px-2 sm:px-6 md:px-12 max-w-7xl mx-auto">
+                    <div className="flex flex-row gap-4 w-full px-2 sm:px-6 md:px-12 max-w-7xl mx-auto overflow-x-auto snap-x sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-8 sm:overflow-x-visible">
                         {howToUseSteps.map((step, idx) => (
-                            <div key={idx} className="flex flex-col items-center bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-8 h-[400px] sm:h-[440px] md:h-[500px] transition-all duration-300 hover:scale-105 hover:shadow-2xl w-full max-w-md mx-auto">
-                                <div className="border-4 border-white rounded-2xl mb-6 flex flex-col items-center justify-center p-2 shadow-lg w-[180px] h-[220px] sm:w-[220px] sm:h-[260px] md:w-[260px] md:h-[300px] mx-auto">
+                            <div key={idx} className="flex flex-col items-center bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-8 h-[400px] min-w-[260px] max-w-xs snap-center sm:min-w-0 sm:max-w-none transition-all duration-300 hover:scale-105 hover:shadow-2xl w-full mx-2 sm:mx-0">
+                                <div className="border-4 border-white rounded-2xl mb-6 flex flex-col items-center justify-center p-2 shadow-lg w-[180px] h-[220px] mx-auto">
                                     <div className="flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white text-3xl font-bold mt-8 shadow-md mb-4">{step.step}</div>
                                     <h3 className="text-xl font-bold text-gray-800 mt-2 mb-2 text-center">{step.title}</h3>
                                     <p className="text-gray-700 text-lg text-center px-2">{step.desc}</p>
