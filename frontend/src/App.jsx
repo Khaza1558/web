@@ -1969,27 +1969,27 @@ function App() {
                 ) : (
                     <div className="min-h-screen flex flex-col md:flex-row font-sans">
                         {/* Left section for Logo, Slogan, Advertisement */}
-                        <div className="w-full md:w-1/2 px-4 md:px-10 py-6 flex flex-col relative min-h-screen justify-between">
-                            <header className="flex flex-col items-center md:items-start mt-2 mb-6">
+                        <div className="w-full md:w-1/2 px-2 sm:px-6 md:px-12 py-6 flex flex-col relative min-h-screen justify-between items-center md:items-start">
+                            <header className="flex flex-col items-center md:items-start mt-2 mb-8 w-full">
                                 <img 
                                     src="/tit.png" 
                                     alt="kroxnest." 
-                                    className="h-24 sm:h-32 md:h-[140px] lg:h-[180px] mb-[-10px] drop-shadow-2xl filter invert transition-all duration-500 ease-in-out" 
-                                    style={{ maxWidth: '90vw', objectFit: 'contain' }}
+                                    className="h-28 sm:h-36 md:h-[180px] lg:h-[220px] mb-[-10px] drop-shadow-2xl filter invert transition-all duration-500 ease-in-out mx-auto md:mx-0"
+                                    style={{ maxWidth: '98vw', objectFit: 'contain' }}
                                     loading="eager"
                                 />
-                                <p className="text-lg sm:text-2xl md:text-3xl text-white italic pl-2 mt-2 text-center md:text-left font-semibold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-lg" style={{ fontFamily: 'Inter, sans-serif' }}>
+                                <p className="text-lg sm:text-2xl md:text-3xl text-white italic pl-2 mt-4 text-center md:text-left font-semibold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-lg w-full max-w-3xl mx-auto md:mx-0" style={{ fontFamily: 'Inter, sans-serif' }}>
                                     Knowledge Repository Of eXhibits & Networked Educational Student Tracks
                                 </p>
                             </header>
                             {/* Advertisement section with gradient background and shadow */}
-                            <div className="mt-6 w-full flex justify-center">
-                                <div className="bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-2 flex items-center justify-center transition-all duration-300 hover:scale-105 hover:shadow-2xl" style={{ width: '100%', maxWidth: 420, height: 320 }}>
+                            <div className="mt-8 w-full flex justify-center">
+                                <div className="bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-2 flex items-center justify-center transition-all duration-300 hover:scale-105 hover:shadow-2xl w-full max-w-2xl h-[320px] sm:h-[400px] md:h-[480px] lg:h-[540px]">
                                     <a href={currentAd.href} target="_blank" rel="noopener noreferrer" className="block w-full h-full rounded-2xl overflow-hidden">
                                         <img
                                             src={currentAd.src}
                                             alt={currentAd.alt}
-                                            className="w-full h-full object-contain rounded-2xl transition-all duration-300 hover:scale-105"
+                                            className="w-full h-full object-contain rounded-2xl transition-all duration-300 hover:scale-105 mx-auto"
                                             loading="lazy"
                                         />
                                     </a>
@@ -1998,38 +1998,50 @@ function App() {
                         </div>
 
                         {/* Right section for content (login, register, etc.) - top aligned with responsive padding */}
-                        <div className="w-full md:w-1/2 flex justify-center items-start pt-6 md:pt-[40px] px-2 md:px-0">
-                            <div className="w-full max-w-xl">
-                                {renderPage()}
+                        <div className="w-full md:w-1/2 flex justify-center items-start pt-8 md:pt-[60px] px-2 md:px-0">
+                            <div className="w-full max-w-2xl flex flex-col items-center">
+                                <div className="w-full flex flex-col items-center">
+                                    {renderPage()}
+                                </div>
                             </div>
                         </div>
                     </div>
                 )}
 
-                {/* What we do section with gradient header and responsive grid */}
+                {/* What we do section with gradient header, underline, and responsive grid */}
                 <div className="w-full mt-16 bg-gradient-to-r from-[#232526] via-[#2c5364] to-[#0f2027] py-0 px-0">
-                    <h2 className="text-3xl font-extrabold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-8 text-left pl-8 drop-shadow-lg">What we do</h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full px-4 md:px-8">
+                    <div className="w-full flex flex-col items-center">
+                        <h2 className="text-4xl font-extrabold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-2 text-center drop-shadow-lg relative inline-block">
+                            What we do
+                            <span className="block h-1 w-24 sm:w-32 md:w-40 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full mt-2 mx-auto animate-pulse"></span>
+                        </h2>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full px-2 sm:px-6 md:px-12 max-w-7xl mx-auto">
                         {whatWeDoImages.map((item, idx) => (
-                            <div key={idx} className="flex flex-col items-center bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-2xl shadow-xl p-6 h-[340px] transition-all duration-300 hover:scale-105 hover:shadow-2xl">
-                                <div className="bg-white border-2 border-white rounded-xl mb-4 flex items-center justify-center shadow-lg" style={{ width: '140px', height: '140px' }}>
-                                    <img src={item.src} alt={item.alt} className="w-full h-full object-contain rounded-xl" loading="lazy" />
+                            <div key={idx} className="flex flex-col items-center bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-8 h-[380px] sm:h-[420px] md:h-[480px] transition-all duration-300 hover:scale-105 hover:shadow-2xl w-full max-w-md mx-auto">
+                                <div className="bg-white border-4 border-white rounded-2xl mb-6 flex items-center justify-center shadow-lg w-[160px] h-[160px] sm:w-[200px] sm:h-[200px] md:w-[240px] md:h-[240px] mx-auto">
+                                    <img src={item.src} alt={item.alt} className="w-full h-full object-contain rounded-2xl" loading="lazy" />
                                 </div>
-                                <p className="text-gray-800 text-center mt-2 font-medium text-base md:text-lg">{item.desc}</p>
+                                <p className="text-gray-800 text-center mt-2 font-semibold text-lg md:text-xl">{item.desc}</p>
                             </div>
                         ))}
                     </div>
                 </div>
-                {/* How to use section with gradient header and responsive grid */}
+                {/* How to use section with gradient header, underline, and responsive grid */}
                 <div className="w-full mt-16 bg-gradient-to-r from-[#232526] via-[#2c5364] to-[#0f2027] py-0 px-0">
-                    <h2 className="text-3xl font-extrabold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-8 text-left pl-8 drop-shadow-lg">How to use</h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full px-4 md:px-8">
+                    <div className="w-full flex flex-col items-center">
+                        <h2 className="text-4xl font-extrabold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-2 text-center drop-shadow-lg relative inline-block">
+                            How to use
+                            <span className="block h-1 w-24 sm:w-32 md:w-40 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full mt-2 mx-auto animate-pulse"></span>
+                        </h2>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full px-2 sm:px-6 md:px-12 max-w-7xl mx-auto">
                         {howToUseSteps.map((step, idx) => (
-                            <div key={idx} className="flex flex-col items-center bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-2xl shadow-xl p-6 h-[380px] transition-all duration-300 hover:scale-105 hover:shadow-2xl">
-                                <div className="border-2 border-white rounded-xl mb-4 flex flex-col items-center justify-center p-2 shadow-lg" style={{ width: '160px', height: '200px' }}>
-                                    <div className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white text-2xl font-bold mt-8 shadow-md">{step.step}</div>
-                                    <h3 className="text-lg font-bold text-gray-800 mt-6 mb-2 text-center">{step.title}</h3>
-                                    <p className="text-gray-700 text-base text-center px-2">{step.desc}</p>
+                            <div key={idx} className="flex flex-col items-center bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-8 h-[400px] sm:h-[440px] md:h-[500px] transition-all duration-300 hover:scale-105 hover:shadow-2xl w-full max-w-md mx-auto">
+                                <div className="border-4 border-white rounded-2xl mb-6 flex flex-col items-center justify-center p-2 shadow-lg w-[180px] h-[220px] sm:w-[220px] sm:h-[260px] md:w-[260px] md:h-[300px] mx-auto">
+                                    <div className="flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white text-3xl font-bold mt-8 shadow-md mb-4">{step.step}</div>
+                                    <h3 className="text-xl font-bold text-gray-800 mt-2 mb-2 text-center">{step.title}</h3>
+                                    <p className="text-gray-700 text-lg text-center px-2">{step.desc}</p>
                                 </div>
                             </div>
                         ))}
@@ -2037,12 +2049,12 @@ function App() {
                 </div>
 
                 {/* Footer centered at the bottom of the entire page, not fixed */}
-                <footer className="w-full flex flex-col items-center justify-center py-6 px-2 bg-gradient-to-r from-[#232526] via-[#2c5364] to-[#0f2027] gap-1 text-center mt-16">
+                <footer className="w-full flex flex-col items-center justify-center py-8 px-2 bg-gradient-to-r from-[#232526] via-[#2c5364] to-[#0f2027] gap-1 text-center mt-16">
                     <div>
-                        <span className="text-gray-300 text-sm mr-6">Contact: <a href="tel:+1234567890" className="underline hover:text-blue-400 transition-colors">+1 234 567 890</a> | <a href="mailto:dummy@email.com" className="underline hover:text-blue-400 transition-colors">info@kroxnest.com</a></span>
+                        <span className="text-gray-300 text-lg mr-6">Contact: <a href="tel:+1234567890" className="underline hover:text-blue-400 transition-colors">+1 234 567 890</a> | <a href="mailto:dummy@email.com" className="underline hover:text-blue-400 transition-colors">info@kroxnest.com</a></span>
                     </div>
                     <div>
-                        <span className="block text-gray-300 text-base font-semibold">© 2025 Kroxnest. All rights reserved.</span>
+                        <span className="block text-gray-300 text-xl font-semibold">© 2025 Kroxnest. All rights reserved.</span>
                     </div>
                 </footer>
             </div>
