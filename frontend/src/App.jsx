@@ -1531,34 +1531,30 @@ const CreateProjectPage = ({ onNavigateToWelcome }) => {
                     <h3 className="text-2xl font-bold mb-4 text-gray-800">Files:</h3> 
                     <div className="flex flex-col gap-4 w-full">
                         {files.map(fileEntry => (
-                            <div key={fileEntry.id} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 p-4 bg-gray-50 rounded-xl border border-gray-200 shadow-sm flex-wrap"> 
-                                <div className="flex flex-col sm:flex-row sm:items-center gap-2 w-full sm:w-1/2">
-                                    <label htmlFor={`file${fileEntry.id}`} className="font-semibold text-gray-700 sm:w-fit sm:min-w-[50px] flex-shrink-0">File {fileEntry.id}:</label>
-                                    <input
-                                        type="file"
-                                        id={`file${fileEntry.id}`}
-                                        onChange={(e) => handleFileChange(fileEntry.id, 'file', e.target.files[0])}
-                                        className="p-2 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow w-full"
-                                        required
-                                    />
-                                </div>
-                                <div className="flex flex-col sm:flex-row sm:items-center gap-2 w-full sm:w-1/2">
-                                    <label htmlFor={`fileTitle${fileEntry.id}`} className="font-semibold text-gray-700 sm:w-fit sm:min-w-[40px] flex-shrink-0">Title:</label>
-                                    <input
-                                        type="text"
-                                        id={`fileTitle${fileEntry.id}`}
-                                        value={fileEntry.title}
-                                        onChange={(e) => handleFileChange(fileEntry.id, 'title', e.target.value)}
-                                        placeholder="Enter title for this file"
-                                        className="p-2 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow w-full"
-                                        required
-                                    />
-                                </div>
+                            <div key={fileEntry.id} className="flex flex-col gap-2 p-4 bg-gray-50 rounded-xl border border-gray-200 shadow-sm w-full max-w-2xl mx-auto">
+                                <label htmlFor={`file${fileEntry.id}`} className="font-semibold text-gray-700 mb-1">File {fileEntry.id}:</label>
+                                <input
+                                    type="file"
+                                    id={`file${fileEntry.id}`}
+                                    onChange={(e) => handleFileChange(fileEntry.id, 'file', e.target.files[0])}
+                                    className="p-2 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition w-full bg-white shadow-sm min-w-0"
+                                    required
+                                />
+                                <label htmlFor={`fileTitle${fileEntry.id}`} className="font-semibold text-gray-700 mb-1">Title:</label>
+                                <input
+                                    type="text"
+                                    id={`fileTitle${fileEntry.id}`}
+                                    value={fileEntry.title}
+                                    onChange={(e) => handleFileChange(fileEntry.id, 'title', e.target.value)}
+                                    placeholder="Enter title for this file"
+                                    className="p-2 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition w-full bg-white shadow-sm min-w-0"
+                                    required
+                                />
                                 {files.length > 1 && (
                                     <button
                                         type="button"
                                         onClick={() => removeFileField(fileEntry.id)}
-                                        className="bg-red-500 text-white py-2 px-4 rounded-lg font-bold transition duration-300 hover:bg-red-600 shadow-md hover:shadow-lg sm:ml-auto mt-2 sm:mt-0 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-75 w-full sm:w-auto"
+                                        className="bg-red-500 text-white py-2 px-4 rounded-lg font-bold transition duration-200 hover:bg-red-600 mt-2 w-full md:w-auto"
                                     >
                                         Remove
                                     </button>
@@ -1844,7 +1840,7 @@ function App() {
                                 <img 
                                     src="/tit.png" 
                                     alt="kroxnest." 
-                                    className="h-16 sm:h-24 md:h-[180px] lg:h-[220px] mb-0 sm:mb-[-10px] drop-shadow-2xl filter invert transition-all duration-500 ease-in-out mx-auto md:mx-0"
+                                    className="hidden sm:block h-16 sm:h-24 md:h-[180px] lg:h-[220px] mb-0 sm:mb-[-10px] drop-shadow-2xl filter invert transition-all duration-500 ease-in-out mx-auto md:mx-0"
                                     style={{ maxWidth: '98vw', objectFit: 'contain' }}
                                     loading="eager"
                                 />
@@ -1853,7 +1849,7 @@ function App() {
                                 </p>
                             </header>
                             {/* Advertisement section with no margin or padding on mobile */}
-                            <div className="mt-0 sm:mt-8 w-full flex justify-center p-0">
+                            <div className="order-first sm:order-none mt-0 sm:mt-8 w-full flex justify-center p-0">
                                 <div className="bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-2 flex items-center justify-center transition-all duration-300 w-full h-32 sm:h-40 md:h-[480px] max-w-2xl">
                                     <a href={currentAd.href} target="_blank" rel="noopener noreferrer" className="block w-full h-full rounded-2xl overflow-hidden">
                                         <img
@@ -1892,10 +1888,10 @@ function App() {
                     <div className="flex flex-row gap-4 w-full px-2 sm:px-6 md:px-12 max-w-7xl mx-auto overflow-x-auto snap-x sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-8 sm:overflow-x-visible">
                         {whatWeDoImages.map((item, idx) => (
                             <div key={idx} className="flex flex-col items-center bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-8 h-[340px] min-w-[260px] max-w-xs snap-center sm:min-w-0 sm:max-w-none transition-all duration-300 hover:scale-105 hover:shadow-2xl w-full mx-2 sm:mx-0">
-                                <div className="bg-white border-4 border-white rounded-2xl mb-6 flex items-center justify-center shadow-lg w-[140px] h-[140px] mx-auto">
+                                <div className="bg-white border-4 border-white rounded-2xl mb-6 flex items-center justify-center shadow-lg w-[140px] h-[140px] sm:w-[180px] sm:h-[180px] md:w-[220px] md:h-[220px] mx-auto">
                                     <img src={item.src} alt={item.alt} className="w-full h-full object-contain rounded-2xl" loading="lazy" />
                                 </div>
-                                <p className="text-gray-800 text-center mt-2 font-semibold text-lg md:text-xl">{item.desc}</p>
+                                <p className="text-gray-800 text-center mt-2 font-semibold text-base md:text-lg lg:text-base">{item.desc}</p>
                             </div>
                         ))}
                     </div>
