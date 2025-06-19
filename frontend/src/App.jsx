@@ -1910,11 +1910,11 @@ function App() {
                     </div>
                     <div className="flex flex-row gap-4 w-full px-2 sm:px-6 md:px-12 max-w-7xl mx-auto overflow-x-auto snap-x sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-8 sm:overflow-x-visible">
                         {howToUseSteps.map((step, idx) => (
-                            <div key={idx} className="flex flex-col items-center bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-6 md:p-8 h-[400px] min-w-[260px] max-w-xs md:max-w-sm snap-center sm:min-w-0 sm:max-w-none transition-all duration-300 hover:scale-105 hover:shadow-2xl w-full mx-2 sm:mx-0">
-                                <div className="border-4 border-white rounded-2xl mb-6 flex flex-col items-center justify-center p-2 shadow-lg w-[180px] h-[220px] mx-auto">
+                            <div key={idx} className="flex flex-col items-center bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-6 md:p-10 min-w-[260px] sm:min-w-[320px] lg:min-w-[340px] max-w-full snap-center sm:min-w-0 transition-all duration-300 hover:scale-105 hover:shadow-2xl w-full mx-2 sm:mx-0 h-auto">
+                                <div className="border-4 border-white rounded-2xl mb-6 flex flex-col items-center justify-center p-2 shadow-lg w-full max-w-[320px] mx-auto">
                                     <div className="flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white text-3xl font-bold mt-8 shadow-md mb-4">{step.step}</div>
-                                    <h3 className="text-lg md:text-xl font-bold text-gray-800 mt-2 mb-2 text-center break-words max-w-full">{step.title}</h3>
-                                    <p className="text-gray-700 text-base md:text-lg text-center px-2 break-words max-w-full overflow-hidden text-ellipsis">{step.desc}</p>
+                                    <h3 className="text-xl font-bold text-gray-800 mt-2 mb-2 text-center break-words w-full">{step.title}</h3>
+                                    <p className="text-gray-700 text-lg text-center px-2 break-words w-full whitespace-pre-line">{step.desc}</p>
                                 </div>
                             </div>
                         ))}
