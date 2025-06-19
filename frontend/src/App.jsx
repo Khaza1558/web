@@ -1840,11 +1840,11 @@ function App() {
                     <div className="min-h-screen flex flex-col md:flex-row font-sans">
                         {/* Left section for Logo, Slogan, Advertisement */}
                         <div className="w-full md:w-1/2 px-2 sm:px-6 md:px-12 py-6 flex flex-col relative min-h-screen justify-between items-center md:items-start">
-                            <header className="flex flex-col items-center md:items-start mt-2 mb-2 sm:mb-8 w-full">
+                            <header className="flex flex-col items-center md:items-start mt-0 mb-0 sm:mt-2 sm:mb-8 w-full p-0">
                                 <img 
                                     src="/tit.png" 
                                     alt="kroxnest." 
-                                    className="h-24 sm:h-32 md:h-[180px] lg:h-[220px] mb-[-10px] drop-shadow-2xl filter invert transition-all duration-500 ease-in-out mx-auto md:mx-0"
+                                    className="h-24 sm:h-32 md:h-[180px] lg:h-[220px] mb-0 sm:mb-[-10px] drop-shadow-2xl filter invert transition-all duration-500 ease-in-out mx-auto md:mx-0"
                                     style={{ maxWidth: '98vw', objectFit: 'contain' }}
                                     loading="eager"
                                 />
@@ -1852,8 +1852,8 @@ function App() {
                                     Knowledge Repository Of eXhibits & Networked Educational Student Tracks
                                 </p>
                             </header>
-                            {/* Advertisement section with responsive height */}
-                            <div className="mt-0 sm:mt-8 w-full flex justify-center">
+                            {/* Advertisement section with no margin or padding on mobile */}
+                            <div className="mt-0 sm:mt-8 w-full flex justify-center p-0">
                                 <div className="bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-2 flex items-center justify-center transition-all duration-300 w-full h-32 sm:h-40 md:h-[480px] max-w-2xl">
                                     <a href={currentAd.href} target="_blank" rel="noopener noreferrer" className="block w-full h-full rounded-2xl overflow-hidden">
                                         <img
