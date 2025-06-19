@@ -1600,29 +1600,19 @@ const CreateProjectPage = ({ onNavigateToWelcome }) => {
 // NEW: Splash Video Component
 const SplashVideo = ({ onVideoEnd }) => {
     const videoRef = useRef(null);
-
     useEffect(() => {
         const timer = setTimeout(() => {
-            // Fallback: If video 'ended' event doesn't fire for any reason,
-            // or if video autoplay is blocked, transition after 4 seconds anyway.
             onVideoEnd();
-        }, 4000); // 4 seconds
-
+        }, 4000);
         const handleVideoEnded = () => {
-            clearTimeout(timer); // Clear the timeout if video ends naturally
+            clearTimeout(timer);
             onVideoEnd();
         };
-
         const videoElement = videoRef.current;
         if (videoElement) {
             videoElement.addEventListener('ended', handleVideoEnded);
-            // Attempt to play the video; catch potential autoplay errors
-            videoElement.play().catch(error => {
-                console.warn("Autoplay was prevented:", error);
-                // If autoplay is prevented, the setTimeout will still ensure transition
-            });
+            videoElement.play().catch(() => {});
         }
-
         return () => {
             if (videoElement) {
                 videoElement.removeEventListener('ended', handleVideoEnded);
@@ -1630,16 +1620,15 @@ const SplashVideo = ({ onVideoEnd }) => {
             clearTimeout(timer);
         };
     }, [onVideoEnd]);
-
     return (
         <div className="fixed inset-0 z-50 bg-black flex items-center justify-center overflow-hidden">
             <video
                 ref={videoRef}
-                src="/video.mp4" // IMPORTANT: Replace this with your actual video URL!
+                src="/video.mp4"
                 autoPlay
                 muted
-                playsInline // Crucial for mobile autoplay
-                className="w-full h-full object-cover" // Ensure video covers full screen
+                playsInline
+                className="w-full h-full object-contain sm:object-cover" // object-contain for mobile, object-cover for desktop
             >
                 Your browser does not support the video tag.
             </video>
@@ -1851,7 +1840,7 @@ function App() {
                     <div className="min-h-screen flex flex-col md:flex-row font-sans">
                         {/* Left section for Logo, Slogan, Advertisement */}
                         <div className="w-full md:w-1/2 px-2 sm:px-6 md:px-12 py-6 flex flex-col relative min-h-screen justify-between items-center md:items-start">
-                            <header className="flex flex-col items-center md:items-start mt-2 mb-8 w-full sm:mb-8 mb-2">
+                            <header className="flex flex-col items-center md:items-start mt-2 mb-2 sm:mb-8 w-full">
                                 <img 
                                     src="/tit.png" 
                                     alt="kroxnest." 
@@ -1864,7 +1853,7 @@ function App() {
                                 </p>
                             </header>
                             {/* Advertisement section with responsive height */}
-                            <div className="mt-8 w-full flex justify-center">
+                            <div className="mt-0 sm:mt-8 w-full flex justify-center">
                                 <div className="bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-2 flex items-center justify-center transition-all duration-300 w-full h-32 sm:h-40 md:h-[480px] max-w-2xl">
                                     <a href={currentAd.href} target="_blank" rel="noopener noreferrer" className="block w-full h-full rounded-2xl overflow-hidden">
                                         <img
