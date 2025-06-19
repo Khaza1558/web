@@ -856,6 +856,7 @@ const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects, onNa
 // Suggestions Page
 const SuggestionsPage = ({ onNavigateToWelcome }) => {
     const suggestions = [
+        'virtual mouse using hand gesture- regd:358',
         'AI-Powered Attendance System',
         'Smart Waste Management',
         'IoT Home Automation',
@@ -942,46 +943,44 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
     const [codeViewerContent, setCodeViewerContent] = useState('');
     const [codeViewerLanguage, setCodeViewerLanguage] = useState(''); 
 
+    const [isProjectsLoading, setIsProjectsLoading] = useState(false);
 
     const fetchProjects = useCallback(async () => {
-        console.log('fetchProjects called with rollNumber:', rollNumber);
         setError('');
         if (!rollNumber) {
             setProjects([]);
-            setHasSearched(false); 
-            console.log('Roll number is empty, not fetching projects.');
+            setHasSearched(false);
             return;
         }
-        setHasSearched(true); 
+        setIsProjectsLoading(true);
+        setHasSearched(true);
         try {
             const response = await fetch(`${API_BASE_URL}/api/public-projects/view-by-roll?rollNumber=${encodeURIComponent(rollNumber)}`, {
                 method: 'GET',
                 headers: createAuthHeaders(),
             });
-            console.log('fetchProjects - Response from view-by-roll:', response);
             if (!response.ok) {
                 const errorData = await response.json();
-                console.error('fetchProjects - Error data from view-by-roll:', errorData);
                 if (response.status === 401 || response.status === 403) {
                     removeToken();
                     alert('Your session has expired or is invalid. Please log in again.');
+                    setIsProjectsLoading(false);
                     return;
                 }
                 throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
             }
             const data = await response.json();
-            console.log('fetchProjects - Projects fetched successfully:', data);
             setProjects(data);
-            setSelectedProject(null); 
+            setSelectedProject(null);
             setProjectFiles([]);
-            setAddFiles([{ file: null, title: '', id: 1 }]); 
+            setAddFiles([{ file: null, title: '', id: 1 }]);
             setNextAddFileId(2);
-
         } catch (err) {
-            console.error('fetchProjects - Error in fetchProjects:', err);
             setError(`An error occurred while fetching projects: ${err.message}`);
             setProjects([]);
-            setSelectedProject(null); 
+            setSelectedProject(null);
+        } finally {
+            setIsProjectsLoading(false);
         }
     }, [rollNumber, createAuthHeaders, removeToken]);
 
@@ -1237,7 +1236,7 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
                             />
                             <button
                                 type="submit"
-                                className="bg-blue-500 text-white py-3 px-6 rounded-lg font-bold transition duration-300 hover:bg-blue-600 shadow-xl hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 mt-4"
+                                className="bg-blue-500 text-white py-3 px-6 rounded-lg font-bold transition duration-200 hover:bg-blue-600 mt-4"
                             >
                                 View Projects
                             </button>
@@ -1245,8 +1244,12 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
 
                         <div className="projects-list w-full max-w-md mt-4 self-start">
                             <h3 className="text-2xl font-bold mb-4 text-gray-800">Projects:</h3>
-                            {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
-                            {hasSearched && projects.length === 0 && !error ? (
+                            {error && <p className="text-red-500 text-base mb-4">{error}</p>}
+                            {isProjectsLoading ? (
+                                <div className="flex justify-center items-center py-8">
+                                    <svg className="animate-spin h-8 w-8 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path></svg>
+                                </div>
+                            ) : hasSearched && projects.length === 0 && !error ? (
                                 <p className="text-gray-600">No projects found for this roll number.</p>
                             ) : (
                                 <div className="flex flex-col gap-3">
@@ -1305,34 +1308,30 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
                                     <h4 className="text-2xl font-bold mb-2 text-gray-800">Add New Files to this Project:</h4>
                                     <div className="flex flex-col gap-4 w-full">
                                         {addFiles.map(fileEntry => (
-                                            <div key={fileEntry.id} className="flex flex-col md:flex-row items-stretch md:items-center gap-4 p-4 bg-gray-50 rounded-xl border border-gray-200 shadow-sm w-full max-w-3xl mx-auto">
-                                                <div className="flex flex-col md:flex-row md:items-center gap-2 w-full md:w-2/3">
-                                                    <label htmlFor={`addFile${fileEntry.id}`} className="font-semibold text-gray-700 md:w-fit md:min-w-[70px] flex-shrink-0">File {fileEntry.id}:</label>
-                                                    <input
-                                                        type="file"
-                                                        id={`addFile${fileEntry.id}`}
-                                                        onChange={(e) => handleAddFileChange(fileEntry.id, 'file', e.target.files[0])}
-                                                        className="p-2 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow w-full bg-white shadow-sm min-w-0"
-                                                        required
-                                                    />
-                                                </div>
-                                                <div className="flex flex-col md:flex-row md:items-center gap-2 w-full md:w-1/3">
-                                                    <label htmlFor={`addFileTitle${fileEntry.id}`} className="font-semibold text-gray-700 md:w-fit md:min-w-[50px] flex-shrink-0">Title:</label>
-                                                    <input
-                                                        type="text"
-                                                        id={`addFileTitle${fileEntry.id}`}
-                                                        value={fileEntry.title}
-                                                        onChange={(e) => handleAddFileChange(fileEntry.id, 'title', e.target.value)}
-                                                        placeholder="Enter title for this new file"
-                                                        className="p-2 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow w-full bg-white shadow-sm min-w-0"
-                                                        required
-                                                    />
-                                                </div>
+                                            <div key={fileEntry.id} className="flex flex-col gap-2 p-4 bg-gray-50 rounded-xl border border-gray-200 shadow-sm w-full max-w-2xl mx-auto">
+                                                <label htmlFor={`addFile${fileEntry.id}`} className="font-semibold text-gray-700 mb-1">File {fileEntry.id}:</label>
+                                                <input
+                                                    type="file"
+                                                    id={`addFile${fileEntry.id}`}
+                                                    onChange={(e) => handleAddFileChange(fileEntry.id, 'file', e.target.files[0])}
+                                                    className="p-2 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition w-full bg-white shadow-sm min-w-0"
+                                                    required
+                                                />
+                                                <label htmlFor={`addFileTitle${fileEntry.id}`} className="font-semibold text-gray-700 mb-1">Title:</label>
+                                                <input
+                                                    type="text"
+                                                    id={`addFileTitle${fileEntry.id}`}
+                                                    value={fileEntry.title}
+                                                    onChange={(e) => handleAddFileChange(fileEntry.id, 'title', e.target.value)}
+                                                    placeholder="Enter title for this new file"
+                                                    className="p-2 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition w-full bg-white shadow-sm min-w-0"
+                                                    required
+                                                />
                                                 {addFiles.length > 1 && (
                                                     <button
                                                         type="button"
                                                         onClick={() => removeAddFileField(fileEntry.id)}
-                                                        className="bg-red-500 text-white py-2 px-4 rounded-lg font-bold transition duration-200 hover:bg-red-600 md:ml-auto mt-2 md:mt-0 w-full md:w-auto"
+                                                        className="bg-red-500 text-white py-2 px-4 rounded-lg font-bold transition duration-200 hover:bg-red-600 mt-2 w-full md:w-auto"
                                                     >
                                                         Remove
                                                     </button>
