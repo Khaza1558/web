@@ -94,34 +94,20 @@ const API_BASE_URL = 'https://plote.onrender.com'; // REMEMBER TO UPDATE THIS FO
 // --- Reusable Modal Components ---
 
 const CustomConfirmModal = ({ message, onConfirm, onCancel }) => {
-    const modalRef = useRef(null);
-    useEffect(() => {
-        if (modalRef.current) {
-            const computedStyle = window.getComputedStyle(modalRef.current);
-            console.log('CustomConfirmModal - Initial Opacity:', computedStyle.opacity);
-            console.log('CustomConfirmModal - Initial Display:', computedStyle.display);
-            setTimeout(() => {
-                const updatedStyle = window.getComputedStyle(modalRef.current);
-                console.log('CustomConfirmModal - After 100ms Opacity:', updatedStyle.opacity);
-                console.log('CustomConfirmModal - After 100ms Display:', updatedStyle.display);
-            }, 100);
-        }
-    }, []);
-
     return (
-        <div ref={modalRef} className="fixed inset-0 bg-gray-900 bg-opacity-70 flex justify-center items-center z-50 p-5 backdrop-blur-sm animate-fade-in">
-            <div className="bg-white p-8 rounded-3xl shadow-2xl text-center max-w-sm w-full transform transition-all duration-300 scale-105 opacity-0 animate-scale-in">
+        <div className="fixed inset-0 bg-gray-900 bg-opacity-70 flex justify-center items-center z-50 p-5">
+            <div className="bg-white border border-gray-200 p-8 rounded-2xl shadow-2xl text-center max-w-sm w-full">
                 <p className="mb-6 text-gray-800 text-lg font-medium">{message}</p>
                 <div className="flex justify-center gap-4">
                     <button
                         onClick={onConfirm}
-                        className="bg-blue-500 text-white py-2 px-5 rounded-lg font-bold transition duration-300 hover:bg-blue-600 hover:scale-105 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75"
+                        className="bg-blue-500 text-white py-2 px-5 rounded-lg font-bold transition duration-200 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
                     >
                         Yes
                     </button>
                     <button
                         onClick={onCancel}
-                        className="bg-gray-400 text-gray-800 py-2 px-5 rounded-lg font-bold transition duration-300 hover:bg-gray-500 hover:scale-105 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75"
+                        className="bg-gray-200 text-gray-800 py-2 px-5 rounded-lg font-bold transition duration-200 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75"
                     >
                         No
                     </button>
@@ -135,20 +121,6 @@ const EditTitleModal = ({ projectId, currentTitle, onClose, onSave }) => {
     const { createAuthHeaders } = useContext(AuthContext);
     const [newTitle, setNewTitle] = useState(currentTitle);
     const [error, setError] = useState('');
-    const modalRef = useRef(null);
-
-    useEffect(() => {
-        if (modalRef.current) {
-            const computedStyle = window.getComputedStyle(modalRef.current);
-            console.log('EditTitleModal - Initial Opacity:', computedStyle.opacity);
-            console.log('EditTitleModal - Initial Display:', computedStyle.display);
-            setTimeout(() => {
-                const updatedStyle = window.getComputedStyle(modalRef.current);
-                console.log('EditTitleModal - After 100ms Opacity:', updatedStyle.opacity);
-                console.log('EditTitleModal - After 100ms Display:', updatedStyle.display);
-            }, 100);
-        }
-    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -157,7 +129,6 @@ const EditTitleModal = ({ projectId, currentTitle, onClose, onSave }) => {
             setError('Project title cannot be empty.');
             return;
         }
-
         try {
             const response = await fetch(`${API_BASE_URL}/api/projects/${projectId}`, {
                 method: 'PUT',
@@ -167,22 +138,21 @@ const EditTitleModal = ({ projectId, currentTitle, onClose, onSave }) => {
             const data = await response.json();
             if (response.ok && data.success) {
                 alert(data.message || 'Project title updated successfully!');
-                onSave(newTitle); // Pass new title back to parent
+                onSave(newTitle);
             } else {
                 setError(data.message || 'Error updating project title.');
-                alert(data.message || 'Error updating project title.'); // Use alert for critical feedback
+                alert(data.message || 'Error updating project title.');
             }
         } catch (err) {
-            console.error('Error updating project title:', err);
             setError('An error occurred while updating the project title.');
             alert('An error occurred while updating the project title.');
         }
     };
-
     return (
-        <div ref={modalRef} className="fixed inset-0 bg-gray-900 bg-opacity-70 flex justify-center items-center z-50 p-5 backdrop-blur-sm animate-fade-in">
-            <div className="bg-white p-8 rounded-3xl shadow-2xl max-w-md w-full transform transition-all duration-300 scale-105 opacity-0 animate-scale-in">
-                <h3 className="text-xl font-bold mb-6 text-center text-gray-800">Edit Project Title</h3>
+        <div className="fixed inset-0 bg-gray-900 bg-opacity-70 flex justify-center items-center z-50 p-5">
+            <div className="bg-white border border-gray-200 p-8 rounded-2xl shadow-2xl max-w-md w-full">
+                <h3 className="text-xl font-bold mb-2 text-center text-gray-800">Edit Project Title</h3>
+                <div className="w-16 h-1 bg-blue-500 rounded-full mb-6 mx-auto" />
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                     <label htmlFor="newProjectTitle" className="font-semibold text-gray-700">New Project Title:</label>
                     <input
@@ -190,21 +160,21 @@ const EditTitleModal = ({ projectId, currentTitle, onClose, onSave }) => {
                         id="newProjectTitle"
                         value={newTitle}
                         onChange={(e) => setNewTitle(e.target.value)}
-                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition focus:shadow-md"
+                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition bg-white shadow-sm"
                         required
                     />
                     {error && <p className="text-red-600 text-sm mt-1">{error}</p>}
                     <div className="flex justify-end gap-3 mt-4">
                         <button
                             type="submit"
-                            className="bg-blue-500 text-white py-2 px-5 rounded-lg font-bold transition duration-300 hover:bg-blue-600 hover:scale-105 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75"
+                            className="bg-blue-500 text-white py-2 px-5 rounded-lg font-bold transition duration-200 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
                         >
                             Save Changes
                         </button>
                         <button
                             type="button"
                             onClick={onClose}
-                            className="bg-gray-400 text-gray-800 py-2 px-5 rounded-lg font-bold transition duration-300 hover:bg-gray-500 hover:scale-105 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75"
+                            className="bg-gray-200 text-gray-800 py-2 px-5 rounded-lg font-bold transition duration-200 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75"
                         >
                             Cancel
                         </button>
@@ -220,20 +190,6 @@ const ReplaceFileModal = ({ fileId, currentFileName, onClose, onReplace }) => {
     const [newFileName, setNewFileName] = useState(currentFileName);
     const [newFile, setNewFile] = useState(null);
     const [error, setError] = useState('');
-    const modalRef = useRef(null);
-
-    useEffect(() => {
-        if (modalRef.current) {
-            const computedStyle = window.getComputedStyle(modalRef.current);
-            console.log('ReplaceFileModal - Initial Opacity:', computedStyle.opacity);
-            console.log('ReplaceFileModal - Initial Display:', computedStyle.display);
-            setTimeout(() => {
-                const updatedStyle = window.getComputedStyle(modalRef.current);
-                console.log('ReplaceFileModal - After 100ms Opacity:', updatedStyle.opacity);
-                console.log('ReplaceFileModal - After 100ms Display:', updatedStyle.display);
-            }, 100);
-        }
-    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -246,11 +202,9 @@ const ReplaceFileModal = ({ fileId, currentFileName, onClose, onReplace }) => {
             setError('Please select a new file to upload.');
             return;
         }
-
         const formData = new FormData();
         formData.append('fileName', newFileName);
         formData.append('newFile', newFile);
-
         try {
             const response = await fetch(`${API_BASE_URL}/api/projects/replace-file/${fileId}`, {
                 method: 'POST',
@@ -260,22 +214,21 @@ const ReplaceFileModal = ({ fileId, currentFileName, onClose, onReplace }) => {
             const data = await response.json();
             if (response.ok && data.success) {
                 alert(data.message || 'File replaced successfully!');
-                onReplace(); // Notify parent to refresh
+                onReplace();
             } else {
                 setError(data.message || 'Error replacing file.');
                 alert(data.message || 'Error replacing file.');
             }
         } catch (err) {
-            console.error('Error replacing file:', err);
             setError('An error occurred while replacing the file.');
             alert('An error occurred while replacing the file.');
         }
     };
-
     return (
-        <div ref={modalRef} className="fixed inset-0 bg-gray-900 bg-opacity-70 flex justify-center items-center z-50 p-5 backdrop-blur-sm animate-fade-in">
-            <div className="bg-white p-8 rounded-3xl shadow-2xl max-w-md w-full transform transition-all duration-300 scale-105 opacity-0 animate-scale-in">
-                <h3 className="text-xl font-bold mb-6 text-center text-gray-800">Replace File</h3>
+        <div className="fixed inset-0 bg-gray-900 bg-opacity-70 flex justify-center items-center z-50 p-5">
+            <div className="bg-white border border-gray-200 p-8 rounded-2xl shadow-2xl max-w-md w-full">
+                <h3 className="text-xl font-bold mb-2 text-center text-gray-800">Replace File</h3>
+                <div className="w-16 h-1 bg-blue-500 rounded-full mb-6 mx-auto" />
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                     <label htmlFor="newFileName" className="font-semibold text-gray-700">New File Name:</label>
                     <input
@@ -283,7 +236,7 @@ const ReplaceFileModal = ({ fileId, currentFileName, onClose, onReplace }) => {
                         id="newFileName"
                         value={newFileName}
                         onChange={(e) => setNewFileName(e.target.value)}
-                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition focus:shadow-md"
+                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition bg-white shadow-sm"
                         required
                     />
                     <label htmlFor="newFileInput" className="font-semibold text-gray-700">Upload New File:</label>
@@ -291,21 +244,21 @@ const ReplaceFileModal = ({ fileId, currentFileName, onClose, onReplace }) => {
                         type="file"
                         id="newFileInput"
                         onChange={(e) => setNewFile(e.target.files[0])}
-                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition focus:shadow-md"
+                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition bg-white shadow-sm"
                         required
                     />
                     {error && <p className="text-red-600 text-sm mt-1">{error}</p>}
                     <div className="flex justify-end gap-3 mt-4">
                         <button
                             type="submit"
-                            className="bg-blue-500 text-white py-2 px-5 rounded-lg font-bold transition duration-300 hover:bg-blue-600 hover:scale-105 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75"
+                            className="bg-blue-500 text-white py-2 px-5 rounded-lg font-bold transition duration-200 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
                         >
                             Replace
                         </button>
                         <button
                             type="button"
                             onClick={onClose}
-                            className="bg-gray-400 text-gray-800 py-2 px-5 rounded-lg font-bold transition duration-300 hover:bg-gray-500 hover:scale-105 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75"
+                            className="bg-gray-200 text-gray-800 py-2 px-5 rounded-lg font-bold transition duration-200 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75"
                         >
                             Cancel
                         </button>
@@ -320,21 +273,6 @@ const ReplaceFileModal = ({ fileId, currentFileName, onClose, onReplace }) => {
 // NEW: Code Viewer Modal Component
 const CodeViewerModal = ({ content, language, onClose }) => {
     const codeRef = useRef(null);
-    const modalRef = useRef(null);
-
-    useEffect(() => {
-        if (modalRef.current) {
-            const computedStyle = window.getComputedStyle(modalRef.current);
-            console.log('CodeViewerModal - Initial Opacity:', computedStyle.opacity);
-            console.log('CodeViewerModal - Initial Display:', computedStyle.display);
-            setTimeout(() => {
-                const updatedStyle = window.getComputedStyle(modalRef.current);
-                console.log('CodeViewerModal - After 100ms Opacity:', updatedStyle.opacity);
-                console.log('CodeViewerModal - After 100ms Display:', updatedStyle.display);
-            }, 100);
-        }
-    }, []);
-
     useEffect(() => {
         const loadScript = (url, callback) => {
             const script = document.createElement('script');
@@ -343,7 +281,6 @@ const CodeViewerModal = ({ content, language, onClose }) => {
             script.onerror = () => console.error(`Failed to load script: ${url}`);
             document.head.appendChild(script);
         };
-
         const loadStylesheet = (url) => {
             const link = document.createElement('link');
             link.rel = 'stylesheet';
@@ -351,42 +288,38 @@ const CodeViewerModal = ({ content, language, onClose }) => {
             link.onerror = () => console.error(`Failed to load stylesheet: ${url}`);
             document.head.appendChild(link);
         };
-
         const highlightCode = () => {
             if (window.hljs && codeRef.current) {
-                codeRef.current.className = ''; 
+                codeRef.current.className = '';
                 if (language) {
                     codeRef.current.classList.add(`language-${language}`);
                 }
                 window.hljs.highlightElement(codeRef.current);
             }
         };
-
         if (window.hljs) {
             highlightCode();
         } else {
-            loadStylesheet('https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css'); 
+            loadStylesheet('https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css');
             loadScript('https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js', () => {
-                highlightCode(); 
+                highlightCode();
             });
         }
-    }, [content, language]); 
-
+    }, [content, language]);
     return (
-        <div ref={modalRef} className="fixed inset-0 bg-gray-900 bg-opacity-70 flex justify-center items-center z-50 p-5 backdrop-blur-sm animate-fade-in">
-            <div className="bg-white p-8 rounded-3xl shadow-2xl max-w-4xl w-full h-4/5 flex flex-col transform transition-all duration-300 scale-105 opacity-0 animate-scale-in">
-                <h3 className="text-xl font-bold mb-4 text-center text-gray-800">Code Viewer</h3>
-                <div className="flex-grow overflow-auto rounded-lg bg-gray-800 p-4 text-sm scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-900">
+        <div className="fixed inset-0 bg-gray-900 bg-opacity-70 flex justify-center items-center z-50 p-5">
+            <div className="bg-white border border-gray-200 p-8 rounded-2xl shadow-2xl max-w-3xl w-full h-4/5 flex flex-col">
+                <h3 className="text-xl font-bold mb-2 text-center text-gray-800">Code Viewer</h3>
+                <div className="w-16 h-1 bg-blue-500 rounded-full mb-6 mx-auto" />
+                <div className="flex-grow overflow-auto rounded-lg bg-gray-100 p-4 text-sm">
                     <pre>
-                        <code ref={codeRef} className={`language-${language || 'plaintext'}`}>
-                            {content}
-                        </code>
+                        <code ref={codeRef} className={`language-${language || 'plaintext'}`}>{content}</code>
                     </pre>
                 </div>
                 <div className="flex justify-end mt-4">
                     <button
                         onClick={onClose}
-                        className="bg-gray-400 text-gray-800 py-2 px-5 rounded-lg font-bold transition duration-300 hover:bg-gray-500 hover:scale-105 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75"
+                        className="bg-gray-200 text-gray-800 py-2 px-5 rounded-lg font-bold transition duration-200 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75"
                     >
                         Close
                     </button>
@@ -450,23 +383,21 @@ const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPas
 
     return (
         <div className="flex items-center justify-center w-full min-h-[80vh] animate-fade-in-up">
-            <div className="bg-white/20 backdrop-blur-2xl border border-blue-200/40 shadow-2xl rounded-3xl w-full max-w-lg p-10 flex flex-col items-center glass-card relative">
-                <h2 className="text-4xl font-extrabold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-6 text-center drop-shadow-lg relative inline-block">
-                    Login
-                    <span className="block h-1 w-24 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full mt-2 mx-auto animate-pulse"></span>
-                </h2>
-                <form onSubmit={handleSubmit} className="flex flex-col gap-6 w-full animate-fade-in">
-                    <label htmlFor="loginUsername" className="font-semibold text-gray-700 text-lg">Username</label> 
+            <div className="bg-white border border-gray-200 shadow-lg rounded-2xl w-full max-w-md p-8 flex flex-col items-center relative">
+                <h2 className="text-3xl font-bold text-gray-800 mb-2 text-center">Login</h2>
+                <div className="w-16 h-1 bg-blue-500 rounded-full mb-6 mx-auto" />
+                <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full">
+                    <label htmlFor="loginUsername" className="font-semibold text-gray-700 text-base">Username</label> 
                     <input
                         type="text"
                         id="loginUsername"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
-                        className="p-4 border border-gray-300 rounded-xl text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition text-lg bg-white/60 backdrop-blur-md shadow-md"
+                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition text-base bg-white shadow-sm"
                         required
                     />
 
-                    <label htmlFor="loginPassword" className="font-semibold text-gray-700 text-lg">Password</label> 
+                    <label htmlFor="loginPassword" className="font-semibold text-gray-700 text-base">Password</label> 
                     <PasswordInput
                         id="loginPassword"
                         value={password}
@@ -477,22 +408,22 @@ const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPas
 
                     <button
                         type="submit"
-                        className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white py-4 px-8 rounded-xl font-bold text-xl transition duration-300 hover:scale-105 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 mt-2 shadow-lg animate-scale-in"
+                        className="bg-blue-500 text-white py-3 px-6 rounded-lg font-bold text-lg transition duration-200 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 mt-2 shadow-md"
                     >
                         Login
                     </button>
                 </form>
                 {showForgotPassword && (
                     <p className="mt-4 text-gray-700">
-                        <a href="#" onClick={onNavigateToForgotPassword} className="text-blue-500 font-semibold hover:underline hover:text-pink-500 transition-colors">
+                        <a href="#" onClick={onNavigateToForgotPassword} className="text-blue-500 font-semibold hover:underline hover:text-blue-700 transition-colors">
                             Forgot Password?
                         </a>
                     </p>
                 )}
-                <div className="absolute bottom-6 left-0 w-full flex justify-center">
-                    <p className="text-gray-700 text-lg text-center">
+                <div className="mt-8 w-full flex justify-center">
+                    <p className="text-gray-700 text-base text-center">
                         Don't have an account?{' '}
-                        <a href="#" onClick={onNavigateToRegister} className="text-blue-500 font-semibold hover:underline hover:text-pink-500 transition-colors">
+                        <a href="#" onClick={onNavigateToRegister} className="text-blue-500 font-semibold hover:underline hover:text-blue-700 transition-colors">
                             Register here
                         </a>
                     </p>
@@ -575,24 +506,22 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
 
     return (
         <div className="flex items-center justify-center w-full min-h-[80vh] animate-fade-in-up">
-            <div className="bg-white/20 backdrop-blur-2xl border border-purple-200/40 shadow-2xl rounded-3xl w-full max-w-2xl p-10 flex flex-col items-center glass-card relative">
-                <h2 className="text-4xl font-extrabold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-6 text-center drop-shadow-lg relative inline-block">
-                    Register
-                    <span className="block h-1 w-24 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full mt-2 mx-auto animate-pulse"></span>
-                </h2>
-                <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full animate-fade-in">
+            <div className="bg-white border border-gray-200 shadow-lg rounded-2xl w-full max-w-lg p-8 flex flex-col items-center relative">
+                <h2 className="text-3xl font-bold text-gray-800 mb-2 text-center">Register</h2>
+                <div className="w-16 h-1 bg-blue-500 rounded-full mb-6 mx-auto" />
+                <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full">
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
-                        <label htmlFor="email" className="font-semibold text-gray-700 text-lg sm:w-1/4 flex-shrink-0">Email</label>
+                        <label htmlFor="email" className="font-semibold text-gray-700 text-base sm:w-1/4 flex-shrink-0">Email</label>
                         <input type="email" id="email" value={formData.email} onChange={handleChange}
-                            className="p-4 border border-gray-300 rounded-xl text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow text-lg bg-white/60 backdrop-blur-md shadow-md" required />
+                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow text-base bg-white shadow-sm" required />
                     </div>
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
-                        <label htmlFor="username" className="font-semibold text-gray-700 text-lg sm:w-1/4 flex-shrink-0">Username</label>
+                        <label htmlFor="username" className="font-semibold text-gray-700 text-base sm:w-1/4 flex-shrink-0">Username</label>
                         <input type="text" id="username" value={formData.username} onChange={handleChange}
-                            className="p-4 border border-gray-300 rounded-xl text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow text-lg bg-white/60 backdrop-blur-md shadow-md" required />
+                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow text-base bg-white shadow-sm" required />
                     </div>
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
-                        <label htmlFor="password" className="font-semibold text-gray-700 text-lg sm:w-1/4 flex-shrink-0">Password</label>
+                        <label htmlFor="password" className="font-semibold text-gray-700 text-base sm:w-1/4 flex-shrink-0">Password</label>
                         <div className="flex-grow">
                             <PasswordInput
                                 id="password"
@@ -602,7 +531,7 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
                         </div>
                     </div>
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
-                        <label htmlFor="reEnterPassword" className="font-semibold text-gray-700 text-lg sm:w-1/4 flex-shrink-0">Re-enter Password</label>
+                        <label htmlFor="reEnterPassword" className="font-semibold text-gray-700 text-base sm:w-1/4 flex-shrink-0">Re-enter Password</label>
                         <div className="flex-grow">
                             <PasswordInput
                                 id="reEnterPassword"
@@ -612,22 +541,22 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
                         </div>
                     </div>
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
-                        <label htmlFor="collegeName" className="font-semibold text-gray-700 text-lg sm:w-1/4 flex-shrink-0">College Name</label>
+                        <label htmlFor="collegeName" className="font-semibold text-gray-700 text-base sm:w-1/4 flex-shrink-0">College Name</label>
                         <input type="text" id="collegeName" value={formData.collegeName} onChange={handleChange}
-                            className="p-4 border border-gray-300 rounded-xl text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow text-lg bg-white/60 backdrop-blur-md shadow-md" required />
+                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow text-base bg-white shadow-sm" required />
                     </div>
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
-                        <label htmlFor="branch" className="font-semibold text-gray-700 text-lg sm:w-1/4 flex-shrink-0">Branch</label>
+                        <label htmlFor="branch" className="font-semibold text-gray-700 text-base sm:w-1/4 flex-shrink-0">Branch</label>
                         <input type="text" id="branch" value={formData.branch} onChange={handleChange}
-                            className="p-4 border border-gray-300 rounded-xl text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow text-lg bg-white/60 backdrop-blur-md shadow-md" required />
+                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow text-base bg-white shadow-sm" required />
                     </div>
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
-                        <label htmlFor="rollNumber" className="font-semibold text-gray-700 text-lg sm:w-1/4 flex-shrink-0">Roll Number</label>
+                        <label htmlFor="rollNumber" className="font-semibold text-gray-700 text-base sm:w-1/4 flex-shrink-0">Roll Number</label>
                         <input type="text" id="rollNumber" value={formData.rollNumber} onChange={handleChange}
-                            className="p-4 border border-gray-300 rounded-xl text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow text-lg bg-white/60 backdrop-blur-md shadow-md" required />
+                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow text-base bg-white shadow-sm" required />
                     </div>
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
-                        <label htmlFor="mobileNumber" className="font-semibold text-gray-700 text-lg sm:w-1/4 flex-shrink-0">Mobile Number</label>
+                        <label htmlFor="mobileNumber" className="font-semibold text-gray-700 text-base sm:w-1/4 flex-shrink-0">Mobile Number</label>
                         <input
                             type="tel"
                             id="mobileNumber"
@@ -635,21 +564,21 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
                             onChange={handleChange}
                             placeholder="Enter 10-digit mobile number"
                             pattern="[0-9]{10}"
-                            className="p-4 border border-gray-300 rounded-xl text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow text-lg bg-white/60 backdrop-blur-md shadow-md"
+                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow text-base bg-white shadow-sm"
                             required
                         />
                     </div>
                     {error && <p className="text-red-500 text-base text-center mt-2 animate-fade-in">{error}</p>}
                     <button
                         type="submit"
-                        className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white py-4 px-8 rounded-xl font-bold text-xl transition duration-300 hover:scale-105 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 mt-2 shadow-lg animate-scale-in"
+                        className="bg-blue-500 text-white py-3 px-6 rounded-lg font-bold text-lg transition duration-200 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 mt-2 shadow-md"
                     >
                         Register
                     </button>
                 </form>
-                <p className="mt-8 text-gray-700 text-lg">
+                <p className="mt-8 text-gray-700 text-base">
                     Already have an account?{' '}
-                    <a href="#" onClick={onNavigateToLogin} className="text-blue-500 font-semibold hover:underline hover:text-pink-500 transition-colors">
+                    <a href="#" onClick={onNavigateToLogin} className="text-blue-500 font-semibold hover:underline hover:text-blue-700 transition-colors">
                         Login here
                     </a>
                 </p>
@@ -704,33 +633,32 @@ const ForgotPasswordPage = ({ onNavigateToLogin, onNavigateToResetPasswordWithTo
     };
 
     return (
-        <div className="flex items-center justify-center p-5 w-full h-full"> {/* Added h-full to help centering */}
-            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col items-center animate-fade-in-up"> 
-                <h2 className="text-3xl font-bold text-gray-800 mb-6">Forgot Password</h2>
-                <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full max-w-xs"> 
-                    <p className="text-center text-gray-700 mb-4">Enter your username to receive a password reset token.</p>
-                    <label htmlFor="username" className="font-semibold text-gray-700 mb-1">Username:</label>
+        <div className="flex items-center justify-center w-full min-h-[80vh] animate-fade-in-up">
+            <div className="bg-white border border-gray-200 shadow-lg rounded-2xl w-full max-w-md p-8 flex flex-col items-center relative">
+                <h2 className="text-3xl font-bold text-gray-800 mb-2 text-center">Forgot Password</h2>
+                <div className="w-16 h-1 bg-blue-500 rounded-full mb-6 mx-auto" />
+                <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full">
+                    <p className="text-center text-gray-700 mb-2">Enter your username to receive a password reset token.</p>
+                    <label htmlFor="username" className="font-semibold text-gray-700 text-base">Username</label>
                     <input
                         type="text"
                         id="username"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
-                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition"
+                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition text-base bg-white shadow-sm"
                         required
                     />
                     <button
                         type="submit"
-                        className="bg-blue-500 text-white py-3 px-6 rounded-lg font-bold transition duration-300 hover:bg-blue-600 shadow-xl hover:shadow-2xl mt-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75"
+                        className="bg-blue-500 text-white py-3 px-6 rounded-lg font-bold text-lg transition duration-200 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 mt-2 shadow-md"
                     >
                         Request Reset Token
                     </button>
                 </form>
-
-                {error && <p className="text-red-500 text-sm text-center mt-4">{error}</p>}
-                {message && <p className="text-green-500 text-sm text-center mt-4">{message}</p>}
-
+                {error && <p className="text-red-500 text-base text-center mt-4">{error}</p>}
+                {message && <p className="text-green-500 text-base text-center mt-4">{message}</p>}
                 {resetTokenInfo && (
-                    <div className="mt-6 p-4 bg-yellow-100 border border-yellow-300 rounded-lg w-full max-w-xs mx-auto text-center animate-fade-in">
+                    <div className="mt-6 p-4 bg-yellow-100 border border-yellow-300 rounded-lg w-full max-w-xs mx-auto text-center">
                         <p className="font-bold text-yellow-800 mb-2">FOR DEMO PURPOSES ONLY:</p>
                         <p className="text-sm text-yellow-700 mb-2">
                             Token: <span id="resetTokenDisplay" className="font-mono break-all">{resetTokenInfo.token}</span>
@@ -746,10 +674,9 @@ const ForgotPasswordPage = ({ onNavigateToLogin, onNavigateToResetPasswordWithTo
                         </p>
                     </div>
                 )}
-
-                <p className="mt-6 text-gray-700 text-base">
+                <p className="mt-8 text-gray-700 text-base">
                     Remembered your password?{' '}
-                    <a href="#" onClick={onNavigateToLogin} className="text-blue-500 font-semibold hover:underline">
+                    <a href="#" onClick={onNavigateToLogin} className="text-blue-500 font-semibold hover:underline hover:text-blue-700 transition-colors">
                         Back to Login
                     </a>
                 </p>
@@ -767,19 +694,6 @@ const ResetPasswordPage = ({ onNavigateToLogin, initialToken }) => {
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
     const modalRef = useRef(null);
-
-    useEffect(() => {
-        if (modalRef.current) {
-            const computedStyle = window.getComputedStyle(modalRef.current);
-            console.log('ResetPasswordPage Modal - Initial Opacity:', computedStyle.opacity);
-            console.log('ResetPasswordPage Modal - Initial Display:', computedStyle.display);
-            setTimeout(() => {
-                const updatedStyle = window.getComputedStyle(modalRef.current);
-                console.log('ResetPasswordPage Modal - After 100ms Opacity:', updatedStyle.opacity);
-                console.log('ResetPasswordPage Modal - After 100ms Display:', updatedStyle.display);
-            }, 100);
-        }
-    }, []);
 
     useEffect(() => {
         if (initialToken) {
@@ -823,56 +737,52 @@ const ResetPasswordPage = ({ onNavigateToLogin, initialToken }) => {
     };
 
     return (
-        <div className="flex items-center justify-center p-5 w-full h-full"> {/* Added h-full to help centering */}
-            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col items-center animate-fade-in-up"> 
-                <h2 className="text-3xl font-bold text-gray-800 mb-6">Reset Password</h2>
-                <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full max-w-xs"> 
-                    <label htmlFor="resetUsername" className="font-semibold text-gray-700 mb-1">Username:</label>
+        <div className="flex items-center justify-center w-full min-h-[80vh] animate-fade-in-up">
+            <div className="bg-white border border-gray-200 shadow-lg rounded-2xl w-full max-w-md p-8 flex flex-col items-center relative">
+                <h2 className="text-3xl font-bold text-gray-800 mb-2 text-center">Reset Password</h2>
+                <div className="w-16 h-1 bg-blue-500 rounded-full mb-6 mx-auto" />
+                <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full">
+                    <label htmlFor="resetUsername" className="font-semibold text-gray-700 text-base">Username</label>
                     <input
                         type="text"
                         id="resetUsername"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
-                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition"
+                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition text-base bg-white shadow-sm"
                         required
                     />
-
-                    <label htmlFor="resetToken" className="font-semibold text-gray-700 mb-1">Reset Token:</label>
+                    <label htmlFor="resetToken" className="font-semibold text-gray-700 text-base">Reset Token</label>
                     <input
                         type="text"
                         id="resetToken"
                         value={token}
                         onChange={(e) => setToken(e.target.value)}
-                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition"
+                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition text-base bg-white shadow-sm"
                         required
                     />
-
-                    <label htmlFor="newPassword" className="font-semibold text-gray-700 mb-1">New Password:</label>
+                    <label htmlFor="newPassword" className="font-semibold text-gray-700 text-base">New Password</label>
                     <PasswordInput
                         id="newPassword"
                         value={newPassword}
                         onChange={(e) => setNewPassword(e.target.value)}
                     />
-
-                    <label htmlFor="reEnterNewPassword" className="font-semibold text-gray-700 mb-1">Re-enter New Password:</label>
+                    <label htmlFor="reEnterNewPassword" className="font-semibold text-gray-700 text-base">Re-enter New Password</label>
                     <PasswordInput
                         id="reEnterNewPassword"
                         value={reEnterNewPassword}
                         onChange={(e) => setReEnterNewPassword(e.target.value)}
                     />
-
-                    {error && <p className="text-red-500 text-sm text-center mt-2">{error}</p>}
-                    {message && <p className="text-green-500 text-sm text-center mt-2">{message}</p>}
-
+                    {error && <p className="text-red-500 text-base text-center mt-2">{error}</p>}
+                    {message && <p className="text-green-500 text-base text-center mt-2">{message}</p>}
                     <button
                         type="submit"
-                        className="bg-blue-500 text-white py-3 px-6 rounded-lg font-bold transition duration-300 hover:bg-blue-600 shadow-xl hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 mt-4"
+                        className="bg-blue-500 text-white py-3 px-6 rounded-lg font-bold text-lg transition duration-200 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 mt-2 shadow-md"
                     >
                         Reset Password
                     </button>
                 </form>
-                <p className="mt-6 text-gray-700 text-base">
-                    <a href="#" onClick={onNavigateToLogin} className="text-blue-500 font-semibold hover:underline">
+                <p className="mt-8 text-gray-700 text-base">
+                    <a href="#" onClick={onNavigateToLogin} className="text-blue-500 font-semibold hover:underline hover:text-blue-700 transition-colors">
                         Back to Login
                     </a>
                 </p>
@@ -897,55 +807,44 @@ const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects, onNa
     };
 
     return (
-        <div className="flex items-start justify-center p-5 w-full h-full mt-8">
-            <div
-                className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col items-center animate-fade-in-up relative"
-                style={{ width: 450, height: 450, minWidth: 450, minHeight: 450 }}
-            >
-                <h1 className="text-3xl font-bold text-gray-800 mb-6">Welcome, {userDetails?.username || 'User'}!</h1>
-
+        <div className="flex items-center justify-center w-full min-h-[80vh] animate-fade-in-up">
+            <div className="bg-white border border-gray-200 shadow-lg rounded-2xl w-full max-w-md p-8 flex flex-col items-center relative">
+                <h1 className="text-3xl font-bold text-gray-800 mb-2 text-center">Welcome{userDetails?.username ? `, ${userDetails.username}` : ''}!</h1>
+                <div className="w-16 h-1 bg-blue-500 rounded-full mb-6 mx-auto" />
                 {isAuthLoading ? (
                     <p className="text-gray-600 mb-6">Loading user details...</p>
                 ) : userDetails ? (
-                    <div className="user-details-box text-left w-full max-w-xs mx-auto mb-6 p-4 border border-blue-300 rounded-xl bg-blue-50 shadow-md"> 
-                        <p className="text-gray-700 text-sm mb-2">College: <span className="font-medium">{userDetails.college || 'N/A'}</span></p> 
-                        <p className="text-gray-700 text-sm mb-2">Branch: <span className="font-medium">{userDetails.branch || 'N/A'}</span></p> 
-                        <p className="text-gray-700 text-sm">Roll Number: <span className="font-medium">{userDetails.roll_number || 'N/A'}</span></p>
+                    <div className="user-details-box text-left w-full max-w-xs mx-auto mb-6 p-4 border border-blue-100 rounded-xl bg-blue-50 shadow-sm">
+                        <p className="text-gray-700 text-base mb-2">College: <span className="font-medium">{userDetails.college || 'N/A'}</span></p>
+                        <p className="text-gray-700 text-base mb-2">Branch: <span className="font-medium">{userDetails.branch || 'N/A'}</span></p>
+                        <p className="text-gray-700 text-base">Roll Number: <span className="font-medium">{userDetails.roll_number || 'N/A'}</span></p>
                     </div>
                 ) : (
                     <p className="text-red-500 mb-6">Could not load user details. Please try logging in again.</p>
                 )}
-
-                {/* Project Suggestions Button - blue with thunder icon */}
                 <button
                     onClick={onNavigateToSuggestions}
-                    className="flex items-center gap-2 bg-blue-500 text-white py-2 px-5 rounded-lg font-bold transition duration-300 hover:bg-blue-600 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 mb-4"
-                    style={{ fontSize: '1.1rem' }}
+                    className="w-full bg-blue-100 text-blue-700 py-3 px-6 rounded-lg font-bold text-lg transition duration-200 hover:bg-blue-200 shadow-md mb-4"
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-white">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
                     Project Suggestions
                 </button>
-
-                <div className="flex flex-col sm:flex-row gap-4 mt-6 w-full max-w-xs justify-center">
+                <div className="flex flex-col sm:flex-row gap-4 mt-2 w-full justify-center">
                     <button
                         onClick={onNavigateToCreateProject}
-                        className="bg-blue-500 text-white py-3 px-6 rounded-lg font-bold transition duration-300 hover:bg-blue-600 shadow-xl hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75"
+                        className="bg-blue-500 text-white py-3 px-6 rounded-lg font-bold text-lg transition duration-200 hover:bg-blue-600 shadow-md"
                     >
                         Create New Project
                     </button>
                     <button
                         onClick={onNavigateToViewProjects}
-                        className="bg-blue-500 text-white py-3 px-6 rounded-lg font-bold transition duration-300 hover:bg-blue-600 shadow-xl hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75"
+                        className="bg-blue-500 text-white py-3 px-6 rounded-lg font-bold text-lg transition duration-200 hover:bg-blue-600 shadow-md"
                     >
                         View All Projects
                     </button>
                 </div>
-
                 <button
                     onClick={handleLogout}
-                    className="bg-gray-300 text-gray-800 py-2 px-5 rounded-lg font-bold transition duration-300 hover:bg-gray-400 shadow-md hover:shadow-lg mt-6 w-full max-w-[150px] mx-auto focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-75"
+                    className="bg-gray-200 text-gray-800 py-2 px-5 rounded-lg font-bold text-base transition duration-200 hover:bg-gray-300 shadow-md mt-6 w-full max-w-[150px] mx-auto"
                 >
                     Logout
                 </button>
@@ -964,15 +863,10 @@ const SuggestionsPage = ({ onNavigateToWelcome }) => {
         'Virtual Reality Learning App',
     ];
     return (
-        <div className="flex items-start justify-center p-5 w-full h-full mt-8">
-            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col items-center animate-fade-in-up"
-                style={{ width: 450, minWidth: 450 }}>
-                <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-yellow-600">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v13.5m0 0l-3.75-3.75m3.75 3.75l3.75-3.75M21 21H3" />
-                    </svg>
-                    Project Suggestions
-                </h2>
+        <div className="flex items-center justify-center w-full min-h-[80vh] animate-fade-in-up">
+            <div className="bg-white border border-gray-200 shadow-lg rounded-2xl w-full max-w-md p-8 flex flex-col items-center relative">
+                <h2 className="text-3xl font-bold text-gray-800 mb-2 text-center">Project Suggestions</h2>
+                <div className="w-16 h-1 bg-blue-500 rounded-full mb-6 mx-auto" />
                 <ul className="w-full list-disc pl-6 text-gray-700 text-lg mb-6">
                     {suggestions.map((title, idx) => (
                         <li key={idx} className="mb-2">{title}</li>
@@ -980,7 +874,7 @@ const SuggestionsPage = ({ onNavigateToWelcome }) => {
                 </ul>
                 <button
                     onClick={onNavigateToWelcome}
-                    className="bg-gray-300 text-gray-800 py-2 px-5 rounded-lg font-bold transition duration-300 hover:bg-gray-400 shadow-md hover:shadow-lg w-full max-w-[150px] mx-auto focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-75"
+                    className="bg-gray-200 text-gray-800 py-2 px-5 rounded-lg font-bold text-base transition duration-200 hover:bg-gray-300 shadow-md w-full max-w-[150px] mx-auto"
                 >
                     Back to Welcome
                 </button>
