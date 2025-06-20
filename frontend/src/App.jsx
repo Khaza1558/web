@@ -969,7 +969,7 @@ const NavigationBar = ({ currentPage, onNavigate }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const navItems = [
-        { name: 'Home', icon: 'fa-solid fa-home', page: 'login' },
+        { name: 'Home', icon: 'fa-solid fa-home', page: 'home' },
         { name: 'Process', icon: 'fa-solid fa-gears', page: 'howToUse' },
         { name: 'About Us', icon: 'fa-solid fa-info-circle', page: 'about' },
         { name: 'Contact Us', icon: 'fa-solid fa-phone', page: 'contact' },
@@ -978,7 +978,14 @@ const NavigationBar = ({ currentPage, onNavigate }) => {
 
     const handleNavClick = (page) => {
         setIsMenuOpen(false);
-        if (page === 'howToUse') {
+        if (page === 'home') {
+            // Home should go to login page for non-authenticated users, or welcome page for authenticated users
+            if (token && userDetails) {
+                onNavigate('welcome');
+            } else {
+                onNavigate('login');
+            }
+        } else if (page === 'howToUse') {
             // Scroll to the "How to use" section
             const howToUseSection = document.querySelector('[data-section="how-to-use"]');
             if (howToUseSection) {
@@ -1011,10 +1018,9 @@ const NavigationBar = ({ currentPage, onNavigate }) => {
                             src="/tit.png" 
                             alt="Kroxnest" 
                             className="h-8 w-auto filter invert"
-                            onClick={() => handleNavClick('login')}
+                            onClick={() => handleNavClick('home')}
                             style={{ cursor: 'pointer' }}
                         />
-                        <span className="ml-2 text-lg font-bold text-white hidden sm:block">Kroxnest</span>
                     </div>
 
                     {/* Desktop Navigation */}
@@ -1023,8 +1029,8 @@ const NavigationBar = ({ currentPage, onNavigate }) => {
                             <button
                                 key={item.name}
                                 onClick={() => handleNavClick(item.page)}
-                                className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:bg-white/10 hover:text-white ${
-                                    currentPage === item.page ? 'text-white bg-white/20' : 'text-gray-200'
+                                className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:bg-black/10 hover:text-black ${
+                                    (currentPage === item.page || (item.page === 'home' && (currentPage === 'login' || currentPage === 'welcome'))) ? 'text-black bg-black/20' : 'text-black'
                                 }`}
                             >
                                 <i className={`${item.icon} text-lg`}></i>
@@ -1037,7 +1043,7 @@ const NavigationBar = ({ currentPage, onNavigate }) => {
                     <div className="md:hidden">
                         <button
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
-                            className="text-white hover:text-gray-200 focus:outline-none focus:text-gray-200"
+                            className="text-black hover:text-gray-700 focus:outline-none focus:text-gray-700"
                         >
                             <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 {isMenuOpen ? (
@@ -1053,13 +1059,13 @@ const NavigationBar = ({ currentPage, onNavigate }) => {
                 {/* Mobile Navigation */}
                 {isMenuOpen && (
                     <div className="md:hidden">
-                        <div className="px-2 pt-2 pb-3 space-y-1 bg-black/20 backdrop-blur-md rounded-lg border border-white/20">
+                        <div className="px-2 pt-2 pb-3 space-y-1 bg-white/90 backdrop-blur-md rounded-lg border border-black/20">
                             {navItems.map((item) => (
                                 <button
                                     key={item.name}
                                     onClick={() => handleNavClick(item.page)}
-                                    className={`flex items-center space-x-3 w-full text-left px-3 py-2 rounded-lg text-base font-medium transition-all duration-300 hover:bg-white/10 hover:text-white ${
-                                        currentPage === item.page ? 'text-white bg-white/20' : 'text-gray-200'
+                                    className={`flex items-center space-x-3 w-full text-left px-3 py-2 rounded-lg text-base font-medium transition-all duration-300 hover:bg-black/10 hover:text-black ${
+                                        (currentPage === item.page || (item.page === 'home' && (currentPage === 'login' || currentPage === 'welcome'))) ? 'text-black bg-black/20' : 'text-black'
                                     }`}
                                 >
                                     <i className={`${item.icon} text-lg`}></i>
@@ -2584,8 +2590,8 @@ function App() {
                             {/* How to use section */}
                             <div className="w-full py-12 px-0" data-section="how-to-use">
                                 <div className="w-full flex flex-col items-start px-2 sm:px-6 md:px-12 max-w-7xl mx-auto">
-                                    <h2 className="text-4xl font-extrabold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-2 text-left drop-shadow-lg relative inline-block">
-                                        How to use
+                                    <h2 className="text-4xl font-extrabold text-black mb-2 text-left drop-shadow-lg relative inline-block">
+                                        Getting Started
                                     </h2>
                                     <div className="w-full h-1 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full mb-8 animate-pulse"></div>
                                 </div>
@@ -2605,8 +2611,8 @@ function App() {
                             {/* What we do section */}
                             <div className="w-full py-12 px-0" data-section="what-we-do">
                                 <div className="w-full flex flex-col items-start px-2 sm:px-6 md:px-12 max-w-7xl mx-auto">
-                                    <h2 className="text-4xl font-extrabold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-2 text-left drop-shadow-lg relative inline-block">
-                                        What we do
+                                    <h2 className="text-4xl font-extrabold text-black mb-2 text-left drop-shadow-lg relative inline-block">
+                                        Our Services
                                     </h2>
                                     <div className="w-full h-1 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full mb-8 animate-pulse"></div>
                                 </div>
