@@ -6,6 +6,64 @@ import React, { useState, useEffect, createContext, useContext, useCallback, use
 // --- Context for Authentication ---
 const AuthContext = createContext(null); 
 
+// NEW: Toast Notification System
+const ToastContext = createContext(null);
+
+export const ToastProvider = ({ children }) => {
+    const [toasts, setToasts] = useState([]);
+
+    const showToast = useCallback((message, type = 'info', duration = 5000) => {
+        const id = Date.now() + Math.random();
+        const newToast = { id, message, type, duration };
+        setToasts(prev => [...prev, newToast]);
+        
+        setTimeout(() => {
+            setToasts(prev => prev.filter(toast => toast.id !== id));
+        }, duration);
+    }, []);
+
+    const removeToast = useCallback((id) => {
+        setToasts(prev => prev.filter(toast => toast.id !== id));
+    }, []);
+
+    return (
+        <ToastContext.Provider value={{ showToast, removeToast }}>
+            {children}
+            <div className="fixed top-4 right-4 z-50 space-y-2">
+                {toasts.map(toast => (
+                    <div
+                        key={toast.id}
+                        className={`px-4 py-3 rounded-lg shadow-lg text-white font-medium max-w-sm transform transition-all duration-300 ${
+                            toast.type === 'success' ? 'bg-green-500' :
+                            toast.type === 'error' ? 'bg-red-500' :
+                            toast.type === 'warning' ? 'bg-yellow-500' :
+                            'bg-blue-500'
+                        }`}
+                    >
+                        <div className="flex items-center justify-between">
+                            <span>{toast.message}</span>
+                            <button
+                                onClick={() => removeToast(toast.id)}
+                                className="ml-3 text-white hover:text-gray-200"
+                            >
+                                ×
+                            </button>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </ToastContext.Provider>
+    );
+};
+
+export const useToast = () => {
+    const context = useContext(ToastContext);
+    if (!context) {
+        throw new Error('useToast must be used within a ToastProvider');
+    }
+    return context;
+};
+
 export const AuthContextProvider = ({ children }) => { 
     const [token, setTokenInternal] = useState(localStorage.getItem('jwtToken'));
     const [userDetails, setUserDetails] = useState(null); 
@@ -330,14 +388,24 @@ const CodeViewerModal = ({ content, language, onClose }) => {
 };
 
 // NEW: ProjectCard Component
-const ProjectCard = ({ project, onSelectProject }) => {
+const ProjectCard = ({ project, onSelectProject, searchTerm = '' }) => {
+    const isHighlighted = searchTerm && 
+        (project.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+         project.description?.toLowerCase().includes(searchTerm.toLowerCase()));
+
     return (
         <div
-            className="bg-gray-100 p-4 rounded-xl shadow-lg hover:bg-gray-200 transition duration-200 cursor-pointer" 
+            className={`bg-gray-100 p-4 rounded-xl shadow-lg hover:bg-gray-200 transition duration-200 cursor-pointer ${
+                isHighlighted ? 'ring-2 ring-blue-400 bg-blue-50' : ''
+            }`}
             onClick={() => onSelectProject(project.id, project.name)}
         >
             <h4 className="text-xl font-bold text-gray-800 mb-2">{project.name}</h4>
-            <p className="text-gray-600 text-sm">{project.description}</p>
+            <p className="text-gray-600 text-sm mb-3">{project.description}</p>
+            <div className="flex items-center justify-between text-xs text-gray-500">
+                <span>Created: {new Date(project.createdAt).toLocaleDateString()}</span>
+                <span>{project.fileCount || 0} files</span>
+            </div>
         </div>
     );
 };
@@ -1216,8 +1284,7 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
 
     return (
         <div className="flex items-start justify-center p-5 w-full h-full mt-8">
-            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-xl flex flex-col items-start animate-fade-in-up"
-                style={{ width: 450, minWidth: 450 }}>
+            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-4xl flex flex-col items-start animate-fade-in-up">
                 <h1 className="text-3xl font-bold mb-6 text-gray-800 self-center">View Projects</h1>
 
                 {showSearchAndList ? (
@@ -1505,8 +1572,7 @@ const CreateProjectPage = ({ onNavigateToWelcome }) => {
 
     return (
         <div className="flex items-start justify-center p-5 w-full h-full mt-8">
-            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-xl flex flex-col items-center animate-fade-in-up"
-                style={{ width: 450, minWidth: 450 }}>
+            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-4xl flex flex-col items-center animate-fade-in-up">
                 <h2 className="text-3xl font-bold text-gray-800 mb-6">Create New Project</h2>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full max-w-lg mx-auto"> 
                     <label htmlFor="projectName" className="font-semibold text-gray-700 mb-1">Project Name:</label>
@@ -1671,6 +1737,379 @@ const PasswordInput = ({ id, value, onChange, placeholder, required = true }) =>
     );
 };
 
+// NEW: Skeleton Loading Components
+const SkeletonCard = () => (
+    <div className="bg-gray-100 p-4 rounded-xl shadow-lg animate-pulse">
+        <div className="h-6 bg-gray-300 rounded mb-2"></div>
+        <div className="h-4 bg-gray-300 rounded w-3/4"></div>
+    </div>
+);
+
+const SkeletonFileItem = () => (
+    <div className="flex flex-row flex-wrap items-center gap-2 mb-4 p-4 bg-gray-50 rounded-xl border border-gray-200 shadow-lg w-full animate-pulse">
+        <div className="h-4 bg-gray-300 rounded w-16"></div>
+        <div className="h-4 bg-gray-300 rounded flex-grow"></div>
+        <div className="flex gap-2">
+            <div className="h-8 bg-gray-300 rounded w-16"></div>
+            <div className="h-8 bg-gray-300 rounded w-20"></div>
+            <div className="h-8 bg-gray-300 rounded w-16"></div>
+        </div>
+    </div>
+);
+
+// NEW: Loading Spinner Component
+const LoadingSpinner = ({ size = 'md', text = 'Loading...' }) => (
+    <div className="flex flex-col items-center justify-center py-8">
+        <svg className={`animate-spin text-blue-500 ${size === 'sm' ? 'h-6 w-6' : size === 'lg' ? 'h-12 w-12' : 'h-8 w-8'}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+        </svg>
+        {text && <p className="mt-2 text-gray-600">{text}</p>}
+    </div>
+);
+
+// NEW: Enhanced Form Validation Hook
+const useFormValidation = (initialState, validationRules) => {
+    const [formData, setFormData] = useState(initialState);
+    const [errors, setErrors] = useState({});
+    const [touched, setTouched] = useState({});
+
+    const validateField = useCallback((name, value) => {
+        const rules = validationRules[name];
+        if (!rules) return '';
+
+        for (const rule of rules) {
+            if (rule.required && !value) {
+                return rule.message || `${name} is required`;
+            }
+            if (rule.pattern && !rule.pattern.test(value)) {
+                return rule.message || `${name} format is invalid`;
+            }
+            if (rule.minLength && value.length < rule.minLength) {
+                return rule.message || `${name} must be at least ${rule.minLength} characters`;
+            }
+            if (rule.maxLength && value.length > rule.maxLength) {
+                return rule.message || `${name} must be less than ${rule.maxLength} characters`;
+            }
+            if (rule.custom) {
+                const customError = rule.custom(value, formData);
+                if (customError) return customError;
+            }
+        }
+        return '';
+    }, [validationRules, formData]);
+
+    const handleChange = useCallback((name, value) => {
+        setFormData(prev => ({ ...prev, [name]: value }));
+        if (touched[name]) {
+            const error = validateField(name, value);
+            setErrors(prev => ({ ...prev, [name]: error }));
+        }
+    }, [touched, validateField]);
+
+    const handleBlur = useCallback((name) => {
+        setTouched(prev => ({ ...prev, [name]: true }));
+        const error = validateField(name, formData[name]);
+        setErrors(prev => ({ ...prev, [name]: error }));
+    }, [validateField, formData]);
+
+    const validateForm = useCallback(() => {
+        const newErrors = {};
+        Object.keys(validationRules).forEach(field => {
+            const error = validateField(field, formData[field]);
+            if (error) newErrors[field] = error;
+        });
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    }, [validationRules, validateField, formData]);
+
+    return {
+        formData,
+        errors,
+        touched,
+        handleChange,
+        handleBlur,
+        validateForm,
+        setFormData
+    };
+};
+
+// NEW: Enhanced Input Component with Validation
+const ValidatedInput = ({ 
+    id, 
+    label, 
+    type = 'text', 
+    value, 
+    onChange, 
+    onBlur, 
+    error, 
+    touched, 
+    required = false,
+    placeholder,
+    className = ''
+}) => {
+    const inputClass = `p-3 border rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition bg-white shadow-sm ${className} ${
+        error && touched ? 'border-red-500' : 'border-gray-300'
+    }`;
+
+    return (
+        <div className="flex flex-col gap-2">
+            <label htmlFor={id} className="font-semibold text-gray-700 text-base">
+                {label} {required && <span className="text-red-500">*</span>}
+            </label>
+            {type === 'password' ? (
+                <PasswordInput
+                    id={id}
+                    value={value}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    placeholder={placeholder}
+                    required={required}
+                    className={inputClass}
+                />
+            ) : (
+                <input
+                    type={type}
+                    id={id}
+                    value={value}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    placeholder={placeholder}
+                    className={inputClass}
+                    required={required}
+                />
+            )}
+            {error && touched && (
+                <p className="text-red-500 text-sm animate-fade-in">{error}</p>
+            )}
+        </div>
+    );
+};
+
+// NEW: Search and Filter Components
+const SearchBar = ({ value, onChange, placeholder = "Search..." }) => (
+    <div className="relative w-full">
+        <input
+            type="text"
+            value={value}
+            onChange={onChange}
+            placeholder={placeholder}
+            className="w-full p-3 pl-10 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition bg-white shadow-sm"
+        />
+        <svg className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+    </div>
+);
+
+const FilterDropdown = ({ value, onChange, options, placeholder = "Filter by..." }) => (
+    <select
+        value={value}
+        onChange={onChange}
+        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition bg-white shadow-sm"
+    >
+        <option value="">{placeholder}</option>
+        {options.map(option => (
+            <option key={option.value} value={option.value}>
+                {option.label}
+            </option>
+        ))}
+    </select>
+);
+
+// NEW: File Upload Components with Progress
+const FileUploadArea = ({ onFileSelect, multiple = false, accept = "*", children }) => {
+    const [isDragOver, setIsDragOver] = useState(false);
+    const [uploadProgress, setUploadProgress] = useState(0);
+
+    const handleDragOver = (e) => {
+        e.preventDefault();
+        setIsDragOver(true);
+    };
+
+    const handleDragLeave = (e) => {
+        e.preventDefault();
+        setIsDragOver(false);
+    };
+
+    const handleDrop = (e) => {
+        e.preventDefault();
+        setIsDragOver(false);
+        const files = Array.from(e.dataTransfer.files);
+        onFileSelect(multiple ? files : files[0]);
+    };
+
+    return (
+        <div
+            className={`border-2 border-dashed rounded-lg p-6 text-center transition-all duration-200 ${
+                isDragOver 
+                    ? 'border-blue-400 bg-blue-50' 
+                    : 'border-gray-300 hover:border-gray-400'
+            }`}
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            onDrop={handleDrop}
+        >
+            <svg className="mx-auto h-12 w-12 text-gray-400 mb-4" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <p className="text-gray-600 mb-2">
+                Drag and drop files here, or{' '}
+                <label className="text-blue-500 hover:text-blue-700 cursor-pointer">
+                    browse
+                    <input
+                        type="file"
+                        multiple={multiple}
+                        accept={accept}
+                        onChange={(e) => onFileSelect(multiple ? Array.from(e.target.files) : e.target.files[0])}
+                        className="hidden"
+                    />
+                </label>
+            </p>
+            {children}
+        </div>
+    );
+};
+
+const UploadProgress = ({ progress, fileName }) => (
+    <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
+        <div 
+            className="bg-blue-500 h-2 rounded-full transition-all duration-300"
+            style={{ width: `${progress}%` }}
+        ></div>
+    </div>
+);
+
+// NEW: Enhanced File Management
+const FileManager = ({ files, onFileSelect, onFileRemove, maxFiles = 10 }) => {
+    const [selectedFiles, setSelectedFiles] = useState([]);
+
+    const handleFileSelect = (newFiles) => {
+        const fileArray = Array.isArray(newFiles) ? newFiles : [newFiles];
+        const validFiles = fileArray.filter(file => {
+            const isValid = file && file.size > 0;
+            const isDuplicate = selectedFiles.some(existing => 
+                existing.name === file.name && existing.size === file.size
+            );
+            return isValid && !isDuplicate;
+        });
+
+        if (selectedFiles.length + validFiles.length > maxFiles) {
+            alert(`Maximum ${maxFiles} files allowed`);
+            return;
+        }
+
+        const updatedFiles = [...selectedFiles, ...validFiles];
+        setSelectedFiles(updatedFiles);
+        onFileSelect(updatedFiles);
+    };
+
+    const handleFileRemove = (index) => {
+        const updatedFiles = selectedFiles.filter((_, i) => i !== index);
+        setSelectedFiles(updatedFiles);
+        onFileSelect(updatedFiles);
+    };
+
+    return (
+        <div className="space-y-4">
+            <FileUploadArea onFileSelect={handleFileSelect} multiple={true}>
+                <p className="text-sm text-gray-500">
+                    Maximum {maxFiles} files allowed
+                </p>
+            </FileUploadArea>
+            
+            {selectedFiles.length > 0 && (
+                <div className="space-y-2">
+                    <h4 className="font-semibold text-gray-700">Selected Files:</h4>
+                    {selectedFiles.map((file, index) => (
+                        <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <div className="flex items-center space-x-3">
+                                <svg className="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clipRule="evenodd" />
+                                </svg>
+                                <div>
+                                    <p className="text-sm font-medium text-gray-700">{file.name}</p>
+                                    <p className="text-xs text-gray-500">
+                                        {(file.size / 1024 / 1024).toFixed(2)} MB
+                                    </p>
+                                </div>
+                            </div>
+                            <button
+                                onClick={() => handleFileRemove(index)}
+                                className="text-red-500 hover:text-red-700"
+                            >
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
+                    ))}
+                </div>
+            )}
+        </div>
+    );
+};
+
+// NEW: Dark Mode Context and Hook
+const ThemeContext = createContext(null);
+
+export const ThemeProvider = ({ children }) => {
+    const [isDarkMode, setIsDarkMode] = useState(() => {
+        const saved = localStorage.getItem('darkMode');
+        return saved ? JSON.parse(saved) : window.matchMedia('(prefers-color-scheme: dark)').matches;
+    });
+
+    useEffect(() => {
+        localStorage.setItem('darkMode', JSON.stringify(isDarkMode));
+        if (isDarkMode) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    }, [isDarkMode]);
+
+    const toggleDarkMode = useCallback(() => {
+        setIsDarkMode(prev => !prev);
+    }, []);
+
+    return (
+        <ThemeContext.Provider value={{ isDarkMode, toggleDarkMode }}>
+            {children}
+        </ThemeContext.Provider>
+    );
+};
+
+export const useTheme = () => {
+    const context = useContext(ThemeContext);
+    if (!context) {
+        throw new Error('useTheme must be used within a ThemeProvider');
+    }
+    return context;
+};
+
+// NEW: Theme Toggle Button
+const ThemeToggle = () => {
+    const { isDarkMode, toggleDarkMode } = useTheme();
+
+    return (
+        <button
+            onClick={toggleDarkMode}
+            className="fixed top-4 left-4 z-40 p-3 rounded-full bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-200 border border-gray-200 dark:border-gray-600"
+            aria-label="Toggle dark mode"
+        >
+            {isDarkMode ? (
+                <svg className="w-6 h-6 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
+                </svg>
+            ) : (
+                <svg className="w-6 h-6 text-gray-700" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                </svg>
+            )}
+        </button>
+    );
+};
+
 // Main App component
 function App() { 
     const getInitialPage = () => {
@@ -1828,54 +2267,20 @@ function App() {
     ];
 
     return (
-        <>
-            <div className="bg-gradient-to-br from-[#0f2027] via-[#2c5364] to-[#232526] min-h-screen w-full">
-                {showSplash ? (
-                    <SplashVideo onVideoEnd={handleVideoEnd} />
-                ) : (
-                    <div className="min-h-screen w-full font-sans">
-                        {/* Mobile: ad + login stacked; Desktop: split */}
-                        <div className="block md:hidden w-full">
-                            {/* Ad at top */}
-                            <div className="w-full flex justify-center p-0">
-                                <div className="bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-2 flex items-center justify-center transition-all duration-300 w-full h-32 max-w-2xl">
-                                    <a href={currentAd.href} target="_blank" rel="noopener noreferrer" className="block w-full h-full rounded-2xl overflow-hidden">
-                                        <img
-                                            src={currentAd.src}
-                                            alt={currentAd.alt}
-                                            className="w-full h-full object-contain rounded-2xl transition-all duration-300 mx-auto"
-                                            loading="lazy"
-                                        />
-                                    </a>
-                                </div>
-                            </div>
-                            {/* Small gap */}
-                            <div className="w-full p-1"></div>
-                            {/* Login page (or currentPage) */}
-                            <div className="w-full max-w-sm mx-auto">
-                                {currentPage === 'login'
-                                    ? <LoginPage onLoginSuccess={() => setCurrentPage('welcome')} onNavigateToRegister={() => navigate('register')} onNavigateToForgotPassword={() => navigate('forgotPassword')} />
-                                    : renderPage()}
-                            </div>
-                        </div>
-                        {/* Desktop: split layout as before */}
-                        <div className="hidden md:flex min-h-screen flex-row w-full">
-                            {/* Left: logo, slogan, ad */}
-                            <div className="w-1/2 px-6 md:px-12 py-6 flex flex-col relative min-h-screen justify-between items-center md:items-start">
-                                <header className="flex flex-col items-center md:items-start mt-0 mb-0 sm:mt-2 sm:mb-8 w-full p-0">
-                                    <img 
-                                        src="/tit.png" 
-                                        alt="kroxnest." 
-                                        className="hidden sm:block h-16 sm:h-24 md:h-[180px] lg:h-[220px] mb-0 sm:mb-[-10px] drop-shadow-2xl filter invert transition-all duration-500 ease-in-out mx-auto md:mx-0"
-                                        style={{ maxWidth: '98vw', objectFit: 'contain' }}
-                                        loading="eager"
-                                    />
-                                    <p className="hidden sm:block text-lg sm:text-2xl md:text-3xl text-white italic pl-2 mt-4 text-center md:text-left font-semibold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-lg w-full max-w-3xl mx-auto md:mx-0" style={{ fontFamily: 'Inter, sans-serif' }}>
-                                        Knowledge Repository Of eXhibits & Networked Educational Student Tracks
-                                    </p>
-                                </header>
-                                <div className="mt-8 w-full flex justify-center p-0">
-                                    <div className="bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-2 flex items-center justify-center transition-all duration-300 w-full h-40 md:h-[480px] max-w-2xl">
+        <ThemeProvider>
+            <ToastProvider>
+                <div className="bg-gradient-to-br from-[#0f2027] via-[#2c5364] to-[#232526] dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 min-h-screen w-full">
+                    {showSplash ? (
+                        <SplashVideo onVideoEnd={handleVideoEnd} />
+                    ) : (
+                        <div className="min-h-screen w-full font-sans">
+                            <ThemeToggle />
+                            
+                            {/* Mobile: ad + login stacked; Desktop: split */}
+                            <div className="block md:hidden w-full">
+                                {/* Ad at top */}
+                                <div className="w-full flex justify-center p-0">
+                                    <div className="bg-gradient-to-br from-white via-blue-50 to-purple-100 dark:from-gray-800 dark:via-gray-700 dark:to-gray-600 rounded-3xl shadow-2xl p-2 flex items-center justify-center transition-all duration-300 w-full h-32 max-w-2xl">
                                         <a href={currentAd.href} target="_blank" rel="noopener noreferrer" className="block w-full h-full rounded-2xl overflow-hidden">
                                             <img
                                                 src={currentAd.src}
@@ -1886,77 +2291,115 @@ function App() {
                                         </a>
                                     </div>
                                 </div>
+                                {/* Small gap */}
+                                <div className="w-full p-1"></div>
+                                {/* Login page (or currentPage) */}
+                                <div className="w-full max-w-sm mx-auto">
+                                    {currentPage === 'login'
+                                        ? <LoginPage onLoginSuccess={() => setCurrentPage('welcome')} onNavigateToRegister={() => navigate('register')} onNavigateToForgotPassword={() => navigate('forgotPassword')} />
+                                        : renderPage()}
+                                </div>
                             </div>
-                            {/* Right: content (login, register, etc.) */}
-                            <div className="w-1/2 flex justify-center items-start pt-[60px] px-0">
-                                <div className={
-                                    currentPage === 'login'
-                                        ? 'w-full max-w-sm sm:max-w-md mx-auto'
-                                        : 'w-full max-w-2xl flex flex-col items-center'
-                                }>
-                                    <div className={currentPage === 'login' ? 'w-full flex flex-col items-center' : 'w-full'}>
-                                        {renderPage()}
+                            {/* Desktop: split layout as before */}
+                            <div className="hidden md:flex min-h-screen flex-row w-full">
+                                {/* Left: logo, slogan, ad */}
+                                <div className="w-1/2 px-6 md:px-12 py-6 flex flex-col relative min-h-screen justify-between items-center md:items-start">
+                                    <header className="flex flex-col items-center md:items-start mt-0 mb-0 sm:mt-2 sm:mb-8 w-full p-0">
+                                        <img 
+                                            src="/tit.png" 
+                                            alt="kroxnest." 
+                                            className="hidden sm:block h-16 sm:h-24 md:h-[180px] lg:h-[220px] mb-0 sm:mb-[-10px] drop-shadow-2xl filter invert dark:invert-0 transition-all duration-500 ease-in-out mx-auto md:mx-0"
+                                            style={{ maxWidth: '98vw', objectFit: 'contain' }}
+                                            loading="eager"
+                                        />
+                                        <p className="hidden sm:block text-lg sm:text-2xl md:text-3xl text-white dark:text-gray-100 italic pl-2 mt-4 text-center md:text-left font-semibold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-lg w-full max-w-3xl mx-auto md:mx-0" style={{ fontFamily: 'Inter, sans-serif' }}>
+                                            Knowledge Repository Of eXhibits & Networked Educational Student Tracks
+                                        </p>
+                                    </header>
+                                    <div className="mt-8 w-full flex justify-center p-0">
+                                        <div className="bg-gradient-to-br from-white via-blue-50 to-purple-100 dark:from-gray-800 dark:via-gray-700 dark:to-gray-600 rounded-3xl shadow-2xl p-2 flex items-center justify-center transition-all duration-300 w-full h-40 md:h-[480px] max-w-2xl">
+                                            <a href={currentAd.href} target="_blank" rel="noopener noreferrer" className="block w-full h-full rounded-2xl overflow-hidden">
+                                                <img
+                                                    src={currentAd.src}
+                                                    alt={currentAd.alt}
+                                                    className="w-full h-full object-contain rounded-2xl transition-all duration-300 mx-auto"
+                                                    loading="lazy"
+                                                />
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {/* Right: content (login, register, etc.) */}
+                                <div className="w-1/2 flex justify-center items-start pt-[60px] px-0">
+                                    <div className={
+                                        currentPage === 'login'
+                                            ? 'w-full max-w-sm sm:max-w-md mx-auto'
+                                            : 'w-full max-w-4xl flex flex-col items-center'
+                                    }>
+                                        <div className={currentPage === 'login' ? 'w-full flex flex-col items-center' : 'w-full'}>
+                                            {renderPage()}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                )}
+                    )}
 
-                {/* What we do section with horizontal scroll on mobile */}
-                <div className="w-full mt-16 bg-gradient-to-r from-[#232526] via-[#2c5364] to-[#0f2027] py-0 px-0">
-                    <div className="w-full flex flex-col items-center">
-                        <h2 className="text-4xl font-extrabold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-2 text-center drop-shadow-lg relative inline-block">
-                            What we do
-                            <span className="block h-1 w-24 sm:w-32 md:w-40 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full mt-2 mx-auto animate-pulse"></span>
-                        </h2>
-                    </div>
-                    <div className="flex flex-row gap-4 w-full px-2 sm:px-6 md:px-12 max-w-7xl mx-auto overflow-x-auto snap-x sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-8 sm:overflow-x-visible">
-                        {whatWeDoImages.map((item, idx) => (
-                            <div key={idx} className="flex flex-col items-center bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl border border-blue-200 hover:border-blue-400 hover:shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] transition-all duration-300 p-6 md:p-10 min-w-[260px] sm:min-w-[320px] lg:min-w-[340px] max-w-full snap-center sm:min-w-0 hover:scale-105 w-full mx-2 sm:mx-0 h-auto group">
-                                <div className="border-4 border-white rounded-2xl mb-6 flex flex-col items-center justify-center p-2 shadow-lg w-full max-w-[320px] mx-auto bg-gradient-to-tr from-blue-100 via-white to-purple-100 group-hover:from-blue-200 group-hover:to-purple-200 transition-all duration-300">
-                                    <div className="flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white text-3xl font-bold mt-8 shadow-md mb-4 group-hover:scale-110 transition-transform duration-300">
-                                        <img src={item.src} alt={item.alt} className="w-12 h-12 object-contain rounded-xl" loading="lazy" />
+                    {/* What we do section with horizontal scroll on mobile */}
+                    <div className="w-full mt-16 bg-gradient-to-r from-[#232526] via-[#2c5364] to-[#0f2027] dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-0 px-0">
+                        <div className="w-full flex flex-col items-center">
+                            <h2 className="text-4xl font-extrabold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-2 text-center drop-shadow-lg relative inline-block">
+                                What we do
+                                <span className="block h-1 w-24 sm:w-32 md:w-40 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full mt-2 mx-auto animate-pulse"></span>
+                            </h2>
+                        </div>
+                        <div className="flex flex-row gap-4 w-full px-2 sm:px-6 md:px-12 max-w-7xl mx-auto overflow-x-auto snap-x sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-8 sm:overflow-x-visible">
+                            {whatWeDoImages.map((item, idx) => (
+                                <div key={idx} className="flex flex-col items-center bg-gradient-to-br from-white via-blue-50 to-purple-100 dark:from-gray-800 dark:via-gray-700 dark:to-gray-600 rounded-3xl shadow-2xl border border-blue-200 dark:border-gray-600 hover:border-blue-400 dark:hover:border-blue-300 hover:shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] transition-all duration-300 p-6 md:p-10 min-w-[260px] sm:min-w-[320px] lg:min-w-[340px] max-w-full snap-center sm:min-w-0 hover:scale-105 w-full mx-2 sm:mx-0 h-auto group">
+                                    <div className="border-4 border-white dark:border-gray-700 rounded-2xl mb-6 flex flex-col items-center justify-center p-2 shadow-lg w-full max-w-[320px] mx-auto bg-gradient-to-tr from-blue-100 via-white to-purple-100 dark:from-gray-700 dark:via-gray-600 dark:to-gray-700 group-hover:from-blue-200 group-hover:to-purple-200 dark:group-hover:from-gray-600 dark:group-hover:to-gray-500 transition-all duration-300">
+                                        <div className="flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white text-3xl font-bold mt-8 shadow-md mb-4 group-hover:scale-110 transition-transform duration-300">
+                                            <img src={item.src} alt={item.alt} className="w-12 h-12 object-contain rounded-xl" loading="lazy" />
+                                        </div>
+                                        <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100 mt-2 mb-2 text-center break-words w-full">{item.alt}</h3>
+                                        <p className="text-gray-700 dark:text-gray-300 text-lg text-center px-2 break-words w-full whitespace-pre-line font-normal">{item.desc}</p>
                                     </div>
-                                    <h3 className="text-xl font-bold text-gray-800 mt-2 mb-2 text-center break-words w-full">{item.alt}</h3>
-                                    <p className="text-gray-700 text-lg text-center px-2 break-words w-full whitespace-pre-line font-normal">{item.desc}</p>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
-                </div>
-                {/* How to use section with horizontal scroll on mobile */}
-                <div className="w-full mt-16 bg-gradient-to-r from-[#232526] via-[#2c5364] to-[#0f2027] py-0 px-0">
-                    <div className="w-full flex flex-col items-center">
-                        <h2 className="text-4xl font-extrabold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-2 text-center drop-shadow-lg relative inline-block">
-                            How to use
-                            <span className="block h-1 w-24 sm:w-32 md:w-40 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full mt-2 mx-auto animate-pulse"></span>
-                        </h2>
-                    </div>
-                    <div className="flex flex-row gap-4 w-full px-2 sm:px-6 md:px-12 max-w-7xl mx-auto overflow-x-auto snap-x sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-8 sm:overflow-x-visible">
-                        {howToUseSteps.map((step, idx) => (
-                            <div key={idx} className="flex flex-col items-center bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-6 md:p-10 min-w-[260px] sm:min-w-[320px] lg:min-w-[340px] max-w-full snap-center sm:min-w-0 transition-all duration-300 hover:scale-105 hover:shadow-2xl w-full mx-2 sm:mx-0 h-auto">
-                                <div className="border-4 border-white rounded-2xl mb-6 flex flex-col items-center justify-center p-2 shadow-lg w-full max-w-[320px] mx-auto">
-                                    <div className="flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white text-3xl font-bold mt-8 shadow-md mb-4">{step.step}</div>
-                                    <h3 className="text-xl font-bold text-gray-800 mt-2 mb-2 text-center break-words w-full">{step.title}</h3>
-                                    <p className="text-gray-700 text-lg text-center px-2 break-words w-full whitespace-pre-line">{step.desc}</p>
+                    {/* How to use section with horizontal scroll on mobile */}
+                    <div className="w-full mt-16 bg-gradient-to-r from-[#232526] via-[#2c5364] to-[#0f2027] dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-0 px-0">
+                        <div className="w-full flex flex-col items-center">
+                            <h2 className="text-4xl font-extrabold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-2 text-center drop-shadow-lg relative inline-block">
+                                How to use
+                                <span className="block h-1 w-24 sm:w-32 md:w-40 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full mt-2 mx-auto animate-pulse"></span>
+                            </h2>
+                        </div>
+                        <div className="flex flex-row gap-4 w-full px-2 sm:px-6 md:px-12 max-w-7xl mx-auto overflow-x-auto snap-x sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-8 sm:overflow-x-visible">
+                            {howToUseSteps.map((step, idx) => (
+                                <div key={idx} className="flex flex-col items-center bg-gradient-to-br from-white via-blue-50 to-purple-100 dark:from-gray-800 dark:via-gray-700 dark:to-gray-600 rounded-3xl shadow-2xl p-6 md:p-10 min-w-[260px] sm:min-w-[320px] lg:min-w-[340px] max-w-full snap-center sm:min-w-0 transition-all duration-300 hover:scale-105 hover:shadow-2xl w-full mx-2 sm:mx-0 h-auto">
+                                    <div className="border-4 border-white dark:border-gray-700 rounded-2xl mb-6 flex flex-col items-center justify-center p-2 shadow-lg w-full max-w-[320px] mx-auto">
+                                        <div className="flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white text-3xl font-bold mt-8 shadow-md mb-4">{step.step}</div>
+                                        <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100 mt-2 mb-2 text-center break-words w-full">{step.title}</h3>
+                                        <p className="text-gray-700 dark:text-gray-300 text-lg text-center px-2 break-words w-full whitespace-pre-line">{step.desc}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
-                </div>
 
-                {/* Footer centered at the bottom of the entire page, not fixed */}
-                <footer className="w-full flex flex-col items-center justify-center py-8 px-2 bg-gradient-to-r from-[#232526] via-[#2c5364] to-[#0f2027] gap-1 text-center mt-16">
-                    <div>
-                        <span className="text-gray-300 text-lg mr-6">Contact: <a href="tel:+1234567890" className="underline hover:text-blue-400 transition-colors">+1 234 567 890</a> | <a href="mailto:dummy@email.com" className="underline hover:text-blue-400 transition-colors">info@kroxnest.com</a></span>
-                    </div>
-                    <div>
-                        <span className="block text-gray-300 text-xl font-semibold">© 2025 Kroxnest. All rights reserved.</span>
-                    </div>
-                </footer>
-            </div>
-        </>
+                    {/* Footer centered at the bottom of the entire page, not fixed */}
+                    <footer className="w-full flex flex-col items-center justify-center py-8 px-2 bg-gradient-to-r from-[#232526] via-[#2c5364] to-[#0f2027] dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 gap-1 text-center mt-16">
+                        <div>
+                            <span className="text-gray-300 dark:text-gray-400 text-lg mr-6">Contact: <a href="tel:+1234567890" className="underline hover:text-blue-400 transition-colors">+1 234 567 890</a> | <a href="mailto:dummy@email.com" className="underline hover:text-blue-400 transition-colors">info@kroxnest.com</a></span>
+                        </div>
+                        <div>
+                            <span className="block text-gray-300 dark:text-gray-400 text-xl font-semibold">© 2025 Kroxnest. All rights reserved.</span>
+                        </div>
+                    </footer>
+                </div>
+            </ToastProvider>
+        </ThemeProvider>
     );
 }
 
