@@ -2612,7 +2612,7 @@ function App() {
         },
         welcome: {
             href: 'https://ad-link-welcome.com',
-            src: 'girl.png/600x600',
+            src: 'girl.png',
             alt: 'Welcome Advertisement',
         },
         createProject: {
