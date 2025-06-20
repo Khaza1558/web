@@ -859,6 +859,220 @@ const ResetPasswordPage = ({ onNavigateToLogin, initialToken }) => {
     );
 };
 
+// NEW: Privacy Policy Page
+const PrivacyPolicyPage = ({ onNavigateToLogin }) => {
+    return (
+        <div className="flex items-start justify-center p-5 w-full h-full mt-8">
+            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-4xl flex flex-col items-center animate-fade-in-up">
+                <h2 className="text-3xl font-bold text-gray-800 mb-6">Privacy Policy</h2>
+                <div className="w-full max-w-3xl text-left space-y-6">
+                    <div className="bg-blue-50 p-6 rounded-xl border border-blue-200">
+                        <h3 className="text-2xl font-bold text-blue-800 mb-4">Project Portfolio & Selling Platform</h3>
+                        <p className="text-gray-700 leading-relaxed">
+                            Kroxnest is a comprehensive platform designed for students to showcase their academic projects, 
+                            collaborate with peers, and potentially monetize their innovative work. Our platform serves as 
+                            a bridge between talented students and potential buyers, investors, or collaborators.
+                        </p>
+                    </div>
+
+                    <section>
+                        <h3 className="text-xl font-bold text-gray-800 mb-3">Information We Collect</h3>
+                        <ul className="list-disc pl-6 text-gray-700 space-y-2">
+                            <li><strong>Personal Information:</strong> Name, email, college details, roll number, and contact information</li>
+                            <li><strong>Project Data:</strong> Project files, descriptions, and associated metadata</li>
+                            <li><strong>Usage Analytics:</strong> Platform interaction data to improve user experience</li>
+                            <li><strong>Communication Data:</strong> Messages and interactions between users</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h3 className="text-xl font-bold text-gray-800 mb-3">How We Use Your Information</h3>
+                        <ul className="list-disc pl-6 text-gray-700 space-y-2">
+                            <li>Facilitate project showcasing and portfolio building</li>
+                            <li>Enable project discovery by potential buyers and investors</li>
+                            <li>Provide collaboration tools for team projects</li>
+                            <li>Send notifications about project inquiries and opportunities</li>
+                            <li>Improve platform functionality and user experience</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h3 className="text-xl font-bold text-gray-800 mb-3">Project Selling & Monetization</h3>
+                        <div className="bg-green-50 p-4 rounded-lg border border-green-200">
+                            <p className="text-gray-700 leading-relaxed">
+                                Our platform enables students to monetize their projects through various channels:
+                            </p>
+                            <ul className="list-disc pl-6 text-gray-700 mt-3 space-y-1">
+                                <li><strong>Direct Sales:</strong> Sell completed projects to interested buyers</li>
+                                <li><strong>Licensing:</strong> License your project code or design to companies</li>
+                                <li><strong>Consulting:</strong> Offer implementation services for your projects</li>
+                                <li><strong>Collaboration:</strong> Partner with other students on commercial ventures</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h3 className="text-xl font-bold text-gray-800 mb-3">Data Protection</h3>
+                        <p className="text-gray-700 leading-relaxed">
+                            We implement industry-standard security measures to protect your personal information and project data. 
+                            All file uploads are encrypted, and access is restricted to authorized personnel only.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h3 className="text-xl font-bold text-gray-800 mb-3">Third-Party Services</h3>
+                        <p className="text-gray-700 leading-relaxed">
+                            We may integrate with third-party services for payment processing, analytics, and communication. 
+                            These services have their own privacy policies, and we recommend reviewing them.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h3 className="text-xl font-bold text-gray-800 mb-3">Your Rights</h3>
+                        <ul className="list-disc pl-6 text-gray-700 space-y-2">
+                            <li>Access and download your personal data</li>
+                            <li>Request deletion of your account and associated data</li>
+                            <li>Opt-out of marketing communications</li>
+                            <li>Control visibility of your projects and profile</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h3 className="text-xl font-bold text-gray-800 mb-3">Contact Information</h3>
+                        <p className="text-gray-700 leading-relaxed">
+                            For privacy-related inquiries, please contact us at: <br/>
+                            <strong>Email:</strong> privacy@kroxnest.com<br/>
+                            <strong>Phone:</strong> +1 234 567 890
+                        </p>
+                    </section>
+
+                    <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+                        <p className="text-sm text-gray-600">
+                            <strong>Last Updated:</strong> January 2025<br/>
+                            This privacy policy is subject to change. Please review periodically.
+                        </p>
+                    </div>
+                </div>
+                <button
+                    onClick={onNavigateToLogin}
+                    className="bg-gray-300 text-gray-800 py-2 px-5 rounded-lg font-bold transition duration-300 hover:bg-gray-400 shadow-md hover:shadow-lg mt-8 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-75"
+                >
+                    Back to Login
+                </button>
+            </div>
+        </div>
+    );
+};
+
+// NEW: Navigation Bar Component
+const NavigationBar = ({ currentPage, onNavigate }) => {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const navItems = [
+        { name: 'Home', icon: '🏠', page: 'login' },
+        { name: 'Process', icon: '⚙️', page: 'howToUse' },
+        { name: 'About Us', icon: 'ℹ️', page: 'about' },
+        { name: 'Contact Us', icon: '📞', page: 'contact' },
+        { name: 'Privacy Policy', icon: '🔒', page: 'privacyPolicy' }
+    ];
+
+    const handleNavClick = (page) => {
+        setIsMenuOpen(false);
+        if (page === 'howToUse') {
+            // Scroll to the "How to use" section
+            const howToUseSection = document.querySelector('[data-section="how-to-use"]');
+            if (howToUseSection) {
+                howToUseSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        } else if (page === 'about') {
+            // Scroll to the "What we do" section
+            const whatWeDoSection = document.querySelector('[data-section="what-we-do"]');
+            if (whatWeDoSection) {
+                whatWeDoSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        } else if (page === 'contact') {
+            // Scroll to the footer
+            const footer = document.querySelector('footer');
+            if (footer) {
+                footer.scrollIntoView({ behavior: 'smooth' });
+            }
+        } else {
+            onNavigate(page);
+        }
+    };
+
+    return (
+        <nav className="bg-white/90 backdrop-blur-md shadow-lg border-b border-gray-200 sticky top-0 z-40">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex justify-between items-center h-16">
+                    {/* Logo */}
+                    <div className="flex items-center">
+                        <img 
+                            src="/tit.png" 
+                            alt="Kroxnest" 
+                            className="h-8 w-auto filter invert"
+                            onClick={() => handleNavClick('login')}
+                            style={{ cursor: 'pointer' }}
+                        />
+                        <span className="ml-2 text-lg font-bold text-gray-800 hidden sm:block">Kroxnest</span>
+                    </div>
+
+                    {/* Desktop Navigation */}
+                    <div className="hidden md:flex items-center space-x-8">
+                        {navItems.map((item) => (
+                            <button
+                                key={item.name}
+                                onClick={() => handleNavClick(item.page)}
+                                className={`flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-blue-50 hover:text-blue-600 ${
+                                    currentPage === item.page ? 'text-blue-600 bg-blue-50' : 'text-gray-700'
+                                }`}
+                            >
+                                <span className="text-lg">{item.icon}</span>
+                                <span>{item.name}</span>
+                            </button>
+                        ))}
+                    </div>
+
+                    {/* Mobile menu button */}
+                    <div className="md:hidden">
+                        <button
+                            onClick={() => setIsMenuOpen(!isMenuOpen)}
+                            className="text-gray-700 hover:text-blue-600 focus:outline-none focus:text-blue-600"
+                        >
+                            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                {isMenuOpen ? (
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                ) : (
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                                )}
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                {/* Mobile Navigation */}
+                {isMenuOpen && (
+                    <div className="md:hidden">
+                        <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t border-gray-200">
+                            {navItems.map((item) => (
+                                <button
+                                    key={item.name}
+                                    onClick={() => handleNavClick(item.page)}
+                                    className={`flex items-center space-x-3 w-full text-left px-3 py-2 rounded-lg text-base font-medium transition-all duration-200 hover:bg-blue-50 hover:text-blue-600 ${
+                                        currentPage === item.page ? 'text-blue-600 bg-blue-50' : 'text-gray-700'
+                                    }`}
+                                >
+                                    <span className="text-lg">{item.icon}</span>
+                                    <span>{item.name}</span>
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                )}
+            </div>
+        </nav>
+    );
+};
 
 const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects, onNavigateToSuggestions }) => {
     const { userDetails, removeToken, fetchUserDetails, isAuthLoading } = useContext(AuthContext);
@@ -882,7 +1096,7 @@ const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects, onNa
                 {isAuthLoading ? (
                     <p className="text-gray-600 mb-6">Loading user details...</p>
                 ) : userDetails ? (
-                    <div className="user-details-box text-left w-full max-w-xs mx-auto mb-6 p-4 border border-blue-100 rounded-xl bg-blue-50 shadow-sm">
+                    <div className="user-details-box text-left w-full max-w-md mx-auto mb-6 p-4 border border-blue-100 rounded-xl bg-blue-50 shadow-sm">
                         <p className="text-gray-700 text-base mb-2">College: <span className="font-medium">{userDetails.college || 'N/A'}</span></p>
                         <p className="text-gray-700 text-base mb-2">Branch: <span className="font-medium">{userDetails.branch || 'N/A'}</span></p>
                         <p className="text-gray-700 text-base">Roll Number: <span className="font-medium">{userDetails.roll_number || 'N/A'}</span></p>
@@ -892,11 +1106,11 @@ const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects, onNa
                 )}
                 <button
                     onClick={onNavigateToSuggestions}
-                    className="w-full bg-blue-100 text-blue-700 py-3 px-6 rounded-lg font-bold text-lg transition duration-200 hover:bg-blue-200 shadow-md mb-4"
+                    className="w-full bg-blue-500 text-white py-3 px-6 rounded-lg font-bold text-lg transition duration-200 hover:bg-blue-600 shadow-md mb-4"
                 >
                     Project Suggestions
                 </button>
-                <div className="flex flex-col sm:flex-row gap-4 mt-2 w-full justify-center">
+                <div className="flex flex-col sm:flex-row gap-6 mt-2 w-full justify-center">
                     <button
                         onClick={onNavigateToCreateProject}
                         className="bg-blue-500 text-white py-3 px-6 rounded-lg font-bold text-lg transition duration-200 hover:bg-blue-600 shadow-md"
@@ -2196,6 +2410,8 @@ function App() {
                 return <CreateProjectPage onNavigateToWelcome={() => navigate('welcome')} />; 
             case 'viewProjects':
                 return <ViewProjectsPage onNavigateToWelcome={() => navigate('welcome')} />;
+            case 'privacyPolicy':
+                return <PrivacyPolicyPage onNavigateToLogin={() => navigate('login')} />;
             default:
                 return <LoginPage onLoginSuccess={() => setCurrentPage('welcome')} onNavigateToRegister={() => navigate('register')} onNavigateToForgotPassword={() => navigate('forgotPassword')} />;
         }
@@ -2296,6 +2512,7 @@ function App() {
                         <SplashVideo onVideoEnd={handleVideoEnd} />
                     ) : (
                         <>
+                            <NavigationBar currentPage={currentPage} onNavigate={navigate} />
                             <div className="min-h-screen w-full font-sans bg-gradient-to-br from-[#0f2027] via-[#2c5364] to-[#232526]">
 
                                 {/* Mobile: ad + login stacked; Desktop: split */}
@@ -2365,7 +2582,7 @@ function App() {
                             </div>
 
                             {/* How to use section */}
-                            <div className="w-full py-12 px-0">
+                            <div className="w-full py-12 px-0" data-section="how-to-use">
                                 <div className="w-full flex flex-col items-start px-2 sm:px-6 md:px-12 max-w-7xl mx-auto">
                                     <h2 className="text-4xl font-extrabold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-2 text-left drop-shadow-lg relative inline-block">
                                         How to use
@@ -2386,7 +2603,7 @@ function App() {
                             </div>
 
                             {/* What we do section */}
-                            <div className="w-full py-12 px-0">
+                            <div className="w-full py-12 px-0" data-section="what-we-do">
                                 <div className="w-full flex flex-col items-start px-2 sm:px-6 md:px-12 max-w-7xl mx-auto">
                                     <h2 className="text-4xl font-extrabold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-2 text-left drop-shadow-lg relative inline-block">
                                         What we do
@@ -2397,11 +2614,7 @@ function App() {
                                     {whatWeDoImages.map((item, idx) => (
                                         <div key={idx} className="flex flex-col items-center bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-6 md:p-10 min-w-[260px] sm:min-w-0 snap-center transition-all duration-300 hover:scale-105 hover:shadow-2xl w-full mx-2 sm:mx-0 h-auto group">
                                             <div className="border-4 border-white rounded-2xl mb-6 flex flex-col items-center justify-center p-2 shadow-lg w-full max-w-[320px] mx-auto bg-gradient-to-tr from-blue-100 via-white to-purple-100 group-hover:from-blue-200 group-hover:to-purple-200 transition-all duration-300">
-                                                <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white text-3xl font-bold mt-8 shadow-md mb-4 group-hover:scale-110 transition-transform duration-300">
-                                                    <div className="w-20 h-20 flex items-center justify-center text-4xl font-bold">
-                                                        {idx + 1}
-                                                    </div>
-                                                </div>
+                                                <div className="flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white text-3xl font-bold mt-8 shadow-md mb-4 group-hover:scale-110 transition-transform duration-300">{idx + 1}</div>
                                                 <h3 className="text-xl font-bold text-blue-600 mt-2 mb-2 text-center break-words w-full">{item.alt}</h3>
                                                 <p className="text-gray-600 text-lg text-center px-2 break-words w-full whitespace-pre-line font-normal">{item.desc}</p>
                                             </div>
