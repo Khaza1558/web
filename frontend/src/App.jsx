@@ -2693,19 +2693,19 @@ function App() {
     return (
         <ThemeProvider>
             <ToastProvider>
-                <div className="bg-gradient-to-br from-[#0f2027] via-[#2c5364] to-[#232526] min-h-screen w-full">
+                {/* Animated Gradient Background */}
+                <div className="animated-bg min-h-screen w-full font-body">
                     {showSplash ? (
                         <SplashVideo onVideoEnd={handleVideoEnd} />
                     ) : (
                         <>
                             <NavigationBar currentPage={currentPage} onNavigate={navigate} />
-                            <div className="min-h-screen w-full font-sans bg-gradient-to-br from-[#0f2027] via-[#2c5364] to-[#232526]">
-
+                            <div className="min-h-screen w-full font-sans">
                                 {/* Mobile: ad + login stacked; Desktop: split */}
                                 <div className="block md:hidden w-full">
                                     {/* Ad at top */}
                                     <div className="w-full flex justify-center p-0">
-                                        <div className="bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-2 flex items-center justify-center transition-all duration-300 w-full h-32 max-w-2xl">
+                                        <div className="glass-card rounded-3xl shadow-2xl p-2 flex items-center justify-center transition-all duration-300 w-full h-32 max-w-2xl animate-fade-in-up">
                                             <a href={currentAd.href} target="_blank" rel="noopener noreferrer" className="block w-full h-full rounded-2xl overflow-hidden">
                                                 <img
                                                     src={currentAd.src}
@@ -2719,7 +2719,7 @@ function App() {
                                     {/* Small gap */}
                                     <div className="w-full p-1"></div>
                                     {/* Login page (or currentPage) */}
-                                    <div className="w-full max-w-sm mx-auto">
+                                    <div className="w-full max-w-sm mx-auto animate-fade-in-up">
                                         {renderPage()}
                                     </div>
                                 </div>
@@ -2731,16 +2731,16 @@ function App() {
                                             <img 
                                                 src="/tit.png" 
                                                 alt="kroxnest." 
-                                                className="hidden sm:block h-16 sm:h-24 md:h-[180px] lg:h-[220px] mb-0 sm:mb-[-10px] drop-shadow-2xl filter invert transition-all duration-500 ease-in-out mx-auto md:mx-0"
+                                                className="hidden sm:block h-16 sm:h-24 md:h-[180px] lg:h-[220px] mb-0 sm:mb-[-10px] drop-shadow-2xl filter invert transition-all duration-500 ease-in-out mx-auto md:mx-0 animate-fade-in-up"
                                                 style={{ maxWidth: '98vw', objectFit: 'contain' }}
                                                 loading="eager"
                                             />
-                                            <p className="hidden sm:block text-lg sm:text-2xl md:text-3xl text-white italic pl-2 mt-4 text-center md:text-left font-semibold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-lg w-full max-w-3xl mx-auto md:mx-0" style={{ fontFamily: 'Inter, sans-serif' }}>
+                                            <p className="hidden sm:block text-lg sm:text-2xl md:text-3xl text-white italic pl-2 mt-4 text-center md:text-left font-heading bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-lg w-full max-w-3xl mx-auto md:mx-0 animate-fade-in-up" style={{ fontFamily: 'Poppins, Inter, sans-serif' }}>
                                                 Knowledge Repository Of eXhibits & Networked Educational Student Tracks
                                             </p>
                                         </header>
                                         <div className="mt-8 w-full flex justify-center p-0">
-                                            <div className="bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-2 flex items-center justify-center transition-all duration-300 w-full h-40 md:h-[480px] max-w-2xl">
+                                            <div className="glass-card rounded-3xl shadow-2xl p-2 flex items-center justify-center transition-all duration-300 w-full h-40 md:h-[480px] max-w-2xl animate-fade-in-up">
                                                 <a href={currentAd.href} target="_blank" rel="noopener noreferrer" className="block w-full h-full rounded-2xl overflow-hidden">
                                                     <img
                                                         src={currentAd.src}
@@ -2766,51 +2766,52 @@ function App() {
                                     </div>
                                 </div>
                             </div>
-
                             {/* How to use section */}
                             <div className="w-full py-12 px-0" data-section="how-to-use">
                                 <div className="w-full flex flex-col items-start px-2 sm:px-6 md:px-12 max-w-7xl mx-auto">
-                                    <h2 className="text-4xl font-extrabold text-white mb-2 text-left drop-shadow-lg relative inline-block">
+                                    <h2 className="text-4xl font-extrabold text-white mb-2 text-left drop-shadow-lg relative inline-block font-heading animate-fade-in-up">
                                         Getting Started
                                     </h2>
                                     <div className="w-full h-1 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full mb-8 animate-pulse"></div>
                                 </div>
                                 <div className="flex flex-row gap-4 w-full px-2 sm:px-6 md:px-12 max-w-7xl mx-auto overflow-x-auto snap-x sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-8 sm:overflow-x-visible">
                                     {howToUseSteps.map((step, idx) => (
-                                        <div key={idx} className="flex flex-col items-center bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-6 md:p-10 min-w-[260px] sm:min-w-0 snap-center transition-all duration-300 hover:scale-105 hover:shadow-2xl w-full mx-2 sm:mx-0 h-auto group">
+                                        <div key={idx} className="glass-card flex flex-col items-center rounded-3xl shadow-2xl p-6 md:p-10 min-w-[260px] sm:min-w-0 snap-center transition-all duration-300 hover:scale-105 hover:shadow-2xl w-full mx-2 sm:mx-0 h-auto group animate-fade-in-up">
                                             <div className="border-4 border-white rounded-2xl mb-6 flex flex-col items-center justify-center p-2 shadow-lg w-full max-w-[320px] mx-auto bg-gradient-to-tr from-blue-100 via-white to-purple-100 group-hover:from-blue-200 group-hover:to-purple-200 transition-all duration-300">
-                                                <div className="flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white text-3xl font-bold mt-8 shadow-md mb-4 group-hover:scale-110 transition-transform duration-300">{step.step}</div>
-                                                <h3 className="text-xl font-bold text-blue-600 mt-2 mb-2 text-center break-words w-full">{step.title}</h3>
-                                                <p className="text-gray-600 text-lg text-center px-2 break-words w-full whitespace-pre-line">{step.desc}</p>
+                                                <div className="flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white text-3xl font-bold mt-8 shadow-md mb-4 group-hover:scale-110 transition-transform duration-300 animated-btn">
+                                                    {step.step}
+                                                </div>
+                                                <h3 className="text-xl font-bold text-blue-600 mt-2 mb-2 text-center break-words w-full font-heading animated-btn">{step.title}</h3>
+                                                <p className="text-gray-600 text-lg text-center px-2 break-words w-full whitespace-pre-line animated-btn">{step.desc}</p>
                                             </div>
                                         </div>
                                     ))}
                                 </div>
                             </div>
-
                             {/* What we do section */}
                             <div className="w-full py-12 px-0" data-section="what-we-do">
                                 <div className="w-full flex flex-col items-start px-2 sm:px-6 md:px-12 max-w-7xl mx-auto">
-                                    <h2 className="text-4xl font-extrabold text-white mb-2 text-left drop-shadow-lg relative inline-block">
+                                    <h2 className="text-4xl font-extrabold text-white mb-2 text-left drop-shadow-lg relative inline-block font-heading animate-fade-in-up">
                                         Our Services
                                     </h2>
                                     <div className="w-full h-1 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full mb-8 animate-pulse"></div>
                                 </div>
                                 <div className="flex flex-row gap-4 w-full px-2 sm:px-6 md:px-12 max-w-7xl mx-auto overflow-x-auto snap-x sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-8 sm:overflow-x-visible">
                                     {whatWeDoImages.map((item, idx) => (
-                                        <div key={idx} className="flex flex-col items-center bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-6 md:p-10 min-w-[260px] sm:min-w-0 snap-center transition-all duration-300 hover:scale-105 hover:shadow-2xl w-full mx-2 sm:mx-0 h-auto group">
+                                        <div key={idx} className="glass-card flex flex-col items-center rounded-3xl shadow-2xl p-6 md:p-10 min-w-[260px] sm:min-w-0 snap-center transition-all duration-300 hover:scale-105 hover:shadow-2xl w-full mx-2 sm:mx-0 h-auto group animate-fade-in-up">
                                             <div className="border-4 border-white rounded-2xl mb-6 flex flex-col items-center justify-center p-2 shadow-lg w-full max-w-[320px] mx-auto bg-gradient-to-tr from-blue-100 via-white to-purple-100 group-hover:from-blue-200 group-hover:to-purple-200 transition-all duration-300">
-                                                <div className="flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white text-3xl font-bold mt-8 shadow-md mb-4 group-hover:scale-110 transition-transform duration-300">{idx + 1}</div>
-                                                <h3 className="text-xl font-bold text-blue-600 mt-2 mb-2 text-center break-words w-full">{item.alt}</h3>
-                                                <p className="text-gray-600 text-lg text-center px-2 break-words w-full whitespace-pre-line font-normal">{item.desc}</p>
+                                                <div className="flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white text-3xl font-bold mt-8 shadow-md mb-4 group-hover:scale-110 transition-transform duration-300 animated-btn">
+                                                    {idx + 1}
+                                                </div>
+                                                <h3 className="text-xl font-bold text-blue-600 mt-2 mb-2 text-center break-words w-full font-heading animated-btn">{item.alt}</h3>
+                                                <p className="text-gray-600 text-lg text-center px-2 break-words w-full whitespace-pre-line font-normal animated-btn">{item.desc}</p>
                                             </div>
                                         </div>
                                     ))}
                                 </div>
                             </div>
-
                             {/* Footer centered at the bottom of the entire page, not fixed */}
-                            <footer className="w-full flex flex-col items-center justify-center py-8 px-2 gap-1 text-center mt-16">
+                            <footer className="w-full flex flex-col items-center justify-center py-8 px-2 gap-1 text-center mt-16 animate-fade-in-up">
                                 <div>
                                     <span className="text-gray-300 text-lg mr-6">Contact: <a href="tel:+1234567890" className="underline hover:text-blue-400 transition-colors">+1 234 567 890</a> | <a href="mailto:dummy@email.com" className="underline hover:text-blue-400 transition-colors">info@kroxnest.com</a></span>
                                 </div>
