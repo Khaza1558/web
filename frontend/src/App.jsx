@@ -1017,7 +1017,7 @@ const NavigationBar = ({ currentPage, onNavigate }) => {
                         <img 
                             src="/tit.png" 
                             alt="Kroxnest" 
-                            className="h-8 w-auto filter invert"
+                            className="h-8 w-auto filter invert hover:scale-110 transition-transform duration-300"
                             onClick={() => handleNavClick('home')}
                             style={{ cursor: 'pointer' }}
                         />
@@ -1029,11 +1029,11 @@ const NavigationBar = ({ currentPage, onNavigate }) => {
                             <button
                                 key={item.name}
                                 onClick={() => handleNavClick(item.page)}
-                                className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:bg-black/10 hover:text-black ${
-                                    (currentPage === item.page || (item.page === 'home' && (currentPage === 'login' || currentPage === 'welcome'))) ? 'text-black bg-black/20' : 'text-black'
+                                className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:bg-white/20 hover:text-white group ${
+                                    (currentPage === item.page || (item.page === 'home' && (currentPage === 'login' || currentPage === 'welcome'))) ? 'text-white bg-white/20' : 'text-gray-200'
                                 }`}
                             >
-                                <i className={`${item.icon} text-lg`}></i>
+                                <i className={`${item.icon} text-lg group-hover:scale-110 transition-transform duration-300`}></i>
                                 <span>{item.name}</span>
                             </button>
                         ))}
@@ -1043,7 +1043,7 @@ const NavigationBar = ({ currentPage, onNavigate }) => {
                     <div className="md:hidden">
                         <button
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
-                            className="text-black hover:text-gray-700 focus:outline-none focus:text-gray-700"
+                            className="text-white hover:text-gray-200 focus:outline-none focus:text-gray-200"
                         >
                             <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 {isMenuOpen ? (
@@ -1059,16 +1059,16 @@ const NavigationBar = ({ currentPage, onNavigate }) => {
                 {/* Mobile Navigation */}
                 {isMenuOpen && (
                     <div className="md:hidden">
-                        <div className="px-2 pt-2 pb-3 space-y-1 bg-white/90 backdrop-blur-md rounded-lg border border-black/20">
+                        <div className="px-2 pt-2 pb-3 space-y-1 bg-black/30 backdrop-blur-md rounded-lg border border-white/20">
                             {navItems.map((item) => (
                                 <button
                                     key={item.name}
                                     onClick={() => handleNavClick(item.page)}
-                                    className={`flex items-center space-x-3 w-full text-left px-3 py-2 rounded-lg text-base font-medium transition-all duration-300 hover:bg-black/10 hover:text-black ${
-                                        (currentPage === item.page || (item.page === 'home' && (currentPage === 'login' || currentPage === 'welcome'))) ? 'text-black bg-black/20' : 'text-black'
+                                    className={`flex items-center space-x-3 w-full text-left px-3 py-2 rounded-lg text-base font-medium transition-all duration-300 hover:bg-white/20 hover:text-white group ${
+                                        (currentPage === item.page || (item.page === 'home' && (currentPage === 'login' || currentPage === 'welcome'))) ? 'text-white bg-white/20' : 'text-gray-200'
                                     }`}
                                 >
-                                    <i className={`${item.icon} text-lg`}></i>
+                                    <i className={`${item.icon} text-lg group-hover:scale-110 transition-transform duration-300`}></i>
                                     <span>{item.name}</span>
                                 </button>
                             ))}
@@ -2590,7 +2590,7 @@ function App() {
                             {/* How to use section */}
                             <div className="w-full py-12 px-0" data-section="how-to-use">
                                 <div className="w-full flex flex-col items-start px-2 sm:px-6 md:px-12 max-w-7xl mx-auto">
-                                    <h2 className="text-4xl font-extrabold text-black mb-2 text-left drop-shadow-lg relative inline-block">
+                                    <h2 className="text-4xl font-extrabold text-white mb-2 text-left drop-shadow-lg relative inline-block">
                                         Getting Started
                                     </h2>
                                     <div className="w-full h-1 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full mb-8 animate-pulse"></div>
@@ -2611,7 +2611,7 @@ function App() {
                             {/* What we do section */}
                             <div className="w-full py-12 px-0" data-section="what-we-do">
                                 <div className="w-full flex flex-col items-start px-2 sm:px-6 md:px-12 max-w-7xl mx-auto">
-                                    <h2 className="text-4xl font-extrabold text-black mb-2 text-left drop-shadow-lg relative inline-block">
+                                    <h2 className="text-4xl font-extrabold text-white mb-2 text-left drop-shadow-lg relative inline-block">
                                         Our Services
                                     </h2>
                                     <div className="w-full h-1 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full mb-8 animate-pulse"></div>
