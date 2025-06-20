@@ -1143,26 +1143,196 @@ const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects, onNa
 
 // Suggestions Page
 const SuggestionsPage = ({ onNavigateToWelcome }) => {
-    const suggestions = [
-        'AI-Powered Attendance System',
-        'Smart Waste Management',
-        'IoT Home Automation',
-        'Blockchain Voting Platform',
-        'Virtual Reality Learning App',
+    const [selectedCategory, setSelectedCategory] = useState(null);
+
+    const categories = [
+        { id: 'ai', name: 'AI', icon: 'fa-solid fa-brain' },
+        { id: 'aiml', name: 'AIML', icon: 'fa-solid fa-robot' },
+        { id: 'cse', name: 'CSE', icon: 'fa-solid fa-laptop-code' },
+        { id: 'ece', name: 'ECE', icon: 'fa-solid fa-microchip' },
+        { id: 'eee', name: 'EEE', icon: 'fa-solid fa-bolt' },
+        { id: 'iot', name: 'IOT', icon: 'fa-solid fa-wifi' },
+        { id: 'it', name: 'IT', icon: 'fa-solid fa-server' },
+        { id: 'bs', name: 'BS', icon: 'fa-solid fa-chart-line' },
+        { id: 'ds', name: 'DS', icon: 'fa-solid fa-database' }
     ];
+
+    const projectSuggestions = {
+        ai: [
+            'AI-Powered Attendance System',
+            'Smart Chatbot for Customer Service',
+            'Image Recognition System',
+            'Natural Language Processing Tool',
+            'AI-Based Recommendation System',
+            'Voice Recognition Application',
+            'AI-Powered Medical Diagnosis',
+            'Autonomous Vehicle Simulation'
+        ],
+        aiml: [
+            'Machine Learning Stock Predictor',
+            'Sentiment Analysis Tool',
+            'Facial Recognition System',
+            'Predictive Analytics Dashboard',
+            'ML-Based Fraud Detection',
+            'Recommendation Engine',
+            'Pattern Recognition System',
+            'Deep Learning Image Classifier'
+        ],
+        cse: [
+            'E-Learning Platform',
+            'Social Media Clone',
+            'E-Commerce Website',
+            'Task Management System',
+            'File Sharing Application',
+            'Online Quiz Platform',
+            'Blog Management System',
+            'Real-time Chat Application'
+        ],
+        ece: [
+            'Smart Home Automation',
+            'Digital Signal Processing Tool',
+            'RFID-Based Attendance System',
+            'Audio Processing Application',
+            'Circuit Design Simulator',
+            'Wireless Communication System',
+            'Embedded System Controller',
+            'Digital Clock with Alarms'
+        ],
+        eee: [
+            'Power System Monitoring',
+            'Energy Consumption Tracker',
+            'Smart Grid Management',
+            'Electrical Load Calculator',
+            'Circuit Breaker Simulator',
+            'Power Factor Correction',
+            'Renewable Energy Monitor',
+            'Electrical Safety System'
+        ],
+        iot: [
+            'Smart Agriculture System',
+            'IoT-Based Health Monitor',
+            'Smart Parking System',
+            'Environmental Monitoring',
+            'Home Security System',
+            'Smart Traffic Light Control',
+            'Industrial IoT Dashboard',
+            'Weather Station with Sensors'
+        ],
+        it: [
+            'Network Monitoring Tool',
+            'Cybersecurity Dashboard',
+            'Database Management System',
+            'Cloud Storage Application',
+            'API Management Platform',
+            'DevOps Automation Tool',
+            'IT Asset Tracker',
+            'System Performance Monitor'
+        ],
+        bs: [
+            'Business Analytics Dashboard',
+            'Customer Relationship Management',
+            'Inventory Management System',
+            'Financial Planning Tool',
+            'Market Analysis Platform',
+            'Sales Forecasting System',
+            'Business Intelligence Tool',
+            'Project Management Application'
+        ],
+        ds: [
+            'Data Visualization Dashboard',
+            'Big Data Processing Tool',
+            'Statistical Analysis Platform',
+            'Data Mining Application',
+            'Predictive Modeling System',
+            'Data Quality Assessment Tool',
+            'Real-time Data Analytics',
+            'Data Pipeline Management'
+        ]
+    };
+
+    const handleCategoryClick = (categoryId) => {
+        setSelectedCategory(categoryId);
+    };
+
+    const handleBackToCategories = () => {
+        setSelectedCategory(null);
+    };
+
     return (
-        <div className="flex items-center justify-center w-full min-h-[80vh] animate-fade-in-up">
-            <div className="bg-white border border-gray-200 shadow-lg rounded-2xl w-full max-w-md p-8 flex flex-col items-center relative">
-                <h2 className="text-3xl font-bold text-gray-800 mb-2 text-center">Project Suggestions</h2>
-                <div className="w-16 h-1 bg-blue-500 rounded-full mb-6 mx-auto" />
-                <ul className="w-full list-disc pl-6 text-gray-700 text-lg mb-6">
-                    {suggestions.map((title, idx) => (
-                        <li key={idx} className="mb-2">{title}</li>
-                    ))}
-                </ul>
+        <div className="flex items-start justify-center p-5 w-full h-full mt-8">
+            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-6xl flex flex-col items-center animate-fade-in-up">
+                <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Project Suggestions</h2>
+                
+                {!selectedCategory ? (
+                    <>
+                        <p className="text-gray-600 text-lg mb-8 text-center max-w-2xl">
+                            Choose your branch to discover exciting project ideas tailored to your field of study
+                        </p>
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 w-full max-w-4xl">
+                            {categories.map((category) => (
+                                <button
+                                    key={category.id}
+                                    onClick={() => handleCategoryClick(category.id)}
+                                    className="flex flex-col items-center p-6 bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-blue-200 hover:border-blue-400 group"
+                                >
+                                    <i className={`${category.icon} text-3xl text-blue-600 mb-3 group-hover:scale-110 transition-transform duration-300`}></i>
+                                    <span className="text-lg font-bold text-gray-800">{category.name}</span>
+                                    <span className="text-sm text-gray-600 mt-1">Click to explore</span>
+                                </button>
+                            ))}
+                        </div>
+                    </>
+                ) : (
+                    <div className="w-full max-w-4xl">
+                        <div className="flex items-center justify-between mb-6">
+                            <h3 className="text-2xl font-bold text-gray-800">
+                                {categories.find(cat => cat.id === selectedCategory)?.name} Projects
+                            </h3>
+                            <button
+                                onClick={handleBackToCategories}
+                                className="flex items-center space-x-2 px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors duration-200"
+                            >
+                                <i className="fa-solid fa-arrow-left"></i>
+                                <span>Back to Categories</span>
+                            </button>
+                        </div>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {projectSuggestions[selectedCategory].map((project, index) => (
+                                <div
+                                    key={index}
+                                    className="p-4 bg-gradient-to-br from-white to-blue-50 rounded-xl border border-blue-200 shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
+                                >
+                                    <div className="flex items-start space-x-3">
+                                        <div className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                                            {index + 1}
+                                        </div>
+                                        <div className="flex-1">
+                                            <h4 className="text-lg font-semibold text-gray-800 mb-2">{project}</h4>
+                                            <p className="text-gray-600 text-sm">
+                                                A comprehensive project idea perfect for {categories.find(cat => cat.id === selectedCategory)?.name} students.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        
+                        <div className="mt-8 p-4 bg-blue-50 rounded-xl border border-blue-200">
+                            <h4 className="text-lg font-semibold text-blue-800 mb-2">💡 Project Tips</h4>
+                            <ul className="text-sm text-blue-700 space-y-1">
+                                <li>• Choose a project that aligns with your interests and career goals</li>
+                                <li>• Consider the complexity and time required for implementation</li>
+                                <li>• Think about real-world applications and market potential</li>
+                                <li>• Collaborate with peers to enhance your project portfolio</li>
+                            </ul>
+                        </div>
+                    </div>
+                )}
+                
                 <button
                     onClick={onNavigateToWelcome}
-                    className="bg-gray-200 text-gray-800 py-2 px-5 rounded-lg font-bold text-base transition duration-200 hover:bg-gray-300 shadow-md w-full max-w-[150px] mx-auto"
+                    className="bg-gray-300 text-gray-800 py-2 px-5 rounded-lg font-bold text-base transition duration-300 hover:bg-gray-400 shadow-md hover:shadow-lg mt-8 w-full max-w-[200px] mx-auto focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-75"
                 >
                     Back to Welcome
                 </button>
