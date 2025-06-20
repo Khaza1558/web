@@ -2607,12 +2607,12 @@ function App() {
     const adConfig = {
         login: {
             href: 'https://ad-link-login.com',
-            src: 'S.jpg',
+            src: 'boy.png',
             alt: 'Login Advertisement',
         },
         welcome: {
             href: 'https://ad-link-welcome.com',
-            src: 'https://via.placeholder.com/600x600',
+            src: 'girl.png/600x600',
             alt: 'Welcome Advertisement',
         },
         createProject: {
