@@ -177,6 +177,7 @@ const CustomConfirmModal = ({ message, onConfirm, onCancel }) => {
 
 const EditTitleModal = ({ projectId, currentTitle, onClose, onSave }) => {
     const { createAuthHeaders } = useContext(AuthContext);
+    const { showToast } = useToast();
     const [newTitle, setNewTitle] = useState(currentTitle);
     const [error, setError] = useState('');
 
@@ -195,15 +196,15 @@ const EditTitleModal = ({ projectId, currentTitle, onClose, onSave }) => {
             });
             const data = await response.json();
             if (response.ok && data.success) {
-                alert(data.message || 'Project title updated successfully!');
+                showToast(data.message || 'Project title updated successfully!', 'success');
                 onSave(newTitle);
             } else {
                 setError(data.message || 'Error updating project title.');
-                alert(data.message || 'Error updating project title.');
+                showToast(data.message || 'Error updating project title.', 'error');
             }
         } catch (err) {
             setError('An error occurred while updating the project title.');
-            alert('An error occurred while updating the project title.');
+            showToast('An error occurred while updating the project title.', 'error');
         }
     };
     return (
@@ -245,6 +246,7 @@ const EditTitleModal = ({ projectId, currentTitle, onClose, onSave }) => {
 
 const ReplaceFileModal = ({ fileId, currentFileName, onClose, onReplace }) => {
     const { createFileUploadAuthHeaders } = useContext(AuthContext);
+    const { showToast } = useToast();
     const [newFileName, setNewFileName] = useState(currentFileName);
     const [newFile, setNewFile] = useState(null);
     const [error, setError] = useState('');
@@ -271,15 +273,15 @@ const ReplaceFileModal = ({ fileId, currentFileName, onClose, onReplace }) => {
             });
             const data = await response.json();
             if (response.ok && data.success) {
-                alert(data.message || 'File replaced successfully!');
+                showToast(data.message || 'File replaced successfully!', 'success');
                 onReplace();
             } else {
                 setError(data.message || 'Error replacing file.');
-                alert(data.message || 'Error replacing file.');
+                showToast(data.message || 'Error replacing file.', 'error');
             }
         } catch (err) {
             setError('An error occurred while replacing the file.');
-            alert('An error occurred while replacing the file.');
+            showToast('An error occurred while replacing the file.', 'error');
         }
     };
     return (
@@ -416,6 +418,7 @@ const ProjectCard = ({ project, onSelectProject, searchTerm = '' }) => {
 // LoginPage
 const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPassword }) => {
     const { setToken } = useContext(AuthContext); 
+    const { showToast } = useToast();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -436,16 +439,17 @@ const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPas
 
             if (response.ok && data.success && data.token) {
                 setToken(data.token);
+                showToast('Login successful!', 'success');
                 onLoginSuccess();
             } else {
                 setError(data.message || 'Login failed. Please check your credentials.');
-                alert(data.message || 'Login failed. Please check your credentials.');
+                showToast(data.message || 'Login failed. Please check your credentials.', 'error');
                 setShowForgotPassword(true);
             }
         } catch (err) {
             console.error('Error during login:', err);
             setError('An error occurred. Please try again.');
-            alert('An error occurred. Please try again.');
+            showToast('An error occurred. Please try again.', 'error');
         }
     };
 
@@ -503,6 +507,7 @@ const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPas
 
 // RegisterPage
 const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
+    const { showToast } = useToast();
     const [formData, setFormData] = useState({
         email: '',
         username: '',
@@ -531,13 +536,13 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
 
         if (formData.password !== formData.reEnterPassword) {
             setError('Passwords do not match!');
-            alert('Passwords do not match!');
+            showToast('Passwords do not match!', 'error');
             return;
         }
 
         if (!validateMobileNumber(formData.mobileNumber)) {
             setError('Please enter a valid 10-digit mobile number.');
-            alert('Please enter a valid 10-digit mobile number.');
+            showToast('Please enter a valid 10-digit mobile number.', 'error');
             return;
         }
 
@@ -559,16 +564,16 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
             const data = await response.json();
 
             if (response.ok && data.success) {
-                alert('Registration successful! You can now log in.');
+                showToast('Registration successful! You can now log in.', 'success');
                 onRegisterSuccess();
             } else {
                 setError(data.message || 'Registration failed. Please try again.');
-                alert(data.message || 'Registration failed. Please try again.');
+                showToast(data.message || 'Registration failed. Please try again.', 'error');
             }
         } catch (err) {
             console.error('Error during registration:', err);
             setError('An error occurred during registration. Please try again.');
-            alert('An error occurred during registration. Please try again.');
+            showToast('An error occurred during registration. Please try again.', 'error');
         }
     };
 
@@ -657,6 +662,7 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
 
 // NEW: Forgot Password Request Page
 const ForgotPasswordPage = ({ onNavigateToLogin, onNavigateToResetPasswordWithToken }) => {
+    const { showToast } = useToast();
     const [username, setUsername] = useState('');
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
@@ -696,7 +702,7 @@ const ForgotPasswordPage = ({ onNavigateToLogin, onNavigateToResetPasswordWithTo
             tempInput.select();
             document.execCommand('copy');
             document.body.removeChild(tempInput);
-            alert('Token copied to clipboard!');
+            showToast('Token copied to clipboard!', 'success');
         }
     };
 
@@ -755,6 +761,7 @@ const ForgotPasswordPage = ({ onNavigateToLogin, onNavigateToResetPasswordWithTo
 
 // NEW: Reset Password Page
 const ResetPasswordPage = ({ onNavigateToLogin, initialToken }) => {
+    const { showToast } = useToast();
     const [username, setUsername] = useState('');
     const [token, setToken] = useState(initialToken || '');
     const [newPassword, setNewPassword] = useState('');
@@ -776,7 +783,7 @@ const ResetPasswordPage = ({ onNavigateToLogin, initialToken }) => {
 
         if (newPassword !== reEnterNewPassword) {
             setError('New passwords do not match!');
-            alert('New passwords do not match!');
+            showToast('New passwords do not match!', 'error');
             return;
         }
 
@@ -791,16 +798,16 @@ const ResetPasswordPage = ({ onNavigateToLogin, initialToken }) => {
 
             if (response.ok && data.success) {
                 setMessage(data.message || 'Password reset successfully!');
-                alert(data.message || 'Password reset successfully! You can now log in.');
+                showToast(data.message || 'Password reset successfully! You can now log in.', 'success');
                 onNavigateToLogin();
             } else {
                 setError(data.message || 'Error resetting password.');
-                alert(data.message || 'Error resetting password.');
+                showToast(data.message || 'Error resetting password.', 'error');
             }
         } catch (err) {
             console.error('Error resetting password:', err);
             setError('An error occurred. Please try again.');
-            alert('An error occurred. Please try again.');
+            showToast('An error occurred. Please try again.', 'error');
         }
     };
 
@@ -1082,6 +1089,7 @@ const NavigationBar = ({ currentPage, onNavigate }) => {
 
 const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects, onNavigateToSuggestions }) => {
     const { userDetails, removeToken, fetchUserDetails, isAuthLoading } = useContext(AuthContext);
+    const { showToast } = useToast();
 
     useEffect(() => {
         if (!userDetails && !isAuthLoading) {
@@ -1091,7 +1099,7 @@ const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects, onNa
 
     const handleLogout = () => {
         removeToken();
-        alert('Logged out successfully!');
+        showToast('Logged out successfully!', 'success');
     };
 
     return (
@@ -1379,6 +1387,7 @@ const FileItem = ({ file, projectOwnerRollNumber, loggedInUserRollNumber, onRepl
 
 const ViewProjectsPage = ({ onNavigateToWelcome }) => {
     const { createAuthHeaders, createFileUploadAuthHeaders, removeToken, userDetails } = useContext(AuthContext);
+    const { showToast } = useToast();
     const loggedInUserRollNumber = userDetails?.roll_number; 
     console.log('ViewProjectsPage - loggedInUserRollNumber (from AuthContext):', loggedInUserRollNumber); 
 
@@ -1420,7 +1429,7 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
                 const errorData = await response.json();
                 if (response.status === 401 || response.status === 403) {
                     removeToken();
-                    alert('Your session has expired or is invalid. Please log in again.');
+                    showToast('Your session has expired or is invalid. Please log in again.', 'error');
                     setIsProjectsLoading(false);
                     return;
                 }
@@ -1439,7 +1448,7 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
         } finally {
             setIsProjectsLoading(false);
         }
-    }, [rollNumber, createAuthHeaders, removeToken]);
+    }, [rollNumber, createAuthHeaders, removeToken, showToast]);
 
     const fetchProjectDetails = useCallback(async (projectId) => {
         console.log('fetchProjectDetails called for projectId:', projectId);
@@ -1468,16 +1477,16 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
             setSelectedProject(null); 
             setProjectFiles([]);
             if (err.message === 'Project not found.') {
-                alert('Project not found. It might have been deleted or never existed.');
+                showToast('Project not found. It might have been deleted or never existed.', 'error');
                 setProjects([]); 
                 setHasSearched(false); 
             }
             if (err.message.includes('401') || err.message.includes('403')) {
                 removeToken();
-                alert('Your session has expired or is invalid. Please log in again.');
+                showToast('Your session has expired or is invalid. Please log in again.', 'error');
             }
         }
-    }, [removeToken]);
+    }, [removeToken, showToast]);
 
     const handleSelectProject = (projectId, projectName) => {
         console.log('handleSelectProject called:', projectId, projectName);
@@ -1539,16 +1548,16 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
             });
             const data = await response.json();
             if (response.ok && data.success) {
-                alert('Files added successfully!');
+                showToast('Files added successfully!', 'success');
                 fetchProjectDetails(selectedProject.id); 
             } else {
                 setError(data.message || 'Error adding new files.');
-                alert(data.message || 'Error adding new files.');
+                showToast(data.message || 'Error adding new files.', 'error');
             }
         } catch (err) {
             console.error('Error adding new files:', err);
             setError('An error occurred while adding new files.');
-            alert('An error occurred while adding new files.');
+            showToast('An error occurred while adding new files.', 'error');
         }
     };
 
@@ -1591,16 +1600,16 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
                 });
                 const data = await response.json();
                 if (response.ok && data.success) {
-                    alert(data.message || 'File deleted successfully!');
+                    showToast(data.message || 'File deleted successfully!', 'success');
                     fetchProjectDetails(selectedProject.id); 
                 } else {
                     setError(data.message || 'Error deleting file.');
-                    alert(data.message || 'Error deleting file.');
+                    showToast(data.message || 'Error deleting file.', 'error');
                 }
             } catch (err) {
                 console.error('Error deleting file:', err);
                 setError('An error occurred while deleting the file.');
-                alert('An error occurred while deleting the file.');
+                showToast('An error occurred while deleting the file.', 'error');
             }
         } else if (confirmAction.type === 'deleteProject') {
             try {
@@ -1610,16 +1619,16 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
                 });
                 const data = await response.json();
                 if (response.ok && data.success) {
-                    alert(data.message || 'Project deleted successfully!');
+                    showToast(data.message || 'Project deleted successfully!', 'success');
                     handleBackToProjectsList(); 
                 } else {
                     setError(data.message || 'Error deleting project.');
-                    alert(data.message || 'Error deleting project.');
+                    showToast(data.message || 'Error deleting project.', 'error');
                 }
             } catch (err) {
                 console.error('Error deleting project:', err);
                 setError('An error occurred while deleting the project.');
-                alert('An error occurred while deleting the project.');
+                showToast('An error occurred while deleting the project.', 'error');
             }
         }
         setConfirmAction(null);
@@ -1650,7 +1659,7 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
                 const response = await fetch(`${API_BASE_URL}${filePath}`);
                 if (!response.ok) {
                     if (response.status === 404) {
-                        alert('File Not Found (404):\n\nFiles uploaded on Render\'s free tier are temporary. They are removed when the server restarts or deploys. Please upload a new file if you need it.');
+                        showToast('File Not Found (404): Render free tier files are temporary and deleted on server restart. Please re-upload.', 'warning');
                     } else {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
@@ -1662,7 +1671,7 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
                 setShowCodeViewer(true);
             } catch (error) {
                 console.error('Error fetching file content for viewer:', error);
-                alert(`An error occurred while fetching file content: ${error.message}`);
+                showToast(`Error fetching file content: ${error.message}`, 'error');
             }
         } else {
             window.open(`${API_BASE_URL}${filePath}`, '_blank');
@@ -1870,6 +1879,7 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
 
 const CreateProjectPage = ({ onNavigateToWelcome }) => {
     const { createAuthHeaders, createFileUploadAuthHeaders, userDetails, isAuthLoading } = useContext(AuthContext);
+    const { showToast } = useToast();
 
     const [projectName, setProjectName] = useState('');
     const [projectDescription, setProjectDescription] = useState('');
@@ -1880,10 +1890,10 @@ const CreateProjectPage = ({ onNavigateToWelcome }) => {
 
     useEffect(() => {
         if (!isAuthLoading && !userDetails) {
-            alert('User details not loaded. Please log in again.');
+            showToast('User details not loaded. Please log in again.', 'error');
             onNavigateToWelcome(); 
         }
-    }, [userDetails, isAuthLoading, onNavigateToWelcome]);
+    }, [userDetails, isAuthLoading, onNavigateToWelcome, showToast]);
 
 
     const handleFileChange = (id, field, value) => {
@@ -1945,16 +1955,16 @@ const CreateProjectPage = ({ onNavigateToWelcome }) => {
             const data = await response.json();
 
             if (response.ok && data.success) {
-                alert('Project created successfully!');
+                showToast('Project created successfully!', 'success');
                 onNavigateToWelcome();
             } else {
                 setError(data.message || 'Project creation failed.');
-                alert(data.message || 'Project creation failed.');
+                showToast(data.message || 'Project creation failed.', 'error');
             }
         } catch (err) {
             console.error('Error creating project:', err);
             setError('An error occurred during project creation.');
-            alert('An error occurred during project creation.');
+            showToast('An error occurred during project creation.', 'error');
         } finally {
             setIsLoading(false);
         }
