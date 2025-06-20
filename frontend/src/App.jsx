@@ -986,8 +986,12 @@ const NavigationBar = ({ currentPage, onNavigate }) => {
     const handleNavClick = (page) => {
         setIsMenuOpen(false);
         if (page === 'home') {
-            // Always navigate to the login page when Home is clicked
-            onNavigate('login');
+            // Home should go to login page for non-authenticated users, or welcome page for authenticated users
+            if (token && userDetails) {
+                onNavigate('welcome');
+            } else {
+                onNavigate('login');
+            }
         } else if (page === 'howToUse') {
             // Scroll to the "How to use" section
             const howToUseSection = document.querySelector('[data-section="how-to-use"]');
@@ -2695,123 +2699,128 @@ function App() {
                     ) : (
                         <>
                             <NavigationBar currentPage={currentPage} onNavigate={navigate} />
-                            
-                            {/* Mobile: ad + login stacked; Desktop: split */}
-                            <div className="block md:hidden w-full">
-                                {/* Ad at top */}
-                                <div className="w-full flex justify-center p-0">
-                                    <div className="bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-2 flex items-center justify-center transition-all duration-300 w-full h-32 max-w-2xl">
-                                        <a href={currentAd.href} target="_blank" rel="noopener noreferrer" className="block w-full h-full rounded-2xl overflow-hidden">
-                                            <img
-                                                src={currentAd.src}
-                                                alt={currentAd.alt}
-                                                className="w-full h-full object-contain rounded-2xl transition-all duration-300 mx-auto"
-                                                loading="lazy"
-                                            />
-                                        </a>
+                            <div className="min-h-screen w-full font-sans bg-gradient-to-br from-[#0f2027] via-[#2c5364] to-[#232526]">
+
+                                {/* Mobile: ad + login stacked; Desktop: split */}
+                                <div className="block md:hidden w-full">
+                                    {/* Ad at top */}
+                                    <div className="w-full flex justify-center p-0">
+                                        <div className="bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-2 flex items-center justify-center transition-all duration-300 w-full h-32 max-w-2xl">
+                                            <a href={currentAd.href} target="_blank" rel="noopener noreferrer" className="block w-full h-full rounded-2xl overflow-hidden">
+                                                <img
+                                                    src={currentAd.src}
+                                                    alt={currentAd.alt}
+                                                    className="w-full h-full object-contain rounded-2xl transition-all duration-300 mx-auto"
+                                                    loading="lazy"
+                                                />
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            {/* Small gap */}
-                            <div className="w-full p-1"></div>
-                            {/* Login page (or currentPage) */}
-                            <div className="w-full max-w-sm mx-auto">
-                                {renderPage()}
-                            </div>
-                        </div>
-                        {/* Desktop: split layout as before */}
-                        <div className="hidden md:flex min-h-screen flex-row w-full">
-                            {/* Left: logo, slogan, ad */}
-                            <div className="w-1/2 px-6 md:px-12 py-6 flex flex-col relative min-h-screen justify-between items-center md:items-start">
-                                <header className="flex flex-col items-center md:items-start mt-0 mb-0 sm:mt-2 sm:mb-8 w-full p-0">
-                                    <img 
-                                        src="/tit.png" 
-                                        alt="kroxnest." 
-                                        className="hidden sm:block h-16 sm:h-24 md:h-[180px] lg:h-[220px] mb-0 sm:mb-[-10px] drop-shadow-2xl filter invert transition-all duration-500 ease-in-out mx-auto md:mx-0"
-                                        style={{ maxWidth: '98vw', objectFit: 'contain' }}
-                                        loading="eager"
-                                    />
-                                    <p className="hidden sm:block text-lg sm:text-2xl md:text-3xl text-white italic pl-2 mt-4 text-center md:text-left font-semibold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-lg w-full max-w-3xl mx-auto md:mx-0" style={{ fontFamily: 'Inter, sans-serif' }}>
-                                        Knowledge Repository Of eXhibits & Networked Educational Student Tracks
-                                    </p>
-                                </header>
-                                <div className="mt-8 w-full flex justify-center p-0">
-                                    <div className="bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-2 flex items-center justify-center transition-all duration-300 w-full h-40 md:h-[480px] max-w-2xl">
-                                        <a href={currentAd.href} target="_blank" rel="noopener noreferrer" className="block w-full h-full rounded-2xl overflow-hidden">
-                                            <img
-                                                src={currentAd.src}
-                                                alt={currentAd.alt}
-                                                className="w-full h-full object-contain rounded-2xl transition-all duration-300 mx-auto"
-                                                loading="lazy"
-                                            />
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            {/* Right: content (login, register, etc.) */}
-                            <div className="w-1/2 flex justify-center items-start pt-[60px] px-0">
-                                <div className={
-                                    currentPage === 'login'
-                                        ? 'w-full max-w-sm sm:max-w-md mx-auto'
-                                        : 'w-full max-w-4xl flex flex-col items-center'
-                                }>
-                                    <div className={currentPage === 'login' ? 'w-full flex flex-col items-center' : 'w-full'}>
+                                    {/* Small gap */}
+                                    <div className="w-full p-1"></div>
+                                    {/* Login page (or currentPage) */}
+                                    <div className="w-full max-w-sm mx-auto">
                                         {renderPage()}
                                     </div>
                                 </div>
+                                {/* Desktop: split layout as before */}
+                                <div className="hidden md:flex min-h-screen flex-row w-full">
+                                    {/* Left: logo, slogan, ad */}
+                                    <div className="w-1/2 px-6 md:px-12 py-6 flex flex-col relative min-h-screen justify-between items-center md:items-start">
+                                        <header className="flex flex-col items-center md:items-start mt-0 mb-0 sm:mt-2 sm:mb-8 w-full p-0">
+                                            <img 
+                                                src="/tit.png" 
+                                                alt="kroxnest." 
+                                                className="hidden sm:block h-16 sm:h-24 md:h-[180px] lg:h-[220px] mb-0 sm:mb-[-10px] drop-shadow-2xl filter invert transition-all duration-500 ease-in-out mx-auto md:mx-0"
+                                                style={{ maxWidth: '98vw', objectFit: 'contain' }}
+                                                loading="eager"
+                                            />
+                                            <p className="hidden sm:block text-lg sm:text-2xl md:text-3xl text-white italic pl-2 mt-4 text-center md:text-left font-semibold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-lg w-full max-w-3xl mx-auto md:mx-0" style={{ fontFamily: 'Inter, sans-serif' }}>
+                                                Knowledge Repository Of eXhibits & Networked Educational Student Tracks
+                                            </p>
+                                        </header>
+                                        <div className="mt-8 w-full flex justify-center p-0">
+                                            <div className="bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-2 flex items-center justify-center transition-all duration-300 w-full h-40 md:h-[480px] max-w-2xl">
+                                                <a href={currentAd.href} target="_blank" rel="noopener noreferrer" className="block w-full h-full rounded-2xl overflow-hidden">
+                                                    <img
+                                                        src={currentAd.src}
+                                                        alt={currentAd.alt}
+                                                        className="w-full h-full object-contain rounded-2xl transition-all duration-300 mx-auto"
+                                                        loading="lazy"
+                                                    />
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {/* Right: content (login, register, etc.) */}
+                                    <div className="w-1/2 flex justify-center items-start pt-[60px] px-0">
+                                        <div className={
+                                            currentPage === 'login'
+                                                ? 'w-full max-w-sm sm:max-w-md mx-auto'
+                                                : 'w-full max-w-4xl flex flex-col items-center'
+                                        }>
+                                            <div className={currentPage === 'login' ? 'w-full flex flex-col items-center' : 'w-full'}>
+                                                {renderPage()}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+
+                            {/* How to use section */}
+                            <div className="w-full py-12 px-0" data-section="how-to-use">
+                                <div className="w-full flex flex-col items-start px-2 sm:px-6 md:px-12 max-w-7xl mx-auto">
+                                    <h2 className="text-4xl font-extrabold text-white mb-2 text-left drop-shadow-lg relative inline-block">
+                                        Getting Started
+                                    </h2>
+                                    <div className="w-full h-1 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full mb-8 animate-pulse"></div>
+                                </div>
+                                <div className="flex flex-row gap-4 w-full px-2 sm:px-6 md:px-12 max-w-7xl mx-auto overflow-x-auto snap-x sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-8 sm:overflow-x-visible">
+                                    {howToUseSteps.map((step, idx) => (
+                                        <div key={idx} className="flex flex-col items-center bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-6 md:p-10 min-w-[260px] sm:min-w-0 snap-center transition-all duration-300 hover:scale-105 hover:shadow-2xl w-full mx-2 sm:mx-0 h-auto group">
+                                            <div className="border-4 border-white rounded-2xl mb-6 flex flex-col items-center justify-center p-2 shadow-lg w-full max-w-[320px] mx-auto bg-gradient-to-tr from-blue-100 via-white to-purple-100 group-hover:from-blue-200 group-hover:to-purple-200 transition-all duration-300">
+                                                <div className="flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white text-3xl font-bold mt-8 shadow-md mb-4 group-hover:scale-110 transition-transform duration-300">{step.step}</div>
+                                                <h3 className="text-xl font-bold text-blue-600 mt-2 mb-2 text-center break-words w-full">{step.title}</h3>
+                                                <p className="text-gray-600 text-lg text-center px-2 break-words w-full whitespace-pre-line">{step.desc}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* What we do section */}
+                            <div className="w-full py-12 px-0" data-section="what-we-do">
+                                <div className="w-full flex flex-col items-start px-2 sm:px-6 md:px-12 max-w-7xl mx-auto">
+                                    <h2 className="text-4xl font-extrabold text-white mb-2 text-left drop-shadow-lg relative inline-block">
+                                        Our Services
+                                    </h2>
+                                    <div className="w-full h-1 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full mb-8 animate-pulse"></div>
+                                </div>
+                                <div className="flex flex-row gap-4 w-full px-2 sm:px-6 md:px-12 max-w-7xl mx-auto overflow-x-auto snap-x sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-8 sm:overflow-x-visible">
+                                    {whatWeDoImages.map((item, idx) => (
+                                        <div key={idx} className="flex flex-col items-center bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-6 md:p-10 min-w-[260px] sm:min-w-0 snap-center transition-all duration-300 hover:scale-105 hover:shadow-2xl w-full mx-2 sm:mx-0 h-auto group">
+                                            <div className="border-4 border-white rounded-2xl mb-6 flex flex-col items-center justify-center p-2 shadow-lg w-full max-w-[320px] mx-auto bg-gradient-to-tr from-blue-100 via-white to-purple-100 group-hover:from-blue-200 group-hover:to-purple-200 transition-all duration-300">
+                                                <div className="flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white text-3xl font-bold mt-8 shadow-md mb-4 group-hover:scale-110 transition-transform duration-300">{idx + 1}</div>
+                                                <h3 className="text-xl font-bold text-blue-600 mt-2 mb-2 text-center break-words w-full">{item.alt}</h3>
+                                                <p className="text-gray-600 text-lg text-center px-2 break-words w-full whitespace-pre-line font-normal">{item.desc}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Footer centered at the bottom of the entire page, not fixed */}
+                            <footer className="w-full flex flex-col items-center justify-center py-8 px-2 gap-1 text-center mt-16">
+                                <div>
+                                    <span className="text-gray-300 text-lg mr-6">Contact: <a href="tel:+1234567890" className="underline hover:text-blue-400 transition-colors">+1 234 567 890</a> | <a href="mailto:dummy@email.com" className="underline hover:text-blue-400 transition-colors">info@kroxnest.com</a></span>
+                                </div>
+                                <div>
+                                    <span className="block text-gray-300 text-xl font-semibold">© 2025 Kroxnest. All rights reserved.</span>
+                                </div>
+                            </footer>
                         </>
                     )}
                 </div>
-
-                {/* How to use section */}
-                <div className="w-full py-20 px-0" data-section="how-to-use">
-                    <div className="w-full flex flex-col items-start px-4 sm:px-6 md:px-12 max-w-7xl mx-auto">
-                        <h2 className="text-4xl font-extrabold text-white mb-3 text-left drop-shadow-lg">
-                            Getting Started
-                        </h2>
-                        <div className="w-full h-1 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-full mb-12"></div>
-                    </div>
-                    <div className="flex flex-row gap-8 w-full px-4 sm:px-6 md:px-12 max-w-7xl mx-auto overflow-x-auto snap-x sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:overflow-x-visible pb-8">
-                        {howToUseSteps.map((step, idx) => (
-                            <div key={idx} className="bg-white/5 border border-white/10 backdrop-blur-lg rounded-3xl shadow-2xl p-8 group transition-all duration-300 hover:bg-white/10 hover:border-white/20 hover:-translate-y-2 flex flex-col items-center text-center snap-center min-w-[280px] sm:min-w-0">
-                                <div className="flex items-center justify-center w-16 h-16 mb-6 rounded-full bg-gradient-to-r from-cyan-400 to-blue-600 text-white text-3xl font-bold shadow-lg transition-transform duration-300 group-hover:scale-110">{step.step}</div>
-                                <h3 className="text-2xl font-bold text-white mb-2">{step.title}</h3>
-                                <p className="text-gray-300 text-base leading-relaxed">{step.desc}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-                {/* What we do section */}
-                <div className="w-full py-20 px-0" data-section="what-we-do">
-                    <div className="w-full flex flex-col items-start px-4 sm:px-6 md:px-12 max-w-7xl mx-auto">
-                        <h2 className="text-4xl font-extrabold text-white mb-3 text-left drop-shadow-lg">
-                            Our Services
-                        </h2>
-                        <div className="w-full h-1 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-full mb-12"></div>
-                    </div>
-                    <div className="flex flex-row gap-8 w-full px-4 sm:px-6 md:px-12 max-w-7xl mx-auto overflow-x-auto snap-x sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:overflow-x-visible pb-8">
-                        {whatWeDoImages.map((item, idx) => (
-                            <div key={idx} className="bg-white/5 border border-white/10 backdrop-blur-lg rounded-3xl shadow-2xl p-8 group transition-all duration-300 hover:bg-white/10 hover:border-white/20 hover:-translate-y-2 flex flex-col items-center text-center snap-center min-w-[280px] sm:min-w-0">
-                                <div className="flex items-center justify-center w-16 h-16 mb-6 rounded-full bg-gradient-to-r from-cyan-400 to-blue-600 text-white text-3xl font-bold shadow-lg transition-transform duration-300 group-hover:scale-110">{idx + 1}</div>
-                                <h3 className="text-2xl font-bold text-white mb-2">{item.alt}</h3>
-                                <p className="text-gray-300 text-base leading-relaxed">{item.desc}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-                {/* Footer centered at the bottom of the entire page, not fixed */}
-                <footer className="w-full flex flex-col items-center justify-center py-8 px-4 gap-2 text-center mt-16">
-                    <div>
-                        <span className="text-gray-300 text-base sm:text-lg">Contact: <a href="tel:+1234567890" className="underline hover:text-cyan-400 transition-colors">+1 234 567 890</a> | <a href="mailto:info@kroxnest.com" className="underline hover:text-cyan-400 transition-colors">info@kroxnest.com</a></span>
-                    </div>
-                    <div>
-                        <span className="block text-gray-400 text-lg font-semibold">© 2025 Kroxnest. All rights reserved.</span>
-                    </div>
-                </footer>
             </ToastProvider>
         </ThemeProvider>
     );
