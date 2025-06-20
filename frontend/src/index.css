@@ -103,3 +103,53 @@ input:focus, textarea:focus {
     border-color: #00ADB5;
     box-shadow: 0 0 0 2px rgba(0, 173, 181, 0.5);
 }
+
+/* Animated Gradient Background */
+.animated-bg {
+  min-height: 100vh;
+  background: linear-gradient(120deg, #2563eb, #7c3aed, #14b8a6, #f472b6, #facc15, #2563eb);
+  background-size: 200% 200%;
+  animation: gradientMove 12s ease-in-out infinite;
+}
+@keyframes gradientMove {
+  0% {background-position:0% 50%}
+  50% {background-position:100% 50%}
+  100% {background-position:0% 50%}
+}
+
+/* Glassmorphism Card */
+.glass-card {
+  background: rgba(255,255,255,0.18);
+  box-shadow: 0 8px 32px 0 rgba(31,38,135,0.37);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 2rem;
+  border: 1px solid rgba(255,255,255,0.18);
+}
+
+/* Animated Button */
+.animated-btn {
+  transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+  box-shadow: 0 2px 8px rgba(44,83,100,0.12);
+}
+.animated-btn:hover {
+  transform: scale(1.07) translateY(-2px);
+  box-shadow: 0 6px 24px rgba(44,83,100,0.18);
+}
+
+/* Animated Card Entrance */
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s cubic-bezier(0.4,0,0.2,1) both;
+}
+
+/* Custom font classes for headings */
+.font-heading {
+  font-family: 'Poppins', 'Inter', sans-serif;
+}
+.font-body {
+  font-family: 'Inter', sans-serif;
+}
