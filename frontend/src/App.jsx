@@ -2790,7 +2790,7 @@ function App() {
     return (
         <ThemeProvider>
             <ToastProvider>
-                <div className="bg-gradient-to-r from-black via-gray-900 via-yellow-900/30 to-yellow-900 min-h-screen w-full">
+                <div className="bg-gradient-to-br from-black via-gray-900 via-yellow-900/30 to-yellow-900 min-h-screen w-full">
                     {showSplash ? (
                         <SplashVideo onVideoEnd={handleVideoEnd} />
                     ) : (
