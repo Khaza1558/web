@@ -1017,21 +1017,21 @@ const NavigationBar = ({ currentPage, onNavigate }) => {
 
     return (
         <nav className="sticky top-0 z-40">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex justify-between items-center h-24">
-                    {/* Logo - Much larger size */}
+            <div className="max-w-7xl mx-auto px-0 sm:px-0 lg:px-0">
+                <div className="flex justify-between items-center h-28">
+                    {/* Logo - Much larger size with no padding */}
                     <div className="flex items-center">
                         <img 
                             src="/tit.png" 
                             alt="Kroxnest" 
-                            className="h-16 w-auto filter invert hover:scale-110 transition-transform duration-300"
+                            className="h-20 w-auto filter invert hover:scale-110 transition-transform duration-300"
                             onClick={() => handleNavClick('home')}
                             style={{ cursor: 'pointer' }}
                         />
                     </div>
 
-                    {/* Desktop Navigation */}
-                    <div className="hidden md:flex items-center space-x-8">
+                    {/* Desktop Navigation - All items on the right */}
+                    <div className="hidden md:flex items-center space-x-8 pr-0">
                         {navItems.map((item) => (
                             <button
                                 key={item.name}
