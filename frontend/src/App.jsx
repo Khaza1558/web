@@ -455,47 +455,47 @@ const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPas
 
     return (
         <div className="flex items-center justify-center w-full min-h-[80vh] animate-fade-in-up">
-            <div className="bg-white border border-gray-200 shadow-xl rounded-2xl w-full max-w-md p-8 flex flex-col items-center relative">
-                <h2 className="text-3xl font-bold text-black mb-2 text-center">Login</h2>
-                <div className="w-16 h-1 bg-yellow-500 rounded-full mb-6 mx-auto" />
+            <div className="bg-gradient-to-br from-gray-800 to-gray-900 border border-yellow-500/20 shadow-2xl rounded-2xl w-full max-w-md p-8 flex flex-col items-center relative hover:shadow-yellow-500/20 transition-all duration-500">
+                <h2 className="text-3xl font-bold text-white mb-2 text-center">Login</h2>
+                <div className="w-16 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full mb-6 mx-auto"></div>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full">
-                    <label htmlFor="loginUsername" className="font-semibold text-gray-700 text-base">Username</label> 
+                    <label htmlFor="loginUsername" className="font-semibold text-gray-200 text-base">Username</label> 
                     <input
                         type="text"
                         id="loginUsername"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
-                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition text-base bg-white shadow-sm"
+                        className="p-3 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition text-base shadow-sm hover:border-yellow-400"
                         required
                     />
 
-                    <label htmlFor="loginPassword" className="font-semibold text-gray-700 text-base">Password</label> 
+                    <label htmlFor="loginPassword" className="font-semibold text-gray-200 text-base">Password</label> 
                     <PasswordInput
                         id="loginPassword"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
 
-                    {error && <p className="text-red-600 text-base text-center mt-2 animate-fade-in">{error}</p>}
+                    {error && <p className="text-red-400 text-base text-center mt-2 animate-fade-in">{error}</p>}
 
                     <button
                         type="submit"
-                        className="bg-yellow-500 text-black py-3 px-6 rounded-lg font-bold text-lg transition duration-300 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-75 mt-2 shadow-md"
+                        className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-3 px-6 rounded-lg font-bold text-lg transition duration-300 hover:from-yellow-500 hover:to-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-75 mt-2 shadow-lg hover:shadow-yellow-500/25 transform hover:scale-105"
                     >
                         Login
                     </button>
                 </form>
                 {showForgotPassword && (
-                    <p className="mt-4 text-gray-700">
-                        <a href="#" onClick={onNavigateToForgotPassword} className="text-yellow-600 font-semibold hover:text-yellow-700 transition-colors">
+                    <p className="mt-4 text-gray-300">
+                        <a href="#" onClick={onNavigateToForgotPassword} className="text-yellow-400 font-semibold hover:text-yellow-300 transition-colors duration-300">
                             Forgot Password?
                         </a>
                     </p>
                 )}
                 <div className="mt-8 w-full flex justify-center">
-                    <p className="text-gray-700 text-base text-center">
+                    <p className="text-gray-300 text-base text-center">
                         Don't have an account?{' '}
-                        <a href="#" onClick={onNavigateToRegister} className="text-yellow-600 font-semibold hover:text-yellow-700 transition-colors">
+                        <a href="#" onClick={onNavigateToRegister} className="text-yellow-400 font-semibold hover:text-yellow-300 transition-colors duration-300">
                             Register here
                         </a>
                     </p>
@@ -579,22 +579,22 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
 
     return (
         <div className="flex items-center justify-center w-full min-h-[80vh] animate-fade-in-up">
-            <div className="bg-white border border-gray-200 shadow-xl rounded-2xl w-full max-w-lg p-8 flex flex-col items-center relative">
-                <h2 className="text-3xl font-bold text-gray-900 mb-2 text-center">Register</h2>
-                <div className="w-16 h-1 bg-blue-600 rounded-full mb-6 mx-auto" />
+            <div className="bg-gradient-to-br from-gray-800 to-gray-900 border border-yellow-500/20 shadow-2xl rounded-2xl w-full max-w-lg p-8 flex flex-col items-center relative hover:shadow-yellow-500/20 transition-all duration-500">
+                <h2 className="text-3xl font-bold text-white mb-2 text-center">Register</h2>
+                <div className="w-16 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full mb-6 mx-auto" />
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full">
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
-                        <label htmlFor="email" className="font-semibold text-gray-700 text-base sm:w-1/4 flex-shrink-0">Email</label>
+                        <label htmlFor="email" className="font-semibold text-gray-200 text-base sm:w-1/4 flex-shrink-0">Email</label>
                         <input type="email" id="email" value={formData.email} onChange={handleChange}
-                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition flex-grow text-base bg-white shadow-sm" required />
+                            className="p-3 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition flex-grow text-base shadow-sm hover:border-yellow-400" required />
                     </div>
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
-                        <label htmlFor="username" className="font-semibold text-gray-700 text-base sm:w-1/4 flex-shrink-0">Username</label>
+                        <label htmlFor="username" className="font-semibold text-gray-200 text-base sm:w-1/4 flex-shrink-0">Username</label>
                         <input type="text" id="username" value={formData.username} onChange={handleChange}
-                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition flex-grow text-base bg-white shadow-sm" required />
+                            className="p-3 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition flex-grow text-base shadow-sm hover:border-yellow-400" required />
                     </div>
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
-                        <label htmlFor="password" className="font-semibold text-gray-700 text-base sm:w-1/4 flex-shrink-0">Password</label>
+                        <label htmlFor="password" className="font-semibold text-gray-200 text-base sm:w-1/4 flex-shrink-0">Password</label>
                         <div className="flex-grow">
                             <PasswordInput
                                 id="password"
@@ -604,7 +604,7 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
                         </div>
                     </div>
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
-                        <label htmlFor="reEnterPassword" className="font-semibold text-gray-700 text-base sm:w-1/4 flex-shrink-0">Re-enter Password</label>
+                        <label htmlFor="reEnterPassword" className="font-semibold text-gray-200 text-base sm:w-1/4 flex-shrink-0">Re-enter Password</label>
                         <div className="flex-grow">
                             <PasswordInput
                                 id="reEnterPassword"
@@ -614,22 +614,22 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
                         </div>
                     </div>
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
-                        <label htmlFor="collegeName" className="font-semibold text-gray-700 text-base sm:w-1/4 flex-shrink-0">College Name</label>
+                        <label htmlFor="collegeName" className="font-semibold text-gray-200 text-base sm:w-1/4 flex-shrink-0">College Name</label>
                         <input type="text" id="collegeName" value={formData.collegeName} onChange={handleChange}
-                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition flex-grow text-base bg-white shadow-sm" required />
+                            className="p-3 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition flex-grow text-base shadow-sm hover:border-yellow-400" required />
                     </div>
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
-                        <label htmlFor="branch" className="font-semibold text-gray-700 text-base sm:w-1/4 flex-shrink-0">Branch</label>
+                        <label htmlFor="branch" className="font-semibold text-gray-200 text-base sm:w-1/4 flex-shrink-0">Branch</label>
                         <input type="text" id="branch" value={formData.branch} onChange={handleChange}
-                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition flex-grow text-base bg-white shadow-sm" required />
+                            className="p-3 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition flex-grow text-base shadow-sm hover:border-yellow-400" required />
                     </div>
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
-                        <label htmlFor="rollNumber" className="font-semibold text-gray-700 text-base sm:w-1/4 flex-shrink-0">Roll Number</label>
+                        <label htmlFor="rollNumber" className="font-semibold text-gray-200 text-base sm:w-1/4 flex-shrink-0">Roll Number</label>
                         <input type="text" id="rollNumber" value={formData.rollNumber} onChange={handleChange}
-                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition flex-grow text-base bg-white shadow-sm" required />
+                            className="p-3 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition flex-grow text-base shadow-sm hover:border-yellow-400" required />
                     </div>
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
-                        <label htmlFor="mobileNumber" className="font-semibold text-gray-700 text-base sm:w-1/4 flex-shrink-0">Mobile Number</label>
+                        <label htmlFor="mobileNumber" className="font-semibold text-gray-200 text-base sm:w-1/4 flex-shrink-0">Mobile Number</label>
                         <input
                             type="tel"
                             id="mobileNumber"
@@ -637,21 +637,21 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
                             onChange={handleChange}
                             placeholder="Enter 10-digit mobile number"
                             pattern="[0-9]{10}"
-                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition flex-grow text-base bg-white shadow-sm"
+                            className="p-3 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition flex-grow text-base shadow-sm hover:border-yellow-400"
                             required
                         />
                     </div>
-                    {error && <p className="text-red-600 text-base text-center mt-2 animate-fade-in">{error}</p>}
+                    {error && <p className="text-red-400 text-base text-center mt-2 animate-fade-in">{error}</p>}
                     <button
                         type="submit"
-                        className="bg-blue-600 text-white py-3 px-6 rounded-lg font-bold text-lg transition duration-300 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 mt-2 shadow-md"
+                        className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-3 px-6 rounded-lg font-bold text-lg transition duration-300 hover:from-yellow-500 hover:to-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-75 mt-2 shadow-lg hover:shadow-yellow-500/25 transform hover:scale-105"
                     >
                         Register
                     </button>
                 </form>
-                <p className="mt-8 text-gray-700 text-base">
+                <p className="mt-8 text-gray-300 text-base">
                     Already have an account?{' '}
-                    <a href="#" onClick={onNavigateToLogin} className="text-blue-600 font-semibold hover:text-blue-800 transition-colors">
+                    <a href="#" onClick={onNavigateToLogin} className="text-yellow-400 font-semibold hover:text-yellow-300 transition-colors duration-300">
                         Login here
                     </a>
                 </p>
@@ -708,37 +708,37 @@ const ForgotPasswordPage = ({ onNavigateToLogin, onNavigateToResetPasswordWithTo
 
     return (
         <div className="flex items-center justify-center w-full min-h-[80vh] animate-fade-in-up">
-            <div className="bg-white border border-gray-200 shadow-lg rounded-2xl w-full max-w-md p-8 flex flex-col items-center relative">
-                <h2 className="text-3xl font-bold text-gray-800 mb-2 text-center">Forgot Password</h2>
-                <div className="w-16 h-1 bg-blue-500 rounded-full mb-6 mx-auto" />
+            <div className="bg-gradient-to-br from-gray-800 to-gray-900 border border-yellow-500/20 shadow-2xl rounded-2xl w-full max-w-md p-8 flex flex-col items-center relative hover:shadow-yellow-500/20 transition-all duration-500">
+                <h2 className="text-3xl font-bold text-white mb-2 text-center">Forgot Password</h2>
+                <div className="w-16 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full mb-6 mx-auto" />
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full">
-                    <p className="text-center text-gray-700 mb-2">Enter your username to receive a password reset token.</p>
-                    <label htmlFor="username" className="font-semibold text-gray-700 text-base">Username</label>
+                    <p className="text-center text-gray-300 mb-2">Enter your username to receive a password reset token.</p>
+                    <label htmlFor="username" className="font-semibold text-gray-200 text-base">Username</label>
                     <input
                         type="text"
                         id="username"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
-                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition text-base bg-white shadow-sm"
+                        className="p-3 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition text-base shadow-sm hover:border-yellow-400"
                         required
                     />
                     <button
                         type="submit"
-                        className="bg-blue-500 text-white py-3 px-6 rounded-lg font-bold text-lg transition duration-200 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 mt-2 shadow-md"
+                        className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-3 px-6 rounded-lg font-bold text-lg transition duration-300 hover:from-yellow-500 hover:to-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-75 mt-2 shadow-lg hover:shadow-yellow-500/25 transform hover:scale-105"
                     >
                         Request Reset Token
                     </button>
                 </form>
-                {error && <p className="text-red-500 text-base text-center mt-4">{error}</p>}
-                {message && <p className="text-green-500 text-base text-center mt-4">{message}</p>}
+                {error && <p className="text-red-400 text-base text-center mt-4">{error}</p>}
+                {message && <p className="text-green-400 text-base text-center mt-4">{message}</p>}
                 {resetTokenInfo && (
-                    <div className="mt-6 p-4 bg-yellow-100 border border-yellow-300 rounded-lg w-full max-w-xs mx-auto text-center">
-                        <p className="font-bold text-yellow-800 mb-2">FOR DEMO PURPOSES ONLY:</p>
-                        <p className="text-sm text-yellow-700 mb-2">
+                    <div className="mt-6 p-4 bg-gradient-to-br from-yellow-900 to-yellow-800 border border-yellow-500/30 rounded-lg w-full max-w-xs mx-auto text-center">
+                        <p className="font-bold text-yellow-200 mb-2">FOR DEMO PURPOSES ONLY:</p>
+                        <p className="text-sm text-yellow-100 mb-2">
                             Token: <span id="resetTokenDisplay" className="font-mono break-all">{resetTokenInfo.token}</span>
                             <button
                                 onClick={handleCopyToken}
-                                className="ml-2 bg-blue-200 text-blue-800 text-xs py-1 px-2 rounded-md hover:bg-blue-300 transition duration-200"
+                                className="ml-2 bg-yellow-600 text-yellow-100 text-xs py-1 px-2 rounded-md hover:bg-yellow-500 transition duration-200"
                             >
                                 Copy
                             </button>
@@ -813,51 +813,51 @@ const ResetPasswordPage = ({ onNavigateToLogin, initialToken }) => {
 
     return (
         <div className="flex items-center justify-center w-full min-h-[80vh] animate-fade-in-up">
-            <div className="bg-white border border-gray-200 shadow-lg rounded-2xl w-full max-w-md p-8 flex flex-col items-center relative">
-                <h2 className="text-3xl font-bold text-gray-800 mb-2 text-center">Reset Password</h2>
-                <div className="w-16 h-1 bg-blue-500 rounded-full mb-6 mx-auto" />
+            <div className="bg-gradient-to-br from-gray-800 to-gray-900 border border-yellow-500/20 shadow-2xl rounded-2xl w-full max-w-md p-8 flex flex-col items-center relative hover:shadow-yellow-500/20 transition-all duration-500">
+                <h2 className="text-3xl font-bold text-white mb-2 text-center">Reset Password</h2>
+                <div className="w-16 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full mb-6 mx-auto" />
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full">
-                    <label htmlFor="resetUsername" className="font-semibold text-gray-700 text-base">Username</label>
+                    <label htmlFor="resetUsername" className="font-semibold text-gray-200 text-base">Username</label>
                     <input
                         type="text"
                         id="resetUsername"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
-                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition text-base bg-white shadow-sm"
+                        className="p-3 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition text-base shadow-sm hover:border-yellow-400"
                         required
                     />
-                    <label htmlFor="resetToken" className="font-semibold text-gray-700 text-base">Reset Token</label>
+                    <label htmlFor="resetToken" className="font-semibold text-gray-200 text-base">Reset Token</label>
                     <input
                         type="text"
                         id="resetToken"
                         value={token}
                         onChange={(e) => setToken(e.target.value)}
-                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition text-base bg-white shadow-sm"
+                        className="p-3 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition text-base shadow-sm hover:border-yellow-400"
                         required
                     />
-                    <label htmlFor="newPassword" className="font-semibold text-gray-700 text-base">New Password</label>
+                    <label htmlFor="newPassword" className="font-semibold text-gray-200 text-base">New Password</label>
                     <PasswordInput
                         id="newPassword"
                         value={newPassword}
                         onChange={(e) => setNewPassword(e.target.value)}
                     />
-                    <label htmlFor="reEnterNewPassword" className="font-semibold text-gray-700 text-base">Re-enter New Password</label>
+                    <label htmlFor="reEnterNewPassword" className="font-semibold text-gray-200 text-base">Re-enter New Password</label>
                     <PasswordInput
                         id="reEnterNewPassword"
                         value={reEnterNewPassword}
                         onChange={(e) => setReEnterNewPassword(e.target.value)}
                     />
-                    {error && <p className="text-red-500 text-base text-center mt-2">{error}</p>}
-                    {message && <p className="text-green-500 text-base text-center mt-2">{message}</p>}
+                    {error && <p className="text-red-400 text-base text-center mt-2">{error}</p>}
+                    {message && <p className="text-green-400 text-base text-center mt-2">{message}</p>}
                     <button
                         type="submit"
-                        className="bg-blue-500 text-white py-3 px-6 rounded-lg font-bold text-lg transition duration-200 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 mt-2 shadow-md"
+                        className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-3 px-6 rounded-lg font-bold text-lg transition duration-300 hover:from-yellow-500 hover:to-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-75 mt-2 shadow-lg hover:shadow-yellow-500/25 transform hover:scale-105"
                     >
                         Reset Password
                     </button>
                 </form>
-                <p className="mt-8 text-gray-700 text-base">
-                    <a href="#" onClick={onNavigateToLogin} className="text-blue-500 font-semibold hover:underline hover:text-blue-700 transition-colors">
+                <p className="mt-8 text-gray-300 text-base">
+                    <a href="#" onClick={onNavigateToLogin} className="text-yellow-400 font-semibold hover:text-yellow-300 transition-colors duration-300">
                         Back to Login
                     </a>
                 </p>
@@ -2110,13 +2110,13 @@ const PasswordInput = ({ id, value, onChange, placeholder, required = true }) =>
                 value={value}
                 onChange={onChange}
                 placeholder={placeholder}
-                className="p-3 pr-10 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition w-full"
+                className="p-3 pr-10 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition w-full hover:border-yellow-400"
                 required={required}
             />
             <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-yellow-400 focus:outline-none transition-colors duration-300"
                 tabIndex={-1}
                 style={{ padding: 0 }}
             >
@@ -2788,13 +2788,13 @@ function App() {
     return (
         <ThemeProvider>
             <ToastProvider>
-                <div className="bg-black min-h-screen w-full">
+                <div className="bg-gradient-to-br from-black via-gray-900 to-yellow-900 min-h-screen w-full">
                     {showSplash ? (
                         <SplashVideo onVideoEnd={handleVideoEnd} />
                     ) : (
                         <>
                             <NavigationBar currentPage={currentPage} onNavigate={navigate} />
-                            <div className="min-h-screen w-full font-sans bg-black">
+                            <div className="min-h-screen w-full font-sans bg-gradient-to-br from-black via-gray-900 to-yellow-900">
 
                                 {/* Mobile: ad + login stacked; Desktop: split */}
                                 <div className="block md:hidden w-full">
@@ -2815,11 +2815,11 @@ function App() {
                                             <img 
                                                 src="/tit.png" 
                                                 alt="kroxnest." 
-                                                className="hidden sm:block h-20 sm:h-28 md:h-[160px] lg:h-[200px] mb-6 drop-shadow-lg filter invert transition-all duration-500 ease-in-out mx-auto md:mx-0"
+                                                className="hidden sm:block h-20 sm:h-28 md:h-[160px] lg:h-[200px] mb-6 drop-shadow-lg filter invert hover:scale-110 transition-all duration-500 ease-in-out mx-auto md:mx-0"
                                                 style={{ maxWidth: '98vw', objectFit: 'contain' }}
                                                 loading="eager"
                                             />
-                                            <p className="hidden sm:block text-xl sm:text-2xl md:text-3xl text-white italic pl-2 text-center md:text-left font-semibold leading-relaxed" style={{ fontFamily: 'Inter, sans-serif' }}>
+                                            <p className="hidden sm:block text-xl sm:text-2xl md:text-3xl text-white italic pl-2 text-center md:text-left font-semibold leading-relaxed bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent" style={{ fontFamily: 'Inter, sans-serif' }}>
                                                 Knowledge Repository Of eXhibits & Networked Educational Student Tracks
                                             </p>
                                         </header>
@@ -2843,23 +2843,23 @@ function App() {
                             </div>
 
                             {/* How to use section */}
-                            <div className="w-full py-20 px-4 lg:px-8 bg-white" data-section="how-to-use">
+                            <div className="w-full py-20 px-4 lg:px-8 bg-gradient-to-br from-black via-gray-900 to-yellow-900" data-section="how-to-use">
                                 <div className="w-full max-w-7xl mx-auto">
                                     <div className="text-center mb-16">
-                                        <h2 className="text-4xl md:text-5xl font-bold text-black mb-6">
+                                        <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
                                             How to Use
                                         </h2>
-                                        <div className="w-24 h-1 bg-yellow-500 rounded-full mx-auto"></div>
+                                        <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full mx-auto"></div>
                                     </div>
                                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                                         {howToUseSteps.map((step, idx) => (
-                                            <div key={idx} className="bg-black rounded-xl shadow-lg p-8 transition-all duration-500 hover:scale-105 hover:shadow-xl group border border-gray-800">
+                                            <div key={idx} className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl shadow-2xl p-8 transition-all duration-500 hover:scale-105 hover:shadow-yellow-500/20 group border border-yellow-500/20 hover:border-yellow-500/40">
                                                 <div className="flex flex-col items-center text-center">
-                                                    <div className="flex items-center justify-center w-16 h-16 rounded-full bg-yellow-500 text-black text-2xl font-bold mb-6 group-hover:scale-110 transition-transform duration-300">
+                                                    <div className="flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-yellow-400 to-yellow-600 text-black text-2xl font-bold mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                                                         {step.step}
                                                     </div>
-                                                    <h3 className="text-xl font-bold text-white mb-4">{step.title}</h3>
-                                                    <p className="text-gray-300 leading-relaxed">{step.desc}</p>
+                                                    <h3 className="text-xl font-bold text-white mb-4 group-hover:text-yellow-400 transition-colors duration-300">{step.title}</h3>
+                                                    <p className="text-gray-300 leading-relaxed group-hover:text-gray-200 transition-colors duration-300">{step.desc}</p>
                                                 </div>
                                             </div>
                                         ))}
@@ -2868,23 +2868,23 @@ function App() {
                             </div>
 
                             {/* What we do section */}
-                            <div className="w-full py-20 px-4 lg:px-8 bg-black" data-section="what-we-do">
+                            <div className="w-full py-20 px-4 lg:px-8 bg-gradient-to-br from-black via-gray-900 to-yellow-900" data-section="what-we-do">
                                 <div className="w-full max-w-7xl mx-auto">
                                     <div className="text-center mb-16">
                                         <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
                                             What We Do
                                         </h2>
-                                        <div className="w-24 h-1 bg-yellow-500 rounded-full mx-auto"></div>
+                                        <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full mx-auto"></div>
                                     </div>
                                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                                         {whatWeDoImages.map((item, idx) => (
-                                            <div key={idx} className="bg-white rounded-xl shadow-lg p-8 transition-all duration-500 hover:scale-105 hover:shadow-xl group border border-gray-200">
+                                            <div key={idx} className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl shadow-2xl p-8 transition-all duration-500 hover:scale-105 hover:shadow-yellow-500/20 group border border-yellow-500/20 hover:border-yellow-500/40">
                                                 <div className="flex flex-col items-center text-center">
-                                                    <div className="flex items-center justify-center w-16 h-16 rounded-full bg-yellow-500 text-black text-2xl font-bold mb-6 group-hover:scale-110 transition-transform duration-300">
+                                                    <div className="flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-yellow-400 to-yellow-600 text-black text-2xl font-bold mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                                                         {idx + 1}
                                                     </div>
-                                                    <h3 className="text-xl font-bold text-black mb-4">{item.alt}</h3>
-                                                    <p className="text-gray-600 leading-relaxed">{item.desc}</p>
+                                                    <h3 className="text-xl font-bold text-white mb-4 group-hover:text-yellow-400 transition-colors duration-300">{item.alt}</h3>
+                                                    <p className="text-gray-300 leading-relaxed group-hover:text-gray-200 transition-colors duration-300">{item.desc}</p>
                                                 </div>
                                             </div>
                                         ))}
@@ -2893,13 +2893,13 @@ function App() {
                             </div>
 
                             {/* Footer centered at the bottom of the entire page, not fixed */}
-                            <footer className="w-full flex flex-col items-center justify-center py-12 px-4 gap-4 text-center mt-16 border-t border-gray-800 bg-black">
+                            <footer className="w-full flex flex-col items-center justify-center py-12 px-4 gap-4 text-center mt-16 border-t border-yellow-500/20 bg-gradient-to-br from-black via-gray-900 to-yellow-900">
                                 <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
                                     <span className="text-gray-300 text-base md:text-lg">
-                                        Contact: <a href="tel:+1234567890" className="text-yellow-500 hover:text-yellow-400 transition-colors">+1 234 567 890</a>
+                                        Contact: <a href="tel:+1234567890" className="text-yellow-400 hover:text-yellow-300 transition-colors duration-300">+1 234 567 890</a>
                                     </span>
                                     <span className="text-gray-300 text-base md:text-lg">
-                                        <a href="mailto:dummy@email.com" className="text-yellow-500 hover:text-yellow-400 transition-colors">info@kroxnest.com</a>
+                                        <a href="mailto:dummy@email.com" className="text-yellow-400 hover:text-yellow-300 transition-colors duration-300">info@kroxnest.com</a>
                                     </span>
                                 </div>
                                 <div>
