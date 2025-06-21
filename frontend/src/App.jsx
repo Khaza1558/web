@@ -2569,7 +2569,7 @@ const DynamicAdContainer = ({ adConfig, currentPage }) => {
                             <img
                                 src={currentAd.src}
                                 alt={currentAd.alt}
-                                className="w-full h-full object-cover transition-all duration-300"
+                                className="w-full h-full object-contain transition-all duration-300"
                                 loading="eager"
                                 onLoad={handleImageLoad}
                                 style={{ objectPosition: 'center' }}
@@ -2591,7 +2591,7 @@ const DynamicAdContainer = ({ adConfig, currentPage }) => {
                             <img
                                 src={currentAd.src}
                                 alt={currentAd.alt}
-                                className="w-full h-full object-cover transition-all duration-300"
+                                className="w-full h-full object-contain transition-all duration-300"
                                 loading="eager"
                                 onLoad={handleImageLoad}
                                 style={{ objectPosition: 'center' }}
