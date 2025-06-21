@@ -2562,7 +2562,7 @@ const DynamicAdContainer = ({ adConfig, currentPage }) => {
             <div className="block md:hidden w-full">
                 <div className="w-full flex justify-center p-0">
                     <div 
-                        className="rounded-3xl shadow-2xl flex items-center justify-center transition-all duration-300 w-full max-w-2xl overflow-hidden"
+                        className="rounded-2xl shadow-lg flex items-center justify-center transition-all duration-300 w-full max-w-2xl overflow-hidden"
                         style={{ height: `${heights.mobile}px` }}
                     >
                         <a href={currentAd.href} target="_blank" rel="noopener noreferrer" className="block w-full h-full">
@@ -2584,7 +2584,7 @@ const DynamicAdContainer = ({ adConfig, currentPage }) => {
             <div className="hidden md:block w-full">
                 <div className="w-full flex justify-center p-0">
                     <div 
-                        className="rounded-3xl shadow-2xl flex items-center justify-center transition-all duration-300 w-full max-w-2xl overflow-hidden"
+                        className="rounded-2xl shadow-lg flex items-center justify-center transition-all duration-300 w-full max-w-2xl overflow-hidden"
                         style={{ height: `${heights.desktop}px` }}
                     >
                         <a href={currentAd.href} target="_blank" rel="noopener noreferrer" className="block w-full h-full">
@@ -2799,39 +2799,39 @@ function App() {
                                 {/* Mobile: ad + login stacked; Desktop: split */}
                                 <div className="block md:hidden w-full">
                                     {/* Ad at top */}
-                                    <DynamicAdContainer adConfig={adConfig} currentPage={currentPage} />
-                                    {/* Small gap */}
-                                    <div className="w-full p-1"></div>
+                                    <div className="w-full px-4 py-6">
+                                        <DynamicAdContainer adConfig={adConfig} currentPage={currentPage} />
+                                    </div>
                                     {/* Login page (or currentPage) */}
-                                    <div className="w-full max-w-sm mx-auto">
+                                    <div className="w-full px-4 pb-8">
                                         {renderPage()}
                                     </div>
                                 </div>
                                 {/* Desktop: split layout as before */}
                                 <div className="hidden md:flex min-h-screen flex-row w-full">
                                     {/* Left: logo, slogan, ad */}
-                                    <div className="w-1/2 px-6 md:px-12 pt-[15px] pb-6 flex flex-col relative min-h-screen justify-between items-center md:items-start">
-                                        <header className="flex flex-col items-center md:items-start mt-0 mb-0 sm:mt-2 sm:mb-8 w-full p-0">
+                                    <div className="w-1/2 px-8 lg:px-12 py-8 flex flex-col relative min-h-screen justify-between items-center md:items-start">
+                                        <header className="flex flex-col items-center md:items-start mt-8 mb-8 w-full">
                                             <img 
                                                 src="/tit.png" 
                                                 alt="kroxnest." 
-                                                className="hidden sm:block h-16 sm:h-24 md:h-[180px] lg:h-[220px] mb-0 sm:mb-[-10px] drop-shadow-2xl filter invert transition-all duration-500 ease-in-out mx-auto md:mx-0"
+                                                className="hidden sm:block h-20 sm:h-28 md:h-[160px] lg:h-[200px] mb-6 drop-shadow-2xl filter invert transition-all duration-500 ease-in-out mx-auto md:mx-0"
                                                 style={{ maxWidth: '98vw', objectFit: 'contain' }}
                                                 loading="eager"
                                             />
-                                            <p className="hidden sm:block text-lg sm:text-2xl md:text-3xl text-white italic pl-2 mt-4 text-center md:text-left font-semibold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-lg w-full max-w-3xl mx-auto md:mx-0" style={{ fontFamily: 'Inter, sans-serif' }}>
+                                            <p className="hidden sm:block text-xl sm:text-2xl md:text-3xl text-white italic pl-2 text-center md:text-left font-semibold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-lg w-full max-w-3xl mx-auto md:mx-0 leading-relaxed" style={{ fontFamily: 'Inter, sans-serif' }}>
                                                 Knowledge Repository Of eXhibits & Networked Educational Student Tracks
                                             </p>
                                         </header>
-                                        <div className="mt-8 w-full flex justify-center p-0">
+                                        <div className="w-full flex justify-center p-0">
                                             <DynamicAdContainer adConfig={adConfig} currentPage={currentPage} />
                                         </div>
                                     </div>
                                     {/* Right: content (login, register, etc.) */}
-                                    <div className="w-1/2 flex justify-center items-start pt-[60px] px-0">
+                                    <div className="w-1/2 flex justify-center items-start pt-20 px-8 lg:px-12">
                                         <div className={
                                             currentPage === 'login'
-                                                ? 'w-full max-w-sm sm:max-w-md mx-auto'
+                                                ? 'w-full max-w-md mx-auto'
                                                 : 'w-full max-w-4xl flex flex-col items-center'
                                         }>
                                             <div className={currentPage === 'login' ? 'w-full flex flex-col items-center' : 'w-full'}>
@@ -2843,54 +2843,67 @@ function App() {
                             </div>
 
                             {/* How to use section */}
-                            <div className="w-full py-12 px-0" data-section="how-to-use">
-                                <div className="w-full flex flex-col items-start px-2 sm:px-6 md:px-12 max-w-7xl mx-auto">
-                                    <h2 className="text-4xl font-extrabold text-white mb-2 text-left drop-shadow-lg relative inline-block">
-                                        How to Use
-                                    </h2>
-                                    <div className="w-full h-1 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full mb-8 animate-pulse"></div>
-                                </div>
-                                <div className="flex flex-row gap-4 w-full px-2 sm:px-6 md:px-12 max-w-7xl mx-auto overflow-x-auto snap-x sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-8 sm:overflow-x-visible">
-                                    {howToUseSteps.map((step, idx) => (
-                                        <div key={idx} className="flex flex-col items-center bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-6 md:p-10 min-w-[260px] sm:min-w-0 snap-center transition-all duration-300 hover:scale-105 hover:shadow-2xl w-full mx-2 sm:mx-0 h-auto group">
-                                            <div className="border-4 border-white rounded-2xl mb-6 flex flex-col items-center justify-center p-2 shadow-lg w-full max-w-[320px] mx-auto bg-gradient-to-tr from-blue-100 via-white to-purple-100 group-hover:from-blue-200 group-hover:to-purple-200 transition-all duration-300">
-                                                <div className="flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white text-3xl font-bold mt-8 shadow-md mb-4 group-hover:scale-110 transition-transform duration-300">{step.step}</div>
-                                                <h3 className="text-xl font-bold text-blue-600 mt-2 mb-2 text-center break-words w-full">{step.title}</h3>
-                                                <p className="text-gray-600 text-lg text-center px-2 break-words w-full whitespace-pre-line">{step.desc}</p>
+                            <div className="w-full py-16 px-4 lg:px-8" data-section="how-to-use">
+                                <div className="w-full max-w-7xl mx-auto">
+                                    <div className="text-center mb-12">
+                                        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
+                                            How to Use
+                                        </h2>
+                                        <div className="w-24 h-1 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full mx-auto"></div>
+                                    </div>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                        {howToUseSteps.map((step, idx) => (
+                                            <div key={idx} className="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 hover:scale-105 hover:shadow-2xl group">
+                                                <div className="flex flex-col items-center text-center">
+                                                    <div className="flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white text-2xl font-bold mb-6 group-hover:scale-110 transition-transform duration-300">
+                                                        {step.step}
+                                                    </div>
+                                                    <h3 className="text-xl font-bold text-gray-800 mb-4">{step.title}</h3>
+                                                    <p className="text-gray-600 leading-relaxed">{step.desc}</p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    ))}
+                                        ))}
+                                    </div>
                                 </div>
                             </div>
 
                             {/* What we do section */}
-                            <div className="w-full py-12 px-0" data-section="what-we-do">
-                                <div className="w-full flex flex-col items-start px-2 sm:px-6 md:px-12 max-w-7xl mx-auto">
-                                    <h2 className="text-4xl font-extrabold text-white mb-2 text-left drop-shadow-lg relative inline-block">
-                                        What We Do
-                                    </h2>
-                                    <div className="w-full h-1 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full mb-8 animate-pulse"></div>
-                                </div>
-                                <div className="flex flex-row gap-4 w-full px-2 sm:px-6 md:px-12 max-w-7xl mx-auto overflow-x-auto snap-x sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-8 sm:overflow-x-visible">
-                                    {whatWeDoImages.map((item, idx) => (
-                                        <div key={idx} className="flex flex-col items-center bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-6 md:p-10 min-w-[260px] sm:min-w-0 snap-center transition-all duration-300 hover:scale-105 hover:shadow-2xl w-full mx-2 sm:mx-0 h-auto group">
-                                            <div className="border-4 border-white rounded-2xl mb-6 flex flex-col items-center justify-center p-2 shadow-lg w-full max-w-[320px] mx-auto bg-gradient-to-tr from-blue-100 via-white to-purple-100 group-hover:from-blue-200 group-hover:to-purple-200 transition-all duration-300">
-                                                <div className="flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white text-3xl font-bold mt-8 shadow-md mb-4 group-hover:scale-110 transition-transform duration-300">{idx + 1}</div>
-                                                <h3 className="text-xl font-bold text-blue-600 mt-2 mb-2 text-center break-words w-full">{item.alt}</h3>
-                                                <p className="text-gray-600 text-lg text-center px-2 break-words w-full whitespace-pre-line font-normal">{item.desc}</p>
+                            <div className="w-full py-16 px-4 lg:px-8 bg-white/5" data-section="what-we-do">
+                                <div className="w-full max-w-7xl mx-auto">
+                                    <div className="text-center mb-12">
+                                        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
+                                            What We Do
+                                        </h2>
+                                        <div className="w-24 h-1 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full mx-auto"></div>
+                                    </div>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                        {whatWeDoImages.map((item, idx) => (
+                                            <div key={idx} className="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 hover:scale-105 hover:shadow-2xl group">
+                                                <div className="flex flex-col items-center text-center">
+                                                    <div className="flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white text-2xl font-bold mb-6 group-hover:scale-110 transition-transform duration-300">
+                                                        {idx + 1}
+                                                    </div>
+                                                    <h3 className="text-xl font-bold text-gray-800 mb-4">{item.alt}</h3>
+                                                    <p className="text-gray-600 leading-relaxed">{item.desc}</p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    ))}
+                                        ))}
+                                    </div>
                                 </div>
                             </div>
 
                             {/* Footer centered at the bottom of the entire page, not fixed */}
-                            <footer className="w-full flex flex-col items-center justify-center py-8 px-2 gap-1 text-center mt-16">
-                                <div>
-                                    <span className="text-gray-300 text-lg mr-6">Contact: <a href="tel:+1234567890" className="underline hover:text-blue-400 transition-colors">+1 234 567 890</a> | <a href="mailto:dummy@email.com" className="underline hover:text-blue-400 transition-colors">info@kroxnest.com</a></span>
+                            <footer className="w-full flex flex-col items-center justify-center py-12 px-4 gap-4 text-center mt-16 border-t border-white/10">
+                                <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+                                    <span className="text-gray-300 text-base md:text-lg">
+                                        Contact: <a href="tel:+1234567890" className="underline hover:text-blue-400 transition-colors">+1 234 567 890</a>
+                                    </span>
+                                    <span className="text-gray-300 text-base md:text-lg">
+                                        <a href="mailto:dummy@email.com" className="underline hover:text-blue-400 transition-colors">info@kroxnest.com</a>
+                                    </span>
                                 </div>
                                 <div>
-                                    <span className="block text-gray-300 text-xl font-semibold">© 2025 Kroxnest. All rights reserved.|Ashi</span>
+                                    <span className="block text-gray-300 text-lg font-semibold">© 2025 Kroxnest. All rights reserved.</span>
                                 </div>
                             </footer>
                         </>
