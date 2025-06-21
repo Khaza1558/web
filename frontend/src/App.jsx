@@ -456,8 +456,8 @@ const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPas
     return (
         <div className="flex items-center justify-center w-full min-h-[80vh] animate-fade-in-up">
             <div className="bg-white border border-gray-200 shadow-xl rounded-2xl w-full max-w-md p-8 flex flex-col items-center relative">
-                <h2 className="text-3xl font-bold text-gray-900 mb-2 text-center">Login</h2>
-                <div className="w-16 h-1 bg-blue-600 rounded-full mb-6 mx-auto" />
+                <h2 className="text-3xl font-bold text-black mb-2 text-center">Login</h2>
+                <div className="w-16 h-1 bg-yellow-500 rounded-full mb-6 mx-auto" />
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full">
                     <label htmlFor="loginUsername" className="font-semibold text-gray-700 text-base">Username</label> 
                     <input
@@ -465,7 +465,7 @@ const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPas
                         id="loginUsername"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
-                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition text-base bg-white shadow-sm"
+                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition text-base bg-white shadow-sm"
                         required
                     />
 
@@ -480,14 +480,14 @@ const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPas
 
                     <button
                         type="submit"
-                        className="bg-blue-600 text-white py-3 px-6 rounded-lg font-bold text-lg transition duration-300 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 mt-2 shadow-md"
+                        className="bg-yellow-500 text-black py-3 px-6 rounded-lg font-bold text-lg transition duration-300 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-75 mt-2 shadow-md"
                     >
                         Login
                     </button>
                 </form>
                 {showForgotPassword && (
                     <p className="mt-4 text-gray-700">
-                        <a href="#" onClick={onNavigateToForgotPassword} className="text-blue-600 font-semibold hover:text-blue-800 transition-colors">
+                        <a href="#" onClick={onNavigateToForgotPassword} className="text-yellow-600 font-semibold hover:text-yellow-700 transition-colors">
                             Forgot Password?
                         </a>
                     </p>
@@ -495,7 +495,7 @@ const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPas
                 <div className="mt-8 w-full flex justify-center">
                     <p className="text-gray-700 text-base text-center">
                         Don't have an account?{' '}
-                        <a href="#" onClick={onNavigateToRegister} className="text-blue-600 font-semibold hover:text-blue-800 transition-colors">
+                        <a href="#" onClick={onNavigateToRegister} className="text-yellow-600 font-semibold hover:text-yellow-700 transition-colors">
                             Register here
                         </a>
                     </p>
@@ -1016,7 +1016,7 @@ const NavigationBar = ({ currentPage, onNavigate }) => {
     };
 
     return (
-        <nav className="sticky top-0 z-40 bg-white shadow-sm border-b border-gray-200">
+        <nav className="sticky top-0 z-40 bg-black shadow-lg border-b border-gray-800">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     {/* Logo */}
@@ -1036,8 +1036,8 @@ const NavigationBar = ({ currentPage, onNavigate }) => {
                             <button
                                 key={item.name}
                                 onClick={() => handleNavClick(item.page)}
-                                className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:bg-gray-100 group ${
-                                    (currentPage === item.page || (item.page === 'home' && (currentPage === 'login' || currentPage === 'welcome'))) ? 'text-blue-600 bg-blue-50' : 'text-gray-700'
+                                className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:bg-gray-800 group ${
+                                    (currentPage === item.page || (item.page === 'home' && (currentPage === 'login' || currentPage === 'welcome'))) ? 'text-yellow-500 bg-gray-800' : 'text-white'
                                 }`}
                             >
                                 <i className={`${item.icon} text-lg group-hover:scale-110 transition-transform duration-300`}></i>
@@ -1050,7 +1050,7 @@ const NavigationBar = ({ currentPage, onNavigate }) => {
                     <div className="md:hidden">
                         <button
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
-                            className="text-gray-700 hover:text-gray-900 focus:outline-none focus:text-gray-900"
+                            className="text-white hover:text-yellow-500 focus:outline-none focus:text-yellow-500"
                         >
                             <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 {isMenuOpen ? (
@@ -1066,13 +1066,13 @@ const NavigationBar = ({ currentPage, onNavigate }) => {
                 {/* Mobile Navigation */}
                 {isMenuOpen && (
                     <div className="md:hidden">
-                        <div className="px-2 pt-2 pb-3 space-y-1 bg-white border border-gray-200 rounded-lg shadow-lg">
+                        <div className="px-2 pt-2 pb-3 space-y-1 bg-black border border-gray-800 rounded-lg shadow-lg">
                             {navItems.map((item) => (
                                 <button
                                     key={item.name}
                                     onClick={() => handleNavClick(item.page)}
-                                    className={`flex items-center space-x-3 w-full text-left px-3 py-2 rounded-lg text-base font-medium transition-all duration-300 hover:bg-gray-100 group ${
-                                        (currentPage === item.page || (item.page === 'home' && (currentPage === 'login' || currentPage === 'welcome'))) ? 'text-blue-600 bg-blue-50' : 'text-gray-700'
+                                    className={`flex items-center space-x-3 w-full text-left px-3 py-2 rounded-lg text-base font-medium transition-all duration-300 hover:bg-gray-800 group ${
+                                        (currentPage === item.page || (item.page === 'home' && (currentPage === 'login' || currentPage === 'welcome'))) ? 'text-yellow-500 bg-gray-800' : 'text-white'
                                     }`}
                                 >
                                     <i className={`${item.icon} text-lg group-hover:scale-110 transition-transform duration-300`}></i>
@@ -2788,13 +2788,13 @@ function App() {
     return (
         <ThemeProvider>
             <ToastProvider>
-                <div className="bg-white min-h-screen w-full">
+                <div className="bg-black min-h-screen w-full">
                     {showSplash ? (
                         <SplashVideo onVideoEnd={handleVideoEnd} />
                     ) : (
                         <>
                             <NavigationBar currentPage={currentPage} onNavigate={navigate} />
-                            <div className="min-h-screen w-full font-sans bg-white">
+                            <div className="min-h-screen w-full font-sans bg-black">
 
                                 {/* Mobile: ad + login stacked; Desktop: split */}
                                 <div className="block md:hidden w-full">
@@ -2819,7 +2819,7 @@ function App() {
                                                 style={{ maxWidth: '98vw', objectFit: 'contain' }}
                                                 loading="eager"
                                             />
-                                            <p className="hidden sm:block text-xl sm:text-2xl md:text-3xl text-gray-800 italic pl-2 text-center md:text-left font-semibold leading-relaxed" style={{ fontFamily: 'Inter, sans-serif' }}>
+                                            <p className="hidden sm:block text-xl sm:text-2xl md:text-3xl text-white italic pl-2 text-center md:text-left font-semibold leading-relaxed" style={{ fontFamily: 'Inter, sans-serif' }}>
                                                 Knowledge Repository Of eXhibits & Networked Educational Student Tracks
                                             </p>
                                         </header>
@@ -2843,23 +2843,23 @@ function App() {
                             </div>
 
                             {/* How to use section */}
-                            <div className="w-full py-20 px-4 lg:px-8 bg-gray-50" data-section="how-to-use">
+                            <div className="w-full py-20 px-4 lg:px-8 bg-white" data-section="how-to-use">
                                 <div className="w-full max-w-7xl mx-auto">
                                     <div className="text-center mb-16">
-                                        <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                                        <h2 className="text-4xl md:text-5xl font-bold text-black mb-6">
                                             How to Use
                                         </h2>
-                                        <div className="w-24 h-1 bg-blue-600 rounded-full mx-auto"></div>
+                                        <div className="w-24 h-1 bg-yellow-500 rounded-full mx-auto"></div>
                                     </div>
                                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                                         {howToUseSteps.map((step, idx) => (
-                                            <div key={idx} className="bg-white rounded-xl shadow-lg p-8 transition-all duration-500 hover:scale-105 hover:shadow-xl group border border-gray-100">
+                                            <div key={idx} className="bg-black rounded-xl shadow-lg p-8 transition-all duration-500 hover:scale-105 hover:shadow-xl group border border-gray-800">
                                                 <div className="flex flex-col items-center text-center">
-                                                    <div className="flex items-center justify-center w-16 h-16 rounded-full bg-blue-600 text-white text-2xl font-bold mb-6 group-hover:scale-110 transition-transform duration-300">
+                                                    <div className="flex items-center justify-center w-16 h-16 rounded-full bg-yellow-500 text-black text-2xl font-bold mb-6 group-hover:scale-110 transition-transform duration-300">
                                                         {step.step}
                                                     </div>
-                                                    <h3 className="text-xl font-bold text-gray-900 mb-4">{step.title}</h3>
-                                                    <p className="text-gray-600 leading-relaxed">{step.desc}</p>
+                                                    <h3 className="text-xl font-bold text-white mb-4">{step.title}</h3>
+                                                    <p className="text-gray-300 leading-relaxed">{step.desc}</p>
                                                 </div>
                                             </div>
                                         ))}
@@ -2868,22 +2868,22 @@ function App() {
                             </div>
 
                             {/* What we do section */}
-                            <div className="w-full py-20 px-4 lg:px-8 bg-white" data-section="what-we-do">
+                            <div className="w-full py-20 px-4 lg:px-8 bg-black" data-section="what-we-do">
                                 <div className="w-full max-w-7xl mx-auto">
                                     <div className="text-center mb-16">
-                                        <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                                        <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
                                             What We Do
                                         </h2>
-                                        <div className="w-24 h-1 bg-blue-600 rounded-full mx-auto"></div>
+                                        <div className="w-24 h-1 bg-yellow-500 rounded-full mx-auto"></div>
                                     </div>
                                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                                         {whatWeDoImages.map((item, idx) => (
-                                            <div key={idx} className="bg-gray-50 rounded-xl shadow-lg p-8 transition-all duration-500 hover:scale-105 hover:shadow-xl group border border-gray-200">
+                                            <div key={idx} className="bg-white rounded-xl shadow-lg p-8 transition-all duration-500 hover:scale-105 hover:shadow-xl group border border-gray-200">
                                                 <div className="flex flex-col items-center text-center">
-                                                    <div className="flex items-center justify-center w-16 h-16 rounded-full bg-blue-600 text-white text-2xl font-bold mb-6 group-hover:scale-110 transition-transform duration-300">
+                                                    <div className="flex items-center justify-center w-16 h-16 rounded-full bg-yellow-500 text-black text-2xl font-bold mb-6 group-hover:scale-110 transition-transform duration-300">
                                                         {idx + 1}
                                                     </div>
-                                                    <h3 className="text-xl font-bold text-gray-900 mb-4">{item.alt}</h3>
+                                                    <h3 className="text-xl font-bold text-black mb-4">{item.alt}</h3>
                                                     <p className="text-gray-600 leading-relaxed">{item.desc}</p>
                                                 </div>
                                             </div>
@@ -2893,17 +2893,17 @@ function App() {
                             </div>
 
                             {/* Footer centered at the bottom of the entire page, not fixed */}
-                            <footer className="w-full flex flex-col items-center justify-center py-12 px-4 gap-4 text-center mt-16 border-t border-gray-200 bg-gray-50">
+                            <footer className="w-full flex flex-col items-center justify-center py-12 px-4 gap-4 text-center mt-16 border-t border-gray-800 bg-black">
                                 <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
-                                    <span className="text-gray-600 text-base md:text-lg">
-                                        Contact: <a href="tel:+1234567890" className="text-blue-600 hover:text-blue-800 transition-colors">+1 234 567 890</a>
+                                    <span className="text-gray-300 text-base md:text-lg">
+                                        Contact: <a href="tel:+1234567890" className="text-yellow-500 hover:text-yellow-400 transition-colors">+1 234 567 890</a>
                                     </span>
-                                    <span className="text-gray-600 text-base md:text-lg">
-                                        <a href="mailto:dummy@email.com" className="text-blue-600 hover:text-blue-800 transition-colors">info@kroxnest.com</a>
+                                    <span className="text-gray-300 text-base md:text-lg">
+                                        <a href="mailto:dummy@email.com" className="text-yellow-500 hover:text-yellow-400 transition-colors">info@kroxnest.com</a>
                                     </span>
                                 </div>
                                 <div>
-                                    <span className="block text-gray-600 text-lg font-semibold">© 2025 Kroxnest. All rights reserved.</span>
+                                    <span className="block text-gray-300 text-lg font-semibold">© 2025 Kroxnest. All rights reserved.</span>
                                 </div>
                             </footer>
                         </>
