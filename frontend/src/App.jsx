@@ -2083,7 +2083,7 @@ const SplashVideo = ({ onVideoEnd }) => {
         };
     }, [onVideoEnd]);
     return (
-        <div className="fixed inset-0 z-50 bg-black flex items-center justify-center overflow-hidden">
+        <div className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden" style={{ backgroundColor: '#E1E1E1' }}>
             <video
                 ref={videoRef}
                 src="/video.mp4"
@@ -2551,14 +2551,14 @@ const DynamicAdContainer = ({ adConfig, currentPage }) => {
             <div className="block md:hidden w-full">
                 <div className="w-full flex justify-center p-0">
                     <div 
-                        className="bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-2 flex items-center justify-center transition-all duration-300 w-full max-w-2xl"
+                        className="bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl flex items-center justify-center transition-all duration-300 w-full max-w-2xl"
                         style={{ height: `${heights.mobile}px` }}
                     >
-                        <a href={currentAd.href} target="_blank" rel="noopener noreferrer" className="block w-full h-full rounded-2xl overflow-hidden">
+                        <a href={currentAd.href} target="_blank" rel="noopener noreferrer" className="block w-full h-full rounded-3xl overflow-hidden">
                             <img
                                 src={currentAd.src}
                                 alt={currentAd.alt}
-                                className="w-full h-full object-contain rounded-2xl transition-all duration-300 mx-auto"
+                                className="w-full h-full object-contain rounded-3xl transition-all duration-300 mx-auto"
                                 loading="lazy"
                                 onLoad={handleImageLoad}
                             />
@@ -2571,14 +2571,14 @@ const DynamicAdContainer = ({ adConfig, currentPage }) => {
             <div className="hidden md:block w-full">
                 <div className="w-full flex justify-center p-0">
                     <div 
-                        className="bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-2 flex items-center justify-center transition-all duration-300 w-full max-w-2xl"
+                        className="bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl flex items-center justify-center transition-all duration-300 w-full max-w-2xl"
                         style={{ height: `${heights.desktop}px` }}
                     >
-                        <a href={currentAd.href} target="_blank" rel="noopener noreferrer" className="block w-full h-full rounded-2xl overflow-hidden">
+                        <a href={currentAd.href} target="_blank" rel="noopener noreferrer" className="block w-full h-full rounded-3xl overflow-hidden">
                             <img
                                 src={currentAd.src}
                                 alt={currentAd.alt}
-                                className="w-full h-full object-contain rounded-2xl transition-all duration-300 mx-auto"
+                                className="w-full h-full object-contain rounded-3xl transition-all duration-300 mx-auto"
                                 loading="lazy"
                                 onLoad={handleImageLoad}
                             />
@@ -2795,7 +2795,7 @@ function App() {
                                 {/* Desktop: split layout as before */}
                                 <div className="hidden md:flex min-h-screen flex-row w-full">
                                     {/* Left: logo, slogan, ad */}
-                                    <div className="w-1/2 px-6 md:px-12 pt-[18px] pb-6 flex flex-col relative min-h-screen justify-between items-center md:items-start">
+                                    <div className="w-1/2 px-6 md:px-12 pt-[15px] pb-6 flex flex-col relative min-h-screen justify-between items-center md:items-start">
                                         <header className="flex flex-col items-center md:items-start mt-0 mb-0 sm:mt-2 sm:mb-8 w-full p-0">
                                             <img 
                                                 src="/tit.png" 
