@@ -397,14 +397,14 @@ const ProjectCard = ({ project, onSelectProject, searchTerm = '' }) => {
 
     return (
         <div
-            className={`bg-gray-100 p-4 rounded-xl shadow-lg hover:bg-gray-200 transition duration-200 cursor-pointer ${
-                isHighlighted ? 'ring-2 ring-blue-400 bg-blue-50' : ''
+            className={`bg-gradient-to-br from-gray-700/50 to-gray-800/50 backdrop-blur-sm p-4 rounded-xl shadow-lg hover:shadow-yellow-500/20 transition-all duration-300 cursor-pointer border border-yellow-500/20 hover:border-yellow-500/40 transform hover:scale-105 ${
+                isHighlighted ? 'ring-2 ring-yellow-400 bg-gradient-to-br from-yellow-900/30 to-yellow-800/30' : ''
             }`}
             onClick={() => onSelectProject(project.id, project.name)}
         >
-            <h4 className="text-xl font-bold text-gray-800 mb-2">{project.name}</h4>
-            <p className="text-gray-600 text-sm mb-3">{project.description}</p>
-            <div className="flex items-center justify-between text-xs text-gray-500">
+            <h4 className="text-xl font-bold text-white mb-2">{project.name}</h4>
+            <p className="text-gray-300 text-sm mb-3">{project.description}</p>
+            <div className="flex items-center justify-between text-xs text-gray-400">
                 <span>Created: {new Date(project.createdAt).toLocaleDateString()}</span>
                 <span>{project.fileCount || 0} files</span>
             </div>
@@ -744,13 +744,13 @@ const ForgotPasswordPage = ({ onNavigateToLogin, onNavigateToResetPasswordWithTo
                             </button>
                         </p>
                         <p className="text-sm text-yellow-700">
-                            Use this link to proceed: <a href="#" onClick={() => onNavigateToResetPasswordWithToken(resetTokenInfo.token)} className="text-blue-500 font-semibold hover:underline break-all">Reset Password Link</a>
+                            Use this link to proceed: <a href="#" onClick={() => onNavigateToResetPasswordWithToken(resetTokenInfo.token)} className="text-yellow-300 font-semibold hover:text-yellow-200 transition-colors break-all">Reset Password Link</a>
                         </p>
                     </div>
                 )}
-                <p className="mt-8 text-gray-700 text-base">
+                <p className="mt-8 text-gray-300 text-base">
                     Remembered your password?{' '}
-                    <a href="#" onClick={onNavigateToLogin} className="text-blue-500 font-semibold hover:underline hover:text-blue-700 transition-colors">
+                    <a href="#" onClick={onNavigateToLogin} className="text-yellow-400 font-semibold hover:text-yellow-300 transition-colors">
                         Back to Login
                     </a>
                 </p>
@@ -870,12 +870,12 @@ const ResetPasswordPage = ({ onNavigateToLogin, initialToken }) => {
 const PrivacyPolicyPage = ({ onNavigateToLogin }) => {
     return (
         <div className="flex items-start justify-center p-5 w-full h-full mt-8">
-            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-4xl flex flex-col items-center animate-fade-in-up">
-                <h2 className="text-3xl font-bold text-gray-800 mb-6">Privacy Policy</h2>
+            <div className="bg-gradient-to-br from-gray-800 to-gray-900 border border-yellow-500/20 shadow-2xl rounded-3xl w-full max-w-4xl p-8 flex flex-col items-center animate-fade-in-up hover:shadow-yellow-500/20 transition-all duration-500">
+                <h2 className="text-3xl font-bold text-white mb-6">Privacy Policy</h2>
                 <div className="w-full max-w-3xl text-left space-y-6">
-                    <div className="bg-blue-50 p-6 rounded-xl border border-blue-200">
-                        <h3 className="text-2xl font-bold text-blue-800 mb-4">Project Portfolio & Selling Platform</h3>
-                        <p className="text-gray-700 leading-relaxed">
+                    <div className="bg-gradient-to-br from-yellow-900/30 to-yellow-800/30 p-6 rounded-xl border border-yellow-500/20">
+                        <h3 className="text-2xl font-bold text-yellow-300 mb-4">Project Portfolio & Selling Platform</h3>
+                        <p className="text-gray-300 leading-relaxed">
                             Kroxnest is a comprehensive platform designed for students to showcase their academic projects, 
                             collaborate with peers, and potentially monetize their innovative work. Our platform serves as 
                             a bridge between talented students and potential buyers, investors, or collaborators.
@@ -883,8 +883,8 @@ const PrivacyPolicyPage = ({ onNavigateToLogin }) => {
                     </div>
 
                     <section>
-                        <h3 className="text-xl font-bold text-gray-800 mb-3">Information We Collect</h3>
-                        <ul className="list-disc pl-6 text-gray-700 space-y-2">
+                        <h3 className="text-xl font-bold text-white mb-3">Information We Collect</h3>
+                        <ul className="list-disc pl-6 text-gray-300 space-y-2">
                             <li><strong>Personal Information:</strong> Name, email, college details, roll number, and contact information</li>
                             <li><strong>Project Data:</strong> Project files, descriptions, and associated metadata</li>
                             <li><strong>Usage Analytics:</strong> Platform interaction data to improve user experience</li>
@@ -893,8 +893,8 @@ const PrivacyPolicyPage = ({ onNavigateToLogin }) => {
                     </section>
 
                     <section>
-                        <h3 className="text-xl font-bold text-gray-800 mb-3">How We Use Your Information</h3>
-                        <ul className="list-disc pl-6 text-gray-700 space-y-2">
+                        <h3 className="text-xl font-bold text-white mb-3">How We Use Your Information</h3>
+                        <ul className="list-disc pl-6 text-gray-300 space-y-2">
                             <li>Facilitate project showcasing and portfolio building</li>
                             <li>Enable project discovery by potential buyers and investors</li>
                             <li>Provide collaboration tools for team projects</li>
@@ -904,12 +904,12 @@ const PrivacyPolicyPage = ({ onNavigateToLogin }) => {
                     </section>
 
                     <section>
-                        <h3 className="text-xl font-bold text-gray-800 mb-3">Project Selling & Monetization</h3>
-                        <div className="bg-green-50 p-4 rounded-lg border border-green-200">
-                            <p className="text-gray-700 leading-relaxed">
+                        <h3 className="text-xl font-bold text-white mb-3">Project Selling & Monetization</h3>
+                        <div className="bg-gradient-to-br from-green-900/30 to-green-800/30 p-4 rounded-lg border border-green-500/20">
+                            <p className="text-gray-300 leading-relaxed">
                                 Our platform enables students to monetize their projects through various channels:
                             </p>
-                            <ul className="list-disc pl-6 text-gray-700 mt-3 space-y-1">
+                            <ul className="list-disc pl-6 text-gray-300 mt-3 space-y-1">
                                 <li><strong>Direct Sales:</strong> Sell completed projects to interested buyers</li>
                                 <li><strong>Licensing:</strong> License your project code or design to companies</li>
                                 <li><strong>Consulting:</strong> Offer implementation services for your projects</li>
@@ -919,24 +919,24 @@ const PrivacyPolicyPage = ({ onNavigateToLogin }) => {
                     </section>
 
                     <section>
-                        <h3 className="text-xl font-bold text-gray-800 mb-3">Data Protection</h3>
-                        <p className="text-gray-700 leading-relaxed">
+                        <h3 className="text-xl font-bold text-white mb-3">Data Protection</h3>
+                        <p className="text-gray-300 leading-relaxed">
                             We implement industry-standard security measures to protect your personal information and project data. 
                             All file uploads are encrypted, and access is restricted to authorized personnel only.
                         </p>
                     </section>
 
                     <section>
-                        <h3 className="text-xl font-bold text-gray-800 mb-3">Third-Party Services</h3>
-                        <p className="text-gray-700 leading-relaxed">
+                        <h3 className="text-xl font-bold text-white mb-3">Third-Party Services</h3>
+                        <p className="text-gray-300 leading-relaxed">
                             We may integrate with third-party services for payment processing, analytics, and communication. 
                             These services have their own privacy policies, and we recommend reviewing them.
                         </p>
                     </section>
 
                     <section>
-                        <h3 className="text-xl font-bold text-gray-800 mb-3">Your Rights</h3>
-                        <ul className="list-disc pl-6 text-gray-700 space-y-2">
+                        <h3 className="text-xl font-bold text-white mb-3">Your Rights</h3>
+                        <ul className="list-disc pl-6 text-gray-300 space-y-2">
                             <li>Access and download your personal data</li>
                             <li>Request deletion of your account and associated data</li>
                             <li>Opt-out of marketing communications</li>
@@ -945,16 +945,16 @@ const PrivacyPolicyPage = ({ onNavigateToLogin }) => {
                     </section>
 
                     <section>
-                        <h3 className="text-xl font-bold text-gray-800 mb-3">Contact Information</h3>
-                        <p className="text-gray-700 leading-relaxed">
+                        <h3 className="text-xl font-bold text-white mb-3">Contact Information</h3>
+                        <p className="text-gray-300 leading-relaxed">
                             For privacy-related inquiries, please contact us at: <br/>
                             <strong>Email:</strong> privacy@kroxnest.com<br/>
                             <strong>Phone:</strong> +1 234 567 890
                         </p>
                     </section>
 
-                    <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
-                        <p className="text-sm text-gray-600">
+                    <div className="bg-gradient-to-br from-yellow-900/20 to-yellow-800/20 p-4 rounded-lg border border-yellow-500/20">
+                        <p className="text-sm text-gray-400">
                             <strong>Last Updated:</strong> January 2025<br/>
                             This privacy policy is subject to change. Please review periodically.
                         </p>
@@ -962,7 +962,7 @@ const PrivacyPolicyPage = ({ onNavigateToLogin }) => {
                 </div>
                 <button
                     onClick={onNavigateToLogin}
-                    className="bg-gray-300 text-gray-800 py-2 px-5 rounded-lg font-bold transition duration-300 hover:bg-gray-400 shadow-md hover:shadow-lg mt-8 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-75"
+                    className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-2 px-5 rounded-lg font-bold transition duration-300 hover:from-yellow-500 hover:to-yellow-700 shadow-md hover:shadow-lg mt-8 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-75 transform hover:scale-105"
                 >
                     Back to Login
                 </button>
@@ -1104,43 +1104,43 @@ const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects, onNa
 
     return (
         <div className="flex items-center justify-center w-full min-h-[80vh] animate-fade-in-up">
-            <div className="bg-white border border-gray-200 shadow-xl rounded-2xl w-full max-w-2xl p-8 flex flex-col items-center relative">
-                <h1 className="text-3xl font-bold text-gray-900 mb-2 text-center">Welcome{userDetails?.username ? `, ${userDetails.username}` : ''}!</h1>
-                <div className="w-16 h-1 bg-blue-600 rounded-full mb-6 mx-auto" />
+            <div className="bg-gradient-to-br from-gray-800 to-gray-900 border border-yellow-500/20 shadow-2xl rounded-2xl w-full max-w-2xl p-8 flex flex-col items-center relative hover:shadow-yellow-500/20 transition-all duration-500">
+                <h1 className="text-3xl font-bold text-white mb-2 text-center">Welcome{userDetails?.username ? `, ${userDetails.username}` : ''}!</h1>
+                <div className="w-16 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full mb-6 mx-auto" />
                 {isAuthLoading ? (
-                    <p className="text-gray-600 mb-6">Loading user details...</p>
+                    <p className="text-gray-300 mb-6">Loading user details...</p>
                 ) : userDetails ? (
-                    <div className="user-details-box text-left w-full max-w-md mx-auto mb-6 p-4 border border-blue-200 rounded-xl bg-blue-50 shadow-sm">
-                        <p className="text-gray-700 text-base mb-2">College: <span className="font-medium">{userDetails.college || 'N/A'}</span></p>
-                        <p className="text-gray-700 text-base mb-2">Branch: <span className="font-medium">{userDetails.branch || 'N/A'}</span></p>
-                        <p className="text-gray-700 text-base">Roll Number: <span className="font-medium">{userDetails.roll_number || 'N/A'}</span></p>
+                    <div className="user-details-box text-left w-full max-w-md mx-auto mb-6 p-4 border border-yellow-500/20 rounded-xl bg-gradient-to-br from-gray-700 to-gray-800 shadow-lg">
+                        <p className="text-gray-200 text-base mb-2">College: <span className="font-medium text-yellow-400">{userDetails.college || 'N/A'}</span></p>
+                        <p className="text-gray-200 text-base mb-2">Branch: <span className="font-medium text-yellow-400">{userDetails.branch || 'N/A'}</span></p>
+                        <p className="text-gray-200 text-base">Roll Number: <span className="font-medium text-yellow-400">{userDetails.roll_number || 'N/A'}</span></p>
                     </div>
                 ) : (
-                    <p className="text-red-600 mb-6">Could not load user details. Please try logging in again.</p>
+                    <p className="text-red-400 mb-6">Could not load user details. Please try logging in again.</p>
                 )}
                 <button
                     onClick={onNavigateToSuggestions}
-                    className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-bold text-lg transition duration-300 hover:bg-blue-700 shadow-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75"
+                    className="w-full bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-3 px-6 rounded-lg font-bold text-lg transition duration-300 hover:from-yellow-500 hover:to-yellow-700 shadow-lg hover:shadow-yellow-500/25 transform hover:scale-105 mb-4 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-75"
                 >
                     Project Suggestions
                 </button>
                 <div className="flex flex-col sm:flex-row gap-6 mt-2 w-full justify-center">
                     <button
                         onClick={onNavigateToCreateProject}
-                        className="bg-blue-600 text-white py-3 px-6 rounded-lg font-bold text-lg transition duration-300 hover:bg-blue-700 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75"
+                        className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-3 px-6 rounded-lg font-bold text-lg transition duration-300 hover:from-yellow-500 hover:to-yellow-700 shadow-lg hover:shadow-yellow-500/25 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-75"
                     >
                         Create New Project
                     </button>
                     <button
                         onClick={onNavigateToViewProjects}
-                        className="bg-blue-600 text-white py-3 px-6 rounded-lg font-bold text-lg transition duration-300 hover:bg-blue-700 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75"
+                        className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-3 px-6 rounded-lg font-bold text-lg transition duration-300 hover:from-yellow-500 hover:to-yellow-700 shadow-lg hover:shadow-yellow-500/25 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-75"
                     >
                         View All Projects
                     </button>
                 </div>
                 <button
                     onClick={handleLogout}
-                    className="bg-gray-200 text-gray-800 py-2 px-5 rounded-lg font-bold text-base transition duration-300 hover:bg-gray-300 shadow-md mt-6 w-full max-w-[150px] mx-auto focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-75"
+                    className="bg-gradient-to-br from-gray-600 to-gray-700 text-white py-2 px-5 rounded-lg font-bold text-base transition duration-300 hover:from-gray-500 hover:to-gray-600 shadow-lg hover:shadow-gray-500/25 transform hover:scale-105 mt-6 w-full max-w-[150px] mx-auto focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-75"
                 >
                     Logout
                 </button>
@@ -1268,12 +1268,12 @@ const SuggestionsPage = ({ onNavigateToWelcome }) => {
 
     return (
         <div className="flex items-start justify-center p-5 w-full h-full mt-8">
-            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-6xl flex flex-col items-center animate-fade-in-up">
-                <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Project Suggestions</h2>
+            <div className="bg-gradient-to-br from-gray-800 to-gray-900 border border-yellow-500/20 shadow-2xl rounded-3xl w-full max-w-6xl p-8 flex flex-col items-center animate-fade-in-up hover:shadow-yellow-500/20 transition-all duration-500">
+                <h2 className="text-3xl font-bold text-white mb-6 text-center">Project Suggestions</h2>
                 
                 {!selectedCategory ? (
                     <>
-                        <p className="text-gray-600 text-lg mb-8 text-center max-w-2xl">
+                        <p className="text-gray-300 text-lg mb-8 text-center max-w-2xl">
                             Choose your branch to discover exciting project ideas tailored to your field of study
                         </p>
                         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 w-full max-w-4xl">
@@ -1281,11 +1281,11 @@ const SuggestionsPage = ({ onNavigateToWelcome }) => {
                                 <button
                                     key={category.id}
                                     onClick={() => handleCategoryClick(category.id)}
-                                    className="flex flex-col items-center p-6 bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-blue-200 hover:border-blue-400 group"
+                                    className="flex flex-col items-center p-6 bg-gradient-to-br from-gray-700/50 to-gray-800/50 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-yellow-500/20 transition-all duration-300 hover:scale-105 border border-yellow-500/20 hover:border-yellow-500/40 group"
                                 >
-                                    <i className={`${category.icon} text-3xl text-blue-600 mb-3 group-hover:scale-110 transition-transform duration-300`}></i>
-                                    <span className="text-lg font-bold text-gray-800">{category.name}</span>
-                                    <span className="text-sm text-gray-600 mt-1">Click to explore</span>
+                                    <i className={`${category.icon} text-3xl text-yellow-400 mb-3 group-hover:scale-110 transition-transform duration-300`}></i>
+                                    <span className="text-lg font-bold text-white">{category.name}</span>
+                                    <span className="text-sm text-gray-300 mt-1">Click to explore</span>
                                 </button>
                             ))}
                         </div>
@@ -1293,12 +1293,12 @@ const SuggestionsPage = ({ onNavigateToWelcome }) => {
                 ) : (
                     <div className="w-full max-w-4xl">
                         <div className="flex items-center justify-between mb-6">
-                            <h3 className="text-2xl font-bold text-gray-800">
+                            <h3 className="text-2xl font-bold text-white">
                                 {categories.find(cat => cat.id === selectedCategory)?.name} Projects
                             </h3>
                             <button
                                 onClick={handleBackToCategories}
-                                className="flex items-center space-x-2 px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors duration-200"
+                                className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black rounded-lg hover:from-yellow-500 hover:to-yellow-700 transition-all duration-200 transform hover:scale-105"
                             >
                                 <i className="fa-solid fa-arrow-left"></i>
                                 <span>Back to Categories</span>
@@ -1309,15 +1309,15 @@ const SuggestionsPage = ({ onNavigateToWelcome }) => {
                             {projectSuggestions[selectedCategory].map((project, index) => (
                                 <div
                                     key={index}
-                                    className="p-4 bg-gradient-to-br from-white to-blue-50 rounded-xl border border-blue-200 shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
+                                    className="p-4 bg-gradient-to-br from-gray-700/50 to-gray-800/50 backdrop-blur-sm rounded-xl border border-yellow-500/20 shadow-md hover:shadow-yellow-500/20 transition-all duration-300 hover:scale-105"
                                 >
                                     <div className="flex items-start space-x-3">
-                                        <div className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                                        <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black rounded-full flex items-center justify-center text-sm font-bold">
                                             {index + 1}
                                         </div>
                                         <div className="flex-1">
-                                            <h4 className="text-lg font-semibold text-gray-800 mb-2">{project}</h4>
-                                            <p className="text-gray-600 text-sm">
+                                            <h4 className="text-lg font-semibold text-white mb-2">{project}</h4>
+                                            <p className="text-gray-300 text-sm">
                                                 A comprehensive project idea perfect for {categories.find(cat => cat.id === selectedCategory)?.name} students.
                                             </p>
                                         </div>
@@ -1326,9 +1326,9 @@ const SuggestionsPage = ({ onNavigateToWelcome }) => {
                             ))}
                         </div>
                         
-                        <div className="mt-8 p-4 bg-blue-50 rounded-xl border border-blue-200">
-                            <h4 className="text-lg font-semibold text-blue-800 mb-2">💡 Project Tips</h4>
-                            <ul className="text-sm text-blue-700 space-y-1">
+                        <div className="mt-8 p-4 bg-gradient-to-br from-yellow-900/30 to-yellow-800/30 rounded-xl border border-yellow-500/20">
+                            <h4 className="text-lg font-semibold text-yellow-300 mb-2">💡 Project Tips</h4>
+                            <ul className="text-sm text-yellow-100 space-y-1">
                                 <li>• Choose a project that aligns with your interests and career goals</li>
                                 <li>• Consider the complexity and time required for implementation</li>
                                 <li>• Think about real-world applications and market potential</li>
@@ -1340,7 +1340,7 @@ const SuggestionsPage = ({ onNavigateToWelcome }) => {
                 
                 <button
                     onClick={onNavigateToWelcome}
-                    className="bg-gray-300 text-gray-800 py-2 px-5 rounded-lg font-bold text-base transition duration-300 hover:bg-gray-400 shadow-md hover:shadow-lg mt-8 w-full max-w-[200px] mx-auto focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-75"
+                    className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-2 px-5 rounded-lg font-bold text-base transition duration-300 hover:from-yellow-500 hover:to-yellow-700 shadow-lg hover:shadow-yellow-500/25 transform hover:scale-105 mt-8 w-full max-w-[200px] mx-auto focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-75"
                 >
                     Back to Welcome
                 </button>
@@ -1353,13 +1353,13 @@ const SuggestionsPage = ({ onNavigateToWelcome }) => {
 const FileItem = ({ file, projectOwnerRollNumber, loggedInUserRollNumber, onReplace, onDelete, onViewFile }) => {
     const isOwner = loggedInUserRollNumber && projectOwnerRollNumber === loggedInUserRollNumber;
     return (
-        <div className="flex flex-row flex-wrap items-center gap-2 mb-4 p-4 bg-gray-50 rounded-xl border border-gray-200 shadow-lg animate-fade-in-up w-full">
-            <span className="font-semibold text-gray-700 text-sm flex-shrink-0">Title:</span>
-            <span className="font-bold text-gray-800 flex-grow min-w-0 truncate">{file.file_name} ({file.original_name})</span>
+        <div className="flex flex-row flex-wrap items-center gap-2 mb-4 p-4 bg-gradient-to-br from-gray-700/50 to-gray-800/50 backdrop-blur-sm rounded-xl border border-yellow-500/20 shadow-lg animate-fade-in-up w-full hover:shadow-yellow-500/20 transition-all duration-300">
+            <span className="font-semibold text-gray-200 text-sm flex-shrink-0">Title:</span>
+            <span className="font-bold text-white flex-grow min-w-0 truncate">{file.file_name} ({file.original_name})</span>
             <div className="flex flex-row gap-2 flex-shrink-0">
                 <button
                     onClick={() => onViewFile(file.file_path, file.original_name)}
-                    className="bg-gray-200 text-gray-800 py-2 px-4 rounded-lg font-bold transition duration-200 hover:bg-gray-300 text-center"
+                    className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-2 px-4 rounded-lg font-bold transition duration-200 hover:from-yellow-500 hover:to-yellow-700 text-center transform hover:scale-105"
                 >
                     View
                 </button>
@@ -1367,13 +1367,13 @@ const FileItem = ({ file, projectOwnerRollNumber, loggedInUserRollNumber, onRepl
                     <>
                         <button
                             onClick={() => onReplace(file.id, file.file_name)}
-                            className="bg-gray-200 text-gray-800 py-2 px-4 rounded-lg font-bold transition duration-200 hover:bg-gray-300"
+                            className="bg-gradient-to-r from-gray-500 to-gray-600 text-white py-2 px-4 rounded-lg font-bold transition duration-200 hover:from-gray-400 hover:to-gray-500 transform hover:scale-105"
                         >
                             Replace
                         </button>
                         <button
                             onClick={() => onDelete(file.id)}
-                            className="bg-red-500 text-white py-2 px-4 rounded-lg font-bold transition duration-200 hover:bg-red-600"
+                            className="bg-gradient-to-r from-red-500 to-red-600 text-white py-2 px-4 rounded-lg font-bold transition duration-200 hover:from-red-400 hover:to-red-500 transform hover:scale-105"
                         >
                             Delete
                         </button>
@@ -1683,13 +1683,13 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
 
     return (
         <div className="flex items-start justify-center p-5 w-full h-full mt-8">
-            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-4xl flex flex-col items-start animate-fade-in-up">
-                <h1 className="text-3xl font-bold mb-6 text-gray-800 self-center">View Projects</h1>
+            <div className="bg-gradient-to-br from-gray-800 to-gray-900 border border-yellow-500/20 shadow-2xl rounded-3xl w-full max-w-4xl p-8 flex flex-col items-start animate-fade-in-up hover:shadow-yellow-500/20 transition-all duration-500">
+                <h1 className="text-3xl font-bold mb-6 text-white self-center">View Projects</h1>
 
                 {showSearchAndList ? (
                     <>
                         <form onSubmit={(e) => { e.preventDefault(); fetchProjects(); }} className="flex flex-col gap-5 w-full max-w-xs mx-auto mb-6"> 
-                            <label htmlFor="viewRollNumber" className="font-semibold text-gray-700 mb-1">Enter Student Roll Number:</label>
+                            <label htmlFor="viewRollNumber" className="font-semibold text-gray-200 mb-1">Enter Student Roll Number:</label>
                             <input
                                 type="text"
                                 id="viewRollNumber"
@@ -1972,16 +1972,16 @@ const CreateProjectPage = ({ onNavigateToWelcome }) => {
 
     return (
         <div className="flex items-start justify-center p-5 w-full h-full mt-8">
-            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-4xl flex flex-col items-center animate-fade-in-up">
-                <h2 className="text-3xl font-bold text-gray-800 mb-6">Create New Project</h2>
+            <div className="bg-gradient-to-br from-gray-800 to-gray-900 border border-yellow-500/20 shadow-2xl rounded-3xl w-full max-w-4xl p-8 flex flex-col items-center animate-fade-in-up hover:shadow-yellow-500/20 transition-all duration-500">
+                <h2 className="text-3xl font-bold text-white mb-6">Create New Project</h2>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full max-w-lg mx-auto"> 
-                    <label htmlFor="projectName" className="font-semibold text-gray-700 mb-1">Project Name:</label>
+                    <label htmlFor="projectName" className="font-semibold text-gray-200 mb-1">Project Name:</label>
                     <input
                         type="text"
                         id="projectName"
                         value={projectName}
                         onChange={(e) => setProjectName(e.target.value)}
-                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition"
+                        className="p-3 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition hover:border-yellow-400"
                         required
                     />
 
@@ -2160,11 +2160,11 @@ const SkeletonFileItem = () => (
 // NEW: Loading Spinner Component
 const LoadingSpinner = ({ size = 'md', text = 'Loading...' }) => (
     <div className="flex flex-col items-center justify-center py-8">
-        <svg className={`animate-spin text-blue-500 ${size === 'sm' ? 'h-6 w-6' : size === 'lg' ? 'h-12 w-12' : 'h-8 w-8'}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <svg className={`animate-spin text-yellow-500 ${size === 'sm' ? 'h-6 w-6' : size === 'lg' ? 'h-12 w-12' : 'h-8 w-8'}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
         </svg>
-        {text && <p className="mt-2 text-gray-600">{text}</p>}
+        {text && <p className="mt-2 text-gray-300">{text}</p>}
     </div>
 );
 
@@ -2788,13 +2788,13 @@ function App() {
     return (
         <ThemeProvider>
             <ToastProvider>
-                <div className="bg-gradient-to-br from-black via-gray-900 to-yellow-900 min-h-screen w-full">
+                <div className="bg-gradient-to-b from-black via-gray-900 via-yellow-900/20 to-yellow-900 min-h-screen w-full">
                     {showSplash ? (
                         <SplashVideo onVideoEnd={handleVideoEnd} />
                     ) : (
                         <>
                             <NavigationBar currentPage={currentPage} onNavigate={navigate} />
-                            <div className="min-h-screen w-full font-sans bg-gradient-to-br from-black via-gray-900 to-yellow-900">
+                            <div className="min-h-screen w-full font-sans">
 
                                 {/* Mobile: ad + login stacked; Desktop: split */}
                                 <div className="block md:hidden w-full">
@@ -2815,7 +2815,7 @@ function App() {
                                             <img 
                                                 src="/tit.png" 
                                                 alt="kroxnest." 
-                                                className="hidden sm:block h-20 sm:h-28 md:h-[160px] lg:h-[200px] mb-6 drop-shadow-lg filter invert hover:scale-110 transition-all duration-500 ease-in-out mx-auto md:mx-0"
+                                                className="hidden sm:block h-16 sm:h-20 md:h-24 lg:h-28 mb-6 drop-shadow-lg filter invert hover:scale-110 transition-all duration-500 ease-in-out mx-auto md:mx-0"
                                                 style={{ maxWidth: '98vw', objectFit: 'contain' }}
                                                 loading="eager"
                                             />
@@ -2843,7 +2843,7 @@ function App() {
                             </div>
 
                             {/* How to use section */}
-                            <div className="w-full py-20 px-4 lg:px-8 bg-gradient-to-br from-black via-gray-900 to-yellow-900" data-section="how-to-use">
+                            <div className="w-full py-20 px-4 lg:px-8" data-section="how-to-use">
                                 <div className="w-full max-w-7xl mx-auto">
                                     <div className="text-center mb-16">
                                         <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
@@ -2853,7 +2853,7 @@ function App() {
                                     </div>
                                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                                         {howToUseSteps.map((step, idx) => (
-                                            <div key={idx} className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl shadow-2xl p-8 transition-all duration-500 hover:scale-105 hover:shadow-yellow-500/20 group border border-yellow-500/20 hover:border-yellow-500/40">
+                                            <div key={idx} className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-xl shadow-2xl p-8 transition-all duration-500 hover:scale-105 hover:shadow-yellow-500/20 group border border-yellow-500/20 hover:border-yellow-500/40">
                                                 <div className="flex flex-col items-center text-center">
                                                     <div className="flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-yellow-400 to-yellow-600 text-black text-2xl font-bold mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                                                         {step.step}
@@ -2868,7 +2868,7 @@ function App() {
                             </div>
 
                             {/* What we do section */}
-                            <div className="w-full py-20 px-4 lg:px-8 bg-gradient-to-br from-black via-gray-900 to-yellow-900" data-section="what-we-do">
+                            <div className="w-full py-20 px-4 lg:px-8" data-section="what-we-do">
                                 <div className="w-full max-w-7xl mx-auto">
                                     <div className="text-center mb-16">
                                         <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
@@ -2878,7 +2878,7 @@ function App() {
                                     </div>
                                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                                         {whatWeDoImages.map((item, idx) => (
-                                            <div key={idx} className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl shadow-2xl p-8 transition-all duration-500 hover:scale-105 hover:shadow-yellow-500/20 group border border-yellow-500/20 hover:border-yellow-500/40">
+                                            <div key={idx} className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-xl shadow-2xl p-8 transition-all duration-500 hover:scale-105 hover:shadow-yellow-500/20 group border border-yellow-500/20 hover:border-yellow-500/40">
                                                 <div className="flex flex-col items-center text-center">
                                                     <div className="flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-yellow-400 to-yellow-600 text-black text-2xl font-bold mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                                                         {idx + 1}
@@ -2893,7 +2893,7 @@ function App() {
                             </div>
 
                             {/* Footer centered at the bottom of the entire page, not fixed */}
-                            <footer className="w-full flex flex-col items-center justify-center py-12 px-4 gap-4 text-center mt-16 border-t border-yellow-500/20 bg-gradient-to-br from-black via-gray-900 to-yellow-900">
+                            <footer className="w-full flex flex-col items-center justify-center py-12 px-4 gap-4 text-center mt-16 border-t border-yellow-500/20">
                                 <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
                                     <span className="text-gray-300 text-base md:text-lg">
                                         Contact: <a href="tel:+1234567890" className="text-yellow-400 hover:text-yellow-300 transition-colors duration-300">+1 234 567 890</a>
