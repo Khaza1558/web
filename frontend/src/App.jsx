@@ -2699,12 +2699,12 @@ function App() {
     const adConfig = {
         login: {
             href: 'https://ad-link-login.com',
-            src: 'boy.png',
+            src: 'boy.pngg',
             alt: 'Login Advertisement',
         },
         welcome: {
             href: 'https://ad-link-welcome.com',
-            src: 'girl.png',
+            src: 'girl.pngg',
             alt: 'Welcome Advertisement',
         },
         createProject: {
@@ -2810,7 +2810,7 @@ function App() {
                                     <div className="w-1/2 px-6 md:px-12 pt-[15px] pb-6 flex flex-col relative min-h-screen justify-between items-center md:items-start">
                                         <header className="flex flex-col items-center md:items-start mt-0 mb-0 sm:mt-2 sm:mb-8 w-full p-0">
                                             <img 
-                                                src="/tit.png" 
+                                                src="/tite.png" 
                                                 alt="kroxnest." 
                                                 className="hidden sm:block h-16 sm:h-20 md:h-24 lg:h-28 w-auto max-w-full mb-4 drop-shadow-2xl filter invert transition-all duration-500 ease-in-out mx-auto md:mx-0"
                                                 style={{ maxWidth: '100%', objectFit: 'contain' }}
