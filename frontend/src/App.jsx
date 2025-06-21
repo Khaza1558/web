@@ -1018,14 +1018,14 @@ const NavigationBar = ({ currentPage, onNavigate }) => {
     return (
         <nav className="sticky top-0 z-40">
             <div className="max-w-7xl mx-auto px-0 sm:px-0 lg:px-0">
-                <div className="flex justify-end items-center h-16">
+                <div className="flex justify-end items-center h-10">
                     {/* Desktop Navigation - All items on the right with no padding */}
-                    <div className="hidden md:flex items-center space-x-8">
-                        {navItems.map((item) => (
+                    <div className="hidden md:flex items-center">
+                        {navItems.slice(0, -1).map((item) => (
                             <button
                                 key={item.name}
                                 onClick={() => handleNavClick(item.page)}
-                                className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:bg-white/20 hover:text-white group ${
+                                className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:bg-white/20 hover:text-white group mr-8 ${
                                     (currentPage === item.page || (item.page === 'home' && (currentPage === 'login' || currentPage === 'welcome'))) ? 'text-white bg-white/20' : 'text-gray-200'
                                 }`}
                             >
@@ -1033,6 +1033,16 @@ const NavigationBar = ({ currentPage, onNavigate }) => {
                                 <span>{item.name}</span>
                             </button>
                         ))}
+                        {/* Privacy Policy - No margin to stick to right corner */}
+                        <button
+                            onClick={() => handleNavClick(navItems[navItems.length - 1].page)}
+                            className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:bg-white/20 hover:text-white group ${
+                                currentPage === navItems[navItems.length - 1].page ? 'text-white bg-white/20' : 'text-gray-200'
+                            }`}
+                        >
+                            <i className={`${navItems[navItems.length - 1].icon} text-lg group-hover:scale-110 transition-transform duration-300`}></i>
+                            <span>{navItems[navItems.length - 1].name}</span>
+                        </button>
                     </div>
 
                     {/* Mobile menu button */}
@@ -2804,8 +2814,8 @@ function App() {
                                             <img 
                                                 src="/tit.png" 
                                                 alt="kroxnest." 
-                                                className="hidden sm:block h-16 sm:h-20 md:h-24 lg:h-28 mb-4 drop-shadow-2xl filter invert transition-all duration-500 ease-in-out mx-auto md:mx-0"
-                                                style={{ maxWidth: '98vw', objectFit: 'contain' }}
+                                                className="hidden sm:block h-12 sm:h-14 md:h-16 lg:h-18 w-auto max-w-full mb-4 drop-shadow-2xl filter invert transition-all duration-500 ease-in-out mx-auto md:mx-0"
+                                                style={{ maxWidth: '100%', objectFit: 'contain' }}
                                                 loading="eager"
                                             />
                                             <p className="hidden sm:block text-xs sm:text-sm md:text-base text-white italic pl-2 mt-2 text-center md:text-left font-semibold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-lg w-full max-w-3xl mx-auto md:mx-0" style={{ fontFamily: 'Inter, sans-serif' }}>
