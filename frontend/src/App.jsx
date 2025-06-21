@@ -1018,20 +1018,9 @@ const NavigationBar = ({ currentPage, onNavigate }) => {
     return (
         <nav className="sticky top-0 z-40">
             <div className="max-w-7xl mx-auto px-0 sm:px-0 lg:px-0">
-                <div className="flex justify-between items-center h-28">
-                    {/* Logo - Much larger size with no padding */}
-                    <div className="flex items-center">
-                        <img 
-                            src="/tit.png" 
-                            alt="Kroxnest" 
-                            className="h-20 w-auto filter invert hover:scale-110 transition-transform duration-300"
-                            onClick={() => handleNavClick('home')}
-                            style={{ cursor: 'pointer' }}
-                        />
-                    </div>
-
-                    {/* Desktop Navigation - All items on the right */}
-                    <div className="hidden md:flex items-center space-x-8 pr-0">
+                <div className="flex justify-end items-center h-16">
+                    {/* Desktop Navigation - All items on the right with no padding */}
+                    <div className="hidden md:flex items-center space-x-8">
                         {navItems.map((item) => (
                             <button
                                 key={item.name}
@@ -2809,10 +2798,17 @@ function App() {
                                 </div>
                                 {/* Desktop: split layout as before */}
                                 <div className="hidden md:flex min-h-screen flex-row w-full">
-                                    {/* Left: slogan and ad */}
+                                    {/* Left: title image, slogan and ad */}
                                     <div className="w-1/2 px-6 md:px-12 pt-[15px] pb-6 flex flex-col relative min-h-screen justify-between items-center md:items-start">
                                         <header className="flex flex-col items-center md:items-start mt-0 mb-0 sm:mt-2 sm:mb-8 w-full p-0">
-                                            <p className="hidden sm:block text-lg sm:text-2xl md:text-3xl text-white italic pl-2 mt-4 text-center md:text-left font-semibold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-lg w-full max-w-3xl mx-auto md:mx-0" style={{ fontFamily: 'Inter, sans-serif' }}>
+                                            <img 
+                                                src="/tit.png" 
+                                                alt="kroxnest." 
+                                                className="hidden sm:block h-16 sm:h-20 md:h-24 lg:h-28 mb-4 drop-shadow-2xl filter invert transition-all duration-500 ease-in-out mx-auto md:mx-0"
+                                                style={{ maxWidth: '98vw', objectFit: 'contain' }}
+                                                loading="eager"
+                                            />
+                                            <p className="hidden sm:block text-xs sm:text-sm md:text-base text-white italic pl-2 mt-2 text-center md:text-left font-semibold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-lg w-full max-w-3xl mx-auto md:mx-0" style={{ fontFamily: 'Inter, sans-serif' }}>
                                                 Knowledge Repository Of eXhibits & Networked Educational Student Tracks
                                             </p>
                                         </header>
