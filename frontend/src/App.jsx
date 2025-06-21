@@ -1025,22 +1025,20 @@ const NavigationBar = ({ currentPage, onNavigate }) => {
                             <button
                                 key={item.name}
                                 onClick={() => handleNavClick(item.page)}
-                                className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:bg-white/20 hover:text-white group mr-8 ${
+                                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:bg-white/20 hover:text-white group mr-8 ${
                                     (currentPage === item.page || (item.page === 'home' && (currentPage === 'login' || currentPage === 'welcome'))) ? 'text-white bg-white/20' : 'text-gray-200'
                                 }`}
                             >
-                                <i className={`${item.icon} text-lg group-hover:scale-110 transition-transform duration-300`}></i>
                                 <span>{item.name}</span>
                             </button>
                         ))}
                         {/* Privacy Policy - No margin to stick to right corner */}
                         <button
                             onClick={() => handleNavClick(navItems[navItems.length - 1].page)}
-                            className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:bg-white/20 hover:text-white group ${
+                            className={`py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:bg-white/20 hover:text-white group ${
                                 currentPage === navItems[navItems.length - 1].page ? 'text-white bg-white/20' : 'text-gray-200'
                             }`}
                         >
-                            <i className={`${navItems[navItems.length - 1].icon} text-lg group-hover:scale-110 transition-transform duration-300`}></i>
                             <span>{navItems[navItems.length - 1].name}</span>
                         </button>
                     </div>
@@ -2814,7 +2812,7 @@ function App() {
                                             <img 
                                                 src="/tit.png" 
                                                 alt="kroxnest." 
-                                                className="hidden sm:block h-12 sm:h-14 md:h-16 lg:h-18 w-auto max-w-full mb-4 drop-shadow-2xl filter invert transition-all duration-500 ease-in-out mx-auto md:mx-0"
+                                                className="hidden sm:block h-16 sm:h-20 md:h-24 lg:h-28 w-auto max-w-full mb-4 drop-shadow-2xl filter invert transition-all duration-500 ease-in-out mx-auto md:mx-0"
                                                 style={{ maxWidth: '100%', objectFit: 'contain' }}
                                                 loading="eager"
                                             />
