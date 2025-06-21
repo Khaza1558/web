@@ -869,8 +869,8 @@ const ResetPasswordPage = ({ onNavigateToLogin, initialToken }) => {
 // NEW: Privacy Policy Page
 const PrivacyPolicyPage = ({ onNavigateToLogin }) => {
     return (
-        <div className="flex items-start justify-center p-5 w-full h-full mt-8">
-            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-4xl flex flex-col items-center animate-fade-in-up">
+        <div className="flex items-start justify-start p-5 w-full h-full mt-8">
+            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-4xl flex flex-col items-start animate-fade-in-up">
                 <h2 className="text-3xl font-bold text-gray-800 mb-6">Privacy Policy</h2>
                 <div className="w-full max-w-3xl text-left space-y-6">
                     <div className="bg-blue-50 p-6 rounded-xl border border-blue-200">
@@ -1018,13 +1018,13 @@ const NavigationBar = ({ currentPage, onNavigate }) => {
     return (
         <nav className="sticky top-0 z-40">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex justify-between items-center h-16">
-                    {/* Logo */}
+                <div className="flex justify-between items-center h-20">
+                    {/* Logo - Increased size */}
                     <div className="flex items-center">
                         <img 
                             src="/tit.png" 
                             alt="Kroxnest" 
-                            className="h-8 w-auto filter invert hover:scale-110 transition-transform duration-300"
+                            className="h-12 w-auto filter invert hover:scale-110 transition-transform duration-300"
                             onClick={() => handleNavClick('home')}
                             style={{ cursor: 'pointer' }}
                         />
@@ -2809,20 +2809,8 @@ function App() {
                                 </div>
                                 {/* Desktop: split layout as before */}
                                 <div className="hidden md:flex min-h-screen flex-row w-full">
-                                    {/* Left: logo, slogan, ad */}
-                                    <div className="w-1/2 px-6 md:px-12 pt-[15px] pb-6 flex flex-col relative min-h-screen justify-between items-center md:items-start">
-                                        <header className="flex flex-col items-center md:items-start mt-0 mb-0 sm:mt-2 sm:mb-8 w-full p-0">
-                                            <img 
-                                                src="/tit.png" 
-                                                alt="kroxnest." 
-                                                className="hidden sm:block h-16 sm:h-24 md:h-[180px] lg:h-[220px] mb-0 sm:mb-[-10px] drop-shadow-2xl filter invert transition-all duration-500 ease-in-out mx-auto md:mx-0"
-                                                style={{ maxWidth: '98vw', objectFit: 'contain' }}
-                                                loading="eager"
-                                            />
-                                            <p className="hidden sm:block text-lg sm:text-2xl md:text-3xl text-white italic pl-2 mt-4 text-center md:text-left font-semibold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-lg w-full max-w-3xl mx-auto md:mx-0" style={{ fontFamily: 'Inter, sans-serif' }}>
-                                                Knowledge Repository Of eXhibits & Networked Educational Student Tracks
-                                            </p>
-                                        </header>
+                                    {/* Left: ad only (removed title image) */}
+                                    <div className="w-1/2 px-6 md:px-12 pt-[15px] pb-6 flex flex-col relative min-h-screen justify-center items-center md:items-start">
                                         <div className="mt-8 w-full flex justify-center p-0">
                                             <DynamicAdContainer adConfig={adConfig} currentPage={currentPage} />
                                         </div>
