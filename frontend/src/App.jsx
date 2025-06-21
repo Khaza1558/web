@@ -2510,6 +2510,86 @@ const ThemeToggle = () => {
     );
 };
 
+// NEW: Dynamic Advertisement Component
+const DynamicAdContainer = ({ adConfig, currentPage }) => {
+    const [imageLoaded, setImageLoaded] = useState(false);
+    const [imageAspectRatio, setImageAspectRatio] = useState(1.41); // Default aspect ratio
+    const currentAd = adConfig[currentPage] || adConfig.login;
+
+    const handleImageLoad = (event) => {
+        const img = event.target;
+        const aspectRatio = img.naturalWidth / img.naturalHeight;
+        setImageAspectRatio(aspectRatio);
+        setImageLoaded(true);
+    };
+
+    // Calculate container height based on aspect ratio
+    const getContainerHeight = () => {
+        const maxWidth = 672; // max-w-2xl
+        const mobileMaxHeight = 128; // h-32
+        const desktopMaxHeight = 480; // md:h-[480px]
+        
+        // Calculate ideal height based on image aspect ratio
+        const idealHeight = maxWidth / imageAspectRatio;
+        
+        // For mobile: cap at mobileMaxHeight
+        const mobileHeight = Math.min(idealHeight, mobileMaxHeight);
+        // For desktop: cap at desktopMaxHeight
+        const desktopHeight = Math.min(idealHeight, desktopMaxHeight);
+        
+        return {
+            mobile: mobileHeight,
+            desktop: desktopHeight
+        };
+    };
+
+    const heights = getContainerHeight();
+
+    return (
+        <>
+            {/* Mobile Version */}
+            <div className="block md:hidden w-full">
+                <div className="w-full flex justify-center p-0">
+                    <div 
+                        className="bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-2 flex items-center justify-center transition-all duration-300 w-full max-w-2xl"
+                        style={{ height: `${heights.mobile}px` }}
+                    >
+                        <a href={currentAd.href} target="_blank" rel="noopener noreferrer" className="block w-full h-full rounded-2xl overflow-hidden">
+                            <img
+                                src={currentAd.src}
+                                alt={currentAd.alt}
+                                className="w-full h-full object-contain rounded-2xl transition-all duration-300 mx-auto"
+                                loading="lazy"
+                                onLoad={handleImageLoad}
+                            />
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            {/* Desktop Version */}
+            <div className="hidden md:block w-full">
+                <div className="w-full flex justify-center p-0">
+                    <div 
+                        className="bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-2 flex items-center justify-center transition-all duration-300 w-full max-w-2xl"
+                        style={{ height: `${heights.desktop}px` }}
+                    >
+                        <a href={currentAd.href} target="_blank" rel="noopener noreferrer" className="block w-full h-full rounded-2xl overflow-hidden">
+                            <img
+                                src={currentAd.src}
+                                alt={currentAd.alt}
+                                className="w-full h-full object-contain rounded-2xl transition-all duration-300 mx-auto"
+                                loading="lazy"
+                                onLoad={handleImageLoad}
+                            />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </>
+    );
+};
+
 // Main App component
 function App() { 
     const getInitialPage = () => {
@@ -2704,18 +2784,7 @@ function App() {
                                 {/* Mobile: ad + login stacked; Desktop: split */}
                                 <div className="block md:hidden w-full">
                                     {/* Ad at top */}
-                                    <div className="w-full flex justify-center p-0">
-                                        <div className="bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-2 flex items-center justify-center transition-all duration-300 w-full h-32 max-w-2xl">
-                                            <a href={currentAd.href} target="_blank" rel="noopener noreferrer" className="block w-full h-full rounded-2xl overflow-hidden">
-                                                <img
-                                                    src={currentAd.src}
-                                                    alt={currentAd.alt}
-                                                    className="w-full h-full object-cover rounded-2xl transition-all duration-300 mx-auto"
-                                                    loading="lazy"
-                                                />
-                                            </a>
-                                        </div>
-                                    </div>
+                                    <DynamicAdContainer adConfig={adConfig} currentPage={currentPage} />
                                     {/* Small gap */}
                                     <div className="w-full p-1"></div>
                                     {/* Login page (or currentPage) */}
@@ -2726,7 +2795,7 @@ function App() {
                                 {/* Desktop: split layout as before */}
                                 <div className="hidden md:flex min-h-screen flex-row w-full">
                                     {/* Left: logo, slogan, ad */}
-                                    <div className="w-1/2 px-6 md:px-12 py-6 flex flex-col relative min-h-screen justify-between items-center md:items-start">
+                                    <div className="w-1/2 px-6 md:px-12 pt-[18px] pb-6 flex flex-col relative min-h-screen justify-between items-center md:items-start">
                                         <header className="flex flex-col items-center md:items-start mt-0 mb-0 sm:mt-2 sm:mb-8 w-full p-0">
                                             <img 
                                                 src="/tit.png" 
@@ -2740,16 +2809,7 @@ function App() {
                                             </p>
                                         </header>
                                         <div className="mt-8 w-full flex justify-center p-0">
-                                            <div className="bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-2 flex items-center justify-center transition-all duration-300 w-full h-40 md:h-[480px] max-w-2xl">
-                                                <a href={currentAd.href} target="_blank" rel="noopener noreferrer" className="block w-full h-full rounded-2xl overflow-hidden">
-                                                    <img
-                                                        src={currentAd.src}
-                                                        alt={currentAd.alt}
-                                                        className="w-full h-full object-cover rounded-2xl transition-all duration-300 mx-auto"
-                                                        loading="lazy"
-                                                    />
-                                                </a>
-                                            </div>
+                                            <DynamicAdContainer adConfig={adConfig} currentPage={currentPage} />
                                         </div>
                                     </div>
                                     {/* Right: content (login, register, etc.) */}
@@ -2771,7 +2831,7 @@ function App() {
                             <div className="w-full py-12 px-0" data-section="how-to-use">
                                 <div className="w-full flex flex-col items-start px-2 sm:px-6 md:px-12 max-w-7xl mx-auto">
                                     <h2 className="text-4xl font-extrabold text-white mb-2 text-left drop-shadow-lg relative inline-block">
-                                        Getting Started
+                                        How to Use
                                     </h2>
                                     <div className="w-full h-1 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full mb-8 animate-pulse"></div>
                                 </div>
@@ -2792,7 +2852,7 @@ function App() {
                             <div className="w-full py-12 px-0" data-section="what-we-do">
                                 <div className="w-full flex flex-col items-start px-2 sm:px-6 md:px-12 max-w-7xl mx-auto">
                                     <h2 className="text-4xl font-extrabold text-white mb-2 text-left drop-shadow-lg relative inline-block">
-                                        Our Services
+                                        What We Do
                                     </h2>
                                     <div className="w-full h-1 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full mb-8 animate-pulse"></div>
                                 </div>
