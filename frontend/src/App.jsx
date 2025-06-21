@@ -12,7 +12,7 @@ const ToastContext = createContext(null);
 export const ToastProvider = ({ children }) => {
     const [toasts, setToasts] = useState([]);
 
-    const showToast = useCallback((message, type = 'info', duration = 5000) => {
+    const showToast = useCallback((message, type = 'info', duration = 3000) => {
         const id = Date.now() + Math.random();
         const newToast = { id, message, type, duration };
         setToasts(prev => [...prev, newToast]);
@@ -2710,7 +2710,7 @@ function App() {
                                                 <img
                                                     src={currentAd.src}
                                                     alt={currentAd.alt}
-                                                    className="w-full h-full object-contain rounded-2xl transition-all duration-300 mx-auto"
+                                                    className="w-full h-full object-cover rounded-2xl transition-all duration-300 mx-auto"
                                                     loading="lazy"
                                                 />
                                             </a>
@@ -2745,7 +2745,7 @@ function App() {
                                                     <img
                                                         src={currentAd.src}
                                                         alt={currentAd.alt}
-                                                        className="w-full h-full object-contain rounded-2xl transition-all duration-300 mx-auto"
+                                                        className="w-full h-full object-cover rounded-2xl transition-all duration-300 mx-auto"
                                                         loading="lazy"
                                                     />
                                                 </a>
