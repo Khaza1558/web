@@ -2890,7 +2890,7 @@ function App() {
                                     <span className="text-gray-300 text-lg mr-6">Contact: <a href="tel:+1234567890" className="underline hover:text-blue-400 transition-colors">+1 234 567 890</a> | <a href="mailto:dummy@email.com" className="underline hover:text-blue-400 transition-colors">info@kroxnest.com</a></span>
                                 </div>
                                 <div>
-                                    <span className="block text-gray-300 text-xl font-semibold">© 2025 Kroxnest. All rights reserved.</span>
+                                    <span className="block text-gray-300 text-xl font-semibold">© 2025 Kroxnest. All rights reserved.|Ashi</span>
                                 </div>
                             </footer>
                         </>
