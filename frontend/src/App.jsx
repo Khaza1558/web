@@ -159,7 +159,7 @@ const CustomConfirmModal = ({ message, onConfirm, onCancel }) => {
                 <div className="flex justify-center gap-4">
                     <button
                         onClick={onConfirm}
-                        className="bg-blue-500 text-white py-2 px-5 rounded-lg font-bold transition duration-200 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+                        className="bg-blue-600 text-white py-2 px-5 rounded-lg font-bold transition duration-300 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75"
                     >
                         Yes
                     </button>
@@ -455,9 +455,9 @@ const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPas
 
     return (
         <div className="flex items-center justify-center w-full min-h-[80vh] animate-fade-in-up">
-            <div className="bg-white border border-gray-200 shadow-lg rounded-2xl w-full max-w-md p-8 flex flex-col items-center relative">
-                <h2 className="text-3xl font-bold text-gray-800 mb-2 text-center">Login</h2>
-                <div className="w-16 h-1 bg-blue-500 rounded-full mb-6 mx-auto" />
+            <div className="bg-white border border-gray-200 shadow-xl rounded-2xl w-full max-w-md p-8 flex flex-col items-center relative">
+                <h2 className="text-3xl font-bold text-gray-900 mb-2 text-center">Login</h2>
+                <div className="w-16 h-1 bg-blue-600 rounded-full mb-6 mx-auto" />
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full">
                     <label htmlFor="loginUsername" className="font-semibold text-gray-700 text-base">Username</label> 
                     <input
@@ -465,7 +465,7 @@ const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPas
                         id="loginUsername"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
-                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition text-base bg-white shadow-sm"
+                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition text-base bg-white shadow-sm"
                         required
                     />
 
@@ -476,18 +476,18 @@ const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPas
                         onChange={(e) => setPassword(e.target.value)}
                     />
 
-                    {error && <p className="text-red-500 text-base text-center mt-2 animate-fade-in">{error}</p>}
+                    {error && <p className="text-red-600 text-base text-center mt-2 animate-fade-in">{error}</p>}
 
                     <button
                         type="submit"
-                        className="bg-blue-500 text-white py-3 px-6 rounded-lg font-bold text-lg transition duration-200 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 mt-2 shadow-md"
+                        className="bg-blue-600 text-white py-3 px-6 rounded-lg font-bold text-lg transition duration-300 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 mt-2 shadow-md"
                     >
                         Login
                     </button>
                 </form>
                 {showForgotPassword && (
                     <p className="mt-4 text-gray-700">
-                        <a href="#" onClick={onNavigateToForgotPassword} className="text-blue-500 font-semibold hover:underline hover:text-blue-700 transition-colors">
+                        <a href="#" onClick={onNavigateToForgotPassword} className="text-blue-600 font-semibold hover:text-blue-800 transition-colors">
                             Forgot Password?
                         </a>
                     </p>
@@ -495,7 +495,7 @@ const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPas
                 <div className="mt-8 w-full flex justify-center">
                     <p className="text-gray-700 text-base text-center">
                         Don't have an account?{' '}
-                        <a href="#" onClick={onNavigateToRegister} className="text-blue-500 font-semibold hover:underline hover:text-blue-700 transition-colors">
+                        <a href="#" onClick={onNavigateToRegister} className="text-blue-600 font-semibold hover:text-blue-800 transition-colors">
                             Register here
                         </a>
                     </p>
@@ -579,19 +579,19 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
 
     return (
         <div className="flex items-center justify-center w-full min-h-[80vh] animate-fade-in-up">
-            <div className="bg-white border border-gray-200 shadow-lg rounded-2xl w-full max-w-lg p-8 flex flex-col items-center relative">
-                <h2 className="text-3xl font-bold text-gray-800 mb-2 text-center">Register</h2>
-                <div className="w-16 h-1 bg-blue-500 rounded-full mb-6 mx-auto" />
+            <div className="bg-white border border-gray-200 shadow-xl rounded-2xl w-full max-w-lg p-8 flex flex-col items-center relative">
+                <h2 className="text-3xl font-bold text-gray-900 mb-2 text-center">Register</h2>
+                <div className="w-16 h-1 bg-blue-600 rounded-full mb-6 mx-auto" />
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full">
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
                         <label htmlFor="email" className="font-semibold text-gray-700 text-base sm:w-1/4 flex-shrink-0">Email</label>
                         <input type="email" id="email" value={formData.email} onChange={handleChange}
-                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow text-base bg-white shadow-sm" required />
+                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition flex-grow text-base bg-white shadow-sm" required />
                     </div>
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
                         <label htmlFor="username" className="font-semibold text-gray-700 text-base sm:w-1/4 flex-shrink-0">Username</label>
                         <input type="text" id="username" value={formData.username} onChange={handleChange}
-                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow text-base bg-white shadow-sm" required />
+                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition flex-grow text-base bg-white shadow-sm" required />
                     </div>
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
                         <label htmlFor="password" className="font-semibold text-gray-700 text-base sm:w-1/4 flex-shrink-0">Password</label>
@@ -616,17 +616,17 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
                         <label htmlFor="collegeName" className="font-semibold text-gray-700 text-base sm:w-1/4 flex-shrink-0">College Name</label>
                         <input type="text" id="collegeName" value={formData.collegeName} onChange={handleChange}
-                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow text-base bg-white shadow-sm" required />
+                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition flex-grow text-base bg-white shadow-sm" required />
                     </div>
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
                         <label htmlFor="branch" className="font-semibold text-gray-700 text-base sm:w-1/4 flex-shrink-0">Branch</label>
                         <input type="text" id="branch" value={formData.branch} onChange={handleChange}
-                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow text-base bg-white shadow-sm" required />
+                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition flex-grow text-base bg-white shadow-sm" required />
                     </div>
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
                         <label htmlFor="rollNumber" className="font-semibold text-gray-700 text-base sm:w-1/4 flex-shrink-0">Roll Number</label>
                         <input type="text" id="rollNumber" value={formData.rollNumber} onChange={handleChange}
-                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow text-base bg-white shadow-sm" required />
+                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition flex-grow text-base bg-white shadow-sm" required />
                     </div>
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
                         <label htmlFor="mobileNumber" className="font-semibold text-gray-700 text-base sm:w-1/4 flex-shrink-0">Mobile Number</label>
@@ -637,21 +637,21 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
                             onChange={handleChange}
                             placeholder="Enter 10-digit mobile number"
                             pattern="[0-9]{10}"
-                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow text-base bg-white shadow-sm"
+                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition flex-grow text-base bg-white shadow-sm"
                             required
                         />
                     </div>
-                    {error && <p className="text-red-500 text-base text-center mt-2 animate-fade-in">{error}</p>}
+                    {error && <p className="text-red-600 text-base text-center mt-2 animate-fade-in">{error}</p>}
                     <button
                         type="submit"
-                        className="bg-blue-500 text-white py-3 px-6 rounded-lg font-bold text-lg transition duration-200 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 mt-2 shadow-md"
+                        className="bg-blue-600 text-white py-3 px-6 rounded-lg font-bold text-lg transition duration-300 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 mt-2 shadow-md"
                     >
                         Register
                     </button>
                 </form>
                 <p className="mt-8 text-gray-700 text-base">
                     Already have an account?{' '}
-                    <a href="#" onClick={onNavigateToLogin} className="text-blue-500 font-semibold hover:underline hover:text-blue-700 transition-colors">
+                    <a href="#" onClick={onNavigateToLogin} className="text-blue-600 font-semibold hover:text-blue-800 transition-colors">
                         Login here
                     </a>
                 </p>
@@ -1016,7 +1016,7 @@ const NavigationBar = ({ currentPage, onNavigate }) => {
     };
 
     return (
-        <nav className="sticky top-0 z-40">
+        <nav className="sticky top-0 z-40 bg-white shadow-sm border-b border-gray-200">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     {/* Logo */}
@@ -1036,8 +1036,8 @@ const NavigationBar = ({ currentPage, onNavigate }) => {
                             <button
                                 key={item.name}
                                 onClick={() => handleNavClick(item.page)}
-                                className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:bg-white/20 hover:text-white group ${
-                                    (currentPage === item.page || (item.page === 'home' && (currentPage === 'login' || currentPage === 'welcome'))) ? 'text-white bg-white/20' : 'text-gray-200'
+                                className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:bg-gray-100 group ${
+                                    (currentPage === item.page || (item.page === 'home' && (currentPage === 'login' || currentPage === 'welcome'))) ? 'text-blue-600 bg-blue-50' : 'text-gray-700'
                                 }`}
                             >
                                 <i className={`${item.icon} text-lg group-hover:scale-110 transition-transform duration-300`}></i>
@@ -1050,7 +1050,7 @@ const NavigationBar = ({ currentPage, onNavigate }) => {
                     <div className="md:hidden">
                         <button
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
-                            className="text-white hover:text-gray-200 focus:outline-none focus:text-gray-200"
+                            className="text-gray-700 hover:text-gray-900 focus:outline-none focus:text-gray-900"
                         >
                             <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 {isMenuOpen ? (
@@ -1066,13 +1066,13 @@ const NavigationBar = ({ currentPage, onNavigate }) => {
                 {/* Mobile Navigation */}
                 {isMenuOpen && (
                     <div className="md:hidden">
-                        <div className="px-2 pt-2 pb-3 space-y-1 bg-black/30 backdrop-blur-md rounded-lg border border-white/20">
+                        <div className="px-2 pt-2 pb-3 space-y-1 bg-white border border-gray-200 rounded-lg shadow-lg">
                             {navItems.map((item) => (
                                 <button
                                     key={item.name}
                                     onClick={() => handleNavClick(item.page)}
-                                    className={`flex items-center space-x-3 w-full text-left px-3 py-2 rounded-lg text-base font-medium transition-all duration-300 hover:bg-white/20 hover:text-white group ${
-                                        (currentPage === item.page || (item.page === 'home' && (currentPage === 'login' || currentPage === 'welcome'))) ? 'text-white bg-white/20' : 'text-gray-200'
+                                    className={`flex items-center space-x-3 w-full text-left px-3 py-2 rounded-lg text-base font-medium transition-all duration-300 hover:bg-gray-100 group ${
+                                        (currentPage === item.page || (item.page === 'home' && (currentPage === 'login' || currentPage === 'welcome'))) ? 'text-blue-600 bg-blue-50' : 'text-gray-700'
                                     }`}
                                 >
                                     <i className={`${item.icon} text-lg group-hover:scale-110 transition-transform duration-300`}></i>
@@ -1104,43 +1104,43 @@ const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects, onNa
 
     return (
         <div className="flex items-center justify-center w-full min-h-[80vh] animate-fade-in-up">
-            <div className="bg-white border border-gray-200 shadow-lg rounded-2xl w-full max-w-2xl p-8 flex flex-col items-center relative">
-                <h1 className="text-3xl font-bold text-gray-800 mb-2 text-center">Welcome{userDetails?.username ? `, ${userDetails.username}` : ''}!</h1>
-                <div className="w-16 h-1 bg-blue-500 rounded-full mb-6 mx-auto" />
+            <div className="bg-white border border-gray-200 shadow-xl rounded-2xl w-full max-w-2xl p-8 flex flex-col items-center relative">
+                <h1 className="text-3xl font-bold text-gray-900 mb-2 text-center">Welcome{userDetails?.username ? `, ${userDetails.username}` : ''}!</h1>
+                <div className="w-16 h-1 bg-blue-600 rounded-full mb-6 mx-auto" />
                 {isAuthLoading ? (
                     <p className="text-gray-600 mb-6">Loading user details...</p>
                 ) : userDetails ? (
-                    <div className="user-details-box text-left w-full max-w-md mx-auto mb-6 p-4 border border-blue-100 rounded-xl bg-blue-50 shadow-sm">
+                    <div className="user-details-box text-left w-full max-w-md mx-auto mb-6 p-4 border border-blue-200 rounded-xl bg-blue-50 shadow-sm">
                         <p className="text-gray-700 text-base mb-2">College: <span className="font-medium">{userDetails.college || 'N/A'}</span></p>
                         <p className="text-gray-700 text-base mb-2">Branch: <span className="font-medium">{userDetails.branch || 'N/A'}</span></p>
                         <p className="text-gray-700 text-base">Roll Number: <span className="font-medium">{userDetails.roll_number || 'N/A'}</span></p>
                     </div>
                 ) : (
-                    <p className="text-red-500 mb-6">Could not load user details. Please try logging in again.</p>
+                    <p className="text-red-600 mb-6">Could not load user details. Please try logging in again.</p>
                 )}
                 <button
                     onClick={onNavigateToSuggestions}
-                    className="w-full bg-blue-500 text-white py-3 px-6 rounded-lg font-bold text-lg transition duration-200 hover:bg-blue-600 shadow-md mb-4"
+                    className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-bold text-lg transition duration-300 hover:bg-blue-700 shadow-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75"
                 >
                     Project Suggestions
                 </button>
                 <div className="flex flex-col sm:flex-row gap-6 mt-2 w-full justify-center">
                     <button
                         onClick={onNavigateToCreateProject}
-                        className="bg-blue-500 text-white py-3 px-6 rounded-lg font-bold text-lg transition duration-200 hover:bg-blue-600 shadow-md"
+                        className="bg-blue-600 text-white py-3 px-6 rounded-lg font-bold text-lg transition duration-300 hover:bg-blue-700 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75"
                     >
                         Create New Project
                     </button>
                     <button
                         onClick={onNavigateToViewProjects}
-                        className="bg-blue-500 text-white py-3 px-6 rounded-lg font-bold text-lg transition duration-200 hover:bg-blue-600 shadow-md"
+                        className="bg-blue-600 text-white py-3 px-6 rounded-lg font-bold text-lg transition duration-300 hover:bg-blue-700 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75"
                     >
                         View All Projects
                     </button>
                 </div>
                 <button
                     onClick={handleLogout}
-                    className="bg-gray-200 text-gray-800 py-2 px-5 rounded-lg font-bold text-base transition duration-200 hover:bg-gray-300 shadow-md mt-6 w-full max-w-[150px] mx-auto"
+                    className="bg-gray-200 text-gray-800 py-2 px-5 rounded-lg font-bold text-base transition duration-300 hover:bg-gray-300 shadow-md mt-6 w-full max-w-[150px] mx-auto focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-75"
                 >
                     Logout
                 </button>
@@ -2110,13 +2110,13 @@ const PasswordInput = ({ id, value, onChange, placeholder, required = true }) =>
                 value={value}
                 onChange={onChange}
                 placeholder={placeholder}
-                className="p-3 pr-10 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition w-full"
+                className="p-3 pr-10 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition w-full"
                 required={required}
             />
             <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-800 focus:outline-none"
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
                 tabIndex={-1}
                 style={{ padding: 0 }}
             >
@@ -2788,13 +2788,13 @@ function App() {
     return (
         <ThemeProvider>
             <ToastProvider>
-                <div className="bg-gradient-to-br from-[#0f2027] via-[#2c5364] to-[#232526] min-h-screen w-full">
+                <div className="bg-white min-h-screen w-full">
                     {showSplash ? (
                         <SplashVideo onVideoEnd={handleVideoEnd} />
                     ) : (
                         <>
                             <NavigationBar currentPage={currentPage} onNavigate={navigate} />
-                            <div className="min-h-screen w-full font-sans bg-gradient-to-br from-[#0f2027] via-[#2c5364] to-[#232526]">
+                            <div className="min-h-screen w-full font-sans bg-white">
 
                                 {/* Mobile: ad + login stacked; Desktop: split */}
                                 <div className="block md:hidden w-full">
@@ -2815,11 +2815,11 @@ function App() {
                                             <img 
                                                 src="/tit.png" 
                                                 alt="kroxnest." 
-                                                className="hidden sm:block h-20 sm:h-28 md:h-[160px] lg:h-[200px] mb-6 drop-shadow-2xl filter invert transition-all duration-500 ease-in-out mx-auto md:mx-0"
+                                                className="hidden sm:block h-20 sm:h-28 md:h-[160px] lg:h-[200px] mb-6 drop-shadow-lg filter invert transition-all duration-500 ease-in-out mx-auto md:mx-0"
                                                 style={{ maxWidth: '98vw', objectFit: 'contain' }}
                                                 loading="eager"
                                             />
-                                            <p className="hidden sm:block text-xl sm:text-2xl md:text-3xl text-white italic pl-2 text-center md:text-left font-semibold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-lg w-full max-w-3xl mx-auto md:mx-0 leading-relaxed" style={{ fontFamily: 'Inter, sans-serif' }}>
+                                            <p className="hidden sm:block text-xl sm:text-2xl md:text-3xl text-gray-800 italic pl-2 text-center md:text-left font-semibold leading-relaxed" style={{ fontFamily: 'Inter, sans-serif' }}>
                                                 Knowledge Repository Of eXhibits & Networked Educational Student Tracks
                                             </p>
                                         </header>
@@ -2843,22 +2843,22 @@ function App() {
                             </div>
 
                             {/* How to use section */}
-                            <div className="w-full py-16 px-4 lg:px-8" data-section="how-to-use">
+                            <div className="w-full py-20 px-4 lg:px-8 bg-gray-50" data-section="how-to-use">
                                 <div className="w-full max-w-7xl mx-auto">
-                                    <div className="text-center mb-12">
-                                        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
+                                    <div className="text-center mb-16">
+                                        <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
                                             How to Use
                                         </h2>
-                                        <div className="w-24 h-1 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full mx-auto"></div>
+                                        <div className="w-24 h-1 bg-blue-600 rounded-full mx-auto"></div>
                                     </div>
                                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                                         {howToUseSteps.map((step, idx) => (
-                                            <div key={idx} className="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 hover:scale-105 hover:shadow-2xl group">
+                                            <div key={idx} className="bg-white rounded-xl shadow-lg p-8 transition-all duration-500 hover:scale-105 hover:shadow-xl group border border-gray-100">
                                                 <div className="flex flex-col items-center text-center">
-                                                    <div className="flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white text-2xl font-bold mb-6 group-hover:scale-110 transition-transform duration-300">
+                                                    <div className="flex items-center justify-center w-16 h-16 rounded-full bg-blue-600 text-white text-2xl font-bold mb-6 group-hover:scale-110 transition-transform duration-300">
                                                         {step.step}
                                                     </div>
-                                                    <h3 className="text-xl font-bold text-gray-800 mb-4">{step.title}</h3>
+                                                    <h3 className="text-xl font-bold text-gray-900 mb-4">{step.title}</h3>
                                                     <p className="text-gray-600 leading-relaxed">{step.desc}</p>
                                                 </div>
                                             </div>
@@ -2868,22 +2868,22 @@ function App() {
                             </div>
 
                             {/* What we do section */}
-                            <div className="w-full py-16 px-4 lg:px-8 bg-white/5" data-section="what-we-do">
+                            <div className="w-full py-20 px-4 lg:px-8 bg-white" data-section="what-we-do">
                                 <div className="w-full max-w-7xl mx-auto">
-                                    <div className="text-center mb-12">
-                                        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
+                                    <div className="text-center mb-16">
+                                        <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
                                             What We Do
                                         </h2>
-                                        <div className="w-24 h-1 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full mx-auto"></div>
+                                        <div className="w-24 h-1 bg-blue-600 rounded-full mx-auto"></div>
                                     </div>
                                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                                         {whatWeDoImages.map((item, idx) => (
-                                            <div key={idx} className="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 hover:scale-105 hover:shadow-2xl group">
+                                            <div key={idx} className="bg-gray-50 rounded-xl shadow-lg p-8 transition-all duration-500 hover:scale-105 hover:shadow-xl group border border-gray-200">
                                                 <div className="flex flex-col items-center text-center">
-                                                    <div className="flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white text-2xl font-bold mb-6 group-hover:scale-110 transition-transform duration-300">
+                                                    <div className="flex items-center justify-center w-16 h-16 rounded-full bg-blue-600 text-white text-2xl font-bold mb-6 group-hover:scale-110 transition-transform duration-300">
                                                         {idx + 1}
                                                     </div>
-                                                    <h3 className="text-xl font-bold text-gray-800 mb-4">{item.alt}</h3>
+                                                    <h3 className="text-xl font-bold text-gray-900 mb-4">{item.alt}</h3>
                                                     <p className="text-gray-600 leading-relaxed">{item.desc}</p>
                                                 </div>
                                             </div>
@@ -2893,17 +2893,17 @@ function App() {
                             </div>
 
                             {/* Footer centered at the bottom of the entire page, not fixed */}
-                            <footer className="w-full flex flex-col items-center justify-center py-12 px-4 gap-4 text-center mt-16 border-t border-white/10">
+                            <footer className="w-full flex flex-col items-center justify-center py-12 px-4 gap-4 text-center mt-16 border-t border-gray-200 bg-gray-50">
                                 <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
-                                    <span className="text-gray-300 text-base md:text-lg">
-                                        Contact: <a href="tel:+1234567890" className="underline hover:text-blue-400 transition-colors">+1 234 567 890</a>
+                                    <span className="text-gray-600 text-base md:text-lg">
+                                        Contact: <a href="tel:+1234567890" className="text-blue-600 hover:text-blue-800 transition-colors">+1 234 567 890</a>
                                     </span>
-                                    <span className="text-gray-300 text-base md:text-lg">
-                                        <a href="mailto:dummy@email.com" className="underline hover:text-blue-400 transition-colors">info@kroxnest.com</a>
+                                    <span className="text-gray-600 text-base md:text-lg">
+                                        <a href="mailto:dummy@email.com" className="text-blue-600 hover:text-blue-800 transition-colors">info@kroxnest.com</a>
                                     </span>
                                 </div>
                                 <div>
-                                    <span className="block text-gray-300 text-lg font-semibold">© 2025 Kroxnest. All rights reserved.</span>
+                                    <span className="block text-gray-600 text-lg font-semibold">© 2025 Kroxnest. All rights reserved.</span>
                                 </div>
                             </footer>
                         </>
