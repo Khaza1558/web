@@ -2516,6 +2516,17 @@ const DynamicAdContainer = ({ adConfig, currentPage }) => {
     const [imageAspectRatio, setImageAspectRatio] = useState(1.41); // Default aspect ratio
     const currentAd = adConfig[currentPage] || adConfig.login;
 
+    // Preload image for faster loading
+    useEffect(() => {
+        const img = new Image();
+        img.onload = () => {
+            const aspectRatio = img.naturalWidth / img.naturalHeight;
+            setImageAspectRatio(aspectRatio);
+            setImageLoaded(true);
+        };
+        img.src = currentAd.src;
+    }, [currentAd.src]);
+
     const handleImageLoad = (event) => {
         const img = event.target;
         const aspectRatio = img.naturalWidth / img.naturalHeight;
@@ -2551,16 +2562,18 @@ const DynamicAdContainer = ({ adConfig, currentPage }) => {
             <div className="block md:hidden w-full">
                 <div className="w-full flex justify-center p-0">
                     <div 
-                        className="bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl flex items-center justify-center transition-all duration-300 w-full max-w-2xl"
+                        className="rounded-3xl shadow-2xl flex items-center justify-center transition-all duration-300 w-full max-w-2xl overflow-hidden"
                         style={{ height: `${heights.mobile}px` }}
                     >
-                        <a href={currentAd.href} target="_blank" rel="noopener noreferrer" className="block w-full h-full rounded-3xl overflow-hidden">
+                        <a href={currentAd.href} target="_blank" rel="noopener noreferrer" className="block w-full h-full">
                             <img
                                 src={currentAd.src}
                                 alt={currentAd.alt}
-                                className="w-full h-full object-contain rounded-3xl transition-all duration-300 mx-auto"
-                                loading="lazy"
+                                className="w-full h-full object-cover transition-all duration-300"
+                                loading="eager"
                                 onLoad={handleImageLoad}
+                                style={{ objectPosition: 'center' }}
+                                decoding="async"
                             />
                         </a>
                     </div>
@@ -2571,16 +2584,18 @@ const DynamicAdContainer = ({ adConfig, currentPage }) => {
             <div className="hidden md:block w-full">
                 <div className="w-full flex justify-center p-0">
                     <div 
-                        className="bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl flex items-center justify-center transition-all duration-300 w-full max-w-2xl"
+                        className="rounded-3xl shadow-2xl flex items-center justify-center transition-all duration-300 w-full max-w-2xl overflow-hidden"
                         style={{ height: `${heights.desktop}px` }}
                     >
-                        <a href={currentAd.href} target="_blank" rel="noopener noreferrer" className="block w-full h-full rounded-3xl overflow-hidden">
+                        <a href={currentAd.href} target="_blank" rel="noopener noreferrer" className="block w-full h-full">
                             <img
                                 src={currentAd.src}
                                 alt={currentAd.alt}
-                                className="w-full h-full object-contain rounded-3xl transition-all duration-300 mx-auto"
-                                loading="lazy"
+                                className="w-full h-full object-cover transition-all duration-300"
+                                loading="eager"
                                 onLoad={handleImageLoad}
+                                style={{ objectPosition: 'center' }}
+                                decoding="async"
                             />
                         </a>
                     </div>
