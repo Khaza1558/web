@@ -154,18 +154,18 @@ const API_BASE_URL = 'https://plote.onrender.com'; // REMEMBER TO UPDATE THIS FO
 const CustomConfirmModal = ({ message, onConfirm, onCancel }) => {
     return (
         <div className="fixed inset-0 bg-gray-900 bg-opacity-70 flex justify-center items-center z-50 p-5">
-            <div className="bg-gradient-to-br from-gray-800 to-gray-900 border border-yellow-500/20 p-8 rounded-2xl shadow-2xl text-center max-w-sm w-full animate-fade-in-up">
-                <p className="mb-6 text-gray-200 text-lg font-medium">{message}</p>
+            <div className="bg-white border border-gray-200 p-8 rounded-2xl shadow-2xl text-center max-w-sm w-full">
+                <p className="mb-6 text-gray-800 text-lg font-medium">{message}</p>
                 <div className="flex justify-center gap-4">
                     <button
                         onClick={onConfirm}
-                        className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-2 px-5 rounded-lg font-bold transition duration-300 hover:from-yellow-500 hover:to-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-75 transform hover:scale-105"
+                        className="bg-blue-500 text-white py-2 px-5 rounded-lg font-bold transition duration-200 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
                     >
                         Yes
                     </button>
                     <button
                         onClick={onCancel}
-                        className="bg-gradient-to-r from-gray-500 to-gray-600 text-white py-2 px-5 rounded-lg font-bold transition duration-200 hover:from-gray-400 hover:to-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75 transform hover:scale-105"
+                        className="bg-gray-200 text-gray-800 py-2 px-5 rounded-lg font-bold transition duration-200 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75"
                     >
                         No
                     </button>
@@ -209,31 +209,31 @@ const EditTitleModal = ({ projectId, currentTitle, onClose, onSave }) => {
     };
     return (
         <div className="fixed inset-0 bg-gray-900 bg-opacity-70 flex justify-center items-center z-50 p-5">
-            <div className="bg-gradient-to-br from-gray-800 to-gray-900 border border-yellow-500/20 p-8 rounded-2xl shadow-2xl max-w-md w-full animate-fade-in-up">
-                <h3 className="text-xl font-bold mb-2 text-center text-white">Edit Project Title</h3>
-                <div className="w-16 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full mb-6 mx-auto" />
+            <div className="bg-white border border-gray-200 p-8 rounded-2xl shadow-2xl max-w-md w-full">
+                <h3 className="text-xl font-bold mb-2 text-center text-gray-800">Edit Project Title</h3>
+                <div className="w-16 h-1 bg-blue-500 rounded-full mb-6 mx-auto" />
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-                    <label htmlFor="newProjectTitle" className="font-semibold text-gray-200">New Project Title:</label>
+                    <label htmlFor="newProjectTitle" className="font-semibold text-gray-700">New Project Title:</label>
                     <input
                         type="text"
                         id="newProjectTitle"
                         value={newTitle}
                         onChange={(e) => setNewTitle(e.target.value)}
-                        className="p-3 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition shadow-sm hover:border-yellow-400"
+                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition bg-white shadow-sm"
                         required
                     />
-                    {error && <p className="text-red-400 text-sm mt-1">{error}</p>}
+                    {error && <p className="text-red-600 text-sm mt-1">{error}</p>}
                     <div className="flex justify-end gap-3 mt-4">
                         <button
                             type="submit"
-                            className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-2 px-5 rounded-lg font-bold transition duration-300 hover:from-yellow-500 hover:to-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-75 transform hover:scale-105"
+                            className="bg-blue-500 text-white py-2 px-5 rounded-lg font-bold transition duration-200 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
                         >
                             Save Changes
                         </button>
                         <button
                             type="button"
                             onClick={onClose}
-                            className="bg-gradient-to-r from-gray-500 to-gray-600 text-white py-2 px-5 rounded-lg font-bold transition duration-200 hover:from-gray-400 hover:to-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75 transform hover:scale-105"
+                            className="bg-gray-200 text-gray-800 py-2 px-5 rounded-lg font-bold transition duration-200 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75"
                         >
                             Cancel
                         </button>
@@ -286,39 +286,39 @@ const ReplaceFileModal = ({ fileId, currentFileName, onClose, onReplace }) => {
     };
     return (
         <div className="fixed inset-0 bg-gray-900 bg-opacity-70 flex justify-center items-center z-50 p-5">
-            <div className="bg-gradient-to-br from-gray-800 to-gray-900 border border-yellow-500/20 p-8 rounded-2xl shadow-2xl max-w-md w-full animate-fade-in-up">
-                <h3 className="text-xl font-bold mb-2 text-center text-white">Replace File</h3>
-                <div className="w-16 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full mb-6 mx-auto" />
+            <div className="bg-white border border-gray-200 p-8 rounded-2xl shadow-2xl max-w-md w-full">
+                <h3 className="text-xl font-bold mb-2 text-center text-gray-800">Replace File</h3>
+                <div className="w-16 h-1 bg-blue-500 rounded-full mb-6 mx-auto" />
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-                    <label htmlFor="newFileName" className="font-semibold text-gray-200">New File Name:</label>
+                    <label htmlFor="newFileName" className="font-semibold text-gray-700">New File Name:</label>
                     <input
                         type="text"
                         id="newFileName"
                         value={newFileName}
                         onChange={(e) => setNewFileName(e.target.value)}
-                        className="p-3 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition shadow-sm hover:border-yellow-400"
+                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition bg-white shadow-sm"
                         required
                     />
-                    <label htmlFor="newFileInput" className="font-semibold text-gray-200">Upload New File:</label>
+                    <label htmlFor="newFileInput" className="font-semibold text-gray-700">Upload New File:</label>
                     <input
                         type="file"
                         id="newFileInput"
                         onChange={(e) => setNewFile(e.target.files[0])}
-                        className="p-3 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition shadow-sm hover:border-yellow-400"
+                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition bg-white shadow-sm"
                         required
                     />
-                    {error && <p className="text-red-400 text-sm mt-1">{error}</p>}
+                    {error && <p className="text-red-600 text-sm mt-1">{error}</p>}
                     <div className="flex justify-end gap-3 mt-4">
                         <button
                             type="submit"
-                            className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-2 px-5 rounded-lg font-bold transition duration-300 hover:from-yellow-500 hover:to-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-75 transform hover:scale-105"
+                            className="bg-blue-500 text-white py-2 px-5 rounded-lg font-bold transition duration-200 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
                         >
                             Replace
                         </button>
                         <button
                             type="button"
                             onClick={onClose}
-                            className="bg-gradient-to-r from-gray-500 to-gray-600 text-white py-2 px-5 rounded-lg font-bold transition duration-200 hover:from-gray-400 hover:to-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75 transform hover:scale-105"
+                            className="bg-gray-200 text-gray-800 py-2 px-5 rounded-lg font-bold transition duration-200 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75"
                         >
                             Cancel
                         </button>
@@ -397,14 +397,14 @@ const ProjectCard = ({ project, onSelectProject, searchTerm = '' }) => {
 
     return (
         <div
-            className={`bg-gradient-to-br from-gray-700/50 to-gray-800/50 backdrop-blur-sm p-4 rounded-xl shadow-lg hover:shadow-yellow-500/20 transition-all duration-300 cursor-pointer border border-yellow-500/20 hover:border-yellow-500/40 transform hover:scale-105 ${
-                isHighlighted ? 'ring-2 ring-yellow-400 bg-gradient-to-br from-yellow-900/30 to-yellow-800/30' : ''
+            className={`bg-gray-100 p-4 rounded-xl shadow-lg hover:bg-gray-200 transition duration-200 cursor-pointer ${
+                isHighlighted ? 'ring-2 ring-blue-400 bg-blue-50' : ''
             }`}
             onClick={() => onSelectProject(project.id, project.name)}
         >
-            <h4 className="text-xl font-bold text-white mb-2">{project.name}</h4>
-            <p className="text-gray-300 text-sm mb-3">{project.description}</p>
-            <div className="flex items-center justify-between text-xs text-gray-400">
+            <h4 className="text-xl font-bold text-gray-800 mb-2">{project.name}</h4>
+            <p className="text-gray-600 text-sm mb-3">{project.description}</p>
+            <div className="flex items-center justify-between text-xs text-gray-500">
                 <span>Created: {new Date(project.createdAt).toLocaleDateString()}</span>
                 <span>{project.fileCount || 0} files</span>
             </div>
@@ -455,47 +455,47 @@ const LoginPage = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPas
 
     return (
         <div className="flex items-center justify-center w-full min-h-[80vh] animate-fade-in-up">
-            <div className="bg-gradient-to-br from-gray-800 to-gray-900 border border-yellow-500/20 shadow-2xl rounded-2xl w-full max-w-md p-8 flex flex-col items-center relative hover:shadow-yellow-500/20 transition-all duration-500">
-                <h2 className="text-3xl font-bold text-white mb-2 text-center">Login</h2>
-                <div className="w-16 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full mb-6 mx-auto"></div>
+            <div className="bg-white border border-gray-200 shadow-lg rounded-2xl w-full max-w-md p-8 flex flex-col items-center relative">
+                <h2 className="text-3xl font-bold text-gray-800 mb-2 text-center">Login</h2>
+                <div className="w-16 h-1 bg-blue-500 rounded-full mb-6 mx-auto" />
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full">
-                    <label htmlFor="loginUsername" className="font-semibold text-gray-200 text-base">Username</label> 
+                    <label htmlFor="loginUsername" className="font-semibold text-gray-700 text-base">Username</label> 
                     <input
                         type="text"
                         id="loginUsername"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
-                        className="p-3 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition text-base shadow-sm hover:border-yellow-400"
+                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition text-base bg-white shadow-sm"
                         required
                     />
 
-                    <label htmlFor="loginPassword" className="font-semibold text-gray-200 text-base">Password</label> 
+                    <label htmlFor="loginPassword" className="font-semibold text-gray-700 text-base">Password</label> 
                     <PasswordInput
                         id="loginPassword"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
 
-                    {error && <p className="text-red-400 text-base text-center mt-2 animate-fade-in">{error}</p>}
+                    {error && <p className="text-red-500 text-base text-center mt-2 animate-fade-in">{error}</p>}
 
                     <button
                         type="submit"
-                        className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-3 px-6 rounded-lg font-bold text-lg transition duration-300 hover:from-yellow-500 hover:to-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-75 mt-2 shadow-lg hover:shadow-yellow-500/25 transform hover:scale-105"
+                        className="bg-blue-500 text-white py-3 px-6 rounded-lg font-bold text-lg transition duration-200 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 mt-2 shadow-md"
                     >
                         Login
                     </button>
                 </form>
                 {showForgotPassword && (
-                    <p className="mt-4 text-gray-300">
-                        <a href="#" onClick={onNavigateToForgotPassword} className="text-yellow-400 font-semibold hover:text-yellow-300 transition-colors duration-300">
+                    <p className="mt-4 text-gray-700">
+                        <a href="#" onClick={onNavigateToForgotPassword} className="text-blue-500 font-semibold hover:underline hover:text-blue-700 transition-colors">
                             Forgot Password?
                         </a>
                     </p>
                 )}
                 <div className="mt-8 w-full flex justify-center">
-                    <p className="text-gray-300 text-base text-center">
+                    <p className="text-gray-700 text-base text-center">
                         Don't have an account?{' '}
-                        <a href="#" onClick={onNavigateToRegister} className="text-yellow-400 font-semibold hover:text-yellow-300 transition-colors duration-300">
+                        <a href="#" onClick={onNavigateToRegister} className="text-blue-500 font-semibold hover:underline hover:text-blue-700 transition-colors">
                             Register here
                         </a>
                     </p>
@@ -579,22 +579,22 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
 
     return (
         <div className="flex items-center justify-center w-full min-h-[80vh] animate-fade-in-up">
-            <div className="bg-gradient-to-br from-gray-800 to-gray-900 border border-yellow-500/20 shadow-2xl rounded-2xl w-full max-w-lg p-8 flex flex-col items-center relative hover:shadow-yellow-500/20 transition-all duration-500">
-                <h2 className="text-3xl font-bold text-white mb-2 text-center">Register</h2>
-                <div className="w-16 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full mb-6 mx-auto" />
+            <div className="bg-white border border-gray-200 shadow-lg rounded-2xl w-full max-w-lg p-8 flex flex-col items-center relative">
+                <h2 className="text-3xl font-bold text-gray-800 mb-2 text-center">Register</h2>
+                <div className="w-16 h-1 bg-blue-500 rounded-full mb-6 mx-auto" />
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full">
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
-                        <label htmlFor="email" className="font-semibold text-gray-200 text-base sm:w-1/4 flex-shrink-0">Email</label>
+                        <label htmlFor="email" className="font-semibold text-gray-700 text-base sm:w-1/4 flex-shrink-0">Email</label>
                         <input type="email" id="email" value={formData.email} onChange={handleChange}
-                            className="p-3 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition flex-grow text-base shadow-sm hover:border-yellow-400" required />
+                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow text-base bg-white shadow-sm" required />
                     </div>
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
-                        <label htmlFor="username" className="font-semibold text-gray-200 text-base sm:w-1/4 flex-shrink-0">Username</label>
+                        <label htmlFor="username" className="font-semibold text-gray-700 text-base sm:w-1/4 flex-shrink-0">Username</label>
                         <input type="text" id="username" value={formData.username} onChange={handleChange}
-                            className="p-3 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition flex-grow text-base shadow-sm hover:border-yellow-400" required />
+                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow text-base bg-white shadow-sm" required />
                     </div>
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
-                        <label htmlFor="password" className="font-semibold text-gray-200 text-base sm:w-1/4 flex-shrink-0">Password</label>
+                        <label htmlFor="password" className="font-semibold text-gray-700 text-base sm:w-1/4 flex-shrink-0">Password</label>
                         <div className="flex-grow">
                             <PasswordInput
                                 id="password"
@@ -604,7 +604,7 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
                         </div>
                     </div>
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
-                        <label htmlFor="reEnterPassword" className="font-semibold text-gray-200 text-base sm:w-1/4 flex-shrink-0">Re-enter Password</label>
+                        <label htmlFor="reEnterPassword" className="font-semibold text-gray-700 text-base sm:w-1/4 flex-shrink-0">Re-enter Password</label>
                         <div className="flex-grow">
                             <PasswordInput
                                 id="reEnterPassword"
@@ -614,22 +614,22 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
                         </div>
                     </div>
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
-                        <label htmlFor="collegeName" className="font-semibold text-gray-200 text-base sm:w-1/4 flex-shrink-0">College Name</label>
+                        <label htmlFor="collegeName" className="font-semibold text-gray-700 text-base sm:w-1/4 flex-shrink-0">College Name</label>
                         <input type="text" id="collegeName" value={formData.collegeName} onChange={handleChange}
-                            className="p-3 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition flex-grow text-base shadow-sm hover:border-yellow-400" required />
+                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow text-base bg-white shadow-sm" required />
                     </div>
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
-                        <label htmlFor="branch" className="font-semibold text-gray-200 text-base sm:w-1/4 flex-shrink-0">Branch</label>
+                        <label htmlFor="branch" className="font-semibold text-gray-700 text-base sm:w-1/4 flex-shrink-0">Branch</label>
                         <input type="text" id="branch" value={formData.branch} onChange={handleChange}
-                            className="p-3 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition flex-grow text-base shadow-sm hover:border-yellow-400" required />
+                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow text-base bg-white shadow-sm" required />
                     </div>
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
-                        <label htmlFor="rollNumber" className="font-semibold text-gray-200 text-base sm:w-1/4 flex-shrink-0">Roll Number</label>
+                        <label htmlFor="rollNumber" className="font-semibold text-gray-700 text-base sm:w-1/4 flex-shrink-0">Roll Number</label>
                         <input type="text" id="rollNumber" value={formData.rollNumber} onChange={handleChange}
-                            className="p-3 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition flex-grow text-base shadow-sm hover:border-yellow-400" required />
+                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow text-base bg-white shadow-sm" required />
                     </div>
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 w-full">
-                        <label htmlFor="mobileNumber" className="font-semibold text-gray-200 text-base sm:w-1/4 flex-shrink-0">Mobile Number</label>
+                        <label htmlFor="mobileNumber" className="font-semibold text-gray-700 text-base sm:w-1/4 flex-shrink-0">Mobile Number</label>
                         <input
                             type="tel"
                             id="mobileNumber"
@@ -637,21 +637,21 @@ const RegisterPage = ({ onRegisterSuccess, onNavigateToLogin }) => {
                             onChange={handleChange}
                             placeholder="Enter 10-digit mobile number"
                             pattern="[0-9]{10}"
-                            className="p-3 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition flex-grow text-base shadow-sm hover:border-yellow-400"
+                            className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition flex-grow text-base bg-white shadow-sm"
                             required
                         />
                     </div>
-                    {error && <p className="text-red-400 text-base text-center mt-2 animate-fade-in">{error}</p>}
+                    {error && <p className="text-red-500 text-base text-center mt-2 animate-fade-in">{error}</p>}
                     <button
                         type="submit"
-                        className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-3 px-6 rounded-lg font-bold text-lg transition duration-300 hover:from-yellow-500 hover:to-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-75 mt-2 shadow-lg hover:shadow-yellow-500/25 transform hover:scale-105"
+                        className="bg-blue-500 text-white py-3 px-6 rounded-lg font-bold text-lg transition duration-200 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 mt-2 shadow-md"
                     >
                         Register
                     </button>
                 </form>
-                <p className="mt-8 text-gray-300 text-base">
+                <p className="mt-8 text-gray-700 text-base">
                     Already have an account?{' '}
-                    <a href="#" onClick={onNavigateToLogin} className="text-yellow-400 font-semibold hover:text-yellow-300 transition-colors duration-300">
+                    <a href="#" onClick={onNavigateToLogin} className="text-blue-500 font-semibold hover:underline hover:text-blue-700 transition-colors">
                         Login here
                     </a>
                 </p>
@@ -708,49 +708,49 @@ const ForgotPasswordPage = ({ onNavigateToLogin, onNavigateToResetPasswordWithTo
 
     return (
         <div className="flex items-center justify-center w-full min-h-[80vh] animate-fade-in-up">
-            <div className="bg-gradient-to-br from-gray-800 to-gray-900 border border-yellow-500/20 shadow-2xl rounded-2xl w-full max-w-md p-8 flex flex-col items-center relative hover:shadow-yellow-500/20 transition-all duration-500">
-                <h2 className="text-3xl font-bold text-white mb-2 text-center">Forgot Password</h2>
-                <div className="w-16 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full mb-6 mx-auto" />
+            <div className="bg-white border border-gray-200 shadow-lg rounded-2xl w-full max-w-md p-8 flex flex-col items-center relative">
+                <h2 className="text-3xl font-bold text-gray-800 mb-2 text-center">Forgot Password</h2>
+                <div className="w-16 h-1 bg-blue-500 rounded-full mb-6 mx-auto" />
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full">
-                    <p className="text-center text-gray-300 mb-2">Enter your username to receive a password reset token.</p>
-                    <label htmlFor="username" className="font-semibold text-gray-200 text-base">Username</label>
+                    <p className="text-center text-gray-700 mb-2">Enter your username to receive a password reset token.</p>
+                    <label htmlFor="username" className="font-semibold text-gray-700 text-base">Username</label>
                     <input
                         type="text"
                         id="username"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
-                        className="p-3 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition text-base shadow-sm hover:border-yellow-400"
+                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition text-base bg-white shadow-sm"
                         required
                     />
                     <button
                         type="submit"
-                        className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-3 px-6 rounded-lg font-bold text-lg transition duration-300 hover:from-yellow-500 hover:to-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-75 mt-2 shadow-lg hover:shadow-yellow-500/25 transform hover:scale-105"
+                        className="bg-blue-500 text-white py-3 px-6 rounded-lg font-bold text-lg transition duration-200 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 mt-2 shadow-md"
                     >
                         Request Reset Token
                     </button>
                 </form>
-                {error && <p className="text-red-400 text-base text-center mt-4">{error}</p>}
-                {message && <p className="text-green-400 text-base text-center mt-4">{message}</p>}
+                {error && <p className="text-red-500 text-base text-center mt-4">{error}</p>}
+                {message && <p className="text-green-500 text-base text-center mt-4">{message}</p>}
                 {resetTokenInfo && (
-                    <div className="mt-6 p-4 bg-gradient-to-br from-yellow-900 to-yellow-800 border border-yellow-500/30 rounded-lg w-full max-w-xs mx-auto text-center">
-                        <p className="font-bold text-yellow-200 mb-2">FOR DEMO PURPOSES ONLY:</p>
-                        <p className="text-sm text-yellow-100 mb-2">
+                    <div className="mt-6 p-4 bg-yellow-100 border border-yellow-300 rounded-lg w-full max-w-xs mx-auto text-center">
+                        <p className="font-bold text-yellow-800 mb-2">FOR DEMO PURPOSES ONLY:</p>
+                        <p className="text-sm text-yellow-700 mb-2">
                             Token: <span id="resetTokenDisplay" className="font-mono break-all">{resetTokenInfo.token}</span>
                             <button
                                 onClick={handleCopyToken}
-                                className="ml-2 bg-yellow-600 text-yellow-100 text-xs py-1 px-2 rounded-md hover:bg-yellow-500 transition duration-200"
+                                className="ml-2 bg-blue-200 text-blue-800 text-xs py-1 px-2 rounded-md hover:bg-blue-300 transition duration-200"
                             >
                                 Copy
                             </button>
                         </p>
                         <p className="text-sm text-yellow-700">
-                            Use this link to proceed: <a href="#" onClick={() => onNavigateToResetPasswordWithToken(resetTokenInfo.token)} className="text-yellow-300 font-semibold hover:text-yellow-200 transition-colors break-all">Reset Password Link</a>
+                            Use this link to proceed: <a href="#" onClick={() => onNavigateToResetPasswordWithToken(resetTokenInfo.token)} className="text-blue-500 font-semibold hover:underline break-all">Reset Password Link</a>
                         </p>
                     </div>
                 )}
-                <p className="mt-8 text-gray-300 text-base">
+                <p className="mt-8 text-gray-700 text-base">
                     Remembered your password?{' '}
-                    <a href="#" onClick={onNavigateToLogin} className="text-yellow-400 font-semibold hover:text-yellow-300 transition-colors">
+                    <a href="#" onClick={onNavigateToLogin} className="text-blue-500 font-semibold hover:underline hover:text-blue-700 transition-colors">
                         Back to Login
                     </a>
                 </p>
@@ -813,51 +813,51 @@ const ResetPasswordPage = ({ onNavigateToLogin, initialToken }) => {
 
     return (
         <div className="flex items-center justify-center w-full min-h-[80vh] animate-fade-in-up">
-            <div className="bg-gradient-to-br from-gray-800 to-gray-900 border border-yellow-500/20 shadow-2xl rounded-2xl w-full max-w-md p-8 flex flex-col items-center relative hover:shadow-yellow-500/20 transition-all duration-500">
-                <h2 className="text-3xl font-bold text-white mb-2 text-center">Reset Password</h2>
-                <div className="w-16 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full mb-6 mx-auto" />
+            <div className="bg-white border border-gray-200 shadow-lg rounded-2xl w-full max-w-md p-8 flex flex-col items-center relative">
+                <h2 className="text-3xl font-bold text-gray-800 mb-2 text-center">Reset Password</h2>
+                <div className="w-16 h-1 bg-blue-500 rounded-full mb-6 mx-auto" />
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full">
-                    <label htmlFor="resetUsername" className="font-semibold text-gray-200 text-base">Username</label>
+                    <label htmlFor="resetUsername" className="font-semibold text-gray-700 text-base">Username</label>
                     <input
                         type="text"
                         id="resetUsername"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
-                        className="p-3 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition text-base shadow-sm hover:border-yellow-400"
+                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition text-base bg-white shadow-sm"
                         required
                     />
-                    <label htmlFor="resetToken" className="font-semibold text-gray-200 text-base">Reset Token</label>
+                    <label htmlFor="resetToken" className="font-semibold text-gray-700 text-base">Reset Token</label>
                     <input
                         type="text"
                         id="resetToken"
                         value={token}
                         onChange={(e) => setToken(e.target.value)}
-                        className="p-3 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition text-base shadow-sm hover:border-yellow-400"
+                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition text-base bg-white shadow-sm"
                         required
                     />
-                    <label htmlFor="newPassword" className="font-semibold text-gray-200 text-base">New Password</label>
+                    <label htmlFor="newPassword" className="font-semibold text-gray-700 text-base">New Password</label>
                     <PasswordInput
                         id="newPassword"
                         value={newPassword}
                         onChange={(e) => setNewPassword(e.target.value)}
                     />
-                    <label htmlFor="reEnterNewPassword" className="font-semibold text-gray-200 text-base">Re-enter New Password</label>
+                    <label htmlFor="reEnterNewPassword" className="font-semibold text-gray-700 text-base">Re-enter New Password</label>
                     <PasswordInput
                         id="reEnterNewPassword"
                         value={reEnterNewPassword}
                         onChange={(e) => setReEnterNewPassword(e.target.value)}
                     />
-                    {error && <p className="text-red-400 text-base text-center mt-2">{error}</p>}
-                    {message && <p className="text-green-400 text-base text-center mt-2">{message}</p>}
+                    {error && <p className="text-red-500 text-base text-center mt-2">{error}</p>}
+                    {message && <p className="text-green-500 text-base text-center mt-2">{message}</p>}
                     <button
                         type="submit"
-                        className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-3 px-6 rounded-lg font-bold text-lg transition duration-300 hover:from-yellow-500 hover:to-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-75 mt-2 shadow-lg hover:shadow-yellow-500/25 transform hover:scale-105"
+                        className="bg-blue-500 text-white py-3 px-6 rounded-lg font-bold text-lg transition duration-200 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 mt-2 shadow-md"
                     >
                         Reset Password
                     </button>
                 </form>
-                <p className="mt-8 text-gray-300 text-base">
-                    <a href="#" onClick={onNavigateToLogin} className="text-yellow-400 font-semibold hover:text-yellow-300 transition-colors duration-300">
+                <p className="mt-8 text-gray-700 text-base">
+                    <a href="#" onClick={onNavigateToLogin} className="text-blue-500 font-semibold hover:underline hover:text-blue-700 transition-colors">
                         Back to Login
                     </a>
                 </p>
@@ -870,12 +870,12 @@ const ResetPasswordPage = ({ onNavigateToLogin, initialToken }) => {
 const PrivacyPolicyPage = ({ onNavigateToLogin }) => {
     return (
         <div className="flex items-start justify-center p-5 w-full h-full mt-8">
-            <div className="bg-gradient-to-br from-gray-800 to-gray-900 border border-yellow-500/20 shadow-2xl rounded-3xl w-full max-w-4xl p-8 flex flex-col items-center animate-fade-in-up hover:shadow-yellow-500/20 transition-all duration-500">
-                <h2 className="text-3xl font-bold text-white mb-6">Privacy Policy</h2>
+            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-4xl flex flex-col items-center animate-fade-in-up">
+                <h2 className="text-3xl font-bold text-gray-800 mb-6">Privacy Policy</h2>
                 <div className="w-full max-w-3xl text-left space-y-6">
-                    <div className="bg-gradient-to-br from-yellow-900/30 to-yellow-800/30 p-6 rounded-xl border border-yellow-500/20">
-                        <h3 className="text-2xl font-bold text-yellow-300 mb-4">Project Portfolio & Selling Platform</h3>
-                        <p className="text-gray-300 leading-relaxed">
+                    <div className="bg-blue-50 p-6 rounded-xl border border-blue-200">
+                        <h3 className="text-2xl font-bold text-blue-800 mb-4">Project Portfolio & Selling Platform</h3>
+                        <p className="text-gray-700 leading-relaxed">
                             Kroxnest is a comprehensive platform designed for students to showcase their academic projects, 
                             collaborate with peers, and potentially monetize their innovative work. Our platform serves as 
                             a bridge between talented students and potential buyers, investors, or collaborators.
@@ -883,8 +883,8 @@ const PrivacyPolicyPage = ({ onNavigateToLogin }) => {
                     </div>
 
                     <section>
-                        <h3 className="text-xl font-bold text-white mb-3">Information We Collect</h3>
-                        <ul className="list-disc pl-6 text-gray-300 space-y-2">
+                        <h3 className="text-xl font-bold text-gray-800 mb-3">Information We Collect</h3>
+                        <ul className="list-disc pl-6 text-gray-700 space-y-2">
                             <li><strong>Personal Information:</strong> Name, email, college details, roll number, and contact information</li>
                             <li><strong>Project Data:</strong> Project files, descriptions, and associated metadata</li>
                             <li><strong>Usage Analytics:</strong> Platform interaction data to improve user experience</li>
@@ -893,8 +893,8 @@ const PrivacyPolicyPage = ({ onNavigateToLogin }) => {
                     </section>
 
                     <section>
-                        <h3 className="text-xl font-bold text-white mb-3">How We Use Your Information</h3>
-                        <ul className="list-disc pl-6 text-gray-300 space-y-2">
+                        <h3 className="text-xl font-bold text-gray-800 mb-3">How We Use Your Information</h3>
+                        <ul className="list-disc pl-6 text-gray-700 space-y-2">
                             <li>Facilitate project showcasing and portfolio building</li>
                             <li>Enable project discovery by potential buyers and investors</li>
                             <li>Provide collaboration tools for team projects</li>
@@ -904,12 +904,12 @@ const PrivacyPolicyPage = ({ onNavigateToLogin }) => {
                     </section>
 
                     <section>
-                        <h3 className="text-xl font-bold text-white mb-3">Project Selling & Monetization</h3>
-                        <div className="bg-gradient-to-br from-green-900/30 to-green-800/30 p-4 rounded-lg border border-green-500/20">
-                            <p className="text-gray-300 leading-relaxed">
+                        <h3 className="text-xl font-bold text-gray-800 mb-3">Project Selling & Monetization</h3>
+                        <div className="bg-green-50 p-4 rounded-lg border border-green-200">
+                            <p className="text-gray-700 leading-relaxed">
                                 Our platform enables students to monetize their projects through various channels:
                             </p>
-                            <ul className="list-disc pl-6 text-gray-300 mt-3 space-y-1">
+                            <ul className="list-disc pl-6 text-gray-700 mt-3 space-y-1">
                                 <li><strong>Direct Sales:</strong> Sell completed projects to interested buyers</li>
                                 <li><strong>Licensing:</strong> License your project code or design to companies</li>
                                 <li><strong>Consulting:</strong> Offer implementation services for your projects</li>
@@ -919,24 +919,24 @@ const PrivacyPolicyPage = ({ onNavigateToLogin }) => {
                     </section>
 
                     <section>
-                        <h3 className="text-xl font-bold text-white mb-3">Data Protection</h3>
-                        <p className="text-gray-300 leading-relaxed">
+                        <h3 className="text-xl font-bold text-gray-800 mb-3">Data Protection</h3>
+                        <p className="text-gray-700 leading-relaxed">
                             We implement industry-standard security measures to protect your personal information and project data. 
                             All file uploads are encrypted, and access is restricted to authorized personnel only.
                         </p>
                     </section>
 
                     <section>
-                        <h3 className="text-xl font-bold text-white mb-3">Third-Party Services</h3>
-                        <p className="text-gray-300 leading-relaxed">
+                        <h3 className="text-xl font-bold text-gray-800 mb-3">Third-Party Services</h3>
+                        <p className="text-gray-700 leading-relaxed">
                             We may integrate with third-party services for payment processing, analytics, and communication. 
                             These services have their own privacy policies, and we recommend reviewing them.
                         </p>
                     </section>
 
                     <section>
-                        <h3 className="text-xl font-bold text-white mb-3">Your Rights</h3>
-                        <ul className="list-disc pl-6 text-gray-300 space-y-2">
+                        <h3 className="text-xl font-bold text-gray-800 mb-3">Your Rights</h3>
+                        <ul className="list-disc pl-6 text-gray-700 space-y-2">
                             <li>Access and download your personal data</li>
                             <li>Request deletion of your account and associated data</li>
                             <li>Opt-out of marketing communications</li>
@@ -945,16 +945,16 @@ const PrivacyPolicyPage = ({ onNavigateToLogin }) => {
                     </section>
 
                     <section>
-                        <h3 className="text-xl font-bold text-white mb-3">Contact Information</h3>
-                        <p className="text-gray-300 leading-relaxed">
+                        <h3 className="text-xl font-bold text-gray-800 mb-3">Contact Information</h3>
+                        <p className="text-gray-700 leading-relaxed">
                             For privacy-related inquiries, please contact us at: <br/>
                             <strong>Email:</strong> privacy@kroxnest.com<br/>
                             <strong>Phone:</strong> +1 234 567 890
                         </p>
                     </section>
 
-                    <div className="bg-gradient-to-br from-yellow-900/20 to-yellow-800/20 p-4 rounded-lg border border-yellow-500/20">
-                        <p className="text-sm text-gray-400">
+                    <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+                        <p className="text-sm text-gray-600">
                             <strong>Last Updated:</strong> January 2025<br/>
                             This privacy policy is subject to change. Please review periodically.
                         </p>
@@ -962,7 +962,7 @@ const PrivacyPolicyPage = ({ onNavigateToLogin }) => {
                 </div>
                 <button
                     onClick={onNavigateToLogin}
-                    className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-2 px-5 rounded-lg font-bold transition duration-300 hover:from-yellow-500 hover:to-yellow-700 shadow-md hover:shadow-lg mt-8 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-75 transform hover:scale-105"
+                    className="bg-gray-300 text-gray-800 py-2 px-5 rounded-lg font-bold transition duration-300 hover:bg-gray-400 shadow-md hover:shadow-lg mt-8 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-75"
                 >
                     Back to Login
                 </button>
@@ -1016,7 +1016,7 @@ const NavigationBar = ({ currentPage, onNavigate }) => {
     };
 
     return (
-        <nav className="sticky top-0 z-40 bg-black shadow-lg border-b border-gray-800">
+        <nav className="sticky top-0 z-40">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     {/* Logo */}
@@ -1036,8 +1036,8 @@ const NavigationBar = ({ currentPage, onNavigate }) => {
                             <button
                                 key={item.name}
                                 onClick={() => handleNavClick(item.page)}
-                                className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:bg-gray-800 group ${
-                                    (currentPage === item.page || (item.page === 'home' && (currentPage === 'login' || currentPage === 'welcome'))) ? 'text-yellow-500 bg-gray-800' : 'text-white'
+                                className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:bg-white/20 hover:text-white group ${
+                                    (currentPage === item.page || (item.page === 'home' && (currentPage === 'login' || currentPage === 'welcome'))) ? 'text-white bg-white/20' : 'text-gray-200'
                                 }`}
                             >
                                 <i className={`${item.icon} text-lg group-hover:scale-110 transition-transform duration-300`}></i>
@@ -1050,7 +1050,7 @@ const NavigationBar = ({ currentPage, onNavigate }) => {
                     <div className="md:hidden">
                         <button
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
-                            className="text-white hover:text-yellow-500 focus:outline-none focus:text-yellow-500"
+                            className="text-white hover:text-gray-200 focus:outline-none focus:text-gray-200"
                         >
                             <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 {isMenuOpen ? (
@@ -1066,13 +1066,13 @@ const NavigationBar = ({ currentPage, onNavigate }) => {
                 {/* Mobile Navigation */}
                 {isMenuOpen && (
                     <div className="md:hidden">
-                        <div className="px-2 pt-2 pb-3 space-y-1 bg-black border border-gray-800 rounded-lg shadow-lg">
+                        <div className="px-2 pt-2 pb-3 space-y-1 bg-black/30 backdrop-blur-md rounded-lg border border-white/20">
                             {navItems.map((item) => (
                                 <button
                                     key={item.name}
                                     onClick={() => handleNavClick(item.page)}
-                                    className={`flex items-center space-x-3 w-full text-left px-3 py-2 rounded-lg text-base font-medium transition-all duration-300 hover:bg-gray-800 group ${
-                                        (currentPage === item.page || (item.page === 'home' && (currentPage === 'login' || currentPage === 'welcome'))) ? 'text-yellow-500 bg-gray-800' : 'text-white'
+                                    className={`flex items-center space-x-3 w-full text-left px-3 py-2 rounded-lg text-base font-medium transition-all duration-300 hover:bg-white/20 hover:text-white group ${
+                                        (currentPage === item.page || (item.page === 'home' && (currentPage === 'login' || currentPage === 'welcome'))) ? 'text-white bg-white/20' : 'text-gray-200'
                                     }`}
                                 >
                                     <i className={`${item.icon} text-lg group-hover:scale-110 transition-transform duration-300`}></i>
@@ -1104,43 +1104,43 @@ const WelcomePage = ({ onNavigateToCreateProject, onNavigateToViewProjects, onNa
 
     return (
         <div className="flex items-center justify-center w-full min-h-[80vh] animate-fade-in-up">
-            <div className="bg-gradient-to-br from-gray-800 to-gray-900 border border-yellow-500/20 shadow-2xl rounded-2xl w-full max-w-2xl p-8 flex flex-col items-center relative hover:shadow-yellow-500/20 transition-all duration-500">
-                <h1 className="text-3xl font-bold text-white mb-2 text-center">Welcome{userDetails?.username ? `, ${userDetails.username}` : ''}!</h1>
-                <div className="w-16 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full mb-6 mx-auto" />
+            <div className="bg-white border border-gray-200 shadow-lg rounded-2xl w-full max-w-2xl p-8 flex flex-col items-center relative">
+                <h1 className="text-3xl font-bold text-gray-800 mb-2 text-center">Welcome{userDetails?.username ? `, ${userDetails.username}` : ''}!</h1>
+                <div className="w-16 h-1 bg-blue-500 rounded-full mb-6 mx-auto" />
                 {isAuthLoading ? (
-                    <p className="text-gray-300 mb-6">Loading user details...</p>
+                    <p className="text-gray-600 mb-6">Loading user details...</p>
                 ) : userDetails ? (
-                    <div className="user-details-box text-left w-full max-w-md mx-auto mb-6 p-4 border border-yellow-500/20 rounded-xl bg-gradient-to-br from-gray-700 to-gray-800 shadow-lg">
-                        <p className="text-gray-200 text-base mb-2">College: <span className="font-medium text-yellow-400">{userDetails.college || 'N/A'}</span></p>
-                        <p className="text-gray-200 text-base mb-2">Branch: <span className="font-medium text-yellow-400">{userDetails.branch || 'N/A'}</span></p>
-                        <p className="text-gray-200 text-base">Roll Number: <span className="font-medium text-yellow-400">{userDetails.roll_number || 'N/A'}</span></p>
+                    <div className="user-details-box text-left w-full max-w-md mx-auto mb-6 p-4 border border-blue-100 rounded-xl bg-blue-50 shadow-sm">
+                        <p className="text-gray-700 text-base mb-2">College: <span className="font-medium">{userDetails.college || 'N/A'}</span></p>
+                        <p className="text-gray-700 text-base mb-2">Branch: <span className="font-medium">{userDetails.branch || 'N/A'}</span></p>
+                        <p className="text-gray-700 text-base">Roll Number: <span className="font-medium">{userDetails.roll_number || 'N/A'}</span></p>
                     </div>
                 ) : (
-                    <p className="text-red-400 mb-6">Could not load user details. Please try logging in again.</p>
+                    <p className="text-red-500 mb-6">Could not load user details. Please try logging in again.</p>
                 )}
                 <button
                     onClick={onNavigateToSuggestions}
-                    className="w-full bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-3 px-6 rounded-lg font-bold text-lg transition duration-300 hover:from-yellow-500 hover:to-yellow-700 shadow-lg hover:shadow-yellow-500/25 transform hover:scale-105 mb-4 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-75"
+                    className="w-full bg-blue-500 text-white py-3 px-6 rounded-lg font-bold text-lg transition duration-200 hover:bg-blue-600 shadow-md mb-4"
                 >
                     Project Suggestions
                 </button>
                 <div className="flex flex-col sm:flex-row gap-6 mt-2 w-full justify-center">
                     <button
                         onClick={onNavigateToCreateProject}
-                        className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-3 px-6 rounded-lg font-bold text-lg transition duration-300 hover:from-yellow-500 hover:to-yellow-700 shadow-lg hover:shadow-yellow-500/25 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-75"
+                        className="bg-blue-500 text-white py-3 px-6 rounded-lg font-bold text-lg transition duration-200 hover:bg-blue-600 shadow-md"
                     >
                         Create New Project
                     </button>
                     <button
                         onClick={onNavigateToViewProjects}
-                        className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-3 px-6 rounded-lg font-bold text-lg transition duration-300 hover:from-yellow-500 hover:to-yellow-700 shadow-lg hover:shadow-yellow-500/25 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-75"
+                        className="bg-blue-500 text-white py-3 px-6 rounded-lg font-bold text-lg transition duration-200 hover:bg-blue-600 shadow-md"
                     >
                         View All Projects
                     </button>
                 </div>
                 <button
                     onClick={handleLogout}
-                    className="bg-gradient-to-br from-gray-600 to-gray-700 text-white py-2 px-5 rounded-lg font-bold text-base transition duration-300 hover:from-gray-500 hover:to-gray-600 shadow-lg hover:shadow-gray-500/25 transform hover:scale-105 mt-6 w-full max-w-[150px] mx-auto focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-75"
+                    className="bg-gray-200 text-gray-800 py-2 px-5 rounded-lg font-bold text-base transition duration-200 hover:bg-gray-300 shadow-md mt-6 w-full max-w-[150px] mx-auto"
                 >
                     Logout
                 </button>
@@ -1268,12 +1268,12 @@ const SuggestionsPage = ({ onNavigateToWelcome }) => {
 
     return (
         <div className="flex items-start justify-center p-5 w-full h-full mt-8">
-            <div className="bg-gradient-to-br from-gray-800 to-gray-900 border border-yellow-500/20 shadow-2xl rounded-3xl w-full max-w-6xl p-8 flex flex-col items-center animate-fade-in-up hover:shadow-yellow-500/20 transition-all duration-500">
-                <h2 className="text-3xl font-bold text-white mb-6 text-center">Project Suggestions</h2>
+            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-6xl flex flex-col items-center animate-fade-in-up">
+                <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Project Suggestions</h2>
                 
                 {!selectedCategory ? (
                     <>
-                        <p className="text-gray-300 text-lg mb-8 text-center max-w-2xl">
+                        <p className="text-gray-600 text-lg mb-8 text-center max-w-2xl">
                             Choose your branch to discover exciting project ideas tailored to your field of study
                         </p>
                         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 w-full max-w-4xl">
@@ -1281,11 +1281,11 @@ const SuggestionsPage = ({ onNavigateToWelcome }) => {
                                 <button
                                     key={category.id}
                                     onClick={() => handleCategoryClick(category.id)}
-                                    className="flex flex-col items-center p-6 bg-gradient-to-br from-gray-700/50 to-gray-800/50 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-yellow-500/20 transition-all duration-300 hover:scale-105 border border-yellow-500/20 hover:border-yellow-500/40 group"
+                                    className="flex flex-col items-center p-6 bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-blue-200 hover:border-blue-400 group"
                                 >
-                                    <i className={`${category.icon} text-3xl text-yellow-400 mb-3 group-hover:scale-110 transition-transform duration-300`}></i>
-                                    <span className="text-lg font-bold text-white">{category.name}</span>
-                                    <span className="text-sm text-gray-300 mt-1">Click to explore</span>
+                                    <i className={`${category.icon} text-3xl text-blue-600 mb-3 group-hover:scale-110 transition-transform duration-300`}></i>
+                                    <span className="text-lg font-bold text-gray-800">{category.name}</span>
+                                    <span className="text-sm text-gray-600 mt-1">Click to explore</span>
                                 </button>
                             ))}
                         </div>
@@ -1293,12 +1293,12 @@ const SuggestionsPage = ({ onNavigateToWelcome }) => {
                 ) : (
                     <div className="w-full max-w-4xl">
                         <div className="flex items-center justify-between mb-6">
-                            <h3 className="text-2xl font-bold text-white">
+                            <h3 className="text-2xl font-bold text-gray-800">
                                 {categories.find(cat => cat.id === selectedCategory)?.name} Projects
                             </h3>
                             <button
                                 onClick={handleBackToCategories}
-                                className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black rounded-lg hover:from-yellow-500 hover:to-yellow-700 transition-all duration-200 transform hover:scale-105"
+                                className="flex items-center space-x-2 px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors duration-200"
                             >
                                 <i className="fa-solid fa-arrow-left"></i>
                                 <span>Back to Categories</span>
@@ -1309,15 +1309,15 @@ const SuggestionsPage = ({ onNavigateToWelcome }) => {
                             {projectSuggestions[selectedCategory].map((project, index) => (
                                 <div
                                     key={index}
-                                    className="p-4 bg-gradient-to-br from-gray-700/50 to-gray-800/50 backdrop-blur-sm rounded-xl border border-yellow-500/20 shadow-md hover:shadow-yellow-500/20 transition-all duration-300 hover:scale-105"
+                                    className="p-4 bg-gradient-to-br from-white to-blue-50 rounded-xl border border-blue-200 shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
                                 >
                                     <div className="flex items-start space-x-3">
-                                        <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black rounded-full flex items-center justify-center text-sm font-bold">
+                                        <div className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
                                             {index + 1}
                                         </div>
                                         <div className="flex-1">
-                                            <h4 className="text-lg font-semibold text-white mb-2">{project}</h4>
-                                            <p className="text-gray-300 text-sm">
+                                            <h4 className="text-lg font-semibold text-gray-800 mb-2">{project}</h4>
+                                            <p className="text-gray-600 text-sm">
                                                 A comprehensive project idea perfect for {categories.find(cat => cat.id === selectedCategory)?.name} students.
                                             </p>
                                         </div>
@@ -1326,9 +1326,9 @@ const SuggestionsPage = ({ onNavigateToWelcome }) => {
                             ))}
                         </div>
                         
-                        <div className="mt-8 p-4 bg-gradient-to-br from-yellow-900/30 to-yellow-800/30 rounded-xl border border-yellow-500/20">
-                            <h4 className="text-lg font-semibold text-yellow-300 mb-2">💡 Project Tips</h4>
-                            <ul className="text-sm text-yellow-100 space-y-1">
+                        <div className="mt-8 p-4 bg-blue-50 rounded-xl border border-blue-200">
+                            <h4 className="text-lg font-semibold text-blue-800 mb-2">💡 Project Tips</h4>
+                            <ul className="text-sm text-blue-700 space-y-1">
                                 <li>• Choose a project that aligns with your interests and career goals</li>
                                 <li>• Consider the complexity and time required for implementation</li>
                                 <li>• Think about real-world applications and market potential</li>
@@ -1340,7 +1340,7 @@ const SuggestionsPage = ({ onNavigateToWelcome }) => {
                 
                 <button
                     onClick={onNavigateToWelcome}
-                    className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-2 px-5 rounded-lg font-bold text-base transition duration-300 hover:from-yellow-500 hover:to-yellow-700 shadow-lg hover:shadow-yellow-500/25 transform hover:scale-105 mt-8 w-full max-w-[200px] mx-auto focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-75"
+                    className="bg-gray-300 text-gray-800 py-2 px-5 rounded-lg font-bold text-base transition duration-300 hover:bg-gray-400 shadow-md hover:shadow-lg mt-8 w-full max-w-[200px] mx-auto focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-75"
                 >
                     Back to Welcome
                 </button>
@@ -1353,13 +1353,13 @@ const SuggestionsPage = ({ onNavigateToWelcome }) => {
 const FileItem = ({ file, projectOwnerRollNumber, loggedInUserRollNumber, onReplace, onDelete, onViewFile }) => {
     const isOwner = loggedInUserRollNumber && projectOwnerRollNumber === loggedInUserRollNumber;
     return (
-        <div className="flex flex-row flex-wrap items-center gap-2 mb-4 p-4 bg-gradient-to-br from-gray-700/50 to-gray-800/50 backdrop-blur-sm rounded-xl border border-yellow-500/20 shadow-lg animate-fade-in-up w-full hover:shadow-yellow-500/20 transition-all duration-300">
-            <span className="font-semibold text-gray-200 text-sm flex-shrink-0">Title:</span>
-            <span className="font-bold text-white flex-grow min-w-0 truncate">{file.file_name} ({file.original_name})</span>
+        <div className="flex flex-row flex-wrap items-center gap-2 mb-4 p-4 bg-gray-50 rounded-xl border border-gray-200 shadow-lg animate-fade-in-up w-full">
+            <span className="font-semibold text-gray-700 text-sm flex-shrink-0">Title:</span>
+            <span className="font-bold text-gray-800 flex-grow min-w-0 truncate">{file.file_name} ({file.original_name})</span>
             <div className="flex flex-row gap-2 flex-shrink-0">
                 <button
                     onClick={() => onViewFile(file.file_path, file.original_name)}
-                    className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-2 px-4 rounded-lg font-bold transition duration-200 hover:from-yellow-500 hover:to-yellow-700 text-center transform hover:scale-105"
+                    className="bg-gray-200 text-gray-800 py-2 px-4 rounded-lg font-bold transition duration-200 hover:bg-gray-300 text-center"
                 >
                     View
                 </button>
@@ -1367,13 +1367,13 @@ const FileItem = ({ file, projectOwnerRollNumber, loggedInUserRollNumber, onRepl
                     <>
                         <button
                             onClick={() => onReplace(file.id, file.file_name)}
-                            className="bg-gradient-to-r from-gray-500 to-gray-600 text-white py-2 px-4 rounded-lg font-bold transition duration-200 hover:from-gray-400 hover:to-gray-500 transform hover:scale-105"
+                            className="bg-gray-200 text-gray-800 py-2 px-4 rounded-lg font-bold transition duration-200 hover:bg-gray-300"
                         >
                             Replace
                         </button>
                         <button
                             onClick={() => onDelete(file.id)}
-                            className="bg-gradient-to-r from-red-500 to-red-600 text-white py-2 px-4 rounded-lg font-bold transition duration-200 hover:from-red-400 hover:to-red-500 transform hover:scale-105"
+                            className="bg-red-500 text-white py-2 px-4 rounded-lg font-bold transition duration-200 hover:bg-red-600"
                         >
                             Delete
                         </button>
@@ -1683,40 +1683,39 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
 
     return (
         <div className="flex items-start justify-center p-5 w-full h-full mt-8">
-            <div className="bg-gradient-to-br from-gray-800 to-gray-900 border border-yellow-500/20 shadow-2xl rounded-3xl w-full max-w-4xl p-8 flex flex-col items-start animate-fade-in-up hover:shadow-yellow-500/20 transition-all duration-500">
-                <h1 className="text-3xl font-bold mb-6 text-white self-center">View Projects</h1>
-                <div className="w-16 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full mb-6 mx-auto" />
+            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-4xl flex flex-col items-start animate-fade-in-up">
+                <h1 className="text-3xl font-bold mb-6 text-gray-800 self-center">View Projects</h1>
 
                 {showSearchAndList ? (
                     <>
                         <form onSubmit={(e) => { e.preventDefault(); fetchProjects(); }} className="flex flex-col gap-5 w-full max-w-xs mx-auto mb-6"> 
-                            <label htmlFor="viewRollNumber" className="font-semibold text-gray-200 mb-1">Enter Student Roll Number:</label>
+                            <label htmlFor="viewRollNumber" className="font-semibold text-gray-700 mb-1">Enter Student Roll Number:</label>
                             <input
                                 type="text"
                                 id="viewRollNumber"
                                 value={rollNumber}
                                 onChange={(e) => setRollNumber(e.target.value)}
                                 placeholder="e.g., 12345"
-                                className="p-3 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition mb-2 hover:border-yellow-400"
+                                className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition mb-2"
                                 required
                             />
                             <button
                                 type="submit"
-                                className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-3 px-6 rounded-lg font-bold transition duration-300 hover:from-yellow-500 hover:to-yellow-700 transform hover:scale-105 mt-4"
+                                className="bg-blue-500 text-white py-3 px-6 rounded-lg font-bold transition duration-200 hover:bg-blue-600 mt-4"
                             >
                                 View Projects
                             </button>
                         </form>
 
                         <div className="projects-list w-full max-w-md mt-4 self-start">
-                            <h3 className="text-2xl font-bold mb-4 text-white">Projects:</h3>
-                            {error && <p className="text-red-400 text-base mb-4">{error}</p>}
+                            <h3 className="text-2xl font-bold mb-4 text-gray-800">Projects:</h3>
+                            {error && <p className="text-red-500 text-base mb-4">{error}</p>}
                             {isProjectsLoading ? (
                                 <div className="flex justify-center items-center py-8">
-                                    <svg className="animate-spin h-8 w-8 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path></svg>
+                                    <svg className="animate-spin h-8 w-8 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path></svg>
                                 </div>
                             ) : hasSearched && projects.length === 0 && !error ? (
-                                <p className="text-gray-300">No projects found for this roll number.</p>
+                                <p className="text-gray-600">No projects found for this roll number.</p>
                             ) : (
                                 <div className="flex flex-col gap-3">
                                     {projects.map(project => (
@@ -1729,28 +1728,28 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
                 ) : (
                     <>
                         <div className="project-details-section w-full animate-fade-in-up">
-                            <h3 className="text-3xl font-bold mb-4 text-white">{selectedProject?.name}</h3> 
-                            <p className="text-gray-300 text-lg mb-6">{selectedProject?.description || ''}</p>
+                            <h3 className="text-3xl font-bold mb-4 text-gray-800">{selectedProject?.name}</h3> 
+                            <p className="text-gray-700 text-lg mb-6">{selectedProject?.description || ''}</p>
 
                             {loggedInUserRollNumber && selectedProject?.roll_number === loggedInUserRollNumber && (
                                 <div className="flex flex-wrap gap-4 mb-6 justify-start">
                                     <button
                                         onClick={handleEditProjectTitle}
-                                        className="bg-gradient-to-r from-gray-500 to-gray-600 text-white py-2 px-5 rounded-lg font-bold transition duration-300 hover:from-gray-400 hover:to-gray-500 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-75 transform hover:scale-105"
+                                        className="bg-gray-300 text-gray-800 py-2 px-5 rounded-lg font-bold transition duration-300 hover:bg-gray-400 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-75"
                                     >
                                         Edit Title
                                     </button>
                                     <button
                                         onClick={handleDeleteProject}
-                                        className="bg-gradient-to-r from-red-500 to-red-600 text-white py-2 px-5 rounded-lg font-bold transition duration-300 hover:from-red-400 hover:to-red-500 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-75 transform hover:scale-105"
+                                        className="bg-red-500 text-white py-2 px-5 rounded-lg font-bold transition duration-300 hover:bg-red-600 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-75"
                                     >
                                         Delete Project
                                     </button>
                                 </div>
                             )}
 
-                            <h4 className="text-2xl font-bold mb-4 text-white">Associated Files:</h4>
-                            {error && <p className="text-red-400 text-sm mb-4">{error}</p>}
+                            <h4 className="text-2xl font-bold mb-4 text-gray-800">Associated Files:</h4>
+                            {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
                             {projectFiles.length > 0 ? (
                                 <div className="flex flex-col gap-3">
                                     {projectFiles.map(file => (
@@ -1766,38 +1765,38 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
                                     ))}
                                 </div>
                             ) : (
-                                <p className="text-gray-300">No files associated with this project.</p>
+                                <p className="text-gray-600">No files associated with this project.</p>
                             )}
 
                             {loggedInUserRollNumber && selectedProject?.roll_number === loggedInUserRollNumber && (
                                 <form onSubmit={handleAddFilesSubmit} className="flex flex-col gap-5 mt-8 w-full">
-                                    <h4 className="text-2xl font-bold mb-2 text-white">Add New Files to this Project:</h4>
+                                    <h4 className="text-2xl font-bold mb-2 text-gray-800">Add New Files to this Project:</h4>
                                     <div className="flex flex-col gap-4 w-full">
                                         {addFiles.map(fileEntry => (
-                                            <div key={fileEntry.id} className="flex flex-col gap-2 p-4 bg-gradient-to-br from-gray-700/50 to-gray-800/50 backdrop-blur-sm rounded-xl border border-yellow-500/20 shadow-lg w-full max-w-2xl mx-auto hover:shadow-yellow-500/20 transition-all duration-300">
-                                                <label htmlFor={`addFile${fileEntry.id}`} className="font-semibold text-gray-200 mb-1">File {fileEntry.id}:</label>
+                                            <div key={fileEntry.id} className="flex flex-col gap-2 p-4 bg-gray-50 rounded-xl border border-gray-200 shadow-sm w-full max-w-2xl mx-auto">
+                                                <label htmlFor={`addFile${fileEntry.id}`} className="font-semibold text-gray-700 mb-1">File {fileEntry.id}:</label>
                                                 <input
                                                     type="file"
                                                     id={`addFile${fileEntry.id}`}
                                                     onChange={(e) => handleAddFileChange(fileEntry.id, 'file', e.target.files[0])}
-                                                    className="p-2 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition w-full shadow-sm min-w-0 hover:border-yellow-400"
+                                                    className="p-2 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition w-full bg-white shadow-sm min-w-0"
                                                     required
                                                 />
-                                                <label htmlFor={`addFileTitle${fileEntry.id}`} className="font-semibold text-gray-200 mb-1">Title:</label>
+                                                <label htmlFor={`addFileTitle${fileEntry.id}`} className="font-semibold text-gray-700 mb-1">Title:</label>
                                                 <input
                                                     type="text"
                                                     id={`addFileTitle${fileEntry.id}`}
                                                     value={fileEntry.title}
                                                     onChange={(e) => handleAddFileChange(fileEntry.id, 'title', e.target.value)}
                                                     placeholder="Enter title for this new file"
-                                                    className="p-2 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition w-full shadow-sm min-w-0 hover:border-yellow-400"
+                                                    className="p-2 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition w-full bg-white shadow-sm min-w-0"
                                                     required
                                                 />
                                                 {addFiles.length > 1 && (
                                                     <button
                                                         type="button"
                                                         onClick={() => removeAddFileField(fileEntry.id)}
-                                                        className="bg-gradient-to-r from-red-500 to-red-600 text-white py-2 px-4 rounded-lg font-bold transition duration-200 hover:from-red-400 hover:to-red-500 transform hover:scale-105 mt-2 w-full md:w-auto"
+                                                        className="bg-red-500 text-white py-2 px-4 rounded-lg font-bold transition duration-200 hover:bg-red-600 mt-2 w-full md:w-auto"
                                                     >
                                                         Remove
                                                     </button>
@@ -1808,14 +1807,14 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
                                     <button
                                         type="button"
                                         onClick={addAddFileField}
-                                        className="bg-gradient-to-r from-gray-500 to-gray-600 text-white py-3 px-6 rounded-lg font-bold transition duration-200 hover:from-gray-400 hover:to-gray-500 self-start mt-4 mb-2 transform hover:scale-105"
+                                        className="bg-gray-200 text-gray-800 py-3 px-6 rounded-lg font-bold transition duration-200 hover:bg-gray-300 self-start mt-4 mb-2"
                                     >
                                         Add New File Input
                                     </button>
-                                    {error && <p className="text-red-400 text-base text-center mt-2">{error}</p>}
+                                    {error && <p className="text-red-500 text-base text-center mt-2">{error}</p>}
                                     <button
                                         type="submit"
-                                        className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-3 px-6 rounded-lg font-bold text-lg transition duration-300 hover:from-yellow-500 hover:to-yellow-700 transform hover:scale-105 mt-5"
+                                        className="bg-blue-500 text-white py-3 px-6 rounded-lg font-bold text-lg transition duration-200 hover:bg-blue-600 mt-5"
                                     >
                                         Done (Add Files)
                                     </button>
@@ -1829,14 +1828,14 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
                     {!showSearchAndList && (
                         <button
                             onClick={handleBackToProjectsList}
-                            className="bg-gradient-to-r from-gray-500 to-gray-600 text-white py-2 px-5 rounded-lg font-bold transition duration-300 hover:from-gray-400 hover:to-gray-500 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-75 transform hover:scale-105"
+                            className="bg-gray-300 text-gray-800 py-2 px-5 rounded-lg font-bold transition duration-300 hover:bg-gray-400 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-75"
                         >
                             &larr; Back to Projects List
                         </button>
                     )}
                     <button
                         onClick={onNavigateToWelcome}
-                        className="bg-gradient-to-r from-gray-500 to-gray-600 text-white py-2 px-5 rounded-lg font-bold transition duration-300 hover:from-gray-400 hover:to-gray-500 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-75 transform hover:scale-105"
+                        className="bg-gray-300 text-gray-800 py-2 px-5 rounded-lg font-bold transition duration-300 hover:bg-gray-400 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-75"
                     >
                         Back to Welcome
                     </button>
@@ -1973,56 +1972,55 @@ const CreateProjectPage = ({ onNavigateToWelcome }) => {
 
     return (
         <div className="flex items-start justify-center p-5 w-full h-full mt-8">
-            <div className="bg-gradient-to-br from-gray-800 to-gray-900 border border-yellow-500/20 shadow-2xl rounded-3xl w-full max-w-4xl p-8 flex flex-col items-center animate-fade-in-up hover:shadow-yellow-500/20 transition-all duration-500">
-                <h2 className="text-3xl font-bold text-white mb-6">Create New Project</h2>
-                <div className="w-16 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full mb-6 mx-auto" />
+            <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-4xl flex flex-col items-center animate-fade-in-up">
+                <h2 className="text-3xl font-bold text-gray-800 mb-6">Create New Project</h2>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full max-w-lg mx-auto"> 
-                    <label htmlFor="projectName" className="font-semibold text-gray-200 mb-1">Project Name:</label>
+                    <label htmlFor="projectName" className="font-semibold text-gray-700 mb-1">Project Name:</label>
                     <input
                         type="text"
                         id="projectName"
                         value={projectName}
                         onChange={(e) => setProjectName(e.target.value)}
-                        className="p-3 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition hover:border-yellow-400"
+                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition"
                         required
                     />
 
-                    <label htmlFor="projectDescription" className="font-semibold text-gray-200 mb-1">Project Description (Optional):</label>
+                    <label htmlFor="projectDescription" className="font-semibold text-gray-700 mb-1">Project Description (Optional):</label>
                     <textarea
                         id="projectDescription"
                         value={projectDescription}
                         onChange={(e) => setProjectDescription(e.target.value)}
                         rows="4"
-                        className="p-3 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition resize-y hover:border-yellow-400"
+                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition resize-y"
                     ></textarea>
 
-                    <h3 className="text-2xl font-bold mb-4 text-white">Files:</h3> 
+                    <h3 className="text-2xl font-bold mb-4 text-gray-800">Files:</h3> 
                     <div className="flex flex-col gap-4 w-full">
                         {files.map(fileEntry => (
-                            <div key={fileEntry.id} className="flex flex-col gap-2 p-4 bg-gradient-to-br from-gray-700/50 to-gray-800/50 backdrop-blur-sm rounded-xl border border-yellow-500/20 shadow-lg w-full max-w-2xl mx-auto hover:shadow-yellow-500/20 transition-all duration-300">
-                                <label htmlFor={`file${fileEntry.id}`} className="font-semibold text-gray-200 mb-1">File {fileEntry.id}:</label>
+                            <div key={fileEntry.id} className="flex flex-col gap-2 p-4 bg-gray-50 rounded-xl border border-gray-200 shadow-sm w-full max-w-2xl mx-auto">
+                                <label htmlFor={`file${fileEntry.id}`} className="font-semibold text-gray-700 mb-1">File {fileEntry.id}:</label>
                                 <input
                                     type="file"
                                     id={`file${fileEntry.id}`}
                                     onChange={(e) => handleFileChange(fileEntry.id, 'file', e.target.files[0])}
-                                    className="p-2 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition w-full shadow-sm min-w-0 hover:border-yellow-400"
+                                    className="p-2 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition w-full bg-white shadow-sm min-w-0"
                                     required
                                 />
-                                <label htmlFor={`fileTitle${fileEntry.id}`} className="font-semibold text-gray-200 mb-1">Title:</label>
+                                <label htmlFor={`fileTitle${fileEntry.id}`} className="font-semibold text-gray-700 mb-1">Title:</label>
                                 <input
                                     type="text"
                                     id={`fileTitle${fileEntry.id}`}
                                     value={fileEntry.title}
                                     onChange={(e) => handleFileChange(fileEntry.id, 'title', e.target.value)}
                                     placeholder="Enter title for this file"
-                                    className="p-2 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition w-full shadow-sm min-w-0 hover:border-yellow-400"
+                                    className="p-2 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition w-full bg-white shadow-sm min-w-0"
                                     required
                                 />
                                 {files.length > 1 && (
                                     <button
                                         type="button"
                                         onClick={() => removeFileField(fileEntry.id)}
-                                        className="bg-gradient-to-r from-red-500 to-red-600 text-white py-2 px-4 rounded-lg font-bold transition duration-200 hover:from-red-400 hover:to-red-500 transform hover:scale-105 mt-2 w-full md:w-auto"
+                                        className="bg-red-500 text-white py-2 px-4 rounded-lg font-bold transition duration-200 hover:bg-red-600 mt-2 w-full md:w-auto"
                                     >
                                         Remove
                                     </button>
@@ -2034,16 +2032,16 @@ const CreateProjectPage = ({ onNavigateToWelcome }) => {
                     <button
                         type="button"
                         onClick={addFileField}
-                        className="bg-gradient-to-r from-gray-500 to-gray-600 text-white py-3 px-6 rounded-lg font-bold transition duration-300 hover:from-gray-400 hover:to-gray-500 shadow-xl hover:shadow-2xl self-start mt-4 mb-2 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75 transform hover:scale-105"
+                        className="bg-gray-400 text-gray-800 py-3 px-6 rounded-lg font-bold transition duration-300 hover:bg-gray-500 shadow-xl hover:shadow-2xl self-start mt-4 mb-2 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75"
                     >
                         Add Another File Input
                     </button>
 
-                    {error && <p className="text-red-400 text-sm text-center mt-2">{error}</p>}
+                    {error && <p className="text-red-500 text-sm text-center mt-2">{error}</p>}
 
                     <button
                         type="submit"
-                        className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-3 px-6 rounded-lg font-bold transition duration-300 hover:from-yellow-500 hover:to-yellow-700 shadow-xl hover:shadow-2xl mt-5 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-75 transform hover:scale-105"
+                        className="bg-blue-500 text-white py-3 px-6 rounded-lg font-bold transition duration-300 hover:bg-blue-600 shadow-xl hover:shadow-2xl mt-5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75"
                         disabled={isLoading}
                     >
                         {isLoading ? 'Creating Project...' : 'Create Project'}
@@ -2051,7 +2049,7 @@ const CreateProjectPage = ({ onNavigateToWelcome }) => {
                 </form>
                 <button
                     onClick={onNavigateToWelcome}
-                    className="bg-gradient-to-r from-gray-600 to-gray-700 text-white py-2 px-5 rounded-lg font-bold transition duration-300 hover:from-gray-500 hover:to-gray-600 shadow-md hover:shadow-lg mt-6 w-full max-w-[150px] mx-auto focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-75 transform hover:scale-105"
+                    className="bg-gray-300 text-gray-800 py-2 px-5 rounded-lg font-bold transition duration-300 hover:bg-gray-400 shadow-md hover:shadow-lg mt-6 w-full max-w-[150px] mx-auto focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-75"
                 >
                     Back to Welcome
                 </button>
@@ -2112,13 +2110,13 @@ const PasswordInput = ({ id, value, onChange, placeholder, required = true }) =>
                 value={value}
                 onChange={onChange}
                 placeholder={placeholder}
-                className="p-3 pr-10 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition w-full hover:border-yellow-400"
+                className="p-3 pr-10 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition w-full"
                 required={required}
             />
             <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-yellow-400 focus:outline-none transition-colors duration-300"
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-800 focus:outline-none"
                 tabIndex={-1}
                 style={{ padding: 0 }}
             >
@@ -2162,11 +2160,11 @@ const SkeletonFileItem = () => (
 // NEW: Loading Spinner Component
 const LoadingSpinner = ({ size = 'md', text = 'Loading...' }) => (
     <div className="flex flex-col items-center justify-center py-8">
-        <svg className={`animate-spin text-yellow-500 ${size === 'sm' ? 'h-6 w-6' : size === 'lg' ? 'h-12 w-12' : 'h-8 w-8'}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <svg className={`animate-spin text-blue-500 ${size === 'sm' ? 'h-6 w-6' : size === 'lg' ? 'h-12 w-12' : 'h-8 w-8'}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
         </svg>
-        {text && <p className="mt-2 text-gray-300">{text}</p>}
+        {text && <p className="mt-2 text-gray-600">{text}</p>}
     </div>
 );
 
@@ -2564,7 +2562,7 @@ const DynamicAdContainer = ({ adConfig, currentPage }) => {
             <div className="block md:hidden w-full">
                 <div className="w-full flex justify-center p-0">
                     <div 
-                        className="rounded-2xl shadow-lg flex items-center justify-center transition-all duration-300 w-full max-w-2xl overflow-hidden"
+                        className="rounded-3xl shadow-2xl flex items-center justify-center transition-all duration-300 w-full max-w-2xl overflow-hidden"
                         style={{ height: `${heights.mobile}px` }}
                     >
                         <a href={currentAd.href} target="_blank" rel="noopener noreferrer" className="block w-full h-full">
@@ -2586,7 +2584,7 @@ const DynamicAdContainer = ({ adConfig, currentPage }) => {
             <div className="hidden md:block w-full">
                 <div className="w-full flex justify-center p-0">
                     <div 
-                        className="rounded-2xl shadow-lg flex items-center justify-center transition-all duration-300 w-full max-w-2xl overflow-hidden"
+                        className="rounded-3xl shadow-2xl flex items-center justify-center transition-all duration-300 w-full max-w-2xl overflow-hidden"
                         style={{ height: `${heights.desktop}px` }}
                     >
                         <a href={currentAd.href} target="_blank" rel="noopener noreferrer" className="block w-full h-full">
@@ -2790,50 +2788,50 @@ function App() {
     return (
         <ThemeProvider>
             <ToastProvider>
-                <div className="bg-gradient-to-br from-black via-gray-900 via-yellow-900/30 to-yellow-900 min-h-screen w-full">
+                <div className="bg-gradient-to-br from-[#0f2027] via-[#2c5364] to-[#232526] min-h-screen w-full">
                     {showSplash ? (
                         <SplashVideo onVideoEnd={handleVideoEnd} />
                     ) : (
                         <>
                             <NavigationBar currentPage={currentPage} onNavigate={navigate} />
-                            <div className="min-h-screen w-full font-sans">
+                            <div className="min-h-screen w-full font-sans bg-gradient-to-br from-[#0f2027] via-[#2c5364] to-[#232526]">
 
                                 {/* Mobile: ad + login stacked; Desktop: split */}
                                 <div className="block md:hidden w-full">
                                     {/* Ad at top */}
-                                    <div className="w-full px-4 py-6">
-                                        <DynamicAdContainer adConfig={adConfig} currentPage={currentPage} />
-                                    </div>
+                                    <DynamicAdContainer adConfig={adConfig} currentPage={currentPage} />
+                                    {/* Small gap */}
+                                    <div className="w-full p-1"></div>
                                     {/* Login page (or currentPage) */}
-                                    <div className="w-full px-4 pb-8">
+                                    <div className="w-full max-w-sm mx-auto">
                                         {renderPage()}
                                     </div>
                                 </div>
                                 {/* Desktop: split layout as before */}
                                 <div className="hidden md:flex min-h-screen flex-row w-full">
                                     {/* Left: logo, slogan, ad */}
-                                    <div className="w-1/2 px-8 lg:px-12 py-8 flex flex-col relative min-h-screen justify-between items-center md:items-start">
-                                        <header className="flex flex-col items-center md:items-start mt-8 mb-8 w-full">
+                                    <div className="w-1/2 px-6 md:px-12 pt-[15px] pb-6 flex flex-col relative min-h-screen justify-between items-center md:items-start">
+                                        <header className="flex flex-col items-center md:items-start mt-0 mb-0 sm:mt-2 sm:mb-8 w-full p-0">
                                             <img 
                                                 src="/tit.png" 
                                                 alt="kroxnest." 
-                                                className="hidden sm:block h-16 sm:h-20 md:h-24 lg:h-28 mb-6 drop-shadow-lg filter invert hover:scale-110 transition-all duration-500 ease-in-out mx-auto md:mx-0"
+                                                className="hidden sm:block h-16 sm:h-24 md:h-[180px] lg:h-[220px] mb-0 sm:mb-[-10px] drop-shadow-2xl filter invert transition-all duration-500 ease-in-out mx-auto md:mx-0"
                                                 style={{ maxWidth: '98vw', objectFit: 'contain' }}
                                                 loading="eager"
                                             />
-                                            <p className="hidden sm:block text-xl sm:text-2xl md:text-3xl text-white italic pl-2 text-center md:text-left font-semibold leading-relaxed bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent" style={{ fontFamily: 'Inter, sans-serif' }}>
+                                            <p className="hidden sm:block text-lg sm:text-2xl md:text-3xl text-white italic pl-2 mt-4 text-center md:text-left font-semibold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-lg w-full max-w-3xl mx-auto md:mx-0" style={{ fontFamily: 'Inter, sans-serif' }}>
                                                 Knowledge Repository Of eXhibits & Networked Educational Student Tracks
                                             </p>
                                         </header>
-                                        <div className="w-full flex justify-center p-0">
+                                        <div className="mt-8 w-full flex justify-center p-0">
                                             <DynamicAdContainer adConfig={adConfig} currentPage={currentPage} />
                                         </div>
                                     </div>
                                     {/* Right: content (login, register, etc.) */}
-                                    <div className="w-1/2 flex justify-center items-start pt-20 px-8 lg:px-12">
+                                    <div className="w-1/2 flex justify-center items-start pt-[60px] px-0">
                                         <div className={
                                             currentPage === 'login'
-                                                ? 'w-full max-w-md mx-auto'
+                                                ? 'w-full max-w-sm sm:max-w-md mx-auto'
                                                 : 'w-full max-w-4xl flex flex-col items-center'
                                         }>
                                             <div className={currentPage === 'login' ? 'w-full flex flex-col items-center' : 'w-full'}>
@@ -2845,67 +2843,54 @@ function App() {
                             </div>
 
                             {/* How to use section */}
-                            <div className="w-full py-20 px-4 lg:px-8" data-section="how-to-use">
-                                <div className="w-full max-w-7xl mx-auto">
-                                    <div className="text-center mb-16">
-                                        <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                                            How to Use
-                                        </h2>
-                                        <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full mx-auto"></div>
-                                    </div>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                                        {howToUseSteps.map((step, idx) => (
-                                            <div key={idx} className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-xl shadow-2xl p-8 transition-all duration-500 hover:scale-105 hover:shadow-yellow-500/20 group border border-yellow-500/20 hover:border-yellow-500/40">
-                                                <div className="flex flex-col items-center text-center">
-                                                    <div className="flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-yellow-400 to-yellow-600 text-black text-2xl font-bold mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                                                        {step.step}
-                                                    </div>
-                                                    <h3 className="text-xl font-bold text-white mb-4 group-hover:text-yellow-400 transition-colors duration-300">{step.title}</h3>
-                                                    <p className="text-gray-300 leading-relaxed group-hover:text-gray-200 transition-colors duration-300">{step.desc}</p>
-                                                </div>
+                            <div className="w-full py-12 px-0" data-section="how-to-use">
+                                <div className="w-full flex flex-col items-start px-2 sm:px-6 md:px-12 max-w-7xl mx-auto">
+                                    <h2 className="text-4xl font-extrabold text-white mb-2 text-left drop-shadow-lg relative inline-block">
+                                        How to Use
+                                    </h2>
+                                    <div className="w-full h-1 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full mb-8 animate-pulse"></div>
+                                </div>
+                                <div className="flex flex-row gap-4 w-full px-2 sm:px-6 md:px-12 max-w-7xl mx-auto overflow-x-auto snap-x sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-8 sm:overflow-x-visible">
+                                    {howToUseSteps.map((step, idx) => (
+                                        <div key={idx} className="flex flex-col items-center bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-6 md:p-10 min-w-[260px] sm:min-w-0 snap-center transition-all duration-300 hover:scale-105 hover:shadow-2xl w-full mx-2 sm:mx-0 h-auto group">
+                                            <div className="border-4 border-white rounded-2xl mb-6 flex flex-col items-center justify-center p-2 shadow-lg w-full max-w-[320px] mx-auto bg-gradient-to-tr from-blue-100 via-white to-purple-100 group-hover:from-blue-200 group-hover:to-purple-200 transition-all duration-300">
+                                                <div className="flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white text-3xl font-bold mt-8 shadow-md mb-4 group-hover:scale-110 transition-transform duration-300">{step.step}</div>
+                                                <h3 className="text-xl font-bold text-blue-600 mt-2 mb-2 text-center break-words w-full">{step.title}</h3>
+                                                <p className="text-gray-600 text-lg text-center px-2 break-words w-full whitespace-pre-line">{step.desc}</p>
                                             </div>
-                                        ))}
-                                    </div>
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
 
                             {/* What we do section */}
-                            <div className="w-full py-20 px-4 lg:px-8" data-section="what-we-do">
-                                <div className="w-full max-w-7xl mx-auto">
-                                    <div className="text-center mb-16">
-                                        <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                                            What We Do
-                                        </h2>
-                                        <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full mx-auto"></div>
-                                    </div>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                                        {whatWeDoImages.map((item, idx) => (
-                                            <div key={idx} className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-xl shadow-2xl p-8 transition-all duration-500 hover:scale-105 hover:shadow-yellow-500/20 group border border-yellow-500/20 hover:border-yellow-500/40">
-                                                <div className="flex flex-col items-center text-center">
-                                                    <div className="flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-yellow-400 to-yellow-600 text-black text-2xl font-bold mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                                                        {idx + 1}
-                                                    </div>
-                                                    <h3 className="text-xl font-bold text-white mb-4 group-hover:text-yellow-400 transition-colors duration-300">{item.alt}</h3>
-                                                    <p className="text-gray-300 leading-relaxed group-hover:text-gray-200 transition-colors duration-300">{item.desc}</p>
-                                                </div>
+                            <div className="w-full py-12 px-0" data-section="what-we-do">
+                                <div className="w-full flex flex-col items-start px-2 sm:px-6 md:px-12 max-w-7xl mx-auto">
+                                    <h2 className="text-4xl font-extrabold text-white mb-2 text-left drop-shadow-lg relative inline-block">
+                                        What We Do
+                                    </h2>
+                                    <div className="w-full h-1 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 rounded-full mb-8 animate-pulse"></div>
+                                </div>
+                                <div className="flex flex-row gap-4 w-full px-2 sm:px-6 md:px-12 max-w-7xl mx-auto overflow-x-auto snap-x sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-8 sm:overflow-x-visible">
+                                    {whatWeDoImages.map((item, idx) => (
+                                        <div key={idx} className="flex flex-col items-center bg-gradient-to-br from-white via-blue-50 to-purple-100 rounded-3xl shadow-2xl p-6 md:p-10 min-w-[260px] sm:min-w-0 snap-center transition-all duration-300 hover:scale-105 hover:shadow-2xl w-full mx-2 sm:mx-0 h-auto group">
+                                            <div className="border-4 border-white rounded-2xl mb-6 flex flex-col items-center justify-center p-2 shadow-lg w-full max-w-[320px] mx-auto bg-gradient-to-tr from-blue-100 via-white to-purple-100 group-hover:from-blue-200 group-hover:to-purple-200 transition-all duration-300">
+                                                <div className="flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white text-3xl font-bold mt-8 shadow-md mb-4 group-hover:scale-110 transition-transform duration-300">{idx + 1}</div>
+                                                <h3 className="text-xl font-bold text-blue-600 mt-2 mb-2 text-center break-words w-full">{item.alt}</h3>
+                                                <p className="text-gray-600 text-lg text-center px-2 break-words w-full whitespace-pre-line font-normal">{item.desc}</p>
                                             </div>
-                                        ))}
-                                    </div>
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
 
                             {/* Footer centered at the bottom of the entire page, not fixed */}
-                            <footer className="w-full flex flex-col items-center justify-center py-12 px-4 gap-4 text-center mt-16 border-t border-yellow-500/20">
-                                <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
-                                    <span className="text-gray-300 text-base md:text-lg">
-                                        Contact: <a href="tel:+1234567890" className="text-yellow-400 hover:text-yellow-300 transition-colors duration-300">+1 234 567 890</a>
-                                    </span>
-                                    <span className="text-gray-300 text-base md:text-lg">
-                                        <a href="mailto:dummy@email.com" className="text-yellow-400 hover:text-yellow-300 transition-colors duration-300">info@kroxnest.com</a>
-                                    </span>
+                            <footer className="w-full flex flex-col items-center justify-center py-8 px-2 gap-1 text-center mt-16">
+                                <div>
+                                    <span className="text-gray-300 text-lg mr-6">Contact: <a href="tel:+1234567890" className="underline hover:text-blue-400 transition-colors">+1 234 567 890</a> | <a href="mailto:dummy@email.com" className="underline hover:text-blue-400 transition-colors">info@kroxnest.com</a></span>
                                 </div>
                                 <div>
-                                    <span className="block text-gray-300 text-lg font-semibold">© 2025 Kroxnest. All rights reserved.</span>
+                                    <span className="block text-gray-300 text-xl font-semibold">© 2025 Kroxnest. All rights reserved.|Ashi</span>
                                 </div>
                             </footer>
                         </>
