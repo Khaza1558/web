@@ -154,18 +154,18 @@ const API_BASE_URL = 'https://plote.onrender.com'; // REMEMBER TO UPDATE THIS FO
 const CustomConfirmModal = ({ message, onConfirm, onCancel }) => {
     return (
         <div className="fixed inset-0 bg-gray-900 bg-opacity-70 flex justify-center items-center z-50 p-5">
-            <div className="bg-white border border-gray-200 p-8 rounded-2xl shadow-2xl text-center max-w-sm w-full">
-                <p className="mb-6 text-gray-800 text-lg font-medium">{message}</p>
+            <div className="bg-gradient-to-br from-gray-800 to-gray-900 border border-yellow-500/20 p-8 rounded-2xl shadow-2xl text-center max-w-sm w-full animate-fade-in-up">
+                <p className="mb-6 text-gray-200 text-lg font-medium">{message}</p>
                 <div className="flex justify-center gap-4">
                     <button
                         onClick={onConfirm}
-                        className="bg-blue-600 text-white py-2 px-5 rounded-lg font-bold transition duration-300 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75"
+                        className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-2 px-5 rounded-lg font-bold transition duration-300 hover:from-yellow-500 hover:to-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-75 transform hover:scale-105"
                     >
                         Yes
                     </button>
                     <button
                         onClick={onCancel}
-                        className="bg-gray-200 text-gray-800 py-2 px-5 rounded-lg font-bold transition duration-200 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75"
+                        className="bg-gradient-to-r from-gray-500 to-gray-600 text-white py-2 px-5 rounded-lg font-bold transition duration-200 hover:from-gray-400 hover:to-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75 transform hover:scale-105"
                     >
                         No
                     </button>
@@ -209,31 +209,31 @@ const EditTitleModal = ({ projectId, currentTitle, onClose, onSave }) => {
     };
     return (
         <div className="fixed inset-0 bg-gray-900 bg-opacity-70 flex justify-center items-center z-50 p-5">
-            <div className="bg-white border border-gray-200 p-8 rounded-2xl shadow-2xl max-w-md w-full">
-                <h3 className="text-xl font-bold mb-2 text-center text-gray-800">Edit Project Title</h3>
-                <div className="w-16 h-1 bg-blue-500 rounded-full mb-6 mx-auto" />
+            <div className="bg-gradient-to-br from-gray-800 to-gray-900 border border-yellow-500/20 p-8 rounded-2xl shadow-2xl max-w-md w-full animate-fade-in-up">
+                <h3 className="text-xl font-bold mb-2 text-center text-white">Edit Project Title</h3>
+                <div className="w-16 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full mb-6 mx-auto" />
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-                    <label htmlFor="newProjectTitle" className="font-semibold text-gray-700">New Project Title:</label>
+                    <label htmlFor="newProjectTitle" className="font-semibold text-gray-200">New Project Title:</label>
                     <input
                         type="text"
                         id="newProjectTitle"
                         value={newTitle}
                         onChange={(e) => setNewTitle(e.target.value)}
-                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition bg-white shadow-sm"
+                        className="p-3 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition shadow-sm hover:border-yellow-400"
                         required
                     />
-                    {error && <p className="text-red-600 text-sm mt-1">{error}</p>}
+                    {error && <p className="text-red-400 text-sm mt-1">{error}</p>}
                     <div className="flex justify-end gap-3 mt-4">
                         <button
                             type="submit"
-                            className="bg-blue-500 text-white py-2 px-5 rounded-lg font-bold transition duration-200 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+                            className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-2 px-5 rounded-lg font-bold transition duration-300 hover:from-yellow-500 hover:to-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-75 transform hover:scale-105"
                         >
                             Save Changes
                         </button>
                         <button
                             type="button"
                             onClick={onClose}
-                            className="bg-gray-200 text-gray-800 py-2 px-5 rounded-lg font-bold transition duration-200 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75"
+                            className="bg-gradient-to-r from-gray-500 to-gray-600 text-white py-2 px-5 rounded-lg font-bold transition duration-200 hover:from-gray-400 hover:to-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75 transform hover:scale-105"
                         >
                             Cancel
                         </button>
@@ -286,39 +286,39 @@ const ReplaceFileModal = ({ fileId, currentFileName, onClose, onReplace }) => {
     };
     return (
         <div className="fixed inset-0 bg-gray-900 bg-opacity-70 flex justify-center items-center z-50 p-5">
-            <div className="bg-white border border-gray-200 p-8 rounded-2xl shadow-2xl max-w-md w-full">
-                <h3 className="text-xl font-bold mb-2 text-center text-gray-800">Replace File</h3>
-                <div className="w-16 h-1 bg-blue-500 rounded-full mb-6 mx-auto" />
+            <div className="bg-gradient-to-br from-gray-800 to-gray-900 border border-yellow-500/20 p-8 rounded-2xl shadow-2xl max-w-md w-full animate-fade-in-up">
+                <h3 className="text-xl font-bold mb-2 text-center text-white">Replace File</h3>
+                <div className="w-16 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full mb-6 mx-auto" />
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-                    <label htmlFor="newFileName" className="font-semibold text-gray-700">New File Name:</label>
+                    <label htmlFor="newFileName" className="font-semibold text-gray-200">New File Name:</label>
                     <input
                         type="text"
                         id="newFileName"
                         value={newFileName}
                         onChange={(e) => setNewFileName(e.target.value)}
-                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition bg-white shadow-sm"
+                        className="p-3 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition shadow-sm hover:border-yellow-400"
                         required
                     />
-                    <label htmlFor="newFileInput" className="font-semibold text-gray-700">Upload New File:</label>
+                    <label htmlFor="newFileInput" className="font-semibold text-gray-200">Upload New File:</label>
                     <input
                         type="file"
                         id="newFileInput"
                         onChange={(e) => setNewFile(e.target.files[0])}
-                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition bg-white shadow-sm"
+                        className="p-3 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition shadow-sm hover:border-yellow-400"
                         required
                     />
-                    {error && <p className="text-red-600 text-sm mt-1">{error}</p>}
+                    {error && <p className="text-red-400 text-sm mt-1">{error}</p>}
                     <div className="flex justify-end gap-3 mt-4">
                         <button
                             type="submit"
-                            className="bg-blue-500 text-white py-2 px-5 rounded-lg font-bold transition duration-200 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+                            className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-2 px-5 rounded-lg font-bold transition duration-300 hover:from-yellow-500 hover:to-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-75 transform hover:scale-105"
                         >
                             Replace
                         </button>
                         <button
                             type="button"
                             onClick={onClose}
-                            className="bg-gray-200 text-gray-800 py-2 px-5 rounded-lg font-bold transition duration-200 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75"
+                            className="bg-gradient-to-r from-gray-500 to-gray-600 text-white py-2 px-5 rounded-lg font-bold transition duration-200 hover:from-gray-400 hover:to-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-75 transform hover:scale-105"
                         >
                             Cancel
                         </button>
@@ -1685,6 +1685,7 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
         <div className="flex items-start justify-center p-5 w-full h-full mt-8">
             <div className="bg-gradient-to-br from-gray-800 to-gray-900 border border-yellow-500/20 shadow-2xl rounded-3xl w-full max-w-4xl p-8 flex flex-col items-start animate-fade-in-up hover:shadow-yellow-500/20 transition-all duration-500">
                 <h1 className="text-3xl font-bold mb-6 text-white self-center">View Projects</h1>
+                <div className="w-16 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full mb-6 mx-auto" />
 
                 {showSearchAndList ? (
                     <>
@@ -1696,26 +1697,26 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
                                 value={rollNumber}
                                 onChange={(e) => setRollNumber(e.target.value)}
                                 placeholder="e.g., 12345"
-                                className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition mb-2"
+                                className="p-3 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition mb-2 hover:border-yellow-400"
                                 required
                             />
                             <button
                                 type="submit"
-                                className="bg-blue-500 text-white py-3 px-6 rounded-lg font-bold transition duration-200 hover:bg-blue-600 mt-4"
+                                className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-3 px-6 rounded-lg font-bold transition duration-300 hover:from-yellow-500 hover:to-yellow-700 transform hover:scale-105 mt-4"
                             >
                                 View Projects
                             </button>
                         </form>
 
                         <div className="projects-list w-full max-w-md mt-4 self-start">
-                            <h3 className="text-2xl font-bold mb-4 text-gray-800">Projects:</h3>
-                            {error && <p className="text-red-500 text-base mb-4">{error}</p>}
+                            <h3 className="text-2xl font-bold mb-4 text-white">Projects:</h3>
+                            {error && <p className="text-red-400 text-base mb-4">{error}</p>}
                             {isProjectsLoading ? (
                                 <div className="flex justify-center items-center py-8">
-                                    <svg className="animate-spin h-8 w-8 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path></svg>
+                                    <svg className="animate-spin h-8 w-8 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path></svg>
                                 </div>
                             ) : hasSearched && projects.length === 0 && !error ? (
-                                <p className="text-gray-600">No projects found for this roll number.</p>
+                                <p className="text-gray-300">No projects found for this roll number.</p>
                             ) : (
                                 <div className="flex flex-col gap-3">
                                     {projects.map(project => (
@@ -1728,28 +1729,28 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
                 ) : (
                     <>
                         <div className="project-details-section w-full animate-fade-in-up">
-                            <h3 className="text-3xl font-bold mb-4 text-gray-800">{selectedProject?.name}</h3> 
-                            <p className="text-gray-700 text-lg mb-6">{selectedProject?.description || ''}</p>
+                            <h3 className="text-3xl font-bold mb-4 text-white">{selectedProject?.name}</h3> 
+                            <p className="text-gray-300 text-lg mb-6">{selectedProject?.description || ''}</p>
 
                             {loggedInUserRollNumber && selectedProject?.roll_number === loggedInUserRollNumber && (
                                 <div className="flex flex-wrap gap-4 mb-6 justify-start">
                                     <button
                                         onClick={handleEditProjectTitle}
-                                        className="bg-gray-300 text-gray-800 py-2 px-5 rounded-lg font-bold transition duration-300 hover:bg-gray-400 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-75"
+                                        className="bg-gradient-to-r from-gray-500 to-gray-600 text-white py-2 px-5 rounded-lg font-bold transition duration-300 hover:from-gray-400 hover:to-gray-500 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-75 transform hover:scale-105"
                                     >
                                         Edit Title
                                     </button>
                                     <button
                                         onClick={handleDeleteProject}
-                                        className="bg-red-500 text-white py-2 px-5 rounded-lg font-bold transition duration-300 hover:bg-red-600 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-75"
+                                        className="bg-gradient-to-r from-red-500 to-red-600 text-white py-2 px-5 rounded-lg font-bold transition duration-300 hover:from-red-400 hover:to-red-500 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-75 transform hover:scale-105"
                                     >
                                         Delete Project
                                     </button>
                                 </div>
                             )}
 
-                            <h4 className="text-2xl font-bold mb-4 text-gray-800">Associated Files:</h4>
-                            {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+                            <h4 className="text-2xl font-bold mb-4 text-white">Associated Files:</h4>
+                            {error && <p className="text-red-400 text-sm mb-4">{error}</p>}
                             {projectFiles.length > 0 ? (
                                 <div className="flex flex-col gap-3">
                                     {projectFiles.map(file => (
@@ -1765,38 +1766,38 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
                                     ))}
                                 </div>
                             ) : (
-                                <p className="text-gray-600">No files associated with this project.</p>
+                                <p className="text-gray-300">No files associated with this project.</p>
                             )}
 
                             {loggedInUserRollNumber && selectedProject?.roll_number === loggedInUserRollNumber && (
                                 <form onSubmit={handleAddFilesSubmit} className="flex flex-col gap-5 mt-8 w-full">
-                                    <h4 className="text-2xl font-bold mb-2 text-gray-800">Add New Files to this Project:</h4>
+                                    <h4 className="text-2xl font-bold mb-2 text-white">Add New Files to this Project:</h4>
                                     <div className="flex flex-col gap-4 w-full">
                                         {addFiles.map(fileEntry => (
-                                            <div key={fileEntry.id} className="flex flex-col gap-2 p-4 bg-gray-50 rounded-xl border border-gray-200 shadow-sm w-full max-w-2xl mx-auto">
-                                                <label htmlFor={`addFile${fileEntry.id}`} className="font-semibold text-gray-700 mb-1">File {fileEntry.id}:</label>
+                                            <div key={fileEntry.id} className="flex flex-col gap-2 p-4 bg-gradient-to-br from-gray-700/50 to-gray-800/50 backdrop-blur-sm rounded-xl border border-yellow-500/20 shadow-lg w-full max-w-2xl mx-auto hover:shadow-yellow-500/20 transition-all duration-300">
+                                                <label htmlFor={`addFile${fileEntry.id}`} className="font-semibold text-gray-200 mb-1">File {fileEntry.id}:</label>
                                                 <input
                                                     type="file"
                                                     id={`addFile${fileEntry.id}`}
                                                     onChange={(e) => handleAddFileChange(fileEntry.id, 'file', e.target.files[0])}
-                                                    className="p-2 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition w-full bg-white shadow-sm min-w-0"
+                                                    className="p-2 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition w-full shadow-sm min-w-0 hover:border-yellow-400"
                                                     required
                                                 />
-                                                <label htmlFor={`addFileTitle${fileEntry.id}`} className="font-semibold text-gray-700 mb-1">Title:</label>
+                                                <label htmlFor={`addFileTitle${fileEntry.id}`} className="font-semibold text-gray-200 mb-1">Title:</label>
                                                 <input
                                                     type="text"
                                                     id={`addFileTitle${fileEntry.id}`}
                                                     value={fileEntry.title}
                                                     onChange={(e) => handleAddFileChange(fileEntry.id, 'title', e.target.value)}
                                                     placeholder="Enter title for this new file"
-                                                    className="p-2 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition w-full bg-white shadow-sm min-w-0"
+                                                    className="p-2 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition w-full shadow-sm min-w-0 hover:border-yellow-400"
                                                     required
                                                 />
                                                 {addFiles.length > 1 && (
                                                     <button
                                                         type="button"
                                                         onClick={() => removeAddFileField(fileEntry.id)}
-                                                        className="bg-red-500 text-white py-2 px-4 rounded-lg font-bold transition duration-200 hover:bg-red-600 mt-2 w-full md:w-auto"
+                                                        className="bg-gradient-to-r from-red-500 to-red-600 text-white py-2 px-4 rounded-lg font-bold transition duration-200 hover:from-red-400 hover:to-red-500 transform hover:scale-105 mt-2 w-full md:w-auto"
                                                     >
                                                         Remove
                                                     </button>
@@ -1807,14 +1808,14 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
                                     <button
                                         type="button"
                                         onClick={addAddFileField}
-                                        className="bg-gray-200 text-gray-800 py-3 px-6 rounded-lg font-bold transition duration-200 hover:bg-gray-300 self-start mt-4 mb-2"
+                                        className="bg-gradient-to-r from-gray-500 to-gray-600 text-white py-3 px-6 rounded-lg font-bold transition duration-200 hover:from-gray-400 hover:to-gray-500 self-start mt-4 mb-2 transform hover:scale-105"
                                     >
                                         Add New File Input
                                     </button>
-                                    {error && <p className="text-red-500 text-base text-center mt-2">{error}</p>}
+                                    {error && <p className="text-red-400 text-base text-center mt-2">{error}</p>}
                                     <button
                                         type="submit"
-                                        className="bg-blue-500 text-white py-3 px-6 rounded-lg font-bold text-lg transition duration-200 hover:bg-blue-600 mt-5"
+                                        className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-3 px-6 rounded-lg font-bold text-lg transition duration-300 hover:from-yellow-500 hover:to-yellow-700 transform hover:scale-105 mt-5"
                                     >
                                         Done (Add Files)
                                     </button>
@@ -1828,14 +1829,14 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
                     {!showSearchAndList && (
                         <button
                             onClick={handleBackToProjectsList}
-                            className="bg-gray-300 text-gray-800 py-2 px-5 rounded-lg font-bold transition duration-300 hover:bg-gray-400 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-75"
+                            className="bg-gradient-to-r from-gray-500 to-gray-600 text-white py-2 px-5 rounded-lg font-bold transition duration-300 hover:from-gray-400 hover:to-gray-500 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-75 transform hover:scale-105"
                         >
                             &larr; Back to Projects List
                         </button>
                     )}
                     <button
                         onClick={onNavigateToWelcome}
-                        className="bg-gray-300 text-gray-800 py-2 px-5 rounded-lg font-bold transition duration-300 hover:bg-gray-400 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-75"
+                        className="bg-gradient-to-r from-gray-500 to-gray-600 text-white py-2 px-5 rounded-lg font-bold transition duration-300 hover:from-gray-400 hover:to-gray-500 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-75 transform hover:scale-105"
                     >
                         Back to Welcome
                     </button>
@@ -1974,6 +1975,7 @@ const CreateProjectPage = ({ onNavigateToWelcome }) => {
         <div className="flex items-start justify-center p-5 w-full h-full mt-8">
             <div className="bg-gradient-to-br from-gray-800 to-gray-900 border border-yellow-500/20 shadow-2xl rounded-3xl w-full max-w-4xl p-8 flex flex-col items-center animate-fade-in-up hover:shadow-yellow-500/20 transition-all duration-500">
                 <h2 className="text-3xl font-bold text-white mb-6">Create New Project</h2>
+                <div className="w-16 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full mb-6 mx-auto" />
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full max-w-lg mx-auto"> 
                     <label htmlFor="projectName" className="font-semibold text-gray-200 mb-1">Project Name:</label>
                     <input
@@ -1985,42 +1987,42 @@ const CreateProjectPage = ({ onNavigateToWelcome }) => {
                         required
                     />
 
-                    <label htmlFor="projectDescription" className="font-semibold text-gray-700 mb-1">Project Description (Optional):</label>
+                    <label htmlFor="projectDescription" className="font-semibold text-gray-200 mb-1">Project Description (Optional):</label>
                     <textarea
                         id="projectDescription"
                         value={projectDescription}
                         onChange={(e) => setProjectDescription(e.target.value)}
                         rows="4"
-                        className="p-3 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition resize-y"
+                        className="p-3 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition resize-y hover:border-yellow-400"
                     ></textarea>
 
-                    <h3 className="text-2xl font-bold mb-4 text-gray-800">Files:</h3> 
+                    <h3 className="text-2xl font-bold mb-4 text-white">Files:</h3> 
                     <div className="flex flex-col gap-4 w-full">
                         {files.map(fileEntry => (
-                            <div key={fileEntry.id} className="flex flex-col gap-2 p-4 bg-gray-50 rounded-xl border border-gray-200 shadow-sm w-full max-w-2xl mx-auto">
-                                <label htmlFor={`file${fileEntry.id}`} className="font-semibold text-gray-700 mb-1">File {fileEntry.id}:</label>
+                            <div key={fileEntry.id} className="flex flex-col gap-2 p-4 bg-gradient-to-br from-gray-700/50 to-gray-800/50 backdrop-blur-sm rounded-xl border border-yellow-500/20 shadow-lg w-full max-w-2xl mx-auto hover:shadow-yellow-500/20 transition-all duration-300">
+                                <label htmlFor={`file${fileEntry.id}`} className="font-semibold text-gray-200 mb-1">File {fileEntry.id}:</label>
                                 <input
                                     type="file"
                                     id={`file${fileEntry.id}`}
                                     onChange={(e) => handleFileChange(fileEntry.id, 'file', e.target.files[0])}
-                                    className="p-2 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition w-full bg-white shadow-sm min-w-0"
+                                    className="p-2 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition w-full shadow-sm min-w-0 hover:border-yellow-400"
                                     required
                                 />
-                                <label htmlFor={`fileTitle${fileEntry.id}`} className="font-semibold text-gray-700 mb-1">Title:</label>
+                                <label htmlFor={`fileTitle${fileEntry.id}`} className="font-semibold text-gray-200 mb-1">Title:</label>
                                 <input
                                     type="text"
                                     id={`fileTitle${fileEntry.id}`}
                                     value={fileEntry.title}
                                     onChange={(e) => handleFileChange(fileEntry.id, 'title', e.target.value)}
                                     placeholder="Enter title for this file"
-                                    className="p-2 border border-gray-300 rounded-lg text-gray-800 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition w-full bg-white shadow-sm min-w-0"
+                                    className="p-2 border border-gray-600 rounded-lg text-white bg-gray-700 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition w-full shadow-sm min-w-0 hover:border-yellow-400"
                                     required
                                 />
                                 {files.length > 1 && (
                                     <button
                                         type="button"
                                         onClick={() => removeFileField(fileEntry.id)}
-                                        className="bg-red-500 text-white py-2 px-4 rounded-lg font-bold transition duration-200 hover:bg-red-600 mt-2 w-full md:w-auto"
+                                        className="bg-gradient-to-r from-red-500 to-red-600 text-white py-2 px-4 rounded-lg font-bold transition duration-200 hover:from-red-400 hover:to-red-500 transform hover:scale-105 mt-2 w-full md:w-auto"
                                     >
                                         Remove
                                     </button>
@@ -2032,16 +2034,16 @@ const CreateProjectPage = ({ onNavigateToWelcome }) => {
                     <button
                         type="button"
                         onClick={addFileField}
-                        className="bg-gray-400 text-gray-800 py-3 px-6 rounded-lg font-bold transition duration-300 hover:bg-gray-500 shadow-xl hover:shadow-2xl self-start mt-4 mb-2 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75"
+                        className="bg-gradient-to-r from-gray-500 to-gray-600 text-white py-3 px-6 rounded-lg font-bold transition duration-300 hover:from-gray-400 hover:to-gray-500 shadow-xl hover:shadow-2xl self-start mt-4 mb-2 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75 transform hover:scale-105"
                     >
                         Add Another File Input
                     </button>
 
-                    {error && <p className="text-red-500 text-sm text-center mt-2">{error}</p>}
+                    {error && <p className="text-red-400 text-sm text-center mt-2">{error}</p>}
 
                     <button
                         type="submit"
-                        className="bg-blue-500 text-white py-3 px-6 rounded-lg font-bold transition duration-300 hover:bg-blue-600 shadow-xl hover:shadow-2xl mt-5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75"
+                        className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-3 px-6 rounded-lg font-bold transition duration-300 hover:from-yellow-500 hover:to-yellow-700 shadow-xl hover:shadow-2xl mt-5 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-75 transform hover:scale-105"
                         disabled={isLoading}
                     >
                         {isLoading ? 'Creating Project...' : 'Create Project'}
@@ -2049,7 +2051,7 @@ const CreateProjectPage = ({ onNavigateToWelcome }) => {
                 </form>
                 <button
                     onClick={onNavigateToWelcome}
-                    className="bg-gray-300 text-gray-800 py-2 px-5 rounded-lg font-bold transition duration-300 hover:bg-gray-400 shadow-md hover:shadow-lg mt-6 w-full max-w-[150px] mx-auto focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-75"
+                    className="bg-gradient-to-r from-gray-600 to-gray-700 text-white py-2 px-5 rounded-lg font-bold transition duration-300 hover:from-gray-500 hover:to-gray-600 shadow-md hover:shadow-lg mt-6 w-full max-w-[150px] mx-auto focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-75 transform hover:scale-105"
                 >
                     Back to Welcome
                 </button>
@@ -2788,7 +2790,7 @@ function App() {
     return (
         <ThemeProvider>
             <ToastProvider>
-                <div className="bg-gradient-to-b from-black via-gray-900 via-yellow-900/20 to-yellow-900 min-h-screen w-full">
+                <div className="bg-gradient-to-r from-black via-gray-900 via-yellow-900/30 to-yellow-900 min-h-screen w-full">
                     {showSplash ? (
                         <SplashVideo onVideoEnd={handleVideoEnd} />
                     ) : (
