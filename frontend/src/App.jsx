@@ -1648,30 +1648,39 @@ const ViewProjectsPage = ({ onNavigateToWelcome }) => {
     };
 
     const handleViewFile = async (filePath, originalFileName) => {
+        const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+        const bucketName = 'project-files'; // Or from env if you set it there
+        
+        if (!supabaseUrl) {
+            showToast('Supabase URL is not configured in the frontend environment.', 'error');
+            console.error('Error: VITE_SUPABASE_URL is not set in .env file');
+            return;
+        }
+
+        // Construct the full public URL for the file from Supabase Storage
+        const publicUrl = `${supabaseUrl}/storage/v1/object/public/${bucketName}/${filePath}`;
+
         const fileExtension = originalFileName.split('.').pop().toLowerCase();
-        const codeExtensions = ['js', 'json', 'css', 'html', 'txt', 'py', 'java', 'c', 'cpp', 'sh', 'md', 'xml']; 
+        const codeExtensions = ['js', 'json', 'css', 'html', 'txt', 'py', 'java', 'c', 'cpp', 'sh', 'md', 'xml'];
 
         if (codeExtensions.includes(fileExtension)) {
             try {
-                const response = await fetch(`${API_BASE_URL}${filePath}`);
+                // Fetch the content from the public Supabase URL
+                const response = await fetch(publicUrl);
                 if (!response.ok) {
-                    if (response.status === 404) {
-                        showToast('File Not Found (404): Render free tier files are temporary and deleted on server restart. Please re-upload.', 'warning');
-                    } else {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return;
+                    throw new Error(`Failed to fetch file. Status: ${response.status}`);
                 }
                 const textContent = await response.text();
                 setCodeViewerContent(textContent);
-                setCodeViewerLanguage(fileExtension); 
+                setCodeViewerLanguage(fileExtension);
                 setShowCodeViewer(true);
             } catch (error) {
                 console.error('Error fetching file content for viewer:', error);
                 showToast(`Error fetching file content: ${error.message}`, 'error');
             }
         } else {
-            window.open(`${API_BASE_URL}${filePath}`, '_blank');
+            // Open the public Supabase URL directly for other file types (PDF, images, etc.)
+            window.open(publicUrl, '_blank');
         }
     };
 
